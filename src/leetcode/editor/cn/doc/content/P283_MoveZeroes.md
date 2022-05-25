@@ -30,4 +30,4 @@
 <p>&nbsp;</p>
 
 <p><b>进阶：</b>你能尽量减少完成的操作次数吗？</p>
-<div><div>Related Topics</div><div><li>数组</li><li>双指针</li></div></div><br><div><li>👍 1601</li><li>👎 0</li></div>
+<div><div>Related Topics</div><div><li>数组</li><li>双指针</li></div></div><br><div><li>👍 1600</li><li>👎 0</li></div>
