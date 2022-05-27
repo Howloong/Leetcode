@@ -47,17 +47,37 @@
 // Related Topics 数组 二分查找 前缀和 滑动窗口 👍 1172 👎 0
 
 package leetcode.editor.cn;
+
+import java.util.Map;
+
 //Java：长度最小的子数组
-class P209_MinimumSizeSubarraySum{
+class P209_MinimumSizeSubarraySum {
     public static void main(String[] args) {
         Solution solution = new P209_MinimumSizeSubarraySum().new Solution();
+        System.out.println(solution.minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3}));
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int minSubArrayLen(int target, int[] nums) {
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int minSubArrayLen(int target, int[] nums) {
+            if (nums[0] >= target) {
+                return 1;
+            }
+            int min = Integer.MAX_VALUE;
+            int left = 0;
+            int right = 0;
+            int sum = 0;
+            while (right < nums.length) {
+                sum += nums[right];
+                while (sum >= target) {
+                    min = Math.min(min, right - left + 1);
+                    sum -= nums[left++];
+                }
+                right++;
+            }
+            return min == Integer.MAX_VALUE ? 0 : min;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
