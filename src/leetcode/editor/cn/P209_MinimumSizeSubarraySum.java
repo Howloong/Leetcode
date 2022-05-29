@@ -48,10 +48,13 @@
 
 package leetcode.editor.cn;
 
+import java.util.Map;
+
 //Java：长度最小的子数组
 class P209_MinimumSizeSubarraySum {
     public static void main(String[] args) {
         Solution solution = new P209_MinimumSizeSubarraySum().new Solution();
+        System.out.println(solution.minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
