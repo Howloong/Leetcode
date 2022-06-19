@@ -78,11 +78,65 @@ package leetcode.editor.cn;
 class P13_RomanToInteger{
     public static void main(String[] args) {
         Solution solution = new P13_RomanToInteger().new Solution();
+        System.out.println(solution.romanToInt("MCMXCIV"));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int romanToInt(String s) {
-
+        char[] c = s.toCharArray();
+        int sum = 0;
+        for (int i = 0; i < c.length; i++) {
+            switch (c[i]) {
+                case 'M':
+                    sum += 1000;
+                    break;
+                case 'D':
+                    sum += 500;
+                    break;
+                case 'L':
+                    sum += 50;
+                    break;
+                case 'V':
+                    sum += 5;
+                    break;
+                case 'I':
+                    if (i != c.length - 1 && c[i + 1] == 'V') {
+                        sum += 4;
+                        i++;
+                    } else if (i != c.length - 1 && c[i + 1] == 'X') {
+                        sum += 9;
+                        ++i;
+                    } else {
+                        sum += 1;
+                    }
+                    break;
+                case 'X':
+                    if (i != c.length - 1 && c[i + 1] == 'L') {
+                        sum += 40;
+                        ++i;
+                    } else if (i != c.length - 1 && c[i + 1] == 'C') {
+                        sum += 90;
+                        ++i;
+                    } else {
+                        sum += 10;
+                    }
+                    break;
+                case 'C':
+                    if (i != c.length - 1 && c[i + 1] == 'D') {
+                        sum += 400;
+                        ++i;
+                    } else if (i != c.length - 1 && c[i + 1] == 'M') {
+                        sum += 900;
+                        ++i;
+                    } else {
+                        sum += 100;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        return sum;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
