@@ -96,17 +96,6 @@ class P1379_FindACorrespondingNodeOfABinaryTreeInACloneOfThatTree {
             return node;
         }
 
-        public TreeNode preorder(TreeNode cloned, TreeNode target) {
-            if (cloned == null) {
-                return null;
-            }
-            if (cloned == target) {
-                return cloned;
-            }
-            TreeNode left = preorder(cloned.left, target);
-            TreeNode right = preorder(cloned.right, target);
-            return left == null ? right : left;
-        }
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
