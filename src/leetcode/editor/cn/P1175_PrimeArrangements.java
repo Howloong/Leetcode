@@ -34,12 +34,32 @@ package leetcode.editor.cn;
 class P1175_PrimeArrangements {
     public static void main(String[] args) {
         Solution solution = new P1175_PrimeArrangements().new Solution();
+        System.out.println(solution.numPrimeArrangements(4));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        int mod = 1000000007;
         public int numPrimeArrangements(int n) {
+            int[] prime = new int[]{2, 3, 5, 7, 11, 13, 17,
+                    19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
+            int num = 0;
+            for (int j : prime) {
+                if (j <= n) {
+                    ++num;
+                }
+            }
+            long sum = getSum(num) * getSum(n - num);
+            return (int) (sum%mod);
+        }
 
+        public long getSum(int i) {
+            long result = 1;
+            for (int j = 1; j <= i; j++) {
+                result = result * j;
+                result = result % mod;
+            }
+            return result;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
