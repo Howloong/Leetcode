@@ -41,7 +41,9 @@ package leetcode.editor.cn;
 
 import leetcode.editor.cn.DataStruct.TreeNode;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 //Java：二叉树的后序遍历
@@ -67,19 +69,42 @@ class P145_BinaryTreePostorderTraversal {
      * }
      */
     class Solution {
-        public List<Integer> postorderTraversal(TreeNode root) {
-            List<Integer> list = new ArrayList<>();
-            postOrder(root, list);
-            return list;
-        }
+        /*        public List<Integer> postorderTraversal(TreeNode root) {
+                    List<Integer> list = new ArrayList<>();
+                    postOrder(root, list);
+                    return list;
+                }
 
-        public void postOrder(TreeNode node, List<Integer> list) {
-            if (node == null) {
-                return;
+                public void postOrder(TreeNode node, List<Integer> list) {
+                    if (node == null) {
+                        return;
+                    }
+                    postOrder(node.left, list);
+                    postOrder(node.right, list);
+                    list.add(node.val);
+                }*/
+        public List<Integer> postorderTraversal(TreeNode root) {
+            ArrayDeque<TreeNode> arrayDeque = new ArrayDeque<>();
+            List<Integer> result = new ArrayList<>();
+
+            if (root == null) {
+                return result;
             }
-            postOrder(node.left, list);
-            postOrder(node.right, list);
-            list.add(node.val);
+            TreeNode p = root;
+            arrayDeque.push(p);
+            while (!arrayDeque.isEmpty()) {
+                p = arrayDeque.pop();
+                result.add(p.val);
+                if (p.left != null) {
+                    arrayDeque.push(p.left);
+                }
+                if (p.right != null) {
+                    arrayDeque.push(p.right);
+
+                }
+            }
+            Collections.reverse(result);
+            return result;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

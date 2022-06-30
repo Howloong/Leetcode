@@ -41,6 +41,8 @@ package leetcode.editor.cn;
 
 import leetcode.editor.cn.DataStruct.TreeNode;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.List;
 
 //Java：二叉树的中序遍历
@@ -81,7 +83,20 @@ class P94_BinaryTreeInorderTraversal {
                     inOrder(node.right, list);
                 }*/
         public List<Integer> inorderTraversal(TreeNode root) {
-
+            ArrayDeque<TreeNode> arrayDeque = new ArrayDeque<>();
+            List<Integer> result = new ArrayList<>();
+            TreeNode p = root;
+            while (p != null || !arrayDeque.isEmpty()) {
+                if (p != null) {
+                    arrayDeque.push(p);
+                    p = p.left;
+                } else {
+                    p = arrayDeque.pop();
+                    result.add(p.val);
+                    p = p.right;
+                }
+            }
+            return result;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
