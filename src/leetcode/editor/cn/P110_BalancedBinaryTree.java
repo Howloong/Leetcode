@@ -40,30 +40,34 @@
 // Related Topics 树 深度优先搜索 二叉树 👍 1060 👎 0
 
 package leetcode.editor.cn;
+
+import leetcode.editor.cn.DataStruct.TreeNode;
+
 //Java：平衡二叉树
-class P110_BalancedBinaryTree{
+class P110_BalancedBinaryTree {
     public static void main(String[] args) {
         Solution solution = new P110_BalancedBinaryTree().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
+
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     *     int val;
+     *     TreeNode left;
+     *     TreeNode right;
+     *     TreeNode() {}
+     *     TreeNode(int val) { this.val = val; }
+     *     TreeNode(int val, TreeNode left, TreeNode right) {
+     *         this.val = val;
+     *         this.left = left;
+     *         this.right = right;
+     *     }
  * }
  */
 class Solution {
     public boolean isBalanced(TreeNode root) {
-
+        return false;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
