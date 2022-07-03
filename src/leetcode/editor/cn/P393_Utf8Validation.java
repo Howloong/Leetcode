@@ -57,17 +57,37 @@
 // Related Topics 位运算 数组 👍 172 👎 0
 
 package leetcode.editor.cn;
+
 //Java：UTF-8 编码验证
-class P393_Utf8Validation{
+class P393_Utf8Validation {
     public static void main(String[] args) {
         Solution solution = new P393_Utf8Validation().new Solution();
+//        System.out.println(solution.validUtf8(new int[]{197, 130, 1}));
+//        System.out.println(solution.validUtf8(new int[]{235,140,4}));
+        System.out.println(solution.validUtf8(new int[]{237}));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public boolean validUtf8(int[] data) {
-
+    class Solution {
+        public boolean validUtf8(int[] data) {
+            int i = 0;
+            while (i < data.length) {
+                if (data[i] >= 0 && data[i] <= 0x0000007f) {
+                    i += 1;
+                } else if (data.length - i >= 2 && data[i] >= 0b11000000 && data[i] <= 0b11011111 && data[i + 1] >= 0b10000000 && data[i + 1] <= 0b10111111) {
+                    i += 2;
+                } else if (data.length - i >= 3 && data[i] >= 0b11100000 && data[i] <= 0b11101111 && data[i + 1] >= 0b10000000 && data[i + 1] <= 0b10111111 && data[i + 2] >= 0b10000000 && data[i + 2] <= 0b10111111) {
+                    i += 3;
+                } else if (data.length - i >= 4 && data[i] >= 0b11110000 && data[i] <= 0b11110111 && data[i + 1] >= 0b10000000 && data[i + 1] <= 0b10111111 && data[i + 2] >= 0b10000000 && data[i + 2] <= 0b10111111 && data[i + 3] >= 0b10000000 && data[i + 3] <= 0b10111111) {
+                    i += 4;
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
-
 }
+
+
