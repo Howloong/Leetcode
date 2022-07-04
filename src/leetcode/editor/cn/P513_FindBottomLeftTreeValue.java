@@ -34,10 +34,7 @@
 
 package leetcode.editor.cn;
 
-import leetcode.editor.cn.DataStruct.TreeNode;
-
 import java.util.ArrayDeque;
-import java.util.LinkedList;
 
 //Java：找树左下角的值
 class P513_FindBottomLeftTreeValue{
@@ -81,12 +78,18 @@ class Solution {
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
-public class TreeNode {
+class TreeNode {
     int val;
     TreeNode left;
     TreeNode right;
-    TreeNode() {}
-    TreeNode(int val) { this.val = val; }
+
+    TreeNode() {
+    }
+
+    TreeNode(int val) {
+        this.val = val;
+    }
+
     TreeNode(int val, TreeNode left, TreeNode right) {
         this.val = val;
         this.left = left;

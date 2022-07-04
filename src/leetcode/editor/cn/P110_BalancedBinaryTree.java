@@ -63,13 +63,31 @@ class P110_BalancedBinaryTree {
      *         this.left = left;
      *         this.right = right;
      *     }
- * }
- */
-class Solution {
-    public boolean isBalanced(TreeNode root) {
-        return false;
+     * }
+     */
+    class Solution {
+        public boolean isBalanced(TreeNode root) {
+            if (root == null) {
+                return true;
+            }
+            return maxDepth(root) != -1;
+        }
+
+        public int maxDepth(TreeNode p) {
+            if (p == null) {
+                return 0;
+            }
+            int left = maxDepth(p.left);
+            int right = maxDepth(p.right);
+            if (left == -1 || right == -1) {
+                return -1;
+            }
+            if (Math.abs(left - right) > 1) {
+                return -1;
+            }
+            return Math.max(left, right) + 1;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
