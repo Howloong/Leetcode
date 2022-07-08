@@ -56,6 +56,9 @@
 // Related Topics 树 二叉搜索树 二叉树 👍 897 👎 0
 
 package leetcode.editor.cn;
+
+import leetcode.editor.cn.DataStruct.TreeNode;
+
 //Java：删除二叉搜索树中的节点
 class P450_DeleteNodeInABst{
     public static void main(String[] args) {
@@ -79,7 +82,7 @@ class P450_DeleteNodeInABst{
  */
 class Solution {
     public TreeNode deleteNode(TreeNode root, int key) {
-
+        return null;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

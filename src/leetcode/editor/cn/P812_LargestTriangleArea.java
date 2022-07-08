@@ -31,14 +31,8 @@ class P812_LargestTriangleArea {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public double largestTriangleArea(int[][] points) {
-            int[][] point = new int[3][];
-            int[] distance = new int[point.length];
-            for (int:
-                 ) {
-                
-            }
+            return 0;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
-
 }

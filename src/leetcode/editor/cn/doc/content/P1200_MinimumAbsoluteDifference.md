@@ -30,4 +30,4 @@
 	<li><code>2 &lt;= arr.length &lt;= 10^5</code></li>
 	<li><code>-10^6 &lt;= arr[i] &lt;= 10^6</code></li>
 </ul>
-<div><div>Related Topics</div><div><li>数组</li><li>排序</li></div></div><br><div><li>👍 66</li><li>👎 0</li></div>
+<div><div>Related Topics</div><div><li>数组</li><li>排序</li></div></div><br><div><li>👍 97</li><li>👎 0</li></div>
