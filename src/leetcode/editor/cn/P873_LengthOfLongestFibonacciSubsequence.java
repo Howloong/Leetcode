@@ -44,17 +44,40 @@
 // Related Topics 数组 哈希表 动态规划 👍 238 👎 0
 
 package leetcode.editor.cn;
+
+import java.util.HashMap;
+
 //Java：最长的斐波那契子序列的长度
-class P873_LengthOfLongestFibonacciSubsequence{
+class P873_LengthOfLongestFibonacciSubsequence {
     public static void main(String[] args) {
         Solution solution = new P873_LengthOfLongestFibonacciSubsequence().new Solution();
+        System.out.println(solution.lenLongestFibSubseq(new int[]{1, 2, 3, 4, 5, 6, 7, 8}));
+        System.out.println(solution.lenLongestFibSubseq(new int[]{1, 3, 7, 11, 12, 14, 18}));
+        System.out.println(solution.lenLongestFibSubseq(new int[]{2, 4, 7, 8, 9, 10, 14, 15, 18, 23, 32, 50}));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int lenLongestFibSubseq(int[] arr) {
-        return 0;
+    class Solution {
+        public int lenLongestFibSubseq(int[] arr) {
+            HashMap<Integer, Integer> hashMap = new HashMap<>();
+            int n = arr.length;
+            for (int i = 0; i < arr.length; i++) {
+                hashMap.put(arr[i], i);
+            }
+            int[][] dp = new int[n][n];
+            int max = 0;
+            for (int i = 0; i < n; i++) {
+                for (int j = i - 1; j >= 0 && arr[j] * 2 > arr[i]; j--) {
+                    int k = hashMap.getOrDefault(arr[i] - arr[j], -1);
+                    if (k >= 0) {
+                        dp[j][i] = Math.max(dp[k][j] + 1, 3);
+                    }
+                    max = Math.max(dp[j][i], max);
+                }
+            }
+            return max;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
