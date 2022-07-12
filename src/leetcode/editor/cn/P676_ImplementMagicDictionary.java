@@ -54,26 +54,27 @@
 // Related Topics 设计 字典树 哈希表 字符串 👍 125 👎 0
 
 package leetcode.editor.cn;
+
 //Java：实现一个魔法字典
-class P676_ImplementMagicDictionary{
+class P676_ImplementMagicDictionary {
     public static void main(String[] args) {
-        Solution solution = new P676_ImplementMagicDictionary().new Solution();
-    }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class MagicDictionary {
-
-    public MagicDictionary() {
-
-    }
-    
-    public void buildDict(String[] dictionary) {
-
-    }
-    
-    public boolean search(String searchWord) {
+        MagicDictionary magicDictionary = new MagicDictionary();
+        magicDictionary.buildDict(new String[]{"hello", "hallo", "leetcode"});
+//        System.out.println(magicDictionary.search("hello")) ; // 返回 False
+//        System.out.println(magicDictionary.search("hhllo")); // 将第二个 'h' 替换为 'e' 可以匹配 "hello" ，所以返回 True
+//        System.out.println(magicDictionary.search("hell")); // 返回 False
+//        System.out.println(magicDictionary.search("leetcoded")); // 返回 False
+        System.out.println(magicDictionary.search("hello"));
+        System.out.println(magicDictionary.search("hhllo"));
+        System.out.println(magicDictionary.search("hell"));
+        System.out.println(magicDictionary.search("leetcoded"));
 
     }
+
+
 }
+
+//leetcode submit region begin(Prohibit modification and deletion)
 
 /**
  * Your MagicDictionary object will be instantiated and called as such:
@@ -81,6 +82,62 @@ class MagicDictionary {
  * obj.buildDict(dictionary);
  * boolean param_2 = obj.search(searchWord);
  */
-//leetcode submit region end(Prohibit modification and deletion)
+class MagicDictionary {
+    public TrieTree trieTree;
 
+    public MagicDictionary() {
+        this.trieTree = new TrieTree();
+    }
+
+    public void buildDict(String[] dictionary) {
+        for (String s : dictionary
+        ) {
+            TrieTree p = trieTree;
+            for (int i = 0; i < s.length(); i++) {
+                int index = s.charAt(i) - 'a';
+                if (p.children[index] == null) {
+                    p.children[index] = new TrieTree();
+                }
+                p = p.children[index];
+            }
+            p.isEnd = true;
+        }
+    }
+
+    public boolean search(String searchWord) {
+        return backTracking(searchWord, 0, trieTree, false);
+    }
+
+    public boolean backTracking(String word, int pos, TrieTree node, boolean modified) {
+        if (pos == word.length()) {
+            return node.isEnd && modified;
+        }
+        int index = word.charAt(pos) - 'a';
+        if (node.children[index] != null) {
+            if (backTracking(word, pos+1, node.children[index], modified)) {
+                return true;
+            }
+        }
+        if (!modified) {
+            for (int i = 0; i < 26; i++) {
+                if (i != index && node.children[i] != null) {
+                    if (backTracking(word, pos + 1, node.children[i], true)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }
+
+class TrieTree {
+    public TrieTree[] children;
+    public boolean isEnd;
+
+    public TrieTree() {
+        this.children = new TrieTree[26];
+        this.isEnd = false;
+    }
+}
+//leetcode submit region end(Prohibit modification and deletion)
