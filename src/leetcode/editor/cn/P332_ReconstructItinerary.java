@@ -44,18 +44,61 @@
 
 package leetcode.editor.cn;
 
-import java.util.List;
+import java.util.*;
 
 //Java：重新安排行程
 class P332_ReconstructItinerary {
     public static void main(String[] args) {
         Solution solution = new P332_ReconstructItinerary().new Solution();
+//        System.out.println(solution.findItinerary());
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        public ArrayDeque<String> result = new ArrayDeque<>();
+        public Map<String, Map<String, Integer>> map = new HashMap<>();
+
         public List<String> findItinerary(List<List<String>> tickets) {
-            return null;
+            for (List<String> list : tickets
+            ) {
+                Map<String, Integer> temp;
+                if (map.containsKey(list.get(0))) {
+                    temp = map.get(list.get(0));
+                    temp.put(list.get(1), temp.getOrDefault(list.get(1), 0) + 1);
+                } else {
+                    temp = new TreeMap<>();
+                    temp.put(list.get(1), 1);
+                }
+                map.put(list.get(0), temp);
+            }
+            result.addLast("JFK");
+            backTracking(tickets.size() + 1);
+            return new ArrayList<>(result);
+        }
+
+        public boolean backTracking(int length) {
+            if (result.size() == length) {
+                return true;
+            }
+
+            String last = result.getLast();
+            if (map.containsKey(last)) {
+                for (Map.Entry<String, Integer> mapEntry :
+                        map.get(last).entrySet()) {
+                    int count = mapEntry.getValue();
+                    if (count > 0) {
+                        String dest = mapEntry.getKey();
+                        result.addLast(dest);
+                        mapEntry.setValue(count - 1);
+                        if (backTracking(length)) {
+                            return true;
+                        }
+                        result.removeLast();
+                        mapEntry.setValue(count);
+                    }
+                }
+            }
+            return false;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

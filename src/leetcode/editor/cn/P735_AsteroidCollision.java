@@ -42,14 +42,11 @@
 package leetcode.editor.cn;
 
 import java.util.ArrayDeque;
-import java.util.Arrays;
 
 //Java：行星碰撞
 class P735_AsteroidCollision {
     public static void main(String[] args) {
         Solution solution = new P735_AsteroidCollision().new Solution();
-//        System.out.println(Arrays.toString(solution.asteroidCollision(new int[]{5, 10, -5})));
-        System.out.println(Arrays.toString(solution.asteroidCollision(new int[]{8,-8})));
     }
 
 
@@ -62,9 +59,10 @@ class P735_AsteroidCollision {
                 boolean alive = true;
                 while (alive&&aster<0&&!arrayDeque.isEmpty()&&arrayDeque.peek()>0) {
                     alive = arrayDeque.peek() < -aster;
-                    if (arrayDeque.peek() <= -aster) {
+                    if (arrayDeque.peek() <= aster) {
                         arrayDeque.pop();
                     }
+
                 }
                 if (alive) {
                     arrayDeque.push(aster);
