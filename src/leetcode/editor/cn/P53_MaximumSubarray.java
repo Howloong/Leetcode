@@ -46,6 +46,7 @@ package leetcode.editor.cn;
 class P53_MaximumSubarray {
     public static void main(String[] args) {
         Solution solution = new P53_MaximumSubarray().new Solution();
+        System.out.println(solution.maxSubArray(new int[]{-2, 1}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -60,7 +61,7 @@ class P53_MaximumSubarray {
                 } else {
                     sum = i;
                 }
-                res = Math.max(res, sum);
+                    res = Math.max(res, sum);
             }
             return res;
         }
