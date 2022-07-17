@@ -65,7 +65,7 @@ class P745_PrefixAndSuffixSearch {
         }
 
         public int f(String pref, String suff) {
-
+            return 1;
         }
     }
 
