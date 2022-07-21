@@ -56,14 +56,44 @@ class P134_GasStation {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int canCompleteCircuit(int[] gas, int[] cost) {
+           /* int min = Integer.MAX_VALUE;
             int i = 0;
+            int sum = 0;
             while (i < gas.length) {
-                if (gas[i] - cost[i] < 0) {
-                    continue;
+                int t = gas[i] - cost[i];
+                sum += t;
+                min = Math.min(min, sum);
+                i++;
+            }
+            if (min >= 0) {
+                return 0;
+            }
+            if (sum < 0) {
+                return -1;
+            }
+            for (int j = gas.length - 1; j >= 0; j--) {
+                int t = gas[j] - cost[j];
+                min += t;
+                if (min >= 0) {
+                    return j;
+                }
+            }
+            return -1;*/
+            int sum = 0;
+            int cur = 0;
+            int i = 0;
+            int start = 0;
+            while (i < gas.length) {
+                int t = gas[i] - cost[i];
+                cur += t;
+                sum += t;
+                if (cur < 0) {
+                    start = i + 1;
+                    cur = 0;
                 }
                 i++;
             }
-
+            return sum < 0 ? -1 : start;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

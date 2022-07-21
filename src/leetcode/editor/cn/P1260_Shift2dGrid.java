@@ -86,7 +86,7 @@ class P1260_Shift2dGrid {
                 System.arraycopy(grid[i], 0, flat, i * n, n);
             }
 
-            int i = k == 0 ? 0 : flat.length - k;
+            int i = flat.length - k;
             int count = 1;
             List<Integer> list = new ArrayList<>();
             while (count <= flat.length) {
