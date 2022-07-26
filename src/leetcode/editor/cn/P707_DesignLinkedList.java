@@ -101,6 +101,7 @@ class MyLinkedList {
 
     }
 
+    /**/
     public int get(int index) {
         if (index < list.size && index >= 0) {
             ListNode node = list.next;
