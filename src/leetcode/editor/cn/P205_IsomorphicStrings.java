@@ -46,7 +46,7 @@ import java.util.HashMap;
 class P205_IsomorphicStrings {
     public static void main(String[] args) {
         Solution solution = new P205_IsomorphicStrings().new Solution();
-        System.out.println(solution.isIsomorphic("badc","baba"));
+
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -68,6 +68,7 @@ class P205_IsomorphicStrings {
             return true;
         }
     }
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

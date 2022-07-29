@@ -42,14 +42,13 @@
 package leetcode.editor.cn;
 
  import java.util.Arrays;
+ import java.util.Comparator;
  import java.util.HashMap;
 
  //Java：数组序号转换
 class P1331_RankTransformOfAnArray{
     public static void main(String[] args) {
         Solution solution = new P1331_RankTransformOfAnArray().new Solution();
-//        System.out.println(Arrays.toString(solution.arrayRankTransform(new int[]{40, 10, 20, 30})));
-//        System.out.println(Arrays.toString(solution.arrayRankTransform(new int[]{100,100,100})));
         System.out.println(Arrays.toString(solution.arrayRankTransform(new int[]{37,12,28,9,100,56,80,5,12})));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
