@@ -42,9 +42,7 @@ package leetcode.editor.cn;
 class P1374_GenerateAStringWithCharactersThatHaveOddCounts{
     public static void main(String[] args) {
         Solution solution = new P1374_GenerateAStringWithCharactersThatHaveOddCounts().new Solution();
-//        System.out.println(solution.generateTheString(1));
-//        System.out.println(solution.generateTheString(2));
-//        System.out.println(solution.generateTheString(4));
+
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
