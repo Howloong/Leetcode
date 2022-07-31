@@ -50,9 +50,9 @@ class P416_PartitionEqualSubsetSum {
             }
             sum /= 2;
             int[] dp = new int[sum+1];
-            for (int i = 0; i < nums.length; i++) {
-                for (int j = sum; j >= nums[i]; j--) {
-                    dp[j] = Math.max(dp[j], dp[j - nums[i]] + nums[i]);
+            for (int num : nums) {
+                for (int j = sum; j >= num; j--) {
+                    dp[j] = Math.max(dp[j], dp[j - num] + num);
                 }
             }
             return dp[sum] == sum;

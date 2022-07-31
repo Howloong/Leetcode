@@ -43,22 +43,33 @@
 
 package leetcode.editor.cn;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 //Java:最后一块石头的重量 II
-//Time:2022-07-29 17:57:38
+//Time:2022-07-31 19:46:58
 class P1049_LastStoneWeightIi {
     public static void main(String[] args) {
         Solution solution = new P1049_LastStoneWeightIi().new Solution();
-
+        System.out.println(solution.lastStoneWeightII(new int[]{2, 7, 4, 1, 8, 1}));
+        System.out.println(solution.lastStoneWeightII(new int[]{31, 26, 33, 21, 40}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        public int lastStoneWeightII(int v, int p, int[] nums) {
-            return 1;
+        public int lastStoneWeightII(int[] stones) {
+            int sum = Arrays.stream(stones).sum();
+            int target = sum / 2;
+            int[] dp = new int[sum + 1];
+            A:
+            for (int num : stones) {
+                for (int i = target; i >= num; i--) {
+                    dp[i] = Math.max(dp[i], dp[i - num] + num);
+                    if (dp[target] == target) {
+                        break A;
+                    }
+                }
+            }
+            return sum - 2 * dp[target];
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
