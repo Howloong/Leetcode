@@ -46,12 +46,30 @@ package leetcode.editor.cn;
 class P474_OnesAndZeroes {
     public static void main(String[] args) {
         Solution solution = new P474_OnesAndZeroes().new Solution();
+        System.out.println(solution.findMaxForm(new String[]{"10", "0001", "111001", "1", "0"}, 5, 3));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int findMaxForm(String[] strs, int m, int n) {
-            return 1;
+            int[][] dp = new int[m+1][n+1];
+            for (String str : strs) {
+                int zeroNum = 0;
+                int oneNum = 0;
+                for (char c : str.toCharArray()) {
+                    if (c == '0') {
+                        zeroNum++;
+                    } else {
+                        oneNum++;
+                    }
+                }
+                for (int i = m; i >= zeroNum; i--) {
+                    for (int j = n; j >= oneNum; j--) {
+                        dp[i][j] = Math.max(dp[i][j], dp[i - zeroNum][j - oneNum] + 1);
+                    }
+                }
+            }
+            return dp[m][n];
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
