@@ -34,18 +34,46 @@
 // Related Topics 数组 双指针 排序 👍 1213 👎 0
 
 package leetcode.editor.cn;
+
+import java.util.Arrays;
+
 //Java:最接近的三数之和
-//Time:2022-08-08 22:53:32
-class P16_ThreeSumClosest{
+//Time:2022-08-04 16:56:14
+class P16_ThreeSumClosest {
     public static void main(String[] args) {
         Solution solution = new P16_ThreeSumClosest().new Solution();
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int threeSumClosest(int[] nums, int target) {
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int threeSumClosest(int[] nums, int target) {
+            Arrays.sort(nums);
+            int min = Integer.MAX_VALUE;
+            for (int i = 0; i < nums.length; i++) {
+                if (i > 0 && nums[i] == nums[i - 1]) {
+                    continue;
+                }
+                int j = i + 1;
+                int k = nums.length - 1;
+                while (j < k) {
+                    int sum = nums[i] + nums[j] + nums[k];
+                    if (Math.abs(sum - target) < Math.abs(min - target)) {
+                        min = sum;
+                    }
+                    if (sum == target) {
+                        return min;
+                    } else if (sum > target) {
+                        k--;
+                    } else {
+                        j++;
+                    }
+//                k--;
+//                j++;
+                }
+            }
+            return min;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

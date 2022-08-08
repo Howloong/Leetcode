@@ -46,8 +46,7 @@ class P761_SpecialBinaryString {
         public int[] exclusiveTime(int n, List<String> logs) {
             int[] tasks = new int[n];
             ArrayDeque<String> arrayDeque = new ArrayDeque<>();
-            for (int i = 0; i < logs.size(); i++) {
-                String str = logs.get(i);
+            for (String str : logs) {
                 String[] s = str.split(":");
                 int task = Integer.parseInt(s[0]);
                 String status = s[1];
