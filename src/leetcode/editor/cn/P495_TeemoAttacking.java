@@ -44,32 +44,18 @@
 // Related Topics 数组 模拟 👍 315 👎 0
 
 package leetcode.editor.cn;
-
 //Java:提莫攻击
-//Time:2022-08-06 17:38:47
-class P495_TeemoAttacking {
+//Time:2022-08-07 18:58:46
+class P495_TeemoAttacking{
     public static void main(String[] args) {
         Solution solution = new P495_TeemoAttacking().new Solution();
-        System.out.println(solution.findPoisonedDuration(new int[]{1,2,3,4,5},5));
     }
-
     //leetcode submit region begin(Prohibit modification and deletion)
-    class Solution {
-        public int findPoisonedDuration(int[] timeSeries, int duration) {
-            int sum = 0;
-            int last = timeSeries[0];
-            for (int i = 1; i < timeSeries.length; i++) {
-                if (timeSeries[i] - last > duration - 1) {
-                    sum += duration;
-                } else {
-                    sum += (timeSeries[i] - last);
-                }
-                last = timeSeries[i];
-            }
-            sum += duration;
-            return sum;
-        }
+class Solution {
+    public int findPoisonedDuration(int[] timeSeries, int duration) {
+        return 1;
     }
+}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
