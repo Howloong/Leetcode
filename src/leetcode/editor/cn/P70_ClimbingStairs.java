@@ -47,7 +47,7 @@ class P70_ClimbingStairs {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int climbStairs(int n) {
-//            int[] dp = new int[n + 1];
+/*//            int[] dp = new int[n + 1];
             if (n == 1) {
                 return 1;
             }
@@ -62,7 +62,17 @@ class P70_ClimbingStairs {
                 a = b;
                 b = num;
             }
-            return num;
+            return num;*/
+            int[] dp = new int[n + 1];
+//            int[] target = new int[]{1, 2};
+            dp[0] = 1;
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= 2; j++) {
+                    if (i - j >= 0)
+                        dp[i] += dp[i - j];
+                }
+            }
+            return dp[n];
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

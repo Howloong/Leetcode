@@ -47,18 +47,33 @@
 
 package leetcode.editor.cn;
 
+import java.util.Arrays;
+
 //Java:组合总和 Ⅳ
 //Time:2022-08-05 17:28:19
 class P377_CombinationSumIv {
     public static void main(String[] args) {
         Solution solution = new P377_CombinationSumIv().new Solution();
+        System.out.println(solution.combinationSum4(new int[]{1, 2, 3}, 4));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int combinationSum4(int[] nums, int target) {
+            int[] dp = new int[target + 1];
+            dp[0] = 1;
+            for (int i = 0; i <= target; i++) {
+                for (int j = 0; j < nums.length; j++) {
+                    if (i >= nums[j]) {
+//                        System.out.println(nums[j]);
+                        System.out.println(Arrays.toString(dp));
+                        dp[i] += dp[i - nums[j]];
+                    }
+                }
+                System.out.println("--");
 
-            return 1;
+            }
+            return dp[target];
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

@@ -44,13 +44,14 @@
 
 package leetcode.editor.cn;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 //Java：两数之和
 class P1_TwoSum {
     public static void main(String[] args) {
         Solution solution = new P1_TwoSum().new Solution();
-        solution.twoSum(new int[]{2, 7, 11, 15}, 9);
+        System.out.println(Arrays.toString(solution.twoSum(new int[]{2, 7, 11, 15}, 9)));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

@@ -46,8 +46,6 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-
 //Java:学生出勤记录 I
 //Time:2022-08-17 23:24:24
 class P551_StudentAttendanceRecordI {

@@ -87,7 +87,14 @@ class P998_MaximumBinaryTreeIi{
  */
 class Solution {
     public TreeNode insertIntoMaxTree(TreeNode root, int val) {
-        return null;
+        if (root == null) {
+            return new TreeNode(val);
+        }
+        if (root.val < val) {
+            return new TreeNode(val, root, null);
+        }
+        root.right = insertIntoMaxTree(root.right, val);
+        return root;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

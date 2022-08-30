@@ -1,8 +1,7 @@
 package leetcode.editor.cn;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.HashMap;
-import java.util.Scanner;
 
 /**
  * @ClassName: Test
@@ -13,25 +12,27 @@ import java.util.Scanner;
  */
 public class Test {
     public static void main(String[] args) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("/Users/kangyuhan/1356.txt")));
-        String temp;
-        HashMap<String, Integer> hashMap = new HashMap<>();
-        int line=0;
-        while ((temp = bufferedReader.readLine() )!= null) {
-            hashMap.put(temp, hashMap.getOrDefault(temp, 0) + 1);
-            line++;
-        }
-
-        bufferedReader.close();
-
-
+        Solution solution = new Test().new Solution();
     }
 
-    public static void store(Object obj, OutputStream out) throws IOException {
-        ObjectOutputStream outputStream = new ObjectOutputStream(out);
-        outputStream.writeObject(obj);
-        outputStream.flush();
-        outputStream.close();
+
+    class Solution {
+        public int numberOfPairs(int[] nums) {
+            HashMap<Integer, Integer> hashMap = new HashMap<>();
+            long res = 0;
+            for (int num : nums) {
+                int temp = Integer.parseInt(new StringBuilder(String.valueOf(num)).reverse().toString());
+                hashMap.put(num - temp, hashMap.getOrDefault(num - temp, 0) + 1);
+            }
+            long mod = (long) 10e9 + 7;
+            for (Integer value : hashMap.values()) {
+                Long v = Long.valueOf(value);
+                v = ((v - 1) * v / 2) % mod;
+//                value = (value - 1) * value / 2;
+                res = (res + v) % mod;
+            }
+            return (int) res;
+        }
     }
 
 }
