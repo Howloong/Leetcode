@@ -1,0 +1,24 @@
+    class Solution {
+        public String convertToBase7(int num) {
+            if (num == 0) {
+                return "0";
+            }
+            if (num < 0) {
+                return "-" + convert(-num);
+            } else {
+                return convert(num);
+            }
+        }
+
+        public String convert(int num) {
+            StringBuilder sb = new StringBuilder();
+            while (num != 0) {
+                sb.insert(0,num % 7);
+                num /= 7;
+            }
+            return sb.toString();
+        }
+    }
+
+//runtime:1 ms
+//memory:38.7 MB
