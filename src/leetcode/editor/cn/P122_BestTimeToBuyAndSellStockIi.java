@@ -46,12 +46,14 @@ package leetcode.editor.cn;
 class P122_BestTimeToBuyAndSellStockIi {
     public static void main(String[] args) {
         Solution solution = new P122_BestTimeToBuyAndSellStockIi().new Solution();
+//        System.out.println(solution.maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
+        System.out.println(solution.maxProfit(new int[]{1,2,3,4,5}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxProfit(int[] prices) {
-            int i = 0;
+           /* int i = 0;
             int sum = 0;
             while (i < prices.length-1) {
                 int j = i + 1;
@@ -71,7 +73,9 @@ class P122_BestTimeToBuyAndSellStockIi {
                 }
                 i = j;
             }
-            return sum;
+            return sum;*/
+            return 1;
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

@@ -51,7 +51,7 @@ class P213_HouseRobberIi {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int rob(int[] nums) {
-
+            return 1;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
