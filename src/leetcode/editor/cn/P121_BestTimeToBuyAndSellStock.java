@@ -47,13 +47,22 @@ class P121_BestTimeToBuyAndSellStock{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int maxProfit(int[] prices) {
-        int max = 0;
+        /*int max = 0;
         int min = prices[0];
         for (int i = 1; i < prices.length; i++) {
             max = Math.max(max, prices[i] - min);
             min = Math.min(min, prices[i]);
         }
-        return max;
+        return max;*/
+        int[] dp = new int[2];
+//        0为持有
+//        1为不持有
+        dp[0] = -prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            dp[0] = Math.max(dp[0], -prices[i]);
+            dp[1] = Math.max(dp[1], dp[0] + prices[i]);
+        }
+        return Math.max(dp[0], dp[1]);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
