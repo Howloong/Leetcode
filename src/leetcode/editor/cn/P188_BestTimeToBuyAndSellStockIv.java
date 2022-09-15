@@ -35,17 +35,33 @@
 // Related Topics 数组 动态规划 👍 807 👎 0
 
 package leetcode.editor.cn;
+
 //Java:买卖股票的最佳时机 IV
 //Time:2022-09-14 10:50:27
-class P188_BestTimeToBuyAndSellStockIv{
+class P188_BestTimeToBuyAndSellStockIv {
     public static void main(String[] args) {
         Solution solution = new P188_BestTimeToBuyAndSellStockIv().new Solution();
+        System.out.println(solution.maxProfit(2, new int[]{3, 2, 6, 5, 0, 3}));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int maxProfit(int k, int[] prices) {
-        return 1;
-    }
+    class Solution {
+        public int maxProfit(int k, int[] prices) {
+            int[] dp = new int[2 * k];
+            for (int i = 0; i < dp.length; i += 2) {
+                dp[i] = -prices[0];
+            }
+            for (int i = 1; i < prices.length; i++) {
+                dp[0] = Math.max(-prices[i], dp[0]);
+                for (int j = 1; j < dp.length; j += 2) {
+                    dp[j] = Math.max(dp[j - 1] + prices[i], dp[j]);
+                }
+                for (int j = 2; j < dp.length; j += 2) {
+                    dp[j] = Math.max(dp[j - 1] - prices[i], dp[j]);
+                }
+            }
+            return dp[dp.length - 1];
+        }
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
