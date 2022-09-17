@@ -40,21 +40,33 @@
 // s 只含小写英文字母 
 // 
 //
-// Related Topics 哈希表 字符串 👍 65 👎 0
+// Related Topics 哈希表 字符串 👍 35 👎 0
 
 package leetcode.editor.cn;
-//Java:两个相同字符之间的最长子字符串
-//Time:2022-09-17 22:19:18
-    class P1624_LargestSubstringBetweenTwoEqualCharacters{
-        public static void main(String[] args) {
-            Solution solution = new P1624_LargestSubstringBetweenTwoEqualCharacters().new Solution();
-      }
-      //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int maxLengthBetweenEqualCharacters(String s) {
 
+//Java:两个相同字符之间的最长子字符串
+//Time:2022-09-17 10:30:33
+class P1624_LargestSubstringBetweenTwoEqualCharacters {
+    public static void main(String[] args) {
+        Solution solution = new P1624_LargestSubstringBetweenTwoEqualCharacters().new Solution();
+        System.out.println(solution.maxLengthBetweenEqualCharacters("mgntdygtxrvxjnwksqhxuxtrv"));
     }
-}
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int maxLengthBetweenEqualCharacters(String s) {
+            int[] nums = new int[26];
+            int max = -1;
+            for (int i = 0; i < s.length(); i++) {
+                int c = s.charAt(i) - 'a';
+                if (nums[c] != 0) {
+                    max = Math.max(max, i - nums[c]);
+                } else
+                    nums[c] = i + 1;
+            }
+            return max;
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
-}7
+}

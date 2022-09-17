@@ -40,4 +40,4 @@
  <li><code>s</code> 只含小写英文字母</li> 
 </ul>
 
-<div><div>Related Topics</div><div><li>哈希表</li><li>字符串</li></div></div><br><div><li>👍 65</li><li>👎 0</li></div>
+<div><div>Related Topics</div><div><li>哈希表</li><li>字符串</li></div></div><br><div><li>👍 35</li><li>👎 0</li></div>

@@ -31,20 +31,32 @@
 package leetcode.editor.cn;
 
 //Java:最长重复子数组
-//Time:2022-09-16 22:31:27
+//Time:2022-09-17 16:59:42
 class P718_MaximumLengthOfRepeatedSubarray {
     public static void main(String[] args) {
         Solution solution = new P718_MaximumLengthOfRepeatedSubarray().new Solution();
+//        System.out.println(solution.findLength(new int[]{1, 2, 3, 2, 1}, new int[]{3, 2, 1, 4, 7}));
+        System.out.println(solution.findLength(new int[]{1, 0, 0, 0, 1}, new int[]{1, 0, 0, 1, 1}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-
-
         public int findLength(int[] nums1, int[] nums2) {
-            int[] dp = new int[nums1.length];
+            int[] dp = new int[nums1.length + 1];
+            int max = 0;
+            for (int i = 1; i <= nums1.length; i++) {
+                for (int j = nums2.length; j >= 1; j--) {
+                    if (nums1[i - 1] == nums2[j - 1]) {
+                        dp[j] = dp[j - 1] + 1;
+                        max = Math.max(max, dp[j]);
+                    } else {
+                        dp[j] = 0;
+                    }
+                }
+            }
+            return max;
         }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
-    }
 }

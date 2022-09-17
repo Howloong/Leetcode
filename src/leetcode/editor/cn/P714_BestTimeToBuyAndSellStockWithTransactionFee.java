@@ -47,13 +47,13 @@ class P714_BestTimeToBuyAndSellStockWithTransactionFee {
     public static void main(String[] args) {
         Solution solution = new P714_BestTimeToBuyAndSellStockWithTransactionFee().new Solution();
         System.out.println(solution.maxProfit(new int[]{1, 3, 2, 8, 4, 9}, 2));
-        System.out.println(solution.maxProfit(new int[]{1,3,7,5,10,3}, 3));
+        System.out.println(solution.maxProfit(new int[]{1, 3, 7, 5, 10, 3}, 3));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxProfit(int[] prices, int fee) {
-            int sum = 0;
+         /*   int sum = 0;
             int i = 1;
             int min = prices[0];
             while (i < prices.length) {
@@ -64,7 +64,15 @@ class P714_BestTimeToBuyAndSellStockWithTransactionFee {
                 }
                 i++;
             }
-            return sum;
+            return sum;*/
+            int[] dp = new int[2];
+            dp[0] = -prices[0];
+            dp[1] = 0;
+            for (int i = 1; i < prices.length; i++) {
+                dp[0] = Math.max(dp[0], dp[1] - prices[i]);
+                dp[1] = Math.max(dp[1], dp[0] + prices[i] - fee);
+            }
+            return dp[1];
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
