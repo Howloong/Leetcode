@@ -46,17 +46,31 @@
 
 package leetcode.editor.cn;
 
+import java.util.Arrays;
+
 //Java:最长递增子序列
-//Time:2022-09-16 17:19:23
+//Time:2022-09-16 18:29:14
 class P300_LongestIncreasingSubsequence {
     public static void main(String[] args) {
         Solution solution = new P300_LongestIncreasingSubsequence().new Solution();
+        System.out.println(solution.lengthOfLIS(new int[]{4,10,4,3,8,9}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int lengthOfLIS(int[] nums) {
-            return 1;
+            int[] dp = new int[nums.length];
+            int res = 1;
+            Arrays.fill(dp, 1);
+            for (int i = 1; i < nums.length; i++) {
+                for (int j = 0; j < i; j++) {
+                    if (nums[j] < nums[i]) {
+                        dp[i] = Math.max(dp[j] + 1, dp[i]);
+                    }
+                }
+                res = Math.max(res, dp[i]);
+            }
+            return res;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
