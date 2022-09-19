@@ -54,7 +54,7 @@ class P392_IsSubsequence {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean isSubsequence(String s, String t) {
-            if (s.equals("")) {
+          /*  if (s.equals("")) {
                 return true;
             }
             int index = 0;
@@ -67,7 +67,25 @@ class P392_IsSubsequence {
                 }
             }
             return false;
-            
+            */
+//            int[][] dp = new int[s.length() + 1][t.length() + 1];
+            int[] dp = new int[t.length() + 1];
+            for (int i = 1; i <= s.length(); i++) {
+                int pre = dp[0];
+                for (int j = 1; j <= t.length(); j++) {
+                    int cur = dp[j];
+                    if (s.charAt(i - 1) == t.charAt(j - 1)) {
+//                        dp[i][j] = dp[i - 1][j - 1] + 1;
+                        dp[j] = pre + 1;
+                    } else {
+//                        dp[i][j] = dp[i][j - 1];
+                        dp[j] = dp[j - 1];
+                    }
+                    pre = cur;
+                }
+            }
+            return dp[t.length()] == s.length();
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

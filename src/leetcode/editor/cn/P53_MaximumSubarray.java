@@ -46,13 +46,13 @@ package leetcode.editor.cn;
 class P53_MaximumSubarray {
     public static void main(String[] args) {
         Solution solution = new P53_MaximumSubarray().new Solution();
-        System.out.println(solution.maxSubArray(new int[]{-2, 1}));
+        System.out.println(solution.maxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxSubArray(int[] nums) {
-            int res = nums[0];
+          /*  int res = nums[0];
             int sum = 0;
             for (int i : nums
             ) {
@@ -61,9 +61,17 @@ class P53_MaximumSubarray {
                 } else {
                     sum = i;
                 }
-                    res = Math.max(res, sum);
+                res = Math.max(res, sum);
             }
-            return res;
+            return res;*/
+            int n = nums.length;
+            int dp = Math.max(nums[0], 0);
+            int max = nums[0];
+            for (int i = 1; i < n; i++) {
+                dp = Math.max(dp+ nums[i], nums[i]);
+                max = Math.max(max, dp);
+            }
+            return max;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

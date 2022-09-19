@@ -1,4 +1,4 @@
-//在两条独立的水平线上按给定的顺序写下 nums1 和 nums2 中的整数。 
+//在两条独立的水平线上按给定的顺序写下 nums1 和 nums2 中的整数。
 //
 // 现在，可以绘制一些连接两个数字 nums1[i] 和 nums2[j] 的直线，这些直线需要同时满足满足： 
 //
@@ -60,12 +60,25 @@ class P1035_UncrossedLines{
     public static void main(String[] args) {
         Solution solution = new P1035_UncrossedLines().new Solution();
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int maxUncrossedLines(int[] nums1, int[] nums2) {
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int maxUncrossedLines(int[] nums1, int[] nums2) {
+            int[] dp = new int[nums2.length + 1];
+            for (int i = 1; i <= nums1.length; i++) {
+                int pre = dp[0];
+                for (int j = 1; j <= nums2.length; j++) {
+                    int cur = dp[j];
+                    if (nums1[i - 1] == nums2[j - 1]) {
+                        dp[j] = pre + 1;
+                    } else
+                        dp[j] = Math.max(dp[j - 1], dp[j]);
+                    pre = cur;
+                }
+            }
+            return dp[dp.length - 1];
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
