@@ -54,9 +54,10 @@
 // Related Topics 数组 动态规划 👍 372 👎 0
 
 package leetcode.editor.cn;
+
 //Java:不相交的线
 //Time:2022-09-18 13:55:16
-class P1035_UncrossedLines{
+class P1035_UncrossedLines {
     public static void main(String[] args) {
         Solution solution = new P1035_UncrossedLines().new Solution();
     }
