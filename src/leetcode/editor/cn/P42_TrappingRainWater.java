@@ -43,7 +43,7 @@ class P42_TrappingRainWater {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int trap(int[] height) {
-
+            return 1;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
