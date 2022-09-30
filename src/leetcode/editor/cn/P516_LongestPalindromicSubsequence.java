@@ -34,7 +34,7 @@
 package leetcode.editor.cn;
 
 //Java:最长回文子序列
-//Time:2022-09-21 19:22:36
+//Time:2022-09-21 13:15:28
 class P516_LongestPalindromicSubsequence {
     public static void main(String[] args) {
         Solution solution = new P516_LongestPalindromicSubsequence().new Solution();
