@@ -1,32 +1,18 @@
-//给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。 
-//
-// 如果数组中不存在目标值 target，返回 [-1, -1]。 
-//
-// 进阶： 
-//
-// 
-// 你可以设计并实现时间复杂度为 O(log n) 的算法解决此问题吗？ 
-// 
+//统计一个数字在排序数组中出现的次数。 
 //
 // 
 //
-// 示例 1： 
+// 示例 1: 
 //
 // 
-//输入：nums = [5,7,7,8,8,10], target = 8
-//输出：[3,4] 
+//输入: nums = [5,7,7,8,8,10], target = 8
+//输出: 2 
 //
-// 示例 2： 
-//
-// 
-//输入：nums = [5,7,7,8,8,10], target = 6
-//输出：[-1,-1] 
-//
-// 示例 3： 
+// 示例 2: 
 //
 // 
-//输入：nums = [], target = 0
-//输出：[-1,-1] 
+//输入: nums = [5,7,7,8,8,10], target = 6
+//输出: 0 
 //
 // 
 //
@@ -38,22 +24,29 @@
 // nums 是一个非递减数组 
 // -10⁹ <= target <= 10⁹ 
 // 
-// Related Topics 数组 二分查找 👍 1712 👎 0
+//
+// 
+//
+// 注意：本题与主站 34 题相同（仅返回值不同）：https://leetcode-cn.com/problems/find-first-and-last-
+//position-of-element-in-sorted-array/ 
+//
+// Related Topics 数组 二分查找 👍 364 👎 0
 
 package leetcode.editor.cn;
 
-//Java：在排序数组中查找元素的第一个和最后一个位置
-class P34_FindFirstAndLastPositionOfElementInSortedArray {
+//Java:在排序数组中查找数字 I
+//Time:2022-10-06 16:35:01
+class I_ZaiPaiXuShuZuZhongChaZhaoShuZiLcof {
     public static void main(String[] args) {
-        Solution solution = new P34_FindFirstAndLastPositionOfElementInSortedArray().new Solution();
-        solution.searchRange(new int[]{5,7,7,8,8,10}, 8);
+        Solution solution = new I_ZaiPaiXuShuZuZhongChaZhaoShuZiLcof().new Solution();
+        System.out.println(solution.search(new int[]{5, 7, 7, 8, 8, 10}, 8));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        public int[] searchRange(int[] nums, int target) {
+        public int search(int[] nums, int target) {
             if (nums.length == 0) {
-                return new int[]{-1, -1};
+                return 0;
             }
             int i = 0, j = nums.length-1;
             int mid;
@@ -80,12 +73,12 @@ class P34_FindFirstAndLastPositionOfElementInSortedArray {
                 }
             }
             if (right == -2 || left == -2) {
-                return new int[]{-1, -1};
+                return 0;
             }
             if (right - left > 1) {
-                return new int[]{left + 1, right - 1};
+                return right - left - 1;
             }
-            return new int[]{-1, -1};
+            return 0;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
