@@ -60,8 +60,8 @@ class P801_MinimumSwapsToMakeSequencesIncreasing {
         System.out.println(solution.minSwap(new int[]{0, 7, 8, 10, 10, 11, 12, 13, 19, 18}, new int[]{4, 4, 5, 7, 11, 14, 15, 16, 17, 20}));
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-    class Solution {
+    // leetcode submit region begin(Prohibit modification and deletion)
+    final class Solution {
         public int minSwap(int[] nums1, int[] nums2) {
             int len = nums1.length;
             int a = 0, b = 1;
