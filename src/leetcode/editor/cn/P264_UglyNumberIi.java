@@ -37,7 +37,7 @@ package leetcode.editor.cn;
 class P264_UglyNumberIi {
     public static void main(String[] args) {
         Solution solution = new P264_UglyNumberIi().new Solution();
-        solution.nthUglyNumber(1);
+        solution.nthUglyNumber(10);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
