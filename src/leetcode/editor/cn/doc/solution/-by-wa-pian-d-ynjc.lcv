@@ -1,0 +1,59 @@
+### 解题思路
+
+用的List<Stack>作为主数据结构，决定pop的元素。
+用Map<Integer,Integer>作为主计数结构。
+
+1. map计数，决定新来的key放在list的位置
+2. p 记录当前最大的val数量
+3. pop时候从list的p中pop一个数
+
+### 代码
+
+* java
+
+```java
+class FreqStack {
+
+
+
+	Map<Integer, Integer> cnts;
+	int p;
+	List<Stack<Integer>> list;
+
+	public FreqStack() {
+		cnts = new HashMap<>();
+		list = new ArrayList<>();
+		p = 0;
+	}
+
+	public void push(int val) {
+		int cnt = cnts.getOrDefault(val, 0);
+		if (cnt >= list.size()) {
+			list.add(new Stack<>());
+		}
+		if (cnt > p) {
+			p++;
+		}
+		list.get(cnt).add(val);
+		cnts.put(val, cnt + 1);
+	}
+
+	public int pop() {
+		int ans = list.get(p).pop();
+		cnts.put(ans, cnts.get(ans) - 1);
+		if (list.get(p).size() == 0) {
+			p--;
+		}
+		return ans;
+	}
+
+}
+
+/**
+ * Your FreqStack object will be instantiated and called as such:
+ * FreqStack obj = new FreqStack();
+ * obj.push(val);
+ * int param_2 = obj.pop();
+ */
+```
+
