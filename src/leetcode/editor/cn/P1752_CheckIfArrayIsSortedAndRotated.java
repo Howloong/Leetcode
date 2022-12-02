@@ -44,21 +44,52 @@
 // 1 <= nums[i] <= 100 
 // 
 //
-// Related Topics 数组 👍 53 👎 0
+// Related Topics 数组 👍 62 👎 0
 
 package leetcode.editor.cn;
+
 //Java:检查数组是否经排序和轮转得到
-//Time:2022-11-27 13:48:12
-class P1752_CheckIfArrayIsSortedAndRotated{
+//Time:2022-11-27 16:22:01
+class P1752_CheckIfArrayIsSortedAndRotated {
     public static void main(String[] args) {
         Solution solution = new P1752_CheckIfArrayIsSortedAndRotated().new Solution();
+        System.out.println(solution.check(new int[]{3, 4, 5, 1, 2}));
+        System.out.println(solution.check(new int[]{6,10,6}));
+        System.out.println(solution.check(new int[]{6,6,6}));
+        System.out.println(solution.check(new int[]{6,7,8}));
+        System.out.println(solution.check(new int[]{2, 1, 3, 4}));
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public boolean check(int[] nums) {
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public boolean check(int[] nums) {
+            int[] arr = new int[nums.length * 2];
+            System.arraycopy(nums, 0, arr, 0, nums.length);
+            System.arraycopy(nums, 0, arr, nums.length, nums.length);
+            int i = 0;
+            int count = 1;
+            while (i < arr.length-1) {
+                if (arr[i] > arr[i + 1]) {
+                    break;
+                }
+                i++;
+                if (i == nums.length - 1) {
+                    return true;
+                }
+            }
+
+            i++;
+            while (i < arr.length - 1) {
+                if (arr[i] <= arr[i + 1]) {
+                    count++;
+                } else {
+                    break;
+                }
+                i++;
+            }
+            return count==nums.length;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
