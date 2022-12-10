@@ -1,7 +1,6 @@
 package leetcode.editor.cn;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 /**
  * @ClassName: Test
@@ -12,27 +11,11 @@ import java.util.HashMap;
  */
 public class Test {
     public static void main(String[] args) throws IOException {
-        Solution solution = new Test().new Solution();
-    }
+        for (int i = 1; i <= 100; i++) {
 
-
-    class Solution {
-        public int numberOfPairs(int[] nums) {
-            HashMap<Integer, Integer> hashMap = new HashMap<>();
-            long res = 0;
-            for (int num : nums) {
-                int temp = Integer.parseInt(new StringBuilder(String.valueOf(num)).reverse().toString());
-                hashMap.put(num - temp, hashMap.getOrDefault(num - temp, 0) + 1);
-            }
-            long mod = (long) 10e9 + 7;
-            for (Integer value : hashMap.values()) {
-                Long v = Long.valueOf(value);
-                v = ((v - 1) * v / 2) % mod;
-//                value = (value - 1) * value / 2;
-                res = (res + v) % mod;
-            }
-            return (int) res;
         }
     }
+
+
 
 }
