@@ -48,7 +48,7 @@ class P1769_MinimumNumberOfOperationsToMoveAllBallsToEachBox{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] minOperations(String boxes) {
-
+        return null;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
