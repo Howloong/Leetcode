@@ -66,6 +66,8 @@
 
 package leetcode.editor.cn;
 
+import java.util.List;
+
 //Java:花括号展开 II
 //Time:2023-03-07 09:16:46
 class P1096_BraceExpansionIi {
@@ -76,7 +78,7 @@ class P1096_BraceExpansionIi {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public List<String> braceExpansionII(String expression) {
-
+            return null;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
