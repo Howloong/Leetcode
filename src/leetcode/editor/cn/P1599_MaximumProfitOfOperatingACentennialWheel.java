@@ -67,21 +67,39 @@
 // 1 <= boardingCost, runningCost <= 100 
 // 
 //
-// Related Topics 数组 模拟 👍 53 👎 0
+// Related Topics 数组 模拟 👍 60 👎 0
 
 package leetcode.editor.cn;
 
 //Java:经营摩天轮的最大利润
-//Time:2023-03-05 20:58:31
+//Time:2023-03-07 09:55:45
 class P1599_MaximumProfitOfOperatingACentennialWheel {
     public static void main(String[] args) {
         Solution solution = new P1599_MaximumProfitOfOperatingACentennialWheel().new Solution();
+        System.out.println(solution.minOperationsMaxProfit(new int[]{2}, 2, 4));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int minOperationsMaxProfit(int[] customers, int boardingCost, int runningCost) {
-            return 1;
+            int profit = 0;
+            int rest = 0;
+            int count = 0;
+            int ans = 0;
+            int i = 0;
+            int max = -1;
+            while (rest > 0 || i < customers.length) {
+                rest += i < customers.length ? customers[i] : 0;
+                int t = Math.min(4, rest);
+                rest -= t;
+                profit += (boardingCost * t - runningCost);
+                i++;
+                if (profit > max) {
+                    max = profit;
+                    ans = i;
+                }
+            }
+            return max > 0 ? ans : -1;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

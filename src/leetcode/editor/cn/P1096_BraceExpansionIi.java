@@ -62,24 +62,87 @@
 // 给出的表达式 expression 用以表示一组基于题目描述中语法构造的字符串 
 // 
 //
-// Related Topics 栈 广度优先搜索 字符串 回溯 👍 88 👎 0
+// Related Topics 栈 广度优先搜索 字符串 回溯 👍 113 👎 0
 
 package leetcode.editor.cn;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
+import java.util.TreeSet;
 
 //Java:花括号展开 II
-//Time:2023-03-07 09:16:46
+//Time:2023-03-07 10:54:21
 class P1096_BraceExpansionIi {
     public static void main(String[] args) {
         Solution solution = new P1096_BraceExpansionIi().new Solution();
+        System.out.println(solution.braceExpansionII("{a,b}{c,{d,e}}"));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+
         public List<String> braceExpansionII(String expression) {
-            return null;
+            Deque<Character> op = new ArrayDeque<>();
+            Deque<TreeSet<String>> exp = new ArrayDeque<>();
+            for (int i = 0; i < expression.length(); i++) {
+                char c = expression.charAt(i);
+                int finalI = i;
+                final boolean b = i - 1 >= 0 && Character.isLetter(expression.charAt(i - 1));
+                switch (c) {
+                    case '}' -> {
+                        while (!op.isEmpty() && op.peek() != '{') {
+                            func(op.pop(), exp);
+                        }
+                        op.pop();
+                    }
+                    case '{' -> {
+                        if (b ||
+                                i - 1 >= 0 && expression.charAt(i - 1) == '}') {
+                            op.push('x');
+                        }
+                        op.push('{');
+                    }
+                    case ',' -> {
+                        while (!op.isEmpty() && op.peek() == 'x') {
+                            func(op.pop(), exp);
+                        }
+                        op.push('+');
+                    }
+                    default -> {
+                        if (i - 1 >= 0 && expression.charAt(i - 1) == '}' ||
+                                b) {
+                            op.push('x');
+                        }
+                        exp.push(new TreeSet<>() {{
+                            add(String.valueOf(expression.charAt(finalI)));
+                        }});
+                    }
+                }
+            }
+            while (!op.isEmpty()) {
+                func(op.pop(), exp);
+            }
+            return exp.getFirst().stream().toList();
         }
+
+        public void func(char op, Deque<TreeSet<String>> exp) {
+            TreeSet<String> set2 = exp.pop();
+            TreeSet<String> set1 = exp.pop();
+            if (op == '+') {
+                set1.addAll(set2);
+                exp.push(set1);
+            } else {
+                TreeSet<String> set = new TreeSet<>();
+                for (String s1 : set1) {
+                    for (String s2 : set2) {
+                        set.add(s1 + s2);
+                    }
+                }
+                exp.push(set);
+            }
+        }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
