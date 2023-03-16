@@ -25,7 +25,7 @@
 // array.length <= 100000 
 // 
 //
-// Related Topics 数组 哈希表 前缀和 👍 140 👎 0
+// Related Topics 数组 哈希表 前缀和 👍 131 👎 0
 
 package leetcode.editor.cn;
 
@@ -34,13 +34,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 //Java: 字母与数字
-//Time:2023-03-11 18:01:03
+//Time:2023-03-11 15:41:03
 class FindLongestSubarrayLcci {
     public static void main(String[] args) {
         Solution solution = new FindLongestSubarrayLcci().new Solution();
-        System.out.println(Arrays.toString(solution.findLongestSubarray(new String[]{"A", "1", "B", "C",
-                "D", "2", "3", "4", "E", "5", "F", "G", "6", "7", "H", "I", "J", "K", "L", "M"})));
-
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -72,6 +69,7 @@ class FindLongestSubarrayLcci {
             return max == 0 ? new String[]{} : Arrays.copyOfRange(array, start, start + max);
         }
     }
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
