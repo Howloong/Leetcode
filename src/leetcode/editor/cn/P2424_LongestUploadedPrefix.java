@@ -45,26 +45,58 @@
 // Related Topics 并查集 设计 树状数组 线段树 二分查找 有序集合 堆（优先队列） 👍 11 👎 0
 
 package leetcode.editor.cn;
+
 //Java:最长上传前缀
 //Time:2023-03-16 16:03:33
-class P2424_LongestUploadedPrefix{
+class P2424_LongestUploadedPrefix {
     public static void main(String[] args) {
+
+        LUPrefix luPrefix = new P2424_LongestUploadedPrefix().new LUPrefix(10);
+        luPrefix.upload(6);
+        luPrefix.upload(10);
+        luPrefix.upload(7);
+        luPrefix.upload(4);
+        luPrefix.upload(2);
+        luPrefix.upload(8);
+        luPrefix.upload(3);
+        luPrefix.upload(1);
+        System.out.println(luPrefix.longest());
+
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class LUPrefix {
+    class LUPrefix {
+        public int[] parent;
 
-    public LUPrefix(int n) {
+        public LUPrefix(int n) {
+            parent = new int[n + 2];
+            for (int i = 1; i <= n + 1; i++) {
+                parent[i] = i;
+            }
+        }
 
+        public int find(int x) {
+            return x == parent[x] ? x : (parent[x] = find(parent[x]));
+        }
+
+        public void merge(int x, int y) {
+            int rootX = find(x);
+            int rootY = find(y);
+            if (rootY == rootX) {
+                return;
+            }
+            parent[x] = y;
+        }
+
+        public void upload(int video) {
+            merge(video, video + 1);
+        }
+
+        public int longest() {
+            return find(1) - 1;
+        }
     }
-    
-    public void upload(int video) {
 
-    }
-    
-    public int longest() {
-
-    }
-}
 
 /**
  * Your LUPrefix object will be instantiated and called as such:
