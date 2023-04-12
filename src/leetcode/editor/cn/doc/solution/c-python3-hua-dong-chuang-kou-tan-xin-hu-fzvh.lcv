@@ -1,0 +1,77 @@
+思路和心得：
+
+1.先排序
+
+2.找出刚开始，中间有多少空格
+
+3.必须交叉着来，不能L移动了还是L，R移动了还是R
+
+max_就是第一步尽量少消耗空格数
+
+从第2步开始，都可以想办法，每次范围只缩小1
+
+3.min_
+
+维持一个长度为n的window
+
+window中有几个空格，就是需要几步
+
+但是要注意示例2的那种情况， 3 4 5 6 8 不能把8一步挪到7，必须交叉，折腾一下，cost=2
+
+* []
+
+```python
+class Solution:
+    def numMovesStonesII(self, stones: List[int]) -> List[int]:
+        stones.sort()
+        n = len(stones)
+        inter_space = stones[-1] - stones[0] + 1 - n
+
+        max_ = inter_space - min(stones[1] - stones[0] - 1, stones[-1] - stones[-2] - 1)
+                #主要卡第一步，因为必须交叉着进行  以后的步骤，都可以想办法，每次范围只缩小1
+        min_ = max_
+        R = 0
+        for L in range(n):  
+            while R + 1 < n and stones[R+1] - stones[L] + 1 <= n:   #维护一个长度为n的窗口
+                R += 1
+            cost = n - (R - L + 1)          #窗口内的空格的个数
+
+            if R-L+1 == n-1 and stones[R]-stones[L]+1 == n-1:       #示例2： 3 4 5 6 10，最少操作数不是1，是2
+                cost = 2
+            
+            min_ = min(min_, cost)
+        
+        return [min_, max_]
+```
+
+* []
+
+```c++
+class Solution 
+{
+public:
+    vector<int> numMovesStonesII(vector<int>& stones) 
+    {
+        sort(stones.begin(), stones.end());
+        int n = stones.size();
+        int inter_space = stones.back() - stones[0] + 1 - n;
+
+        int max_ = inter_space - min(stones[1] - stones[0] - 1, stones[n-1] - stones[n-2] - 1);
+                //卡第一步  以后都可以想尽办法，每次只缩小一格
+        int min_ = max_;
+        int R = 0; 
+        for (int L = 0; L < n; L ++)
+        {
+            while (R + 1 < n && stones[R+1] - stones[L] + 1 <= n)       //维持一个长度为n的窗口
+                R ++;
+            int cost = n - (R - L + 1);                                 //窗口内的空格数====需要最少操作数
+
+            if (R - L + 1== n-1 && stones[R] - stones[L] + 1 == n-1)    //示例2： 3 4 5 6 10 最少是2
+                cost = 2;
+            min_ = min(min_, cost);
+        }
+        return {min_, max_};
+    }
+};
+```
+

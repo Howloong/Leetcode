@@ -1,0 +1,36 @@
+### 解题思路
+
+字符串哈希也太强了。。。yyds
+
+### 代码
+
+* java
+
+```java
+class Solution {
+    int[] h;
+    int base = 131;
+    public int longestDecomposition(String s) {
+        int n = s.length(), hash1 = 0, hash2 = 0, tmp = 1;
+        int len = n/2;
+        int ans = 0;
+        int maxi = 0;
+        for(int i = 1;i <= len;i++){
+            hash1 = hash1*base + s.charAt(i-1);
+            hash2 = hash2 + s.charAt(n-i)*tmp;
+            tmp = tmp*base;
+            if(hash1 == hash2){
+                ans += 2;
+                tmp = 1;
+                hash1 = 0;
+                hash2 = 0;
+                maxi = i;
+            }
+        }
+        if(maxi == len) ans = len*2 < n ? ans+1 : ans;
+        else ans++;
+        return ans;
+    }
+}
+```
+
