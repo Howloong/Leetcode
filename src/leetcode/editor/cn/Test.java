@@ -1,8 +1,6 @@
 package leetcode.editor.cn;
 
 import java.io.IOException;
-import java.util.function.Consumer;
-import java.util.stream.LongStream;
 
 /**
  * @ClassName: Test
@@ -11,15 +9,44 @@ import java.util.stream.LongStream;
  * @Datetime: 2022/8/16   18:09
  * @Author: YuHan.Kang@outlook.com
  */
-public class Test {
+public abstract class Test {
     public static void main(String[] args) throws IOException {
-        LongStream.rangeClosed(1, 1000).reduce(0, Long::sum);
+
     }
 
-    public static void print(Consumer<String> c1, Consumer<String> c2) {
-        c1.accept("hh");
-        c2.accept("hh");
+}
+
+class Singleton {
+    private static final Singleton singleton = new Singleton();
+
+    private Singleton() {
+
     }
 
+    public static Singleton getSingleton() {
+        return singleton;
+    }
+}
 
+class Resource {
+    public static Resource getInstance() {
+        return Singleton.INSTANCE.getInstance();
+    }
+
+    /**
+     * 枚举类型是线程安全的，并且只会装载一次
+     */
+    private enum Singleton {
+        INSTANCE;
+
+        private final Resource instance;
+
+        Singleton() {
+            instance = new Resource();
+        }
+
+        private Resource getInstance() {
+            return instance;
+        }
+    }
 }

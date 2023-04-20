@@ -72,7 +72,7 @@ class P1147_LongestChunkedPalindromeDecomposition {
             b = 131;
             p = (int) Math.pow(2, 30);
             for (int i = 0; i < n; i++) {
-                hash[i + 1] = (hash[i] * b + (text.charAt(i) - 'a' + 1)) % p;
+                hash[i + 1] = (hash[i] * b + text.charAt(i) - 'a' + 1) % p;
                 p131[i + 1] = p131[i] * b;
             }
             int i = 1, j = 1, k = n, l = n;
@@ -97,6 +97,7 @@ class P1147_LongestChunkedPalindromeDecomposition {
         public int getHash(int start, int end) {
             return ((hash[end] - hash[start - 1] * p131[end - start + 1]) % p + p) % p;
         }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 

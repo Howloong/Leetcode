@@ -41,7 +41,16 @@ class P1044_LongestDuplicateSubstring {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public String longestDupSubstring(String s) {
-
+            int n = s.length();
+            int b = 1331;
+            long p = (long) Math.pow(2, 40);
+            long[] hash = new long[n + 1];
+            long[] p1331 = new long[n + 1];
+            for (int i = 0; i < n; i++) {
+                hash[i + 1] = (hash[i] * b + s.charAt(i) - 'a' + 1) % p;
+                p1331[i + 1] = p1331[i] * b;
+            }
+            return null;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
