@@ -51,19 +51,17 @@ class P49_GroupAnagrams {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public List<List<String>> groupAnagrams(String[] strs) {
-            int len = strs.length;
-            HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
-            for (int i = 0; i < len; i++) {
-                char[] c = strs[i].toCharArray();
-                Arrays.sort(c);
-                String s = Arrays.toString(c);
-                ArrayList<String> arrayList = hashMap.getOrDefault(s, new ArrayList<>());
-                arrayList.add(strs[i]);
-                hashMap.put(s, arrayList);
+            HashMap<String, List<String>> hashMap = new HashMap<>();
+            for (String str : strs) {
+                char[] charArray = str.toCharArray();
+                Arrays.sort(charArray);
+                String s = Arrays.toString(charArray);
+                if (!hashMap.containsKey(s)) {
+                    hashMap.put(s, new ArrayList<>());
+                }
+                hashMap.get(s).add(str);
             }
-            List<List<String>> list = new ArrayList<>();
-            list.addAll(hashMap.values());
-            return list;
+            return new ArrayList<>(hashMap.values());
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

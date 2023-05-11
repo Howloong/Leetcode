@@ -32,7 +32,9 @@
 package leetcode.editor.cn;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 //Java:最长连续序列
 //Time:2023-03-16 16:47:09
@@ -41,63 +43,84 @@ class P128_LongestConsecutiveSequence {
         Solution solution = new P128_LongestConsecutiveSequence().new Solution();
 //        System.out.println(solution.longestConsecutive(new int[]{100, 4, 200, 1, 3, 2}));
         System.out.println(solution.longestConsecutive(new int[]{0, 3, 7, 2, 5, 8, 4, 6, 0, 1}));
+//        System.out.println(solution.longestConsecutive(new int[]{0, 3, 7, 2, 5, 8, 4, 6, 0, 1}));
 //        System.out.println(solution.longestConsecutive(new int[]{1}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int longestConsecutive(int[] nums) {
-            if (nums.length == 0) {
-                return 0;
-            }
-            int n = nums.length;
-            int res = 1;
-            UnionFind unionFind = new UnionFind(nums);
+         /*   Set<Integer> set = new HashSet<>();
             for (int num : nums) {
-                if (unionFind.find(num + 1) != Integer.MIN_VALUE) {
-                    res = Math.max(res, unionFind.union(num, num + 1));
+                set.add(num);
+            }
+            int max = 0;
+            for (Integer integer : set) {
+                if (set.contains(integer - 1)) {
+                    continue;
                 }
+                int cur = integer;
+                int count = 1;
+                while (set.contains(cur + 1)) {
+                    cur++;
+                    count++;
+                }
+                max = Math.max(max, count);
+            }
+            return max;*/
+            Node node = new Node(nums.length);
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int i = 0; i < nums.length; i++) {
+                map.put(nums[i], i);
+            }
+            for (int i = 0; i < nums.length; i++) {
+                if (i == map.get(nums[i]) && map.containsKey(nums[i] + 1)) {
+                    node.union(i, map.get(nums[i] + 1));
+                }
+            }
+            int res = 0;
+            for (int i = 0; i < nums.length; i++) {
+                res = Math.max(res, node.rank[node.find(i)]);
             }
             return res;
         }
+
     }
 
-    class UnionFind {
-        Map<Integer, int[]> parent;
+    class Node {
+        int[] parent;
+        int[] rank;
 
-        public UnionFind(int[] nums) {
-            parent = new HashMap<>();
-            for (int num : nums) {
-                parent.put(num, new int[]{num, 1});
+        public Node(int N) {
+            parent = new int[N];
+            rank = new int[N];
+            for (int i = 0; i < N; i++) {
+                parent[i] = i;
+                rank[i] = 1;
             }
         }
 
-        public int find(int nums) {
-            if (!parent.containsKey(nums)) {
-                return Integer.MIN_VALUE;
-            }
-//            while (nums != parent.get(nums)[0]) {
-//                nums = parent.get(nums)[0];
-//            }
-            if (nums != parent.get(nums)[0]) {
-                int[] n = parent.get(nums);
-                n[0] = find(n[0]);
-            }
-            return parent.get(nums)[0];
+        public int find(int x) {
+            return x == parent[x] ? x : (parent[x] = find(parent[x]));
         }
 
-        public int union(int x, int y) {
-            int rootX = find(x);
-            int rootY = find(y);
-            if (rootX == rootY) {
-                return parent.get(rootY)[1];
+        public void union(int x, int y) {
+            x = find(x);
+            y = find(y);
+            if (x == y) {
+                return;
             }
-            int[] n = parent.get(rootX);
-            n[0] = rootY;
-            parent.get(rootY)[1] += n[1];
-            return parent.get(rootY)[1];
+            if (rank[x] < rank[y]) {
+                parent[x] = y;
+                rank[y] += rank[x];
+            } else {
+                parent[y] = x;
+                rank[x] += rank[y];
+            }
         }
     }
+
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

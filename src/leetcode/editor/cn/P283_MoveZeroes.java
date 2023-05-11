@@ -34,37 +34,31 @@
 
 package leetcode.editor.cn;
 
+import java.util.Arrays;
+
 //Java：移动零
 class P283_MoveZeroes {
     public static void main(String[] args) {
         Solution solution = new P283_MoveZeroes().new Solution();
-        solution.moveZeroes(new int[]{2, 1});
+        solution.moveZeroes(new int[]{0, 1, 0, 3, 12});
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public void moveZeroes(int[] nums) {
-            if (nums.length == 1 && nums[0] == 0) {
-                return;
-            }
-            int fast = 0;
-            int slow = 0;
-            while (fast < nums.length) {
-                if (nums[fast] != 0) {
-                    nums[slow++] = nums[fast];
+            int j = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[i] != 0) {
+                    nums[j++] = nums[i];
                 }
-                fast++;
             }
-            while (slow < nums.length) {
-                nums[slow++] = 0;
+            while (j < nums.length) {
+                nums[j++] = 0;
             }
+            System.out.println(Arrays.toString(nums));
         }
 
-        public void swap(int[] nums, int i, int j) {
-            int temp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = temp;
-        }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
