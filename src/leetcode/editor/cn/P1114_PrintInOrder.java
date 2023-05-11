@@ -63,7 +63,6 @@ package leetcode.editor.cn;
 //Time:2023-05-11 17:28:54
 class P1114_PrintInOrder {
     public static void main(String[] args) {
-        Solution solution = new P1114_PrintInOrder().new Solution();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
