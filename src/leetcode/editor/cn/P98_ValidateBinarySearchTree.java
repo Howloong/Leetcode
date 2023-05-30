@@ -62,23 +62,23 @@ class P98_ValidateBinarySearchTree {
      * }
      */
     class Solution {
-        public long max = Long.MIN_VALUE;
+        public long pre = Long.MIN_VALUE;
 
         public boolean isValidBST(TreeNode root) {
             if (root == null) {
                 return true;
             }
             boolean b1 = isValidBST(root.left);
-            if (root.val > max) {
-                max = root.val;
-            } else {
+            if (!b1) {
                 return false;
             }
-            boolean b2 = isValidBST(root.right);
-            return b1 && b2;
+            if (root.val <= pre) {
+                return false;
+            }
+            pre = root.val;
+            return isValidBST(root.right);
+
         }
-
-    }
 //leetcode submit region end(Prohibit modification and deletion)
-
+    }
 }
