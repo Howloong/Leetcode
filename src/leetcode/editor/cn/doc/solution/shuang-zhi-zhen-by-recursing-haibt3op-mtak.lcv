@@ -1,0 +1,75 @@
+> Problem: [1156. 单字符重复子串的最大长度](https://leetcode.cn/problems/swap-for-longest-repeated-character-substring/description/)
+
+[TOC]
+
+# 思路
+
+一般这样的最长子串的题目我都用双指针，因为只会双指针(doge)
+
+# 解题方法
+
+题目的意思可以简单描述为寻找以下两种字符串:
+
+1.字母全部相同,如`"eeeeee"`;
+2.中间可以出现一个异常的字符,如`"eeedee"`,但这种情况必须存在一个在此字符串之外的`'e'`能够用来替换`'d'`;
+
+把所有满足这两种形式的字符串找出来并求出最大长度即为答案;
+
+要怎么找这样的字符串呢？
+可以用双指针,假设此时左指针在`l`,右指针在`r`;
+怎么判断`[l,r]`之间的字符串是否满足条件?
+
+利用一个数组`cnt`统计`[l,r]`之间26个字母的个数,若
+- 本字符串长度减去`cnt`的最大值(上面的例子里就是`'e'`的个数),也就是剩余异常字符的个数小于等于1;
+- 且当存在异常字符时，其他地方有`'e'`可以用来替换,需要`num['e']-cnt['e']>=1`
+  `num['e']`代表整个字符串`'e'`的总个数;
+
+一开始`l,r`都在最左边,两个指针都不断向右移,右指针无条件向右移，这两个条件都满足，更新最大值，左指针只有当`[l,r]`之间的字符串不满足上述两个条件时才向右移.
+
+# 复杂度
+
+- 时间复杂度:
+
+> 添加时间复杂度, 示例： $O(n)$
+
+- 空间复杂度:
+
+> 添加空间复杂度, 示例： $O(n)$
+
+# Code
+
+* []
+
+```C++
+
+class Solution {
+public:
+    int maxRepOpt1(string text) {
+        int num[26];
+        memset(num,0,sizeof(num));
+       vector<int>cnt(26);
+
+        for(char c:text)num[c-'a']++;
+
+        int n=text.size();
+        
+        int l=-1,r=-1,c=0;
+        int res=1;
+        while(r<n-1){
+            r++;
+            cnt[text[r]-'a']++;
+            c=*max_element(cnt.begin(),cnt.end());
+            if(r-l+1-c<=1&&c<=num[max_element(cnt.begin(),cnt.end())-cnt.begin()]-1)res=max(res,r-l+1);
+            else{
+
+                if(l!=-1)cnt[text[l]-'a']--;
+                l++;
+               
+            }
+        }
+        return res;
+
+    }
+};
+```
+

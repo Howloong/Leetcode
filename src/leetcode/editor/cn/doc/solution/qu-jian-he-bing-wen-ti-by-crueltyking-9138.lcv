@@ -1,0 +1,69 @@
+题解:
+存储字符在字符串中连续的起始位置区间,然后遍历区间看是否可以合并
+如：acaaabaaa
+a字符出现连续区间arr{[0,0],[2,4],[6,8]}
+然后判断每2个区间是否可以合并即可,合并条件：1.两个区间的距离为2(第二个区间第一个值减去第一个区间的第二个值)  2. 剩余是否还有该字符 （可以记录字符的最后一个位置，当然也可以判断是否是最后一个区间）
+tips：如果合并最后2个区间的时候,由于后面没有字符了，所以需要减去1（但是前面区间的存在可以替换，该如何做呢？将字符串反转算一次就解决了！）
+
+* 
+
+```
+class Solution {
+    public int maxRepOpt1(String str) {
+        String rev = (new StringBuffer(str)).reverse().toString();
+        int ans = Math.max(getMax(str),getMax(rev));
+        return ans;
+    }
+
+    public int getMax(String t){
+        char[]trr = t.toCharArray();
+        int n = trr.length;
+        int ans = 1;
+        for ( int i = 0; i < 26; ++i ) {
+            int l = -1;
+            int r = -1;
+            ArrayList<Integer> m = new ArrayList<Integer>();
+            for ( int j = 0; j < n; ++j ) {
+                if (trr[j] - 'a' == i ) {
+                    if (l  == -1 ) {
+                        r = l = j;    
+                    }else {
+                        r = j;
+                    }
+                }else {
+                    if ( l >= 0) {
+                         m.add(l);
+                         m.add(r);
+                         ans = Math.max(r-l+1,ans);  
+                    }
+                   r = l = -1;
+                }
+            }
+            if ( l >= 0 ) {
+                m.add(l);
+                m.add(r);
+                ans = Math.max(r-l+1,ans);  
+            }
+            // System.out.println(m.toString());
+            int len = m.size();
+            if (len  == 0 ) continue;
+            for ( int x = 0; x + 3 <= len - 1; x+=2  ) {
+                if (x < len - 2 ) {
+                    ans = Math.max( ans,m.get(x+1) - m.get(x) + 2 );
+                }
+                if (m.get(x+2)-m.get(x+1) == 2) {
+                    // System.out.println("x+3:"+m.get(x+3));
+                    // System.out.println("x:"+m.get(x));
+                    int diff = x == len-4 ? m.get(x+3)-m.get(x):m.get(x+3)-m.get(x)+1;
+                    
+                    ans = Math.max(ans,diff);
+                }
+                
+            }    
+        }
+
+        return ans; 
+    }
+}
+```
+

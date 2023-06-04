@@ -62,31 +62,41 @@
 
 package leetcode.editor.cn;
 
-import java.util.PriorityQueue;
-
 //Java:袋子里最少数目的球
 //Time:2022-12-20 09:00:55
 class P1760_MinimumLimitOfBallsInABag {
     public static void main(String[] args) {
         Solution solution = new P1760_MinimumLimitOfBallsInABag().new Solution();
         System.out.println(solution.minimumSize(new int[]{2, 4, 8, 2}, 4));
+        System.out.println(solution.minimumSize(new int[]{9}, 2));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int minimumSize(int[] nums, int maxOperations) {
-            PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+            int right = 0;
             for (int num : nums) {
-                priorityQueue.offer(num);
+                right = Math.max(right, num);
             }
-            while (maxOperations > 0) {
-                int t = priorityQueue.poll();
-                int m = t / 2;
-                priorityQueue.add(t);
-                priorityQueue.add(t - m);
-                maxOperations--;
+            int left = 1;
+            right++;
+            while (left < right) {
+                int mid = left + (right - left) / 2;
+                if (check(nums, mid) <= maxOperations) {
+                    right = mid;
+                } else {
+                    left = mid + 1;
+                }
             }
-            return priorityQueue.peek();
+            return left;
+        }
+
+        public int check(int[] nums, int d) {
+            int sum = 0;
+            for (int num : nums) {
+                sum += Math.max(0, (num + d - 1) / d - 1);
+            }
+            return sum;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
