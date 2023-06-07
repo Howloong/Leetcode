@@ -85,7 +85,8 @@ class P949_LargestTimeForGivenDigits {
                     for (int m = 0; m < 2; m++) {
                         for (int n = 2; n < 4; n++) {
                             if (nums[m] < 24 && nums[n] < 60) {
-                                int[] temp = cmpTime(new int[]{hourMax, minMax}, new int[]{nums[m], nums[n]});
+                                int[] temp = cmpTime(new int[]{hourMax, minMax},
+                                        new int[]{nums[m], nums[n]});
                                 hourMax = temp[0];
                                 minMax = temp[1];
                             }
