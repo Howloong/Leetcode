@@ -59,21 +59,22 @@ class P39_CombinationSum {
     class Solution {
         List<List<Integer>> result;
         ArrayDeque<Integer> path;
+
         public List<List<Integer>> combinationSum(int[] candidates, int target) {
             result = new ArrayList<>();
             path = new ArrayDeque<>();
-            backTracking(candidates, target, 0,0);
+            backTracking(candidates, target, 0, 0);
             return result;
         }
 
-        public void backTracking(int[] candidates, int target, int sum,int index) {
+        public void backTracking(int[] candidates, int target, int sum, int index) {
             if (sum == target) {
                 result.add(new ArrayList<>(path));
                 return;
             }
             for (int i = index; sum < target && i < candidates.length; i++) {
                 path.addLast(candidates[i]);
-                backTracking(candidates, target, sum + candidates[i],i);
+                backTracking(candidates, target, sum + candidates[i], i);
                 path.removeLast();
             }
         }

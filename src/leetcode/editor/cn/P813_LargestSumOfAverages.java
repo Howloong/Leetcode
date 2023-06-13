@@ -44,7 +44,7 @@ class P813_LargestSumOfAverages {
     public static void main(String[] args) {
         Solution solution = new P813_LargestSumOfAverages().new Solution();
         System.out.println(solution.largestSumOfAverages(new int[]{9, 1, 2, 3, 9}, 3));
-        System.out.println(solution.largestSumOfAverages(new int[]{1,2,3,4,5,6,7}, 4));
+        System.out.println(solution.largestSumOfAverages(new int[]{1, 2, 3, 4, 5, 6, 7}, 4));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -57,7 +57,7 @@ class P813_LargestSumOfAverages {
                 prefix[i] = prefix[i - 1] + nums[i - 1];
             }
             for (int j = 2; j <= k; j++) {
-                for (int i = nums.length; i >=j; i--) {
+                for (int i = nums.length; i >= j; i--) {
                     for (int l = j - 1; l < i; l++) {
                         dp[i] = Math.max(dp[i], dp[l] + (prefix[i] - prefix[l]) / (i - l));
                     }

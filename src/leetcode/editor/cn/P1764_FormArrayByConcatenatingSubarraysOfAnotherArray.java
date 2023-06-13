@@ -61,7 +61,7 @@ class P1764_FormArrayByConcatenatingSubarraysOfAnotherArray {
         Solution solution = new P1764_FormArrayByConcatenatingSubarraysOfAnotherArray().new Solution();
 //        System.out.println(solution.canChoose(new int[][]{{1, -1, -1}, {3, -2, 0}}, new int[]{1, -1, 0, 1, -1, -1, 3, -2, 0}));
 //        System.out.println(solution.canChoose(new int[][]{{10, -2}, {1, 2, 3, 4}}, new int[]{1, 2, 3, 4, 10, -2}));
-        System.out.println(solution.canChoose(new int[][]{{1, 2, 3}, {3, 4}}, new int[]{ 1, 2, 3, 4, 7, 7}));
+        System.out.println(solution.canChoose(new int[][]{{1, 2, 3}, {3, 4}}, new int[]{1, 2, 3, 4, 7, 7}));
 
     }
 

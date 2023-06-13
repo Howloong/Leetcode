@@ -74,7 +74,7 @@ class P376_WiggleSubsequence {
             }
             int len = 1;
             int i = 0;
-            while (i < nums.length-1) {
+            while (i < nums.length - 1) {
                 int j = i + 1;
                 if (nums[j] == nums[i]) {
                     i++;
@@ -84,7 +84,7 @@ class P376_WiggleSubsequence {
                     while (j < nums.length - 1 && nums[j] <= nums[j + 1]) {
                         j++;
                     }
-                } else if (nums[j] < nums[i]){
+                } else if (nums[j] < nums[i]) {
                     while (j < nums.length - 1 && nums[j] >= nums[j + 1]) {
                         j++;
                     }

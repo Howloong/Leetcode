@@ -47,9 +47,6 @@
 
 package leetcode.editor.cn;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
 //Java:数青蛙
 //Time:2023-05-06 11:29:43
 class P1419_MinimumNumberOfFrogsCroaking {

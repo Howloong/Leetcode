@@ -41,7 +41,10 @@
 
 package leetcode.editor.cn;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 //Java：组合总和 II
 class P40_CombinationSumIi {
@@ -54,6 +57,7 @@ class P40_CombinationSumIi {
     class Solution {
         public List<List<Integer>> result;
         public ArrayDeque<Integer> path;
+
         public List<List<Integer>> combinationSum2(int[] candidates, int target) {
             result = new ArrayList<>();
             path = new ArrayDeque<>();

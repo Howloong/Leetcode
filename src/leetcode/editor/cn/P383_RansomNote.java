@@ -38,33 +38,35 @@
 // Related Topics 哈希表 字符串 计数 👍 331 👎 0
 
 package leetcode.editor.cn;
+
 //Java：赎金信
-class P383_RansomNote{
+class P383_RansomNote {
     public static void main(String[] args) {
         Solution solution = new P383_RansomNote().new Solution();
-        System.out.println(solution.canConstruct("aa","aab"));
+        System.out.println(solution.canConstruct("aa", "aab"));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public boolean canConstruct(String ransomNote, String magazine) {
-        int[] c1 = new int[26];
-        for (Character c :
-                magazine.toCharArray()) {
-            c1[c - 'a']++;
-        }
-        for (Character c :
-                ransomNote.toCharArray()) {
-            c1[c - 'a']--;
-        }
-        for (Integer i :
-                c1) {
-            if (i < 0) {
-                return false;
+    class Solution {
+        public boolean canConstruct(String ransomNote, String magazine) {
+            int[] c1 = new int[26];
+            for (Character c :
+                    magazine.toCharArray()) {
+                c1[c - 'a']++;
             }
+            for (Character c :
+                    ransomNote.toCharArray()) {
+                c1[c - 'a']--;
+            }
+            for (Integer i :
+                    c1) {
+                if (i < 0) {
+                    return false;
+                }
+            }
+            return true;
         }
-        return true;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

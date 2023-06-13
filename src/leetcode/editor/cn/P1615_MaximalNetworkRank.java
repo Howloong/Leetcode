@@ -82,15 +82,15 @@ class P1615_MaximalNetworkRank {
                 count[roads[i][1]][1]++;
                 count[roads[i][0]][1]++;
             }
-            Arrays.sort(count,(Comparator.comparingInt(o -> -o[1])));
+            Arrays.sort(count, (Comparator.comparingInt(o -> -o[1])));
             for (int i = 0; i < n && count[i][1] == count[0][1]; i++) {
-                for (int j = i+1; j < n && count[j][1] == count[1][1]; j++) {
+                for (int j = i + 1; j < n && count[j][1] == count[1][1]; j++) {
                     if (nums[count[i][0]][count[j][0]] == 0) {
-                        return count[i][1] + count[j][1] ;
+                        return count[i][1] + count[j][1];
                     }
                 }
             }
-            return count[0][1] + count[1][1]-1;
+            return count[0][1] + count[1][1] - 1;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

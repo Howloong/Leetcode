@@ -67,7 +67,7 @@ class P17_LetterCombinationsOfAPhoneNumber {
         }
 
         public void backTracking(int index, String str) {
-            if (index==str.length()) {
+            if (index == str.length()) {
                 list.add(path.toString());
                 return;
             }

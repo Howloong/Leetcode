@@ -53,36 +53,37 @@ import java.util.Map;
 
 //Java:重排字符形成目标字符串
 //Time:2023-01-13 22:47:11
-class P2287_RearrangeCharactersToMakeTargetString{
+class P2287_RearrangeCharactersToMakeTargetString {
     public static void main(String[] args) {
         Solution solution = new P2287_RearrangeCharactersToMakeTargetString().new Solution();
         System.out.println(solution.rearrangeCharacters("ilovecodingonleetcode", "code"));
         System.out.println(solution.rearrangeCharacters("abbaccaddaeea", "aaaaa"));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int rearrangeCharacters(String s, String target) {
-        int max = Integer.MAX_VALUE;
-        HashMap<Character, Integer> hashMap = new HashMap<>();
-        HashMap<Character, Integer> hashMap2 = new HashMap<>();
-        for (char c : target.toCharArray()) {
-            hashMap.put(c, 0);
-            hashMap2.put(c, hashMap2.getOrDefault(c,0) + 1);
-        }
-        for (char c : s.toCharArray()) {
-            if (hashMap.containsKey(c)) {
-                int t = hashMap.get(c);
-                hashMap.put(c, ++t);
+    class Solution {
+        public int rearrangeCharacters(String s, String target) {
+            int max = Integer.MAX_VALUE;
+            HashMap<Character, Integer> hashMap = new HashMap<>();
+            HashMap<Character, Integer> hashMap2 = new HashMap<>();
+            for (char c : target.toCharArray()) {
+                hashMap.put(c, 0);
+                hashMap2.put(c, hashMap2.getOrDefault(c, 0) + 1);
             }
+            for (char c : s.toCharArray()) {
+                if (hashMap.containsKey(c)) {
+                    int t = hashMap.get(c);
+                    hashMap.put(c, ++t);
+                }
+            }
+            for (Map.Entry<Character, Integer> characterIntegerEntry : hashMap.entrySet()) {
+                char c = characterIntegerEntry.getKey();
+                int v = characterIntegerEntry.getValue();
+                max = Math.min(max, v / hashMap2.get(c));
+            }
+            return max;
         }
-        for (Map.Entry<Character, Integer> characterIntegerEntry : hashMap.entrySet()) {
-            char c = characterIntegerEntry.getKey();
-            int v = characterIntegerEntry.getValue();
-            max = Math.min(max, v / hashMap2.get(c));
-        }
-        return max;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

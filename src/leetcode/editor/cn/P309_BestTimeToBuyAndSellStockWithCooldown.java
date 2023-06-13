@@ -55,7 +55,7 @@ class P309_BestTimeToBuyAndSellStockWithCooldown {
             for (int i = 1; i < prices.length; i++) {
                 int temp1 = dp[0];
                 int temp2 = dp[1];
-                dp[0] = Math.max(Math.max(dp[2], dp[3])- prices[i], dp[0]);
+                dp[0] = Math.max(Math.max(dp[2], dp[3]) - prices[i], dp[0]);
                 dp[1] = temp1 + prices[i];
                 dp[2] = Math.max(dp[2], dp[3]);
                 dp[3] = temp2;

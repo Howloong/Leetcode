@@ -144,7 +144,7 @@ class P641_DesignCircularDeque {
         }
 
         public int getRear() {
-            return isEmpty() ? -1 : queue[rear - 1 == -1 ? size - 1 : rear-1];
+            return isEmpty() ? -1 : queue[rear - 1 == -1 ? size - 1 : rear - 1];
         }
 
         public boolean isEmpty() {

@@ -82,7 +82,7 @@ class P151_ReverseWordsInAString {
             while (j >= t) {
                 if (c[j] == ' ') {
                     if (!lastIsBlank) {
-                        sb.append(Arrays.copyOfRange(c, j + 1, i+1));
+                        sb.append(Arrays.copyOfRange(c, j + 1, i + 1));
                         sb.append(' ');
                     } else {
                         --j;
@@ -93,7 +93,7 @@ class P151_ReverseWordsInAString {
                         if (c[j + 1] == ' ') {
                             sb.append(c[t]);
                         } else {
-                            sb.append(Arrays.copyOfRange(c, t, i+1));
+                            sb.append(Arrays.copyOfRange(c, t, i + 1));
 
                         }
                         break;

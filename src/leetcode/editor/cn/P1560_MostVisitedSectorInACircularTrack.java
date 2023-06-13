@@ -45,7 +45,9 @@
 
 package leetcode.editor.cn;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 //Java：圆形赛道上经过次数最多的扇区
 class P1560_MostVisitedSectorInACircularTrack {
@@ -61,7 +63,7 @@ class P1560_MostVisitedSectorInACircularTrack {
     class Solution {
         public List<Integer> mostVisited(int n, int[] rounds) {
             List<Integer> result = new ArrayList<>();
-            int end = rounds[rounds.length-1];
+            int end = rounds[rounds.length - 1];
             int start = rounds[0];
             if (start > end) {
                 for (int i = 1; i <= end; i++) {

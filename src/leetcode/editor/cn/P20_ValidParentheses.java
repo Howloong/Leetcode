@@ -81,19 +81,19 @@ class P20_ValidParentheses {
                         arrayDeque.push(c);
                         break;
                     case ')':
-                        if (arrayDeque.isEmpty()|| !arrayDeque.peek().equals('(')) {
+                        if (arrayDeque.isEmpty() || !arrayDeque.peek().equals('(')) {
                             return false;
                         }
-                         arrayDeque.pop();
+                        arrayDeque.pop();
                         break;
                     case '}':
-                        if (arrayDeque.isEmpty()|| !arrayDeque.peek().equals('{')) {
+                        if (arrayDeque.isEmpty() || !arrayDeque.peek().equals('{')) {
                             return false;
                         }
                         arrayDeque.pop();
                         break;
                     case ']':
-                        if (arrayDeque.isEmpty()|| !arrayDeque.peek().equals('[')) {
+                        if (arrayDeque.isEmpty() || !arrayDeque.peek().equals('[')) {
                             return false;
                         }
                         arrayDeque.pop();

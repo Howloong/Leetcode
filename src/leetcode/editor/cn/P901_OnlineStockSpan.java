@@ -58,20 +58,23 @@ class P901_OnlineStockSpan {
     }
 
 }
+
 //leetcode submit region begin(Prohibit modification and deletion)
 class StockSpanner {
-    ArrayDeque<int[] > arrayDeque;
+    ArrayDeque<int[]> arrayDeque;
     int res;
     int idx = 0;
+
     public StockSpanner() {
         arrayDeque = new ArrayDeque<>();
         res = 0;
     }
+
     public int next(int price) {
         while (!arrayDeque.isEmpty() && arrayDeque.peek()[0] <= price) {
             arrayDeque.pop();
         }
-        int res = arrayDeque.isEmpty() ? idx+1 : idx-arrayDeque.peek()[1];
+        int res = arrayDeque.isEmpty() ? idx + 1 : idx - arrayDeque.peek()[1];
         arrayDeque.push(new int[]{price, idx++});
         return res;
     }

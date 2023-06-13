@@ -60,7 +60,7 @@ package leetcode.editor.cn;
 class P26_RemoveDuplicatesFromSortedArray {
     public static void main(String[] args) {
         Solution solution = new P26_RemoveDuplicatesFromSortedArray().new Solution();
-        solution.removeDuplicates(new int[]{1,1,2});
+        solution.removeDuplicates(new int[]{1, 1, 2});
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -81,7 +81,7 @@ class P26_RemoveDuplicatesFromSortedArray {
                 }
                 fast++;
             }
-            return slow+1;
+            return slow + 1;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

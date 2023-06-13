@@ -29,7 +29,7 @@ class P1287_ElementAppearingMoreThan25InSortedArray {
     public static void main(String[] args) {
         Solution solution = new P1287_ElementAppearingMoreThan25InSortedArray().new Solution();
 //        System.out.println(solution.findSpecialInteger(new int[]{1, 2, 2,6, 6, 6, 6, 7, 10}));
-        System.out.println(solution.findSpecialInteger(new int[]{1,1}));
+        System.out.println(solution.findSpecialInteger(new int[]{1, 1}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

@@ -56,7 +56,7 @@ class P28_ImplementStrstr {
                 while (j >= 0 && haystack.charAt(i) != needle.charAt(j + 1)) {
                     j = next[j];
                 }
-                if (haystack.charAt(i) == needle.charAt(j+1)) {
+                if (haystack.charAt(i) == needle.charAt(j + 1)) {
                     ++j;
                 }
                 if (j == needle.length() - 1) {

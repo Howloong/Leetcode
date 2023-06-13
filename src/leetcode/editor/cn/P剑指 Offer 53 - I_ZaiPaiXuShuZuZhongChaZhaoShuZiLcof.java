@@ -48,7 +48,7 @@ class I_ZaiPaiXuShuZuZhongChaZhaoShuZiLcof {
             if (nums.length == 0) {
                 return 0;
             }
-            int i = 0, j = nums.length-1;
+            int i = 0, j = nums.length - 1;
             int mid;
             int right = -2;
             int left = -2;
@@ -62,7 +62,7 @@ class I_ZaiPaiXuShuZuZhongChaZhaoShuZiLcof {
                 }
             }
             i = 0;
-            j = nums.length-1;
+            j = nums.length - 1;
             while (i <= j) {
                 mid = (i + j) / 2;
                 if (nums[mid] >= target) {

@@ -38,7 +38,7 @@ package leetcode.editor.cn;
 class P461_HammingDistance {
     public static void main(String[] args) {
         Solution solution = new P461_HammingDistance().new Solution();
-        System.out.println(solution.hammingDistance(1,4));
+        System.out.println(solution.hammingDistance(1, 4));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

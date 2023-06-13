@@ -30,32 +30,34 @@
 // Related Topics 字符串 👍 2296 👎 0
 
 package leetcode.editor.cn;
+
 //Java：最长公共前缀
-class P14_LongestCommonPrefix{
+class P14_LongestCommonPrefix {
     public static void main(String[] args) {
         Solution solution = new P14_LongestCommonPrefix().new Solution();
-        System.out.println(solution.longestCommonPrefix(new String[]{"flower","flow","flight"}));
-        System.out.println(solution.longestCommonPrefix(new String[]{"dog","racecar","car"}));
+        System.out.println(solution.longestCommonPrefix(new String[]{"flower", "flow", "flight"}));
+        System.out.println(solution.longestCommonPrefix(new String[]{"dog", "racecar", "car"}));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public String longestCommonPrefix(String[] strs) {
-        if (strs.length == 0) {
-            return "";
-        }
-        String prefix = strs[0];
-        for (int i = 1; i < strs.length; i++) {
-            while (!strs[i].startsWith(prefix)) {
-                prefix = prefix.substring(0, prefix.length() - 1);
-            }
-            if (prefix.equals("")) {
+    class Solution {
+        public String longestCommonPrefix(String[] strs) {
+            if (strs.length == 0) {
                 return "";
             }
+            String prefix = strs[0];
+            for (int i = 1; i < strs.length; i++) {
+                while (!strs[i].startsWith(prefix)) {
+                    prefix = prefix.substring(0, prefix.length() - 1);
+                }
+                if (prefix.equals("")) {
+                    return "";
+                }
 
+            }
+            return prefix;
         }
-        return prefix;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

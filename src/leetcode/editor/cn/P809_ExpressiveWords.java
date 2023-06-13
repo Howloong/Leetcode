@@ -113,7 +113,7 @@ class P809_ExpressiveWords {
                 int letterCount = wordList.get(index);
                 if (word.charAt(i) != s.charAt(sum) ||
                         count > letterCount ||
-                        (letterCount == 2 && count != letterCount)||index != wordList.size() - 1) {
+                        (letterCount == 2 && count != letterCount) || index != wordList.size() - 1) {
                     res--;
                 }
 

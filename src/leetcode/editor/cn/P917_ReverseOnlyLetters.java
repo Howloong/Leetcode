@@ -67,16 +67,16 @@ class P917_ReverseOnlyLetters {
             int j = s.length() - 1;
             char[] c = s.toCharArray();
             while (i < j) {
-                while (i<s.length()&&!Character.isLetter(c[i])) {
+                while (i < s.length() && !Character.isLetter(c[i])) {
                     i++;
                 }
-                while (j>=0&&!Character.isLetter(c[j])) {
+                while (j >= 0 && !Character.isLetter(c[j])) {
                     j--;
                 }
                 if (i >= j) {
                     break;
                 }
-                char temp =c[i];
+                char temp = c[i];
                 c[i] = c[j];
                 c[j] = temp;
                 i++;

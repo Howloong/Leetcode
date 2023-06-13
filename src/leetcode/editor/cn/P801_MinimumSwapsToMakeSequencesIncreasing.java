@@ -48,8 +48,6 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-
 //Java:使序列递增的最小交换次数
 //Time:2022-10-10 17:00:35
 class P801_MinimumSwapsToMakeSequencesIncreasing {
@@ -70,7 +68,7 @@ class P801_MinimumSwapsToMakeSequencesIncreasing {
                 int btemp = b;
                 a = b = len;
                 if (nums1[i] > nums1[i - 1] && nums2[i] > nums2[i - 1]) {
-                    a= Math.min(a, atemp);
+                    a = Math.min(a, atemp);
                     b = Math.min(b, btemp + 1);
                 }
                 if (nums1[i - 1] < nums2[i] && nums2[i - 1] < nums1[i]) {
@@ -78,7 +76,7 @@ class P801_MinimumSwapsToMakeSequencesIncreasing {
                     b = Math.min(b, atemp + 1);
                 }
             }
-            return Math.min(a,b);
+            return Math.min(a, b);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

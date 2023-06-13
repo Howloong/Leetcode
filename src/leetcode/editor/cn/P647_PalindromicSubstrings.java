@@ -71,7 +71,7 @@ class P647_PalindromicSubstrings {
             int len = s.length();
             int sum = 0;
             char[] c = s.toCharArray();
-            for (int i = 0; i < len ; i++) {
+            for (int i = 0; i < len; i++) {
                 sum += extend(c, i, i);
                 sum += extend(c, i, i + 1);
             }

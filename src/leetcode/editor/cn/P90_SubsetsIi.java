@@ -50,9 +50,10 @@ class P90_SubsetsIi {
     class Solution {
         List<List<Integer>> result = new ArrayList<>();
         ArrayDeque<Integer> path = new ArrayDeque<>();
+
         public List<List<Integer>> subsetsWithDup(int[] nums) {
             Arrays.sort(nums);
-            backTracking(nums,0);
+            backTracking(nums, 0);
             return result;
         }
 

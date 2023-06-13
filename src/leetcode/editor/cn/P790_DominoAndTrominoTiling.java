@@ -49,7 +49,7 @@ class P790_DominoAndTrominoTiling {
     class Solution {
         public int numTilings(int n) {
             int MOD = 1000000007;
-            int[][] dp = new int[n+1][4];
+            int[][] dp = new int[n + 1][4];
             dp[0][0] = 0;
             dp[0][1] = 0;
             dp[0][2] = 0;

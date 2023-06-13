@@ -56,6 +56,7 @@ class P1971_FindIfPathExistsInGraph {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] p;
+
         public boolean validPath(int n, int[][] edges, int source, int destination) {
             p = new int[n];
             for (int i = 0; i < n; i++) {

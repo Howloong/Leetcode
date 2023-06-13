@@ -45,8 +45,6 @@
 package leetcode.editor.cn;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 //Java：杨辉三角 II
@@ -64,10 +62,10 @@ class P119_PascalsTriangleIi {
             long n = 1;
             list.add(1);
             for (i = 0; i < rowIndex / 2; i++) {
-                n = n*(rowIndex - i) / (i + 1);
-                list.add((int)n);
+                n = n * (rowIndex - i) / (i + 1);
+                list.add((int) n);
             }
-            for (int j = i+1; j <= rowIndex; j++) {
+            for (int j = i + 1; j <= rowIndex; j++) {
                 list.add(list.get(rowIndex - j));
             }
             return list;

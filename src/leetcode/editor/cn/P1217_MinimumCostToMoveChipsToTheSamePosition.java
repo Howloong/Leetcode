@@ -54,14 +54,11 @@
 
 package leetcode.editor.cn;
 
-import java.util.ArrayList;
-import java.util.List;
-
 //Java：玩筹码
 class P1217_MinimumCostToMoveChipsToTheSamePosition {
     public static void main(String[] args) {
         Solution solution = new P1217_MinimumCostToMoveChipsToTheSamePosition().new Solution();
-        System.out.println(solution.minCostToMoveChips(new int[]{2,2,2,3,3}));
+        System.out.println(solution.minCostToMoveChips(new int[]{2, 2, 2, 3, 3}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

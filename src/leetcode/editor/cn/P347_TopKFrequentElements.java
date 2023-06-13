@@ -35,39 +35,40 @@ package leetcode.editor.cn;
 import java.util.*;
 
 //Java：前 K 个高频元素
-class P347_TopKFrequentElements{
+class P347_TopKFrequentElements {
     public static void main(String[] args) {
         Solution solution = new P347_TopKFrequentElements().new Solution();
         System.out.println(Arrays.toString(solution.topKFrequent(new int[]{1, 1, 1, 2, 2, 3}, 2)));
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int[] topKFrequent(int[] nums, int k) {
-        HashMap<Integer, Integer> hashMap = new HashMap<>();
-        for (int i :
-                nums) {
-            hashMap.put(i, hashMap.getOrDefault(i, 0) + 1);
-        }
-        Set<Map.Entry<Integer, Integer>> set = hashMap.entrySet();
-        PriorityQueue<Map.Entry<Integer, Integer>> priorityQueue = new PriorityQueue<>(
-                Comparator.comparingInt(Map.Entry::getValue));
-        for (Map.Entry<Integer, Integer> entry : set
-        ) {
-            priorityQueue.offer(entry);
-            if (priorityQueue.size() > k) {
-                priorityQueue.poll();
-            }
-        }
-        int[] result = new int[k];
-        int i = 0;
-        for (Map.Entry<Integer, Integer> entry :priorityQueue
-        ) {
-            result[i++] = entry.getKey();
-        }
-        return result;
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int[] topKFrequent(int[] nums, int k) {
+            HashMap<Integer, Integer> hashMap = new HashMap<>();
+            for (int i :
+                    nums) {
+                hashMap.put(i, hashMap.getOrDefault(i, 0) + 1);
+            }
+            Set<Map.Entry<Integer, Integer>> set = hashMap.entrySet();
+            PriorityQueue<Map.Entry<Integer, Integer>> priorityQueue = new PriorityQueue<>(
+                    Comparator.comparingInt(Map.Entry::getValue));
+            for (Map.Entry<Integer, Integer> entry : set
+            ) {
+                priorityQueue.offer(entry);
+                if (priorityQueue.size() > k) {
+                    priorityQueue.poll();
+                }
+            }
+            int[] result = new int[k];
+            int i = 0;
+            for (Map.Entry<Integer, Integer> entry : priorityQueue
+            ) {
+                result[i++] = entry.getKey();
+            }
+            return result;
+
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

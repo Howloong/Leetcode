@@ -53,7 +53,7 @@ class MissingTwoLcci {
                     t1 ^= nums[i];
                 }
             }
-            for (int i = 1; i <=N; i++) {
+            for (int i = 1; i <= N; i++) {
                 if ((lb & i) == 0) {
                     t1 ^= i;
                 }

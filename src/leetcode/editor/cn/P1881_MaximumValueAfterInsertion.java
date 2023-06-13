@@ -59,10 +59,10 @@ class P1881_MaximumValueAfterInsertion {
     class Solution {
         public String maxValue(String n, int x) {
             StringBuilder sb = new StringBuilder(n);
-            if (sb.charAt(0)=='-') {
+            if (sb.charAt(0) == '-') {
                 int i = 0;
                 while (i < n.length()) {
-                    if (sb.charAt(i)-'0' > x) {
+                    if (sb.charAt(i) - '0' > x) {
                         sb.insert(i, x);
                         return sb.toString();
                     }
@@ -71,7 +71,7 @@ class P1881_MaximumValueAfterInsertion {
             } else {
                 int i = 0;
                 while (i < n.length()) {
-                    if (sb.charAt(i) -'0'< x) {
+                    if (sb.charAt(i) - '0' < x) {
                         sb.insert(i, x);
                         return sb.toString();
                     }

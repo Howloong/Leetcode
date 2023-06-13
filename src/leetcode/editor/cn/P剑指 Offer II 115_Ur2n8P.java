@@ -96,11 +96,11 @@ class Ur2n8P {
                 }
             }
             /*构建完成，若序列为[[1,2],[1,3],[2,3]]，则树对应为
-            *      1
-            *    /  \
-            *   2    3
-            *  /
-            * 3  */
+             *      1
+             *    /  \
+             *   2    3
+             *  /
+             * 3  */
             /*遍历nums，若能从根节点找到叶子结点并且nums遍历结束就是胜利*/
             for (int i = 1; i < nums.length; i++) {
                 if (hashMap.get(nums[i - 1]) == null || !hashMap.get(nums[i - 1]).contains(nums[i])) {

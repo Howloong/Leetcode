@@ -33,9 +33,6 @@
 
 package leetcode.editor.cn;
 
-import java.util.HashSet;
-import java.util.Set;
-
 //Java:子串能表示从 1 到 N 数字的二进制串
 //Time:2023-05-11 09:30:34
 class P1016_BinaryStringWithSubstringsRepresenting1ToN {

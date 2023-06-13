@@ -65,7 +65,7 @@ class P1323_Maximum69Number {
                     t = j;
                 }
             }
-            return num + 3 * (int) Math.pow(10, t-1);
+            return num + 3 * (int) Math.pow(10, t - 1);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

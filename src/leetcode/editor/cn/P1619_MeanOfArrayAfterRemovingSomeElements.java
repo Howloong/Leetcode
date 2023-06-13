@@ -62,25 +62,26 @@ import java.util.Arrays;
 
 //Java:删除某些元素后的数组均值
 //Time:2022-09-14 09:02:43
-class P1619_MeanOfArrayAfterRemovingSomeElements{
+class P1619_MeanOfArrayAfterRemovingSomeElements {
     public static void main(String[] args) {
         Solution solution = new P1619_MeanOfArrayAfterRemovingSomeElements().new Solution();
         System.out.println(solution.trimMean(new int[]{1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3}));
-        System.out.println(solution.trimMean(new int[]{6,2,7,5,1,2,0,3,10,2,5,0,5,5,0,8,7,6,8,0}));
+        System.out.println(solution.trimMean(new int[]{6, 2, 7, 5, 1, 2, 0, 3, 10, 2, 5, 0, 5, 5, 0, 8, 7, 6, 8, 0}));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public double trimMean(int[] arr) {
-        Arrays.sort(arr);
-        int deleted = (int) (arr.length * 0.05);
-        int sum = Arrays.stream(arr).sum();
-        for (int i = 0; i < deleted; i++) {
-            sum -= arr[i];
-            sum -= arr[arr.length - 1 - i];
+    class Solution {
+        public double trimMean(int[] arr) {
+            Arrays.sort(arr);
+            int deleted = (int) (arr.length * 0.05);
+            int sum = Arrays.stream(arr).sum();
+            for (int i = 0; i < deleted; i++) {
+                sum -= arr[i];
+                sum -= arr[arr.length - 1 - i];
+            }
+            return (double) sum / (arr.length - 2 * deleted);
         }
-        return (double) sum / (arr.length - 2 * deleted);
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

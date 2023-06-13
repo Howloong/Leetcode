@@ -54,30 +54,32 @@
 // Related Topics 数组 前缀和 👍 48 👎 0
 
 package leetcode.editor.cn;
+
 //Java:左右两边子数组的和相等
 //Time:2022-10-05 12:30:48
-    class Tvdfij{
-        public static void main(String[] args) {
-            Solution solution = new  Tvdfij().new Solution();
-      }
-      //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int pivotIndex(int[] nums) {
-        int sum = 0;
-        for (int num : nums) {
-            sum += num;
-        }
-        int t = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if ((t << 1) + nums[i]== sum) {
-                return i;
-            }
-
-            t += nums[i];
-        }
-        return -1;
+class Tvdfij {
+    public static void main(String[] args) {
+        Solution solution = new Tvdfij().new Solution();
     }
-}
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int pivotIndex(int[] nums) {
+            int sum = 0;
+            for (int num : nums) {
+                sum += num;
+            }
+            int t = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if ((t << 1) + nums[i] == sum) {
+                    return i;
+                }
+
+                t += nums[i];
+            }
+            return -1;
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

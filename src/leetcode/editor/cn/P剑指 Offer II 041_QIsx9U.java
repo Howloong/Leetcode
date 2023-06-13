@@ -82,7 +82,7 @@ class MovingAverage {
         }
         arrayDeque.offer(val);
         sum += val;
-        return sum/arrayDeque.size();
+        return sum / arrayDeque.size();
     }
 }
 

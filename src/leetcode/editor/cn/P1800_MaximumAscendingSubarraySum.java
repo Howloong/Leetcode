@@ -50,14 +50,12 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-
 //Java：最大升序子数组和
 class P1800_MaximumAscendingSubarraySum {
     public static void main(String[] args) {
         Solution solution = new P1800_MaximumAscendingSubarraySum().new Solution();
 //        System.out.println(solution.maxAscendingSum(new int[]{10,20,30,5,10,50}));
-        System.out.println(solution.maxAscendingSum(new int[]{12,17,15,13,10,11,12}));
+        System.out.println(solution.maxAscendingSum(new int[]{12, 17, 15, 13, 10, 11, 12}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -68,7 +66,7 @@ class P1800_MaximumAscendingSubarraySum {
             while (i < nums.length) {
                 int sum = nums[i];
                 j = i + 1;
-                while (j < nums.length && nums[j] > nums[j-1]) {
+                while (j < nums.length && nums[j] > nums[j - 1]) {
                     sum += nums[j];
                     ++j;
                 }

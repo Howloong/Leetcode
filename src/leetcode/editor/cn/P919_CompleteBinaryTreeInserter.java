@@ -104,7 +104,7 @@ class CBTInserter {
             } else break;
             if (root.right != null) {
                 treeNodes.offer(root.right);
-            }else break;
+            } else break;
             treeNodes.poll();
             root = treeNodes.peek();
         }

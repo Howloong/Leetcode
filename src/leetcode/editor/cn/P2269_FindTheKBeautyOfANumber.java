@@ -54,27 +54,29 @@
 // Related Topics 数学 字符串 滑动窗口 👍 7 👎 0
 
 package leetcode.editor.cn;
+
 //Java：找到一个数字的 K 美丽值
-class P2269_FindTheKBeautyOfANumber{
+class P2269_FindTheKBeautyOfANumber {
     public static void main(String[] args) {
         Solution solution = new P2269_FindTheKBeautyOfANumber().new Solution();
-        System.out.println(solution.divisorSubstrings(430043,2));
-        System.out.println(solution.divisorSubstrings(240,2));
+        System.out.println(solution.divisorSubstrings(430043, 2));
+        System.out.println(solution.divisorSubstrings(240, 2));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int divisorSubstrings(int num, int k) {
-        int sum = 0;
-        String s = num + "";
-        for (int i = 0; i < s.length() - k + 1; i++) {
-            int n = Integer.parseInt(s.substring(i, i + k));
-            if (n!=0&&num % n == 0) {
-                sum++;
+    class Solution {
+        public int divisorSubstrings(int num, int k) {
+            int sum = 0;
+            String s = num + "";
+            for (int i = 0; i < s.length() - k + 1; i++) {
+                int n = Integer.parseInt(s.substring(i, i + k));
+                if (n != 0 && num % n == 0) {
+                    sum++;
+                }
             }
+            return sum;
         }
-        return sum;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

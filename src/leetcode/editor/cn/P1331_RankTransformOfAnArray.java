@@ -1,4 +1,4 @@
- //给你一个整数数组 arr ，请你将数组中的每个元素替换为它们排序后的序号。
+//给你一个整数数组 arr ，请你将数组中的每个元素替换为它们排序后的序号。
 //
 // 序号代表了一个元素有多大。序号编号的规则如下： 
 //
@@ -41,35 +41,35 @@
 
 package leetcode.editor.cn;
 
- import java.util.Arrays;
- import java.util.Comparator;
- import java.util.HashMap;
+import java.util.Arrays;
+import java.util.HashMap;
 
- //Java：数组序号转换
-class P1331_RankTransformOfAnArray{
+//Java：数组序号转换
+class P1331_RankTransformOfAnArray {
     public static void main(String[] args) {
         Solution solution = new P1331_RankTransformOfAnArray().new Solution();
-        System.out.println(Arrays.toString(solution.arrayRankTransform(new int[]{37,12,28,9,100,56,80,5,12})));
+        System.out.println(Arrays.toString(solution.arrayRankTransform(new int[]{37, 12, 28, 9, 100, 56, 80, 5, 12})));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int[] arrayRankTransform(int[] arr) {
-        int[] temp = Arrays.copyOf(arr,arr.length);
-        Arrays.sort(arr);
-        HashMap<Integer, Integer> hashMap = new HashMap<>();
-        int rank = 1;
-        for (int i = 0; i < arr.length; i++) {
-            if (!hashMap.containsKey(arr[i])) {
-                hashMap.put(arr[i],rank);
-                rank++;
+    class Solution {
+        public int[] arrayRankTransform(int[] arr) {
+            int[] temp = Arrays.copyOf(arr, arr.length);
+            Arrays.sort(arr);
+            HashMap<Integer, Integer> hashMap = new HashMap<>();
+            int rank = 1;
+            for (int i = 0; i < arr.length; i++) {
+                if (!hashMap.containsKey(arr[i])) {
+                    hashMap.put(arr[i], rank);
+                    rank++;
+                }
             }
+            for (int i = 0; i < arr.length; i++) {
+                temp[i] = hashMap.get(temp[i]);
+            }
+            return temp;
         }
-        for (int i = 0; i < arr.length; i++) {
-            temp[i] = hashMap.get(temp[i]);
-        }
-        return temp;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

@@ -45,8 +45,8 @@ package leetcode.editor.cn;
 class P1886_DetermineWhetherMatrixCanBeObtainedByRotation {
     public static void main(String[] args) {
         Solution solution = new P1886_DetermineWhetherMatrixCanBeObtainedByRotation().new Solution();
-        System.out.println(solution.findRotation(new int[][]{{0,1},{1,1}},new int[][]{{1,0},{0,1}}));
-        System.out.println(solution.findRotation(new int[][]{{1,2},{3,4}},new int[][]{{3,1},{4,2}}));
+        System.out.println(solution.findRotation(new int[][]{{0, 1}, {1, 1}}, new int[][]{{1, 0}, {0, 1}}));
+        System.out.println(solution.findRotation(new int[][]{{1, 2}, {3, 4}}, new int[][]{{3, 1}, {4, 2}}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

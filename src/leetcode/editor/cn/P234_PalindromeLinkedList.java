@@ -36,8 +36,6 @@ package leetcode.editor.cn;
 import leetcode.editor.cn.DataStruct.ListNode;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
 
 //Java:回文链表
 //Time:2022-07-31 23:35:38
@@ -70,7 +68,7 @@ class P234_PalindromeLinkedList {
             ListNode slow = head;
             ArrayDeque<Integer> list = new ArrayDeque<>();
             list.addLast(slow.val);
-            while (fast.next!=null) {
+            while (fast.next != null) {
                 slow = slow.next;
                 fast = fast.next;
                 fast = fast.next;

@@ -66,7 +66,7 @@ class P1863_SumOfAllSubsetXorTotals {
     public static void main(String[] args) {
         Solution solution = new P1863_SumOfAllSubsetXorTotals().new Solution();
 //        System.out.println(solution.subsetXORSum(new int[]{1, 3}));
-        System.out.println(solution.subsetXORSum(new int[]{5,1,6}));
+        System.out.println(solution.subsetXORSum(new int[]{5, 1, 6}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

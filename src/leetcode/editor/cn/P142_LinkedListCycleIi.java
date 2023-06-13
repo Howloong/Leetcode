@@ -79,7 +79,7 @@ class P142_LinkedListCycleIi {
      */
     public class Solution {
         public ListNode detectCycle(ListNode head) {
-            if(head==null||head.next==null)
+            if (head == null || head.next == null)
                 return null;
             ListNode i = head;
             ListNode j = head;

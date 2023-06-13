@@ -50,7 +50,7 @@ import java.util.HashSet;
 class P827_MakingALargeIsland {
     public static void main(String[] args) {
         Solution solution = new P827_MakingALargeIsland().new Solution();
-        System.out.println(solution.largestIsland(new int[][]{{1,1}, {1,1}}));
+        System.out.println(solution.largestIsland(new int[][]{{1, 1}, {1, 1}}));
 //        System.out.println(solution.largestIsland(new int[][]{{1, 0}, {1, 1}}));
     }
 

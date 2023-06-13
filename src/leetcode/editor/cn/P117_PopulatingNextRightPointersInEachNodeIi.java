@@ -50,12 +50,10 @@
 
 package leetcode.editor.cn;
 
-import leetcode.editor.cn.DataStruct.Node;
-
 import java.util.ArrayDeque;
 
 //Java：填充每个节点的下一个右侧节点指针 II
-class P117_PopulatingNextRightPointersInEachNodeIi{
+class P117_PopulatingNextRightPointersInEachNodeIi {
     public static void main(String[] args) {
         Solution solution = new P117_PopulatingNextRightPointersInEachNodeIi().new Solution();
     }
@@ -83,55 +81,57 @@ class Node {
 };
 */
 
-class Solution {
-    public Node connect(Node root) {
-        ArrayDeque<Node> arrayDeque = new ArrayDeque<>();
-        if (root == null) {
-            return null;
-        }
-        arrayDeque.offer(root);
-        while (!arrayDeque.isEmpty()) {
-            int len = arrayDeque.size();
-            Node pre = null, p;
-            for (int i = 0; i < len; i++) {
-                if (i == 0) {
-                    pre = arrayDeque.poll();
-                    p = pre;
-                } else {
-                    p = arrayDeque.poll();
-                    pre.next = p;
-                    pre = p;
-                }
-                if (p.left != null) {
-                    arrayDeque.offer(p.left);
-                }
-                if (p.right != null) {
-                    arrayDeque.offer(p.right);
-                }
+    class Solution {
+        public Node connect(Node root) {
+            ArrayDeque<Node> arrayDeque = new ArrayDeque<>();
+            if (root == null) {
+                return null;
             }
+            arrayDeque.offer(root);
+            while (!arrayDeque.isEmpty()) {
+                int len = arrayDeque.size();
+                Node pre = null, p;
+                for (int i = 0; i < len; i++) {
+                    if (i == 0) {
+                        pre = arrayDeque.poll();
+                        p = pre;
+                    } else {
+                        p = arrayDeque.poll();
+                        pre.next = p;
+                        pre = p;
+                    }
+                    if (p.left != null) {
+                        arrayDeque.offer(p.left);
+                    }
+                    if (p.right != null) {
+                        arrayDeque.offer(p.right);
+                    }
+                }
 
+            }
+            return root;
         }
-        return root;
-    }
-}
-//leetcode submit region end(Prohibit modification and deletion)
-class Node {
-    public int val;
-    public Node left;
-    public Node right;
-    public Node next;
-
-    public Node() {}
-
-    public Node(int _val) {
-        val = _val;
     }
 
-    public Node(int _val, Node _left, Node _right, Node _next) {
-        val = _val;
-        left = _left;
-        right = _right;
-        next = _next;
+    //leetcode submit region end(Prohibit modification and deletion)
+    class Node {
+        public int val;
+        public Node left;
+        public Node right;
+        public Node next;
+
+        public Node() {
+        }
+
+        public Node(int _val) {
+            val = _val;
+        }
+
+        public Node(int _val, Node _left, Node _right, Node _next) {
+            val = _val;
+            left = _left;
+            right = _right;
+            next = _next;
+        }
     }
-}
 }

@@ -48,9 +48,9 @@ class P69_Sqrtx {
             int mid = 1;
             while (i <= j) {
                 mid = (i + j) / 2;
-                if (mid > x/mid) {
+                if (mid > x / mid) {
                     j = mid - 1;
-                } else if (mid < x/mid) {
+                } else if (mid < x / mid) {
                     i = mid + 1;
                 } else {
                     return mid;

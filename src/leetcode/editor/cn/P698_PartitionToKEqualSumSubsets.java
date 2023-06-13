@@ -39,7 +39,7 @@ class P698_PartitionToKEqualSumSubsets {
 //        System.out.println(solution.canPartitionKSubsets(new int[]{1, 1, 1, 1, 2, 2, 2, 2}, 2));
 //        System.out.println(solution.canPartitionKSubsets(new int[]{10, 12, 1, 2, 10, 7, 5, 19, 13, 1}, 4));
 //        System.out.println(solution.canPartitionKSubsets(new int[]{4,3,2,3,5,2,1}, 4));
-        System.out.println(solution.canPartitionKSubsets(new int[]{1,1,2,4},4));
+        System.out.println(solution.canPartitionKSubsets(new int[]{1, 1, 2, 4}, 4));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

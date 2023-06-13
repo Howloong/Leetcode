@@ -55,7 +55,7 @@ package leetcode.editor.cn;
 class P62_UniquePaths {
     public static void main(String[] args) {
         Solution solution = new P62_UniquePaths().new Solution();
-        System.out.println(solution.uniquePaths(0,1));
+        System.out.println(solution.uniquePaths(0, 1));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

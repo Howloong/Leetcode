@@ -44,7 +44,7 @@ class P1785_MinimumElementsToAddToFormAGivenSum {
         Solution solution = new P1785_MinimumElementsToAddToFormAGivenSum().new Solution();
         System.out.println(solution.minElements(new int[]{1, -1, 1}, 3, -4));
         System.out.println(solution.minElements(new int[]{1, -10, 9, 1}, 100, 0));
-        System.out.println(solution.minElements(new int[]{2,2,2,5,1,-2}, 5, 126614243));
+        System.out.println(solution.minElements(new int[]{2, 2, 2, 5, 1, -2}, 5, 126614243));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -54,7 +54,7 @@ class P1785_MinimumElementsToAddToFormAGivenSum {
             for (int num : nums) {
                 sum -= num;
             }
-            return (int) Math.ceil(Math.abs(sum)/ (double)limit);
+            return (int) Math.ceil(Math.abs(sum) / (double) limit);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

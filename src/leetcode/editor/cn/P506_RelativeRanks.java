@@ -43,46 +43,45 @@
 
 package leetcode.editor.cn;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 
 //Java:相对名次
 //Time:2022-08-15 22:31:23
-class P506_RelativeRanks{
+class P506_RelativeRanks {
     public static void main(String[] args) {
         Solution solution = new P506_RelativeRanks().new Solution();
         System.out.println(Arrays.toString(solution.findRelativeRanks(new int[]{5, 4, 3, 2, 1})));
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public String[] findRelativeRanks(int[] score) {
-        int n = score.length;
-        int[] temp = new int[n];
-        System.arraycopy(score, 0, temp, 0, n);
-        Arrays.sort(temp);
-        HashMap<Integer, Integer> hashMap = new HashMap<>();
-        for (int i = 0; i < n; i++) {
-            hashMap.put(temp[i], n-i);
-        }
-        String[] res = new String[n];
 
-        for (int i = 0; i < n; i++) {
-            int rank = hashMap.get(score[i]);
-            if (rank == 1) {
-                res[i] = "Gold Medal";
-            } else if (rank == 2) {
-                res[i] = "Silver Medal";
-            } else if (rank == 3) {
-                res[i] = "Bronze Medal";
-            } else {
-                res[i] = String.valueOf(rank);
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public String[] findRelativeRanks(int[] score) {
+            int n = score.length;
+            int[] temp = new int[n];
+            System.arraycopy(score, 0, temp, 0, n);
+            Arrays.sort(temp);
+            HashMap<Integer, Integer> hashMap = new HashMap<>();
+            for (int i = 0; i < n; i++) {
+                hashMap.put(temp[i], n - i);
             }
+            String[] res = new String[n];
+
+            for (int i = 0; i < n; i++) {
+                int rank = hashMap.get(score[i]);
+                if (rank == 1) {
+                    res[i] = "Gold Medal";
+                } else if (rank == 2) {
+                    res[i] = "Silver Medal";
+                } else if (rank == 3) {
+                    res[i] = "Bronze Medal";
+                } else {
+                    res[i] = String.valueOf(rank);
+                }
+            }
+            return res;
         }
-        return res;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

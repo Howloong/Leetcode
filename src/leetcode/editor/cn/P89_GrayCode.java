@@ -63,8 +63,9 @@ class P89_GrayCode {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         List<Integer> res = new ArrayList<>();
+
         public List<Integer> grayCode(int n) {
-            for (int i = 0; i < 1<<n; i++) {
+            for (int i = 0; i < 1 << n; i++) {
                 res.add(i ^ (i / 2));
             }
             return res;

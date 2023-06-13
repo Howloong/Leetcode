@@ -59,7 +59,7 @@ class P203_RemoveLinkedListElements {
             if (head == null) {
                 return null;
             }
-            ListNode pre, p,temp;
+            ListNode pre, p, temp;
             pre = new ListNode(-1, head);
             temp = pre;
             p = head;

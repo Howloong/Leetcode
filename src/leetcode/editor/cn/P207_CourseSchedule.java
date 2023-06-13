@@ -81,7 +81,7 @@ class P207_CourseSchedule {
                     }
                 }
             }
-            return numCourses==0;
+            return numCourses == 0;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

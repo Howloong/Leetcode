@@ -35,7 +35,6 @@ package leetcode.editor.cn;
 import leetcode.editor.cn.DataStruct.TreeNode;
 
 import java.util.ArrayDeque;
-import java.util.Arrays;
 
 //Java：单值二叉树
 class P965_UnivaluedBinaryTree {

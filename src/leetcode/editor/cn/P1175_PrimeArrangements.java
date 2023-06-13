@@ -40,6 +40,7 @@ class P1175_PrimeArrangements {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         int mod = 1000000007;
+
         public int numPrimeArrangements(int n) {
             int[] prime = new int[]{2, 3, 5, 7, 11, 13, 17,
                     19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
@@ -50,7 +51,7 @@ class P1175_PrimeArrangements {
                 }
             }
             long sum = getSum(num) * getSum(n - num);
-            return (int) (sum%mod);
+            return (int) (sum % mod);
         }
 
         public long getSum(int i) {

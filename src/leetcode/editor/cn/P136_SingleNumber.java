@@ -17,22 +17,24 @@
 // Related Topics 位运算 数组 👍 2467 👎 0
 
 package leetcode.editor.cn;
+
 //Java：只出现一次的数字
-class P136_SingleNumber{
+class P136_SingleNumber {
     public static void main(String[] args) {
         Solution solution = new P136_SingleNumber().new Solution();
-        System.out.println(solution.singleNumber(new int[]{4,1,2,1,2,3,4,4,3,5,5,6,6}));
+        System.out.println(solution.singleNumber(new int[]{4, 1, 2, 1, 2, 3, 4, 4, 3, 5, 5, 6, 6}));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int singleNumber(int[] nums) {
-        int t = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            t = t ^ nums[i];
+    class Solution {
+        public int singleNumber(int[] nums) {
+            int t = nums[0];
+            for (int i = 1; i < nums.length; i++) {
+                t = t ^ nums[i];
+            }
+            return t;
         }
-        return t;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

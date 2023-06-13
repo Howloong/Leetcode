@@ -63,7 +63,7 @@ class P1260_Shift2dGrid {
     public static void main(String[] args) {
         Solution solution = new P1260_Shift2dGrid().new Solution();
 //        System.out.println(solution.shiftGrid(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, 9));
-        System.out.println(solution.shiftGrid(new int[][]{{1},{2},{3},{4},{7},{6},{5}}, 23));
+        System.out.println(solution.shiftGrid(new int[][]{{1}, {2}, {3}, {4}, {7}, {6}, {5}}, 23));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

@@ -44,17 +44,18 @@ import java.util.Arrays;
 
 //Java:两个数对之间的最大乘积差
 //Time:2022-10-05 14:04:12
-    class P1913_MaximumProductDifferenceBetweenTwoPairs{
-        public static void main(String[] args) {
-            Solution solution = new P1913_MaximumProductDifferenceBetweenTwoPairs().new Solution();
-      }
-      //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int maxProductDifference(int[] nums) {
-        Arrays.sort(nums);
-        return nums[nums.length - 1] * nums[nums.length - 2] - nums[1] * nums[0];
+class P1913_MaximumProductDifferenceBetweenTwoPairs {
+    public static void main(String[] args) {
+        Solution solution = new P1913_MaximumProductDifferenceBetweenTwoPairs().new Solution();
     }
-}
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int maxProductDifference(int[] nums) {
+            Arrays.sort(nums);
+            return nums[nums.length - 1] * nums[nums.length - 2] - nums[1] * nums[0];
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

@@ -60,7 +60,7 @@ import java.util.*;
 class P2094_Finding3DigitEvenNumbers {
     public static void main(String[] args) {
         Solution solution = new P2094_Finding3DigitEvenNumbers().new Solution();
-        System.out.println(Arrays.toString(solution.findEvenNumbers(new int[]{2,1,3,0})));
+        System.out.println(Arrays.toString(solution.findEvenNumbers(new int[]{2, 1, 3, 0})));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

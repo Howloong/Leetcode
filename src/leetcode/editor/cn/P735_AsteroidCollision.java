@@ -57,7 +57,7 @@ class P735_AsteroidCollision {
             for (int aster :
                     asteroids) {
                 boolean alive = true;
-                while (alive&&aster<0&&!arrayDeque.isEmpty()&&arrayDeque.peek()>0) {
+                while (alive && aster < 0 && !arrayDeque.isEmpty() && arrayDeque.peek() > 0) {
                     alive = arrayDeque.peek() < -aster;
                     if (arrayDeque.peek() <= aster) {
                         arrayDeque.pop();

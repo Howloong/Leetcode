@@ -85,7 +85,7 @@ class P1759_CountNumberOfHomogenousSubstrings {
             }
             long t = (((long) (j - i + 1) * (j - i)) >> 1) % MOD;
             res += hashMap.getOrDefault(j - i, t);
-            return (int) (res%MOD);
+            return (int) (res % MOD);
 
         }
     }

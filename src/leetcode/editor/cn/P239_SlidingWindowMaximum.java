@@ -49,7 +49,7 @@ class P239_SlidingWindowMaximum {
     public static void main(String[] args) {
         Solution solution = new P239_SlidingWindowMaximum().new Solution();
 //        System.out.println(Arrays.toString(solution.maxSlidingWindow(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3)));
-        System.out.println(Arrays.toString(solution.maxSlidingWindow(new int[]{1,3,1,2,0,5}, 3)));
+        System.out.println(Arrays.toString(solution.maxSlidingWindow(new int[]{1, 3, 1, 2, 0, 5}, 3)));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -68,7 +68,7 @@ class P239_SlidingWindowMaximum {
             for (int i = k; i < nums.length; i++) {
                 myQueue.offer(nums[i]);
                 myQueue.poll(nums[i - k]);
-                result[t++]= myQueue.peek();
+                result[t++] = myQueue.peek();
             }
             return result;
         }

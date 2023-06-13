@@ -74,7 +74,7 @@ class MyCalendar {
             treeSet.add(new int[]{start, end});
             return true;
         }
-        if (start >= treeSet.last()[1] || end <=treeSet.first()[0]) {
+        if (start >= treeSet.last()[1] || end <= treeSet.first()[0]) {
             treeSet.add(new int[]{start, end});
             return true;
         }

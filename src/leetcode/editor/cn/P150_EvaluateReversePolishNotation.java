@@ -74,7 +74,7 @@ import java.util.ArrayDeque;
 class P150_EvaluateReversePolishNotation {
     public static void main(String[] args) {
         Solution solution = new P150_EvaluateReversePolishNotation().new Solution();
-        System.out.println(solution.evalRPN(new String[]{"10","6","9","3","+","-11","*","/","*","17","+","5","+"}));
+        System.out.println(solution.evalRPN(new String[]{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

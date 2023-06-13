@@ -66,9 +66,9 @@ class P168_ExcelSheetColumnTitle {
         public String convertToTitle(int columnNumber) {
             StringBuilder stringBuilder = new StringBuilder();
             while (columnNumber != 0) {
-                int t = (columnNumber-1) % 26;
+                int t = (columnNumber - 1) % 26;
                 stringBuilder.append((char) ('A' + t));
-                columnNumber = (columnNumber-1) / 26;
+                columnNumber = (columnNumber - 1) / 26;
             }
             return stringBuilder.reverse().toString();
         }

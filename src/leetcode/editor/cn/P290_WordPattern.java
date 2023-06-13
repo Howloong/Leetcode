@@ -41,41 +41,41 @@ package leetcode.editor.cn;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 
 //Java:单词规律
 //Time:2022-08-01 15:26:50
-class P290_WordPattern{
+class P290_WordPattern {
     public static void main(String[] args) {
         Solution solution = new P290_WordPattern().new Solution();
         System.out.println(solution.wordPattern("abba", "dog cat cat dog"));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public boolean wordPattern(String pattern, String s) {
-        String[] strs = s.split(" ");
-        if (strs.length != pattern.length()) {
-            return false;
-        }
-        HashSet<String> hashSet = new HashSet<>();
-        HashMap<Character, String> hashMap = new HashMap<>();
-        for (int i = 0; i < pattern.length(); i++) {
-            char c = pattern.charAt(i);
-            if (hashMap.containsKey(c)) {
-                if (!hashMap.get(c).equals(strs[i])) {
-                    return false;
-                }
-            } else {
-                if (hashSet.contains(strs[i])) {
-                    return false;
-                }
-                hashMap.put(c, strs[i]);
-                hashSet.add(strs[i]);
+    class Solution {
+        public boolean wordPattern(String pattern, String s) {
+            String[] strs = s.split(" ");
+            if (strs.length != pattern.length()) {
+                return false;
             }
+            HashSet<String> hashSet = new HashSet<>();
+            HashMap<Character, String> hashMap = new HashMap<>();
+            for (int i = 0; i < pattern.length(); i++) {
+                char c = pattern.charAt(i);
+                if (hashMap.containsKey(c)) {
+                    if (!hashMap.get(c).equals(strs[i])) {
+                        return false;
+                    }
+                } else {
+                    if (hashSet.contains(strs[i])) {
+                        return false;
+                    }
+                    hashMap.put(c, strs[i]);
+                    hashSet.add(strs[i]);
+                }
+            }
+            return true;
         }
-        return true;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

@@ -73,7 +73,7 @@ class P88_MergeSortedArray {
             int k = 0;
             while (i < nums1.length) {
                 j = i;
-                while (j < m&&m!= nums1.length) {
+                while (j < m && m != nums1.length) {
                     if (nums1[j] < nums2[k]) {
                         ++j;
                     } else {

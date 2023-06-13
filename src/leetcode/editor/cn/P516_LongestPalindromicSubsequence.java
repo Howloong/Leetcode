@@ -50,14 +50,14 @@ class P516_LongestPalindromicSubsequence {
                 dp[i][i] = 1;
             }
             for (int i = len; i >= 1; i--) {
-                for (int j = i+1; j<=len; j++) {
+                for (int j = i + 1; j <= len; j++) {
                     if (s.charAt(i - 1) == s.charAt(j - 1)) {
                         if (i + 1 == j) {
                             dp[i][j] = 2;
                         } else
                             dp[i][j] = dp[i + 1][j - 1] + 2;
                     } else {
-                        dp[i][j] = Math.max(dp[i+1][j], dp[i ][j-1]);
+                        dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
                     }
                 }
             }

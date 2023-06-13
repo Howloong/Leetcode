@@ -33,20 +33,20 @@ package leetcode.editor.cn;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 //Java：子集
 class P78_Subsets {
     public static void main(String[] args) {
         Solution solution = new P78_Subsets().new Solution();
-        System.out.println(solution.subsets(new int[]{1,2,3}));
+        System.out.println(solution.subsets(new int[]{1, 2, 3}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public List<List<Integer>> result = new ArrayList<>();
         public ArrayDeque<Integer> path = new ArrayDeque<>();
+
         public List<List<Integer>> subsets(int[] nums) {
             backTracking(nums, 0);
             return result;

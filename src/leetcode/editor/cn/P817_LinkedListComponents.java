@@ -70,7 +70,7 @@ class P817_LinkedListComponents {
                 numSet.add(integer);
             }
             int count = 0;
-            int n=0;
+            int n = 0;
             while (head != null) {
                 if (numSet.contains(head.val)) {
                     numSet.remove(head.val);
@@ -78,7 +78,7 @@ class P817_LinkedListComponents {
                     if (numSet.size() == 0) {
                         break;
                     }
-                } else if(n!=0){
+                } else if (n != 0) {
                     count++;
                     n = 0;
                 }

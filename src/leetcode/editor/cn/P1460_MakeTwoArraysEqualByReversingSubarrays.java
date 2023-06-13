@@ -51,18 +51,19 @@ import java.util.Arrays;
 
 //Java:通过翻转子数组使两个数组相等
 //Time:2022-12-07 19:14:03
-class P1460_MakeTwoArraysEqualByReversingSubarrays{
+class P1460_MakeTwoArraysEqualByReversingSubarrays {
     public static void main(String[] args) {
         Solution solution = new P1460_MakeTwoArraysEqualByReversingSubarrays().new Solution();
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public boolean canBeEqual(int[] target, int[] arr) {
-        Arrays.sort(target);
-        Arrays.sort(arr);
-        return Arrays.equals(target, arr);
+    class Solution {
+        public boolean canBeEqual(int[] target, int[] arr) {
+            Arrays.sort(target);
+            Arrays.sort(arr);
+            return Arrays.equals(target, arr);
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

@@ -34,8 +34,6 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-
 //Java：反转字符串 II
 class P541_ReverseStringIi {
     public static void main(String[] args) {
@@ -49,7 +47,7 @@ class P541_ReverseStringIi {
             char[] c = s.toCharArray();
             for (int i = 0; i < s.length(); i += 2 * k) {
                 int start = i;
-                int end = Math.min(i + k-1, s.length() - 1);
+                int end = Math.min(i + k - 1, s.length() - 1);
                 while (start < end) {
                     c[start] ^= c[end];
                     c[end] ^= c[start];
@@ -60,7 +58,6 @@ class P541_ReverseStringIi {
             }
             return String.valueOf(c);
         }
-
 
 
     }

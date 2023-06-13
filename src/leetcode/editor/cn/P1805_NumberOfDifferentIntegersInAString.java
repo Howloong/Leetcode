@@ -74,7 +74,7 @@ class P1805_NumberOfDifferentIntegersInAString {
                     continue;
                 }
 //                sb.append(word.charAt(i));
-                j = i ;
+                j = i;
                 while (j < word.length() && word.charAt(j) == '0') {
                     j++;
                 }

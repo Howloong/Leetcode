@@ -81,7 +81,7 @@ class P72_EditDistance {
                         dp[j] = pre;
                     } else {
 //                        dp[i][j] = Math.min(dp[i - 1][j], Math.min(dp[i][j - 1], dp[i - 1][j - 1])) + 1;
-                        dp[j] = Math.min(dp[j], Math.min(dp[j - 1], pre))+1;
+                        dp[j] = Math.min(dp[j], Math.min(dp[j - 1], pre)) + 1;
                     }
                     pre = cur;
                 }

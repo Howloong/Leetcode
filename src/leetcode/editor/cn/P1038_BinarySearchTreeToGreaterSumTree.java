@@ -70,6 +70,7 @@ class P1038_BinarySearchTreeToGreaterSumTree {
      */
     class Solution {
         int sum = 0;
+
         public TreeNode bstToGst(TreeNode root) {
             reversePostOrder(root);
             return root;

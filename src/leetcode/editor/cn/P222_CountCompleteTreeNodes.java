@@ -48,49 +48,50 @@ package leetcode.editor.cn;
 import leetcode.editor.cn.DataStruct.TreeNode;
 
 //Java：完全二叉树的节点个数
-class P222_CountCompleteTreeNodes{
+class P222_CountCompleteTreeNodes {
     public static void main(String[] args) {
         Solution solution = new P222_CountCompleteTreeNodes().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    public int countNodes(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int heightLeft=0, heightRight = 0;
-        TreeNode left = root.left;
-        while (left!=null) {
-            left = left.left;
-            ++heightLeft;
-        }
-        TreeNode right = root.right;
-        while (right != null) {
-            right = right.right;
-            ++heightRight;
-        }
-        if (heightLeft == heightRight) {
-            return (2 << heightLeft) - 1;
-        }
-        return countNodes(root.left) + countNodes(root.right) + 1;
-    }
 
-}
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode() {}
+     * TreeNode(int val) { this.val = val; }
+     * TreeNode(int val, TreeNode left, TreeNode right) {
+     * this.val = val;
+     * this.left = left;
+     * this.right = right;
+     * }
+     * }
+     */
+    class Solution {
+        public int countNodes(TreeNode root) {
+            if (root == null) {
+                return 0;
+            }
+            int heightLeft = 0, heightRight = 0;
+            TreeNode left = root.left;
+            while (left != null) {
+                left = left.left;
+                ++heightLeft;
+            }
+            TreeNode right = root.right;
+            while (right != null) {
+                right = right.right;
+                ++heightRight;
+            }
+            if (heightLeft == heightRight) {
+                return (2 << heightLeft) - 1;
+            }
+            return countNodes(root.left) + countNodes(root.right) + 1;
+        }
+
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

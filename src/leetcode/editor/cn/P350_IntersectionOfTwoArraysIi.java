@@ -40,7 +40,6 @@ package leetcode.editor.cn;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 
 //Java：两个数组的交集 II
 class P350_IntersectionOfTwoArraysIi {

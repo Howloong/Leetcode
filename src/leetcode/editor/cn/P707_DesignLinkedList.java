@@ -76,24 +76,6 @@ class P707_DesignLinkedList {
 
 
 class MyLinkedList {
-    class ListNode {
-        public int val;
-        public ListNode next, prev, head, tail;
-        public int size;
-
-        public ListNode() {
-        }
-
-        public ListNode(int val) {
-            this.val = val;
-        }
-
-        public ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
-
     public ListNode list;
 
     public MyLinkedList() {
@@ -148,7 +130,7 @@ class MyLinkedList {
     public void addAtIndex(int index, int val) {
         if (index > list.size) {
             return;
-        } else if (index==list.size) {
+        } else if (index == list.size) {
             addAtTail(val);
             return;
         } else if (index < 0) {
@@ -184,6 +166,24 @@ class MyLinkedList {
             if (index == 0) {
                 list.next = node.next;
             }
+        }
+    }
+
+    class ListNode {
+        public int val;
+        public ListNode next, prev, head, tail;
+        public int size;
+
+        public ListNode() {
+        }
+
+        public ListNode(int val) {
+            this.val = val;
+        }
+
+        public ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
         }
     }
 }

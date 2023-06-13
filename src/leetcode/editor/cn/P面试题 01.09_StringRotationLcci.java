@@ -36,7 +36,7 @@ package leetcode.editor.cn;
 class StringRotationLcci {
     public static void main(String[] args) {
         Solution solution = new StringRotationLcci().new Solution();
-        System.out.println(solution.isFlipedString("waterbottle","erbottlewat"));
+        System.out.println(solution.isFlipedString("waterbottle", "erbottlewat"));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -46,7 +46,7 @@ class StringRotationLcci {
                 return false;
             }
             return (s2 + s2).contains(s1);
-         }
+        }
     }
 //leetcode submit region end(Prohibit modification and deletion)
 

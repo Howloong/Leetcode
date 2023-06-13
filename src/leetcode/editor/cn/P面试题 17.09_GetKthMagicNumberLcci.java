@@ -25,7 +25,7 @@ class GetKthMagicNumberLcci {
     class Solution {
         public int getKthMagicNumber(int k) {
             int x = 1, y = 1, z = 1;
-            int[] dp = new int[k+1];
+            int[] dp = new int[k + 1];
             dp[1] = 1;
             int index = 2;
             while (index <= k) {

@@ -66,7 +66,7 @@ class P51_NQueens {
             return result;
         }
 
-        public void backTracking(int n, int startRow,char[][] board) {
+        public void backTracking(int n, int startRow, char[][] board) {
             if (path.size() == n) {
                 result.add(new ArrayList<>(path));
                 return;

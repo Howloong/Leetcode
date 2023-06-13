@@ -42,7 +42,7 @@ class P441_ArrangingCoins {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int arrangeCoins(int n) {
-            return (int) (Math.sqrt(1 + (long)8 * n) - 1) >> 1;
+            return (int) (Math.sqrt(1 + (long) 8 * n) - 1) >> 1;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

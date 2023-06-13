@@ -51,7 +51,7 @@ class P1365_HowManyNumbersAreSmallerThanTheCurrentNumber {
     public static void main(String[] args) {
         Solution solution = new P1365_HowManyNumbersAreSmallerThanTheCurrentNumber().new Solution();
         System.out.println(Arrays.toString(solution.smallerNumbersThanCurrent(new int[]{8, 1, 2, 2, 3})));
-        System.out.println(Arrays.toString(solution.smallerNumbersThanCurrent(new int[]{7,7,7,7})));
+        System.out.println(Arrays.toString(solution.smallerNumbersThanCurrent(new int[]{7, 7, 7, 7})));
 
     }
 

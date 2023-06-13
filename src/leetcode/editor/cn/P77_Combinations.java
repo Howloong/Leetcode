@@ -38,7 +38,6 @@ package leetcode.editor.cn;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 //Java：组合
@@ -64,7 +63,7 @@ class P77_Combinations {
                 result.add(new ArrayList<>(path));
                 return;
             }
-            for (int i = startIndex; i <= n-(k-path.size())+1; i++) {
+            for (int i = startIndex; i <= n - (k - path.size()) + 1; i++) {
                 path.push(i);
                 backTracking(n, k, i + 1);
                 path.pop();

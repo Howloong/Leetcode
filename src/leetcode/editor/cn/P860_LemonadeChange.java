@@ -50,7 +50,7 @@ class P860_LemonadeChange {
         Solution solution = new P860_LemonadeChange().new Solution();
         System.out.println(solution.lemonadeChange(new int[]{5, 5, 10, 10, 20}));
         System.out.println(solution.lemonadeChange(new int[]{5, 5, 5, 10, 20}));
-        System.out.println(solution.lemonadeChange(new int[]{5,5,5,10,5,5,10,20,20,20}));
+        System.out.println(solution.lemonadeChange(new int[]{5, 5, 5, 10, 5, 5, 10, 20, 20, 20}));
         System.out.println(solution.lemonadeChange(new int[]{5, 5, 5, 5, 20, 20, 5, 5, 5, 5}));
     }
 
@@ -79,7 +79,7 @@ class P860_LemonadeChange {
                             fiveCount -= 3;
                         } else return false;
                     }
-                    case 5-> fiveCount++;
+                    case 5 -> fiveCount++;
                 }
             }
             return true;

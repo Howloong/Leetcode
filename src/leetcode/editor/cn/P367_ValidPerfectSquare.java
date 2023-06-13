@@ -42,7 +42,7 @@ class P367_ValidPerfectSquare {
             if (num == 1) {
                 return true;
             }
-            int i = 1, j =  num / 2;
+            int i = 1, j = num / 2;
             int mid;
             while (i <= j) {
                 mid = (i + j) / 2;
@@ -54,8 +54,7 @@ class P367_ValidPerfectSquare {
                     i = mid + 1;
                 } else if (t > mid) {
                     i = mid + 1;
-                }else
-                {
+                } else {
                     j = mid - 1;
                 }
             }

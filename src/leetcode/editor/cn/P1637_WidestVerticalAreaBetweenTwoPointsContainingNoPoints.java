@@ -38,7 +38,6 @@ package leetcode.editor.cn;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Map;
 
 //Java:两点之间不包含任何点的最宽垂直区域
 //Time:2023-03-30 10:46:30

@@ -51,8 +51,6 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-
 //Java:轮转数组
 //Time:2022-10-04 16:50:21
 class P189_RotateArray {
@@ -67,7 +65,7 @@ class P189_RotateArray {
             int len = nums.length;
             k %= len;
             reverse(nums, 0, len - 1);
-            reverse(nums, 0, k-1);
+            reverse(nums, 0, k - 1);
             reverse(nums, k, len - 1);
         }
 

@@ -53,7 +53,7 @@ class P204_CountPrimes {
             for (int i = 2; i < n; i++) {
                 if (isPrime[i]) {
                     if ((long) i * i < n) {
-                        for (int j = i * i; j < n; j+=i) {
+                        for (int j = i * i; j < n; j += i) {
                             isPrime[j] = false;
                         }
                     }

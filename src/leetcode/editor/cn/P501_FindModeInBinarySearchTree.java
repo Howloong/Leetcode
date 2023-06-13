@@ -42,11 +42,9 @@
 
 package leetcode.editor.cn;
 
-import com.sun.source.tree.Tree;
 import leetcode.editor.cn.DataStruct.TreeNode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 //Java：二叉搜索树中的众数
@@ -72,10 +70,11 @@ class P501_FindModeInBinarySearchTree {
      * }
      */
     class Solution {
-        public TreeNode pre =null ;
+        public TreeNode pre = null;
         public int sum = 0;
         public int max = 0;
         public List<Integer> result;
+
         public int[] findMode(TreeNode root) {
             result = new ArrayList<>();
             inOrder(root);

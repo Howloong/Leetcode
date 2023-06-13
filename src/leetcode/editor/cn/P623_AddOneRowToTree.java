@@ -84,7 +84,7 @@ class P623_AddOneRowToTree {
         }
 
         public void dfs(TreeNode node, int depth, int val, int index) {
-            if (node == null||index>depth) {
+            if (node == null || index > depth) {
                 return;
             }
             if (depth == index) {

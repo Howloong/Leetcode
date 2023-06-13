@@ -53,7 +53,7 @@ import java.util.Arrays;
 class P300_LongestIncreasingSubsequence {
     public static void main(String[] args) {
         Solution solution = new P300_LongestIncreasingSubsequence().new Solution();
-        System.out.println(solution.lengthOfLIS(new int[]{4,10,4,3,8,9}));
+        System.out.println(solution.lengthOfLIS(new int[]{4, 10, 4, 3, 8, 9}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

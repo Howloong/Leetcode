@@ -55,10 +55,6 @@
 
 package leetcode.editor.cn;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-
 //Java：填充每个节点的下一个右侧节点指针
 class P116_PopulatingNextRightPointersInEachNode {
     public static void main(String[] args) {
@@ -89,46 +85,46 @@ class Node {
 */
 
     class Solution {
-       /* public Node connect(Node root) {
+        /* public Node connect(Node root) {
+             if (root == null) {
+                 return null;
+             }
+             ArrayDeque<Node> arrayDeque = new ArrayDeque<>();
+             Node p = root;
+             arrayDeque.offer(p);
+             while (!arrayDeque.isEmpty()) {
+                 int len = arrayDeque.size();
+                 List<Node> list = new ArrayList<>();
+                 while (len > 0) {
+                     p = arrayDeque.poll();
+                     list.add(p);
+                     if (p.left != null) {
+                         arrayDeque.offer(p.left);
+                         arrayDeque.offer(p.right);
+                     }
+                     --len;
+                 }
+                 for (int i = 0; i < list.size()-1; i++) {
+                     list.get(i).next = list.get(i + 1);
+                 }
+                 list.get(list.size() - 1).next = null;
+             }
+             return root;
+         }*/
+        public Node connect(Node root) {
             if (root == null) {
                 return null;
             }
-            ArrayDeque<Node> arrayDeque = new ArrayDeque<>();
-            Node p = root;
-            arrayDeque.offer(p);
-            while (!arrayDeque.isEmpty()) {
-                int len = arrayDeque.size();
-                List<Node> list = new ArrayList<>();
-                while (len > 0) {
-                    p = arrayDeque.poll();
-                    list.add(p);
-                    if (p.left != null) {
-                        arrayDeque.offer(p.left);
-                        arrayDeque.offer(p.right);
-                    }
-                    --len;
+            if (root.left != null) {
+                root.left.next = root.right;
+                if (root.next != null) {
+                    root.right.next = root.next.left;
                 }
-                for (int i = 0; i < list.size()-1; i++) {
-                    list.get(i).next = list.get(i + 1);
-                }
-                list.get(list.size() - 1).next = null;
             }
+            connect(root.left);
+            connect(root.right);
             return root;
-        }*/
-       public Node connect(Node root) {
-           if (root == null) {
-               return null;
-           }
-           if (root.left != null) {
-               root.left.next = root.right;
-               if (root.next != null) {
-                   root.right.next = root.next.left;
-               }
-           }
-           connect(root.left);
-           connect(root.right);
-           return root;
-       }
+        }
     }
 
     //leetcode submit region end(Prohibit modification and deletion)

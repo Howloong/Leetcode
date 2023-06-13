@@ -57,6 +57,7 @@ class P897_IncreasingOrderSearchTree {
      */
     class Solution {
         ArrayDeque<TreeNode> arrayDeque;
+
         public TreeNode increasingBST(TreeNode root) {
             arrayDeque = new ArrayDeque<>();
             inOrder(root);

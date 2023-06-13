@@ -38,18 +38,20 @@
 // Related Topics 贪心 数组 前缀和 滑动窗口 👍 81 👎 0
 
 package leetcode.editor.cn;
+
 //Java:得到连续 K 个 1 的最少相邻交换次数
 //Time:2022-12-18 10:51:39
-class P1703_MinimumAdjacentSwapsForKConsecutiveOnes{
+class P1703_MinimumAdjacentSwapsForKConsecutiveOnes {
     public static void main(String[] args) {
         Solution solution = new P1703_MinimumAdjacentSwapsForKConsecutiveOnes().new Solution();
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int minMoves(int[] nums, int k) {
-        return 1;
+    class Solution {
+        public int minMoves(int[] nums, int k) {
+            return 1;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

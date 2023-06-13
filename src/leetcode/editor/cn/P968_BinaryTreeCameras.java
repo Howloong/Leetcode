@@ -71,10 +71,10 @@ class P968_BinaryTreeCameras {
         }
 
         /*
-        * 0:无覆盖
-        * 1:有覆盖
-        * 2:有摄像头
-        * */
+         * 0:无覆盖
+         * 1:有覆盖
+         * 2:有摄像头
+         * */
         public int postOrder(TreeNode node) {
             if (node == null) {
                 return 1;

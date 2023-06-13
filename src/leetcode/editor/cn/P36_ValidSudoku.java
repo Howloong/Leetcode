@@ -95,7 +95,7 @@ class P36_ValidSudoku {
                         }
                         c1[board[i][j] - '0' - 1]++;
                     }
-                    if (board[j][i] != '.' ) {
+                    if (board[j][i] != '.') {
                         if (c2[board[j][i] - '0' - 1] == 1)
                             return false;
                         c2[board[j][i] - '0' - 1]++;
@@ -104,7 +104,7 @@ class P36_ValidSudoku {
                     int startCol = 3 * (j / 3);
                     for (int k = startRow; k < startRow + 3; k++) {
                         for (int l = startCol; l < startCol + 3; l++) {
-                            if (board[i][j]!='.'&&board[i][j] == board[k][l] && i != k && j != l) {
+                            if (board[i][j] != '.' && board[i][j] == board[k][l] && i != k && j != l) {
                                 return false;
                             }
                         }

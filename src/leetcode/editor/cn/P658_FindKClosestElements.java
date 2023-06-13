@@ -75,7 +75,7 @@ class P658_FindKClosestElements {
                     if (j == len || i >= 0 && x - arr[i] <= arr[j] - x) {
                         list.add(0, arr[i]);
                         i--;
-                    } else  {
+                    } else {
                         list.add(arr[j]);
                         j++;
                     }

@@ -41,7 +41,7 @@ package leetcode.editor.cn;
 class P45_JumpGameIi {
     public static void main(String[] args) {
         Solution solution = new P45_JumpGameIi().new Solution();
-        System.out.println(solution.jump(new int[]{2,3,1,2,2,1,3}));
+        System.out.println(solution.jump(new int[]{2, 3, 1, 2, 2, 1, 3}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -50,7 +50,7 @@ class P45_JumpGameIi {
             int curDistance = 0;
             int nextDistance = 0;
             int result = 0;
-            for (int i = 0; i < nums.length-1; i++) {
+            for (int i = 0; i < nums.length - 1; i++) {
                 nextDistance = Math.max(nextDistance, nums[i] + i);
                 if (curDistance == i) {
                     curDistance = nextDistance;

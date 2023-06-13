@@ -33,7 +33,6 @@ package leetcode.editor.cn;
 
 import leetcode.editor.cn.DataStruct.TreeNode;
 
-import java.lang.reflect.Array;
 import java.util.ArrayDeque;
 
 //Java:层数最深叶子节点的和

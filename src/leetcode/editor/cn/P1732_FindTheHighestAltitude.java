@@ -41,7 +41,7 @@ class P1732_FindTheHighestAltitude {
     public static void main(String[] args) {
         Solution solution = new P1732_FindTheHighestAltitude().new Solution();
         System.out.println(solution.largestAltitude(new int[]{-5, 1, 5, 0, -7}));
-        System.out.println(solution.largestAltitude(new int[]{-4,-3,-2,-1,4,3,2}));
+        System.out.println(solution.largestAltitude(new int[]{-4, -3, -2, -1, 4, 3, 2}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

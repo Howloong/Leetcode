@@ -73,7 +73,7 @@ class Codec {
     // Decodes a shortened URL to its original URL.
     public String decode(String shortUrl) {
         int i = shortUrl.lastIndexOf('/');
-        long p = Long.parseLong(shortUrl.substring(i+1));
+        long p = Long.parseLong(shortUrl.substring(i + 1));
         return hashMap.get(p);
     }
 }

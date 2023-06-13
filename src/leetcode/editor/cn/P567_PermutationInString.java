@@ -35,48 +35,49 @@ import java.util.HashMap;
 import java.util.Objects;
 
 //Java：字符串的排列
-class P567_PermutationInString{
+class P567_PermutationInString {
     public static void main(String[] args) {
         Solution solution = new P567_PermutationInString().new Solution();
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public boolean checkInclusion(String s1, String s2) {
-        int start = 0, end = 0;
-        int len = 0;
-        HashMap<Character, Integer> window = new HashMap<>();
-        HashMap<Character, Integer> hashMap = new HashMap<>();
-        for (Character c :
-                s1.toCharArray()) {
-            hashMap.put(c, hashMap.getOrDefault(c, 0) + 1);
-        }
-        while (end < s2.length()) {
-            char c = s2.charAt(end);
-            if (hashMap.containsKey(c)) {
-                window.put(c, window.getOrDefault(c, 0) + 1);
-                if (Objects.equals(window.get(c), hashMap.get(c))) {
-                    ++len;
-                }
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public boolean checkInclusion(String s1, String s2) {
+            int start = 0, end = 0;
+            int len = 0;
+            HashMap<Character, Integer> window = new HashMap<>();
+            HashMap<Character, Integer> hashMap = new HashMap<>();
+            for (Character c :
+                    s1.toCharArray()) {
+                hashMap.put(c, hashMap.getOrDefault(c, 0) + 1);
             }
-            while (len == hashMap.size()) {
-                c = s2.charAt(start);
-                if (end - start + 1 == s1.length()) {
-                    return true;
-                }
+            while (end < s2.length()) {
+                char c = s2.charAt(end);
                 if (hashMap.containsKey(c)) {
+                    window.put(c, window.getOrDefault(c, 0) + 1);
                     if (Objects.equals(window.get(c), hashMap.get(c))) {
-                        --len;
+                        ++len;
                     }
-                    window.put(c, window.get(c) - 1);
+
                 }
-                ++start;
+                while (len == hashMap.size()) {
+                    c = s2.charAt(start);
+                    if (end - start + 1 == s1.length()) {
+                        return true;
+                    }
+                    if (hashMap.containsKey(c)) {
+                        if (Objects.equals(window.get(c), hashMap.get(c))) {
+                            --len;
+                        }
+                        window.put(c, window.get(c) - 1);
+                    }
+                    ++start;
+                }
+                end++;
             }
-            end++;
+            return false;
         }
-        return false;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

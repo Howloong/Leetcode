@@ -37,34 +37,35 @@ import java.util.Arrays;
 import java.util.List;
 
 //Java：合并区间
-class P56_MergeIntervals{
+class P56_MergeIntervals {
     public static void main(String[] args) {
         Solution solution = new P56_MergeIntervals().new Solution();
 //        System.out.println(Arrays.deepToString(solution.merge(new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}})));
-        System.out.println(Arrays.deepToString(solution.merge(new int[][]{{1,4},{4,5}})));
-    }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int[][] merge(int[][] intervals) {
-        List<int[]> list = new ArrayList<>();
-        Arrays.sort(intervals, (a, b) -> a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]);
-        int left = intervals[0][0];
-        int right = intervals[0][1];
-        for (int i = 1; i < intervals.length; i++) {
-            if (intervals[i][0] <= right) {
-                left = Math.min(left, intervals[i][0]);
-                right = Math.max(right, intervals[i][1]);
-            } else {
-                list.add(new int[]{left, right});
-                left = intervals[i][0];
-                right = intervals[i][1];
-            }
-        }
-        list.add(new int[]{left, right});
-        return list.toArray(new int[list.size()][]);
+        System.out.println(Arrays.deepToString(solution.merge(new int[][]{{1, 4}, {4, 5}})));
     }
 
-}
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int[][] merge(int[][] intervals) {
+            List<int[]> list = new ArrayList<>();
+            Arrays.sort(intervals, (a, b) -> a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]);
+            int left = intervals[0][0];
+            int right = intervals[0][1];
+            for (int i = 1; i < intervals.length; i++) {
+                if (intervals[i][0] <= right) {
+                    left = Math.min(left, intervals[i][0]);
+                    right = Math.max(right, intervals[i][1]);
+                } else {
+                    list.add(new int[]{left, right});
+                    left = intervals[i][0];
+                    right = intervals[i][1];
+                }
+            }
+            list.add(new int[]{left, right});
+            return list.toArray(new int[list.size()][]);
+        }
+
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

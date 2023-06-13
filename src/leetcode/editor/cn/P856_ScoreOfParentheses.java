@@ -60,6 +60,7 @@ class P856_ScoreOfParentheses {
     class Solution {
         ArrayDeque<Character> arrayDeque;
         int index = 0;
+
         public int scoreOfParentheses(String s) {
             arrayDeque = new ArrayDeque<>();
             char[] chars = s.toCharArray();

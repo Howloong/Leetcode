@@ -69,7 +69,7 @@ class P1710_MaximumUnitsOnATruck {
                 if (k == boxTypes.length) {
                     break;
                 }
-                while ( j < boxTypes[k][0] && i < truckSize) {
+                while (j < boxTypes[k][0] && i < truckSize) {
                     sum += boxTypes[k][1];
                     j++;
                     i++;

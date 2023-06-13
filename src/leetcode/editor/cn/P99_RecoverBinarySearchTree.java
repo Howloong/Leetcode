@@ -70,6 +70,7 @@ class P99_RecoverBinarySearchTree {
      */
     class Solution {
         public TreeNode node1, node2, pre;
+
         public void recoverTree(TreeNode root) {
             inorder(root);
             int a = node1.val;

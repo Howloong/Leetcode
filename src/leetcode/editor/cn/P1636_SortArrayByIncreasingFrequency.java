@@ -43,7 +43,7 @@ import java.util.*;
 class P1636_SortArrayByIncreasingFrequency {
     public static void main(String[] args) {
         Solution solution = new P1636_SortArrayByIncreasingFrequency().new Solution();
-        System.out.println(Arrays.toString(solution.frequencySort(new int[]{2,3,1,3,2})));
+        System.out.println(Arrays.toString(solution.frequencySort(new int[]{2, 3, 1, 3, 2})));
 
     }
 
@@ -55,13 +55,13 @@ class P1636_SortArrayByIncreasingFrequency {
                 treeMap.put(num, treeMap.getOrDefault(num, 0) + 1);
             }
             List<Map.Entry<Integer, Integer>> list = new ArrayList<>(treeMap.entrySet());
-            list.sort((a,b)-> Objects.equals(a.getValue(), b.getValue()) ? b.getKey() - a.getKey() :
+            list.sort((a, b) -> Objects.equals(a.getValue(), b.getValue()) ? b.getKey() - a.getKey() :
                     a.getValue() - b.getValue());
             int i = 0;
             int j = 0;
             while (i < nums.length) {
                 Map.Entry<Integer, Integer> entry = list.get(j);
-                for (int k = 0; k < entry.getValue(); k++,i++) {
+                for (int k = 0; k < entry.getValue(); k++, i++) {
                     nums[i] = entry.getKey();
                 }
                 j++;

@@ -66,7 +66,8 @@ class P783_MinimumDistanceBetweenBstNodes {
     class Solution {
         public int min = Integer.MAX_VALUE;
         public boolean flag = true;
-        public int last=-10000;
+        public int last = -10000;
+
         public int minDiffInBST(TreeNode root) {
             inOrder(root);
             return min;

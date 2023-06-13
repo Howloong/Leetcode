@@ -54,10 +54,10 @@ class P1556_ThousandSeparator {
             String s = n + "";
             int j = 1;
             for (int i = s.length(); i >= 1; i--, j++) {
-                sb.insert(0,s.charAt(i - 1));
+                sb.insert(0, s.charAt(i - 1));
                 if (j % 3 == 0 && i != 1) {
-                    sb.insert(0,".");
-                    j=0;
+                    sb.insert(0, ".");
+                    j = 0;
                 }
             }
             return sb.toString();

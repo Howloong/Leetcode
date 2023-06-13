@@ -57,26 +57,28 @@
 // Related Topics 数组 👍 68 👎 0
 
 package leetcode.editor.cn;
+
 //Java:在既定时间做作业的学生人数
 //Time:2022-08-19 20:05:18
-class P1450_NumberOfStudentsDoingHomeworkAtAGivenTime{
+class P1450_NumberOfStudentsDoingHomeworkAtAGivenTime {
     public static void main(String[] args) {
         Solution solution = new P1450_NumberOfStudentsDoingHomeworkAtAGivenTime().new Solution();
-        System.out.println(solution.busyStudent(new int[]{9,8,7,6,5,4,3,2,1}, new int[]{10,10,10,10,10,10,10,10,10},
+        System.out.println(solution.busyStudent(new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1}, new int[]{10, 10, 10, 10, 10, 10, 10, 10, 10},
                 5));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int busyStudent(int[] startTime, int[] endTime, int queryTime) {
-        int sum = 0;
-        for (int i = 0; i < startTime.length; i++) {
-            if (startTime[i] <= queryTime && endTime[i] >= queryTime) {
-                sum++;
+    class Solution {
+        public int busyStudent(int[] startTime, int[] endTime, int queryTime) {
+            int sum = 0;
+            for (int i = 0; i < startTime.length; i++) {
+                if (startTime[i] <= queryTime && endTime[i] >= queryTime) {
+                    sum++;
+                }
             }
+            return sum;
         }
-        return sum;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

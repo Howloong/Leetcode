@@ -53,32 +53,34 @@
 // Related Topics 数组 数学 模拟 👍 103 👎 0
 
 package leetcode.editor.cn;
+
 //Java：奇数值单元格的数目
-class P1252_CellsWithOddValuesInAMatrix{
+class P1252_CellsWithOddValuesInAMatrix {
     public static void main(String[] args) {
         Solution solution = new P1252_CellsWithOddValuesInAMatrix().new Solution();
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int oddCells(int m, int n, int[][] indices) {
-        int[] row = new int[m];
-        int[] col = new int[n];
-        for (int[] mat :
-                indices) {
-            row[mat[0]]++;
-            col[mat[1]]++;
-        }
-        int sum = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if ((row[i] + col[j]) % 2 == 1) {
-                    sum++;
+    class Solution {
+        public int oddCells(int m, int n, int[][] indices) {
+            int[] row = new int[m];
+            int[] col = new int[n];
+            for (int[] mat :
+                    indices) {
+                row[mat[0]]++;
+                col[mat[1]]++;
+            }
+            int sum = 0;
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if ((row[i] + col[j]) % 2 == 1) {
+                        sum++;
+                    }
                 }
             }
+            return sum;
         }
-        return sum;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

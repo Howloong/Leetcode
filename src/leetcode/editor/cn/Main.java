@@ -8,14 +8,6 @@ import java.util.concurrent.CountDownLatch;
 public class Main {
     public volatile List<Integer> list = new ArrayList<>();
 
-    public void add(int i) {
-        list.add(i);
-    }
-
-    public int getSize() {
-        return list.size();
-    }
-
     public static void main(String[] args) {
         Main main = new Main();
         CountDownLatch countDownLatch = new CountDownLatch(1);
@@ -55,5 +47,13 @@ public class Main {
 
             }
         }, "t1").start();
+    }
+
+    public void add(int i) {
+        list.add(i);
+    }
+
+    public int getSize() {
+        return list.size();
     }
 }

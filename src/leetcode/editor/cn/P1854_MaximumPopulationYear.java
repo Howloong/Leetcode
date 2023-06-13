@@ -34,8 +34,6 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-
 //Java：人口最多的年份
 class P1854_MaximumPopulationYear {
     public static void main(String[] args) {
@@ -48,8 +46,8 @@ class P1854_MaximumPopulationYear {
             int offset = 1950;
             int[] t = new int[101];
             for (int[] log : logs) {
-                t[log[0]-offset]++;
-                t[log[1]-offset]--;
+                t[log[0] - offset]++;
+                t[log[1] - offset]--;
             }
             int count = 0;
             int max = 0;

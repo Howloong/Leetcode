@@ -37,8 +37,6 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-
 //Java:单调递增的数字
 //Time:2022-07-21 16:18:27
 class P738_MonotoneIncreasingDigits {
@@ -52,8 +50,8 @@ class P738_MonotoneIncreasingDigits {
         public int monotoneIncreasingDigits(int n) {
             char[] c = String.valueOf(n).toCharArray();
             int last = c.length;
-            for (int i = c.length-1; i > 0; i--) {
-                if (c[i] < c[i-1]) {
+            for (int i = c.length - 1; i > 0; i--) {
+                if (c[i] < c[i - 1]) {
                     last = i;
                     c[i - 1]--;
                 }

@@ -146,7 +146,7 @@ class P592_FractionAdditionAndSubtraction {
                 res1 = -(res2 / m2) * m1 + (res2 / n2) * n1;
             }
             res0 = res1 >= 0 ? '+' : '-';
-            return String.valueOf(res0) + (Math.abs(res1) ) + "/" + (res2);
+            return String.valueOf(res0) + (Math.abs(res1)) + "/" + (res2);
 
         }
 

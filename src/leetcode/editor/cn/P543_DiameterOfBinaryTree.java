@@ -48,6 +48,7 @@ class P543_DiameterOfBinaryTree {
      */
     class Solution {
         int max = 0;
+
         public int diameterOfBinaryTree(TreeNode root) {
             if (root == null) {
                 return 0;
@@ -57,7 +58,7 @@ class P543_DiameterOfBinaryTree {
         }
 
         public int dfs(TreeNode node) {
-            if (node.left==null&&node.right==null) {
+            if (node.left == null && node.right == null) {
                 return 0;
             }
             int left = node.left == null ? 0 : dfs(node.left) + 1;

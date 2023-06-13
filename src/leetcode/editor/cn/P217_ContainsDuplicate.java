@@ -31,15 +31,13 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 
 //Java：存在重复元素
 class P217_ContainsDuplicate {
     public static void main(String[] args) {
         Solution solution = new P217_ContainsDuplicate().new Solution();
-        System.out.println(solution.containsDuplicate(new int[]{1,1,12}));
+        System.out.println(solution.containsDuplicate(new int[]{1, 1, 12}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

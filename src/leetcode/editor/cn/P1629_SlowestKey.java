@@ -61,7 +61,7 @@ class P1629_SlowestKey {
     public static void main(String[] args) {
         Solution solution = new P1629_SlowestKey().new Solution();
         System.out.println(solution.slowestKey(new int[]{9, 29, 49, 50}, "cbcd"));
-        System.out.println(solution.slowestKey(new int[]{12,23,36,46,62}, "spuda"));
+        System.out.println(solution.slowestKey(new int[]{12, 23, 36, 46, 62}, "spuda"));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -73,9 +73,9 @@ class P1629_SlowestKey {
             for (int i = 0; i < releaseTimes.length; i++) {
                 if (releaseTimes[i] - last > max) {
                     result = keysPressed.charAt(i);
-                    max =releaseTimes[i] - last ;
+                    max = releaseTimes[i] - last;
                 } else if (releaseTimes[i] - last == max && keysPressed.charAt(i) > result) {
-                   result= keysPressed.charAt(i);
+                    result = keysPressed.charAt(i);
                 }
                 last = releaseTimes[i];
             }

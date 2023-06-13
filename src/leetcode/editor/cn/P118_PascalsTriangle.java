@@ -35,29 +35,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 //Java：杨辉三角
-class P118_PascalsTriangle{
+class P118_PascalsTriangle {
     public static void main(String[] args) {
         Solution solution = new P118_PascalsTriangle().new Solution();
         System.out.println(solution.generate(6));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public List<List<Integer>> generate(int numRows) {
-        List<List<Integer>> res = new ArrayList<>();
-        for (int i = 0; i < numRows; i++) {
-            List<Integer> list = new ArrayList<>(i+1);
-            for (int j = 0; j <= i; j++) {
-                if (j == 0 || j == i) {
-                    list.add(1);
-                } else {
-                    list.add(res.get(i - 1).get(j - 1) + res.get(i - 1).get(j));
+    class Solution {
+        public List<List<Integer>> generate(int numRows) {
+            List<List<Integer>> res = new ArrayList<>();
+            for (int i = 0; i < numRows; i++) {
+                List<Integer> list = new ArrayList<>(i + 1);
+                for (int j = 0; j <= i; j++) {
+                    if (j == 0 || j == i) {
+                        list.add(1);
+                    } else {
+                        list.add(res.get(i - 1).get(j - 1) + res.get(i - 1).get(j));
+                    }
                 }
+                res.add(list);
             }
-            res.add(list);
+            return res;
         }
-        return res;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

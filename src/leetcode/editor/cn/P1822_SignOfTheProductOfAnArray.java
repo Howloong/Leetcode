@@ -48,13 +48,11 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-
 //Java：数组元素积的符号
 class P1822_SignOfTheProductOfAnArray {
     public static void main(String[] args) {
         Solution solution = new P1822_SignOfTheProductOfAnArray().new Solution();
-        System.out.println(solution.arraySign(new int[]{-1,-2,-3,-4,4,2,1}));
+        System.out.println(solution.arraySign(new int[]{-1, -2, -3, -4, 4, 2, 1}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -68,7 +66,7 @@ class P1822_SignOfTheProductOfAnArray {
                 }
                 isNegative = (i > 0) == isNegative;
             }
-            return isNegative?-1:1;
+            return isNegative ? -1 : 1;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

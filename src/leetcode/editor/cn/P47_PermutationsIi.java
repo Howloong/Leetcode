@@ -31,7 +31,10 @@
 
 package leetcode.editor.cn;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 //Java：全排列 II
 class P47_PermutationsIi {
@@ -45,6 +48,7 @@ class P47_PermutationsIi {
         public List<List<Integer>> result = new ArrayList<>();
         public ArrayDeque<Integer> path = new ArrayDeque<>();
         public boolean[] used;
+
         public List<List<Integer>> permuteUnique(int[] nums) {
             Arrays.sort(nums);
             used = new boolean[nums.length];
@@ -58,7 +62,7 @@ class P47_PermutationsIi {
                 return;
             }
             for (int i = 0; i < nums.length; i++) {
-                if (i > 0 && nums[i] == nums[i - 1] && !used[i-1]) {
+                if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) {
                     continue;
                 }
                 if (!used[i]) {

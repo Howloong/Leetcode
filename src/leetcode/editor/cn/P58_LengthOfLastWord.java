@@ -40,31 +40,33 @@
 // Related Topics 字符串 👍 467 👎 0
 
 package leetcode.editor.cn;
+
 //Java：最后一个单词的长度
-class P58_LengthOfLastWord{
+class P58_LengthOfLastWord {
     public static void main(String[] args) {
         Solution solution = new P58_LengthOfLastWord().new Solution();
 //        System.out.println(solution.lengthOfLastWord("   hello pp   "));
 //        System.out.println(solution.lengthOfLastWord("luffy is still joyboy"));
         System.out.println(solution.lengthOfLastWord("a   "));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int lengthOfLastWord(String s) {
-        int i = s.length() - 1;
-        char[] c = s.toCharArray();
-        while (c[i] == ' ') {
-            --i;
-        }
-        int k;
-        for (k = i; k >= 0; k--) {
-            if (c[k] == ' ') {
-                return i - k;
+    class Solution {
+        public int lengthOfLastWord(String s) {
+            int i = s.length() - 1;
+            char[] c = s.toCharArray();
+            while (c[i] == ' ') {
+                --i;
             }
+            int k;
+            for (k = i; k >= 0; k--) {
+                if (c[k] == ' ') {
+                    return i - k;
+                }
+            }
+            return i - k;
         }
-        return i - k;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

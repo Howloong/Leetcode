@@ -33,9 +33,7 @@
 
 package leetcode.editor.cn;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 //Java:设置交集大小至少为2
 //Time:2022-07-22 14:15:38

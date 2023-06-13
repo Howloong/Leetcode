@@ -67,7 +67,7 @@ class P1869_LongerContiguousSegmentsOfOnesThanZeros {
             int i = 1;
             boolean isZero = s.charAt(0) == '0';
             int oneLen = s.charAt(0) == '1' ? 1 : 0;
-            int zeroLen = 1-oneLen;
+            int zeroLen = 1 - oneLen;
             int oneMax = oneLen;
             int zeroMax = zeroLen;
             while (i < s.length()) {

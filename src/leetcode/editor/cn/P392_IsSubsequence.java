@@ -47,8 +47,8 @@ package leetcode.editor.cn;
 class P392_IsSubsequence {
     public static void main(String[] args) {
         Solution solution = new P392_IsSubsequence().new Solution();
-        System.out.println(solution.isSubsequence("abc","ahbgdc"));
-        System.out.println(solution.isSubsequence("axc","ahbgdc"));
+        System.out.println(solution.isSubsequence("abc", "ahbgdc"));
+        System.out.println(solution.isSubsequence("axc", "ahbgdc"));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

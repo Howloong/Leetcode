@@ -56,7 +56,6 @@
 package leetcode.editor.cn;
 
 import java.util.ArrayDeque;
-import java.util.Queue;
 
 //Java：用队列实现栈
 class P225_ImplementStackUsingQueues {
@@ -77,6 +76,7 @@ class P225_ImplementStackUsingQueues {
 class MyStack {
 
     public ArrayDeque<Integer> arrayDeque;
+
     public MyStack() {
         arrayDeque = new ArrayDeque<>();
     }
@@ -88,12 +88,12 @@ class MyStack {
     public int pop() {
         if (!arrayDeque.isEmpty()) {
             int t = 0;
-            while (t != arrayDeque.size()-1) {
+            while (t != arrayDeque.size() - 1) {
                 int m = arrayDeque.removeLast();
                 arrayDeque.addFirst(m);
                 ++t;
             }
-           return arrayDeque.removeLast();
+            return arrayDeque.removeLast();
         }
         return -1;
     }
@@ -101,7 +101,7 @@ class MyStack {
     public int top() {
         if (!arrayDeque.isEmpty()) {
             int t = 0;
-            while (t != arrayDeque.size()-1) {
+            while (t != arrayDeque.size() - 1) {
                 int m = arrayDeque.removeLast();
                 arrayDeque.addFirst(m);
                 ++t;

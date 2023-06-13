@@ -97,7 +97,7 @@ class P850_RectangleAreaIi {
                 ans += (tot * len);
                 ans %= MOD;
             }
-            return (int)ans;
+            return (int) ans;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

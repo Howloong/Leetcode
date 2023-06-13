@@ -114,7 +114,7 @@ class MagicDictionary {
         }
         int index = word.charAt(pos) - 'a';
         if (node.children[index] != null) {
-            if (backTracking(word, pos+1, node.children[index], modified)) {
+            if (backTracking(word, pos + 1, node.children[index], modified)) {
                 return true;
             }
         }

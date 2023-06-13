@@ -62,7 +62,7 @@ class P724_FindPivotIndex {
         Solution solution = new P724_FindPivotIndex().new Solution();
 //        System.out.println(solution.pivotIndex(new int[]{1, 7, 3, 6, 5, 6}));
 //        System.out.println(solution.pivotIndex(new int[]{1,2,3}));
-        System.out.println(solution.pivotIndex(new int[]{-1,-1,-1,-1,-1,0}));
+        System.out.println(solution.pivotIndex(new int[]{-1, -1, -1, -1, -1, 0}));
 
     }
 
@@ -75,7 +75,7 @@ class P724_FindPivotIndex {
             }
             int t = 0;
             for (int i = 0; i < nums.length; i++) {
-                if ((t << 1) + nums[i]== sum) {
+                if ((t << 1) + nums[i] == sum) {
                     return i;
                 }
 

@@ -53,7 +53,7 @@ class P745_PrefixAndSuffixSearch {
             TrieTree p = trieTree;
             for (String s : words
             ) {
-                for (int i =  0; i < s.length(); i++) {
+                for (int i = 0; i < s.length(); i++) {
                     int index = s.charAt(i) - 'a';
                     if (p.children[index] == null) {
                         p.children[index] = new TrieTree();

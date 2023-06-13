@@ -48,10 +48,6 @@
 
 package leetcode.editor.cn;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 //Java:香槟塔
 //Time:2022-11-20 10:05:32
 class P799_ChampagneTower {
@@ -74,7 +70,7 @@ class P799_ChampagneTower {
                     if (last[j] <= 1) {
                         continue;
                     }
-                    double t = (last[j]-1) / 2;
+                    double t = (last[j] - 1) / 2;
                     now[j] += t;
                     now[j + 1] += t;
                 }

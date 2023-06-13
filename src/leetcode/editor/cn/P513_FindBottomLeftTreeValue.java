@@ -37,63 +37,64 @@ package leetcode.editor.cn;
 import java.util.ArrayDeque;
 
 //Java：找树左下角的值
-class P513_FindBottomLeftTreeValue{
+class P513_FindBottomLeftTreeValue {
     public static void main(String[] args) {
         Solution solution = new P513_FindBottomLeftTreeValue().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    public int findBottomLeftValue(TreeNode root) {
-        ArrayDeque<TreeNode> arrayDeque = new ArrayDeque();
-        arrayDeque.add(root);
-        TreeNode node;
-        int val= root.val;
-        while (!arrayDeque.isEmpty()) {
-            node = arrayDeque.poll();
-            if (node.right != null) {
-                arrayDeque.add(node.right);
+
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode() {}
+     * TreeNode(int val) { this.val = val; }
+     * TreeNode(int val, TreeNode left, TreeNode right) {
+     * this.val = val;
+     * this.left = left;
+     * this.right = right;
+     * }
+     * }
+     */
+    class Solution {
+        public int findBottomLeftValue(TreeNode root) {
+            ArrayDeque<TreeNode> arrayDeque = new ArrayDeque();
+            arrayDeque.add(root);
+            TreeNode node;
+            int val = root.val;
+            while (!arrayDeque.isEmpty()) {
+                node = arrayDeque.poll();
+                if (node.right != null) {
+                    arrayDeque.add(node.right);
+                }
+                if (node.left != null) {
+                    arrayDeque.add(node.left);
+                }
+                val = node.val;
             }
-            if (node.left != null) {
-                arrayDeque.add(node.left);
-            }
-            val = node.val;
+            return val;
         }
-        return val;
-    }
-}
-
-//leetcode submit region end(Prohibit modification and deletion)
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode() {
     }
 
-    TreeNode(int val) {
-        this.val = val;
-    }
+    //leetcode submit region end(Prohibit modification and deletion)
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
     }
-}
 }

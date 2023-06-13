@@ -36,16 +36,15 @@ package leetcode.editor.cn;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 //Java：最小绝对差
 class P1200_MinimumAbsoluteDifference {
     public static void main(String[] args) {
         Solution solution = new P1200_MinimumAbsoluteDifference().new Solution();
-        System.out.println(solution.minimumAbsDifference(new int[]{4,2,1,3}));
-        System.out.println(solution.minimumAbsDifference(new int[]{1,3,6,10,15}));
-        System.out.println(solution.minimumAbsDifference(new int[]{3,8,-10,23,19,-4,-14,27}));
+        System.out.println(solution.minimumAbsDifference(new int[]{4, 2, 1, 3}));
+        System.out.println(solution.minimumAbsDifference(new int[]{1, 3, 6, 10, 15}));
+        System.out.println(solution.minimumAbsDifference(new int[]{3, 8, -10, 23, 19, -4, -14, 27}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -54,18 +53,18 @@ class P1200_MinimumAbsoluteDifference {
             Arrays.sort(arr);
             List<List<Integer>> result = new ArrayList<>();
             int min = Integer.MAX_VALUE;
-            for (int i = 0; i < arr.length-1; i++) {
+            for (int i = 0; i < arr.length - 1; i++) {
                 if (arr[i + 1] - arr[i] < min) {
                     min = arr[i + 1] - arr[i];
                     result.clear();
                     List<Integer> list = new ArrayList<>();
                     list.add(arr[i]);
-                    list.add(arr[i+1]);
+                    list.add(arr[i + 1]);
                     result.add(list);
                 } else if (arr[i + 1] - arr[i] == min) {
                     List<Integer> list = new ArrayList<>();
                     list.add(arr[i]);
-                    list.add(arr[i+1]);
+                    list.add(arr[i + 1]);
                     result.add(list);
                 }
             }

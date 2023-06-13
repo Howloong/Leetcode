@@ -59,15 +59,11 @@
 
 package leetcode.editor.cn;
 
-import java.awt.geom.AffineTransform;
-import java.util.HashMap;
-import java.util.Map;
-
 //Java：水果成篮
 class P904_FruitIntoBaskets {
     public static void main(String[] args) {
         Solution solution = new P904_FruitIntoBaskets().new Solution();
-        System.out.println(solution.totalFruit(new int[]{0,1,0,2}));
+        System.out.println(solution.totalFruit(new int[]{0, 1, 0, 2}));
 //        System.out.println(solution.totalFruit(new int[]{1,2,3,2,2}));
     }
 
@@ -84,7 +80,7 @@ class P904_FruitIntoBaskets {
             int right = fruits[fast];
             while (fast < fruits.length) {
                 if (fruits[fast] == left || fruits[fast] == right) {
-                    count = Math.max(count, fast - slow+1);
+                    count = Math.max(count, fast - slow + 1);
                     fast++;
                 } else {
                     slow = fast - 1;

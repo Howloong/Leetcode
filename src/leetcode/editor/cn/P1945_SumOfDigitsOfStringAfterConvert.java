@@ -65,7 +65,7 @@ class P1945_SumOfDigitsOfStringAfterConvert {
         public int getLucky(String s, int k) {
             StringBuilder sb = new StringBuilder();
             for (char c : s.toCharArray()) {
-                sb.append(c - 'a'+1);
+                sb.append(c - 'a' + 1);
             }
             int sum = 0;
             for (int i = 0; i < k; i++) {
@@ -73,7 +73,7 @@ class P1945_SumOfDigitsOfStringAfterConvert {
                 for (char c : sb.toString().toCharArray()) {
                     sum += c - '0';
                 }
-                sb = new StringBuilder(sum+"");
+                sb = new StringBuilder(sum + "");
             }
             return sum;
         }

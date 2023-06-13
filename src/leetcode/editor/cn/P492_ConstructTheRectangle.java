@@ -44,8 +44,6 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-
 //Java：构造矩形
 class P492_ConstructTheRectangle {
     public static void main(String[] args) {
@@ -64,7 +62,7 @@ class P492_ConstructTheRectangle {
             if (t == -1) {
                 return new int[]{area, 1};
             }
-            return new int[]{area/t,t};
+            return new int[]{area / t, t};
         }
 
         public int isPrime(int num) {

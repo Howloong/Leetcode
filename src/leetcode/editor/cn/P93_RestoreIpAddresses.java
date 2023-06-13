@@ -86,7 +86,7 @@ class P93_RestoreIpAddresses {
                     path.append('.');
                 }
                 backTracking(s, i + 1, number + 1);
-                path.delete(start + number,path.length());
+                path.delete(start + number, path.length());
             }
         }
     }

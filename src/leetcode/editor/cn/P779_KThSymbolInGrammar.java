@@ -66,7 +66,7 @@ class P779_KThSymbolInGrammar {
             }
             int m = (1 << (n - 2));
             if (k > m) {
-                return 1^kthGrammar(n - 1,k- m);
+                return 1 ^ kthGrammar(n - 1, k - m);
             }
             return kthGrammar(n - 1, k);
         }

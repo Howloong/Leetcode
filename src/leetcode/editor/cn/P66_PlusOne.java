@@ -40,27 +40,29 @@
 // Related Topics 数组 数学 👍 1025 👎 0
 
 package leetcode.editor.cn;
+
 //Java：加一
-    class P66_PlusOne{
-        public static void main(String[] args) {
-            Solution solution = new P66_PlusOne().new Solution();
-      }
-      //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int[] plusOne(int[] digits) {
-        int len = digits.length;
-        for (int i = len-1; i >= 0; i--) {
-            if (digits[i] != 9) {
-                ++digits[i];
-                return digits;
-            }
-            digits[i] = 0;
-        }
-        int[] temp = new int[len + 1];
-        temp[0] = 1;
-        return temp;
+class P66_PlusOne {
+    public static void main(String[] args) {
+        Solution solution = new P66_PlusOne().new Solution();
     }
-}
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int[] plusOne(int[] digits) {
+            int len = digits.length;
+            for (int i = len - 1; i >= 0; i--) {
+                if (digits[i] != 9) {
+                    ++digits[i];
+                    return digits;
+                }
+                digits[i] = 0;
+            }
+            int[] temp = new int[len + 1];
+            temp[0] = 1;
+            return temp;
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

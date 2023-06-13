@@ -25,14 +25,16 @@
 // Related Topics 数学 双指针 字符串 👍 261 👎 0
 
 package leetcode.editor.cn;
+
 //Java：左旋转字符串
-class II_ZuoXuanZhuanZiFuChuanLcof{
+class II_ZuoXuanZhuanZiFuChuanLcof {
     public static void main(String[] args) {
         Solution solution = new II_ZuoXuanZhuanZiFuChuanLcof().new Solution();
         System.out.println(solution.reverseLeftWords("abcdefg", 2));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+    class Solution {
         /*  public String reverseLeftWords(String s, int n) {
               StringBuilder sb = new StringBuilder(s.length());
               sb.append(s.substring(n));
@@ -41,10 +43,10 @@ class Solution {
           }*/
         public String reverseLeftWords(String s, int n) {
             StringBuilder sb = new StringBuilder(s);
-            swap(sb, 0, n-1
+            swap(sb, 0, n - 1
             );
-            swap(sb, n, s.length()-1);
-            swap(sb, 0, s.length()-1);
+            swap(sb, n, s.length() - 1);
+            swap(sb, 0, s.length() - 1);
             return sb.toString();
         }
 
@@ -57,7 +59,7 @@ class Solution {
                 --end;
             }
         }
-}
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

@@ -56,7 +56,7 @@ class P2032_TwoOutOfThree {
     public static void main(String[] args) {
         Solution solution = new P2032_TwoOutOfThree().new Solution();
 //        System.out.println(solution.twoOutOfThree(new int[]{1, 1, 3, 2}, new int[]{2, 3}, new int[]{3}));
-        System.out.println(solution.twoOutOfThree(new int[]{1,2,2}, new int[]{4,3,3}, new int[]{5}));
+        System.out.println(solution.twoOutOfThree(new int[]{1, 2, 2}, new int[]{4, 3, 3}, new int[]{5}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

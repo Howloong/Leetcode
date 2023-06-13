@@ -50,11 +50,9 @@ package leetcode.editor.cn;
 
 import leetcode.editor.cn.DataStruct.TreeNode;
 
-import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Stream;
 
 //Java：根据描述创建二叉树
 class P2196_CreateBinaryTreeFromDescriptions {
@@ -84,6 +82,7 @@ class P2196_CreateBinaryTreeFromDescriptions {
         HashMap<Integer, TreeNode> hashMap = new HashMap<>();
         //        ArrayDeque<TreeNode> arrayDeque = new ArrayDeque<>();
         Set<TreeNode> set = new HashSet<>();
+
         public TreeNode createBinaryTree(int[][] descriptions) {
             for (int[] i :
                     descriptions) {

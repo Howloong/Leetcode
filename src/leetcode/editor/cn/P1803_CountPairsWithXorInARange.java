@@ -45,18 +45,20 @@
 // Related Topics 位运算 字典树 数组 👍 131 👎 0
 
 package leetcode.editor.cn;
+
 //Java:统计异或值在范围内的数对有多少
 //Time:2023-01-05 18:53:16
-class P1803_CountPairsWithXorInARange{
+class P1803_CountPairsWithXorInARange {
     public static void main(String[] args) {
         Solution solution = new P1803_CountPairsWithXorInARange().new Solution();
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int countPairs(int[] nums, int low, int high) {
-        return 1;
+    class Solution {
+        public int countPairs(int[] nums, int low, int high) {
+            return 1;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

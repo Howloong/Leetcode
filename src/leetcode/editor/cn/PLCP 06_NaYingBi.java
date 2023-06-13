@@ -32,8 +32,8 @@ package leetcode.editor.cn;
 class PLCP_06_NaYingBi {
     public static void main(String[] args) {
         Solution solution = new PLCP_06_NaYingBi().new Solution();
-        System.out.println(solution.minCount(new int[]{4,2,1}));
-        System.out.println(solution.minCount(new int[]{2,3,10}));
+        System.out.println(solution.minCount(new int[]{4, 2, 1}));
+        System.out.println(solution.minCount(new int[]{2, 3, 10}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

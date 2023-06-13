@@ -61,7 +61,7 @@ class P1827_MinimumOperationsToMakeTheArrayIncreasing {
             int times = 0;
             for (int i = 1; i < nums.length; i++) {
                 if (nums[i] <= nums[i - 1]) {
-                    times += (nums[i-1] + 1 - nums[i]);
+                    times += (nums[i - 1] + 1 - nums[i]);
                     nums[i] = nums[i - 1] + 1;
                 }
             }

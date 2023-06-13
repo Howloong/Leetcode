@@ -43,18 +43,20 @@
 // Related Topics 数组 数学 动态规划 👍 338 👎 0
 
 package leetcode.editor.cn;
+
 //Java:超级丑数
 //Time:2022-09-28 23:53:26
-class P313_SuperUglyNumber{
+class P313_SuperUglyNumber {
     public static void main(String[] args) {
         Solution solution = new P313_SuperUglyNumber().new Solution();
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int nthSuperUglyNumber(int n, int[] primes) {
-        return 1;
+    class Solution {
+        public int nthSuperUglyNumber(int n, int[] primes) {
+            return 1;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

@@ -71,6 +71,7 @@ class P572_SubtreeOfAnotherTree {
             }
             return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
         }
+
         public boolean compare(TreeNode p, TreeNode q) {
             if (p == null && q == null) {
                 return true;

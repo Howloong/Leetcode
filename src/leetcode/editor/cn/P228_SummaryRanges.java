@@ -77,9 +77,9 @@ class P228_SummaryRanges {
                 }
                 int right = nums[i - 1];
                 if (left != right) {
-                    result.add( left + "->" + right  );
+                    result.add(left + "->" + right);
                 } else {
-                    result.add(left+"");
+                    result.add(left + "");
                 }
                 if (i == nums.length) {
                     break;
@@ -88,7 +88,7 @@ class P228_SummaryRanges {
                 i++;
             }
             if (left == nums[i - 1]) {
-                result.add( left + "");
+                result.add(left + "");
             }
             return result;
         }

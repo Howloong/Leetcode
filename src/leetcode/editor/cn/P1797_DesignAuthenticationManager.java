@@ -75,6 +75,7 @@ class P1797_DesignAuthenticationManager {
     }
 
 }
+
 //leetcode submit region begin(Prohibit modification and deletion)
 class AuthenticationManager {
     public int timeToLive;

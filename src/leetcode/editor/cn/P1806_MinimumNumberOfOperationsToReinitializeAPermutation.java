@@ -77,12 +77,12 @@ class P1806_MinimumNumberOfOperationsToReinitializeAPermutation {
                 arr[j] = i;
             }
             j = 0;
-            for (int i = n / 2; i < n - 1; i++, j+=2) {
+            for (int i = n / 2; i < n - 1; i++, j += 2) {
                 arr[j] = i;
             }
             int i = 0;
             while (arr[i] != 1) {
-                i = arr[i]-1;
+                i = arr[i] - 1;
                 count++;
             }
             return count;

@@ -72,6 +72,7 @@ class Node {
 
     class Solution {
         List<Integer> list = new ArrayList<>();
+
         public List<Integer> preorder(Node root) {
             preOrder(root);
             return list;

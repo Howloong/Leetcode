@@ -95,7 +95,7 @@ class P979_DistributeCoinsInBinaryTree {
                 root.val += postOrder(root.right);
             }
             result += Math.abs(root.val - 1);
-            return root.val-1;
+            return root.val - 1;
         }
 
     }

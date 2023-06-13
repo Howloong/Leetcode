@@ -71,8 +71,8 @@ class P401_BinaryWatch {
             for (int i = 0; i < 1024; i++) {
                 int h = i >> 6;
                 int m = i & 63;
-                if (h <= 11 && m <= 59&&Integer.bitCount(i)==turnedOn) {
-                    result.add(h + ":"+(m >= 10 ? m : "0" + m));
+                if (h <= 11 && m <= 59 && Integer.bitCount(i) == turnedOn) {
+                    result.add(h + ":" + (m >= 10 ? m : "0" + m));
                 }
             }
             return result;

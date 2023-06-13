@@ -45,7 +45,7 @@ import java.util.Arrays;
 class P238_ProductOfArrayExceptSelf {
     public static void main(String[] args) {
         Solution solution = new P238_ProductOfArrayExceptSelf().new Solution();
-        System.out.println(Arrays.toString(solution.productExceptSelf(new int[]{1,2,3,4})));
+        System.out.println(Arrays.toString(solution.productExceptSelf(new int[]{1, 2, 3, 4})));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -55,7 +55,7 @@ class P238_ProductOfArrayExceptSelf {
             int left = 1;
             int right = 1;
             int[] res = new int[n];
-            Arrays.fill(res,1);
+            Arrays.fill(res, 1);
             for (int i = 0; i < n; i++) {
                 res[i] *= left;
                 left *= nums[i];

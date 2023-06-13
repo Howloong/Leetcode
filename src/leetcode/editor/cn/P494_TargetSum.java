@@ -64,7 +64,7 @@ class P494_TargetSum {
             if (target % 2 == 1) {
                 return 0;
             }
-            target = target /2;
+            target = target / 2;
             if (target < 0) {
                 target = -target;
             }
@@ -72,7 +72,7 @@ class P494_TargetSum {
             dp[0] = 1;
             for (int num : nums) {
                 for (int i = target; i >= num; i--) {
-                       dp[i] += dp[i - num];
+                    dp[i] += dp[i - num];
                 }
             }
             return dp[target];

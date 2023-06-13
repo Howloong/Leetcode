@@ -58,22 +58,22 @@ import java.util.List;
 class P989_AddToArrayFormOfInteger {
     public static void main(String[] args) {
         Solution solution = new P989_AddToArrayFormOfInteger().new Solution();
-        System.out.println(solution.addToArrayForm(new int[]{1,9,9,9}, 32));
-        System.out.println(solution.addToArrayForm(new int[]{9,3}, 636));
+        System.out.println(solution.addToArrayForm(new int[]{1, 9, 9, 9}, 32));
+        System.out.println(solution.addToArrayForm(new int[]{9, 3}, 636));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public List<Integer> addToArrayForm(int[] num, int k) {
             int len = String.valueOf(k).length();
-            int[] num2 = new int[Math.max(num.length,len)];
+            int[] num2 = new int[Math.max(num.length, len)];
             for (int i = num2.length - 1; i >= 0; i--) {
                 num2[i] = k % 10;
                 k /= 10;
             }
             if (num.length < len) {
                 int[] num1 = new int[len];
-                System.arraycopy(num, 0, num1, len-num.length, num.length);
+                System.arraycopy(num, 0, num1, len - num.length, num.length);
                 return add(num1, num2);
             }
             return add(num, num2);

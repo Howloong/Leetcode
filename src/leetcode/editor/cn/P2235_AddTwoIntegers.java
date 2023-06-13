@@ -27,18 +27,20 @@
 // Related Topics 数学 👍 42 👎 0
 
 package leetcode.editor.cn;
+
 //Java：两整数相加
-class P2235_AddTwoIntegers{
+class P2235_AddTwoIntegers {
     public static void main(String[] args) {
         Solution solution = new P2235_AddTwoIntegers().new Solution();
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
 
-    public int sum(int num1, int num2) {
-        return num1 + num2;
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+
+        public int sum(int num1, int num2) {
+            return num1 + num2;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

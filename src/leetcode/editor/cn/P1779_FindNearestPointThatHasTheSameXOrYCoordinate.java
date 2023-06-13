@@ -49,9 +49,9 @@ package leetcode.editor.cn;
 class P1779_FindNearestPointThatHasTheSameXOrYCoordinate {
     public static void main(String[] args) {
         Solution solution = new P1779_FindNearestPointThatHasTheSameXOrYCoordinate().new Solution();
-        System.out.println(solution.nearestValidPoint(1,1,
-                new int[][]{{1,2},{2,1},{1,2},{1,1},{1,1},{1,1},{1,2},{2,1},{2,1},{2,1},{2,1},{2,2},{2,2},{2,1},{2,2},{2,2},{2,1},{2,2},{2,1},{2,1},{1,1},{2,1},{1,2},{1,1},{1,1},
-                        {2,2},{2,2},{2,2},{1,1},{2,1},{2,1},{2,1},{2,2},{1,2},{1,2},{1,1},{1,2},{1,2}}));
+        System.out.println(solution.nearestValidPoint(1, 1,
+                new int[][]{{1, 2}, {2, 1}, {1, 2}, {1, 1}, {1, 1}, {1, 1}, {1, 2}, {2, 1}, {2, 1}, {2, 1}, {2, 1}, {2, 2}, {2, 2}, {2, 1}, {2, 2}, {2, 2}, {2, 1}, {2, 2}, {2, 1}, {2, 1}, {1, 1}, {2, 1}, {1, 2}, {1, 1}, {1, 1},
+                        {2, 2}, {2, 2}, {2, 2}, {1, 1}, {2, 1}, {2, 1}, {2, 1}, {2, 2}, {1, 2}, {1, 2}, {1, 1}, {1, 2}, {1, 2}}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

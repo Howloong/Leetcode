@@ -30,17 +30,19 @@
 // Related Topics 位运算 数学 👍 908 👎 0
 
 package leetcode.editor.cn;
+
 //Java：两数相除
-class P29_DivideTwoIntegers{
+class P29_DivideTwoIntegers {
     public static void main(String[] args) {
         Solution solution = new P29_DivideTwoIntegers().new Solution();
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int divide(int dividend, int divisor) {
-        return 0;
+    class Solution {
+        public int divide(int dividend, int divisor) {
+            return 0;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

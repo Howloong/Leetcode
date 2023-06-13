@@ -59,10 +59,10 @@ class P2259_RemoveDigitFromNumberToMaximizeResult {
         public String removeDigit(String number, char digit) {
             StringBuilder sb = new StringBuilder(number);
             int index = 0;
-            for (int i = 0; i < sb.length() ; i++) {
+            for (int i = 0; i < sb.length(); i++) {
                 if (sb.charAt(i) == digit) {
                     index = i;
-                    if (i<sb.length()-1&&sb.charAt(i) < sb.charAt(i + 1)) {
+                    if (i < sb.length() - 1 && sb.charAt(i) < sb.charAt(i + 1)) {
                         sb.deleteCharAt(i);
                         return sb.toString();
                     }

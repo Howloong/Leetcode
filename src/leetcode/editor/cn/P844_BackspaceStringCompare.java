@@ -69,7 +69,7 @@ class P844_BackspaceStringCompare {
                     } else {
                         sb.deleteCharAt(sb.length() - 1);
                     }
-                }else {
+                } else {
                     sb.append(chars[i]);
                 }
             }

@@ -37,31 +37,33 @@
 // Related Topics 字符串 👍 23 👎 0
 
 package leetcode.editor.cn;
+
 //Java:生成每种字符都是奇数个的字符串
 //Time:2022-08-01 00:15:28
-class P1374_GenerateAStringWithCharactersThatHaveOddCounts{
+class P1374_GenerateAStringWithCharactersThatHaveOddCounts {
     public static void main(String[] args) {
         Solution solution = new P1374_GenerateAStringWithCharactersThatHaveOddCounts().new Solution();
 
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public String generateTheString(int n) {
-        StringBuilder sb = new StringBuilder();
-        if (n < 2) {
-            return "a";
+    class Solution {
+        public String generateTheString(int n) {
+            StringBuilder sb = new StringBuilder();
+            if (n < 2) {
+                return "a";
+            }
+            if (n % 2 == 0) {
+                sb.append("a".repeat(n - 1));
+                sb.append('b');
+            } else {
+                sb.append("a".repeat(n - 2));
+                sb.append("b");
+                sb.append("c");
+            }
+            return sb.toString();
         }
-        if (n % 2 == 0) {
-            sb.append("a".repeat(n-1));
-            sb.append('b');
-        } else {
-            sb.append("a".repeat(n - 2));
-            sb.append("b");
-            sb.append("c");
-        }
-        return sb.toString();
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

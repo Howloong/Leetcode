@@ -80,9 +80,9 @@ class P671_SecondMinimumNodeInABinaryTree {
             if (p.left == null && p.right == null) {
                 if (p.val > arrayDeque.getFirst()) {
                     arrayDeque.addFirst(p.val);
-                } else if (p.val < arrayDeque.getFirst()&&p.val != arrayDeque.getLast()) {
+                } else if (p.val < arrayDeque.getFirst() && p.val != arrayDeque.getLast()) {
                     while (!arrayDeque.isEmpty() && arrayDeque.getFirst() >= p.val) {
-                            arrayDeque.removeFirst();
+                        arrayDeque.removeFirst();
                     }
                     arrayDeque.addFirst(p.val);
                 }

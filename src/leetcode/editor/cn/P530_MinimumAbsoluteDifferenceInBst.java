@@ -62,7 +62,8 @@ class P530_MinimumAbsoluteDifferenceInBst {
     class Solution {
         public int min = Integer.MAX_VALUE;
         public boolean flag = true;
-        public int last=-10000;
+        public int last = -10000;
+
         public int getMinimumDifference(TreeNode root) {
             inOrder(root);
             return min;

@@ -45,12 +45,12 @@ class P557_ReverseWordsInAStringIii {
             int j = 0;
             char[] c = s.toCharArray();
             while (j < c.length - 1) {
-                while (j<c.length-1&&c[j + 1] != ' ') {
+                while (j < c.length - 1 && c[j + 1] != ' ') {
                     ++j;
                 }
                 swap(c, i, j);
                 ++j;
-                while (j<c.length-1&&c[j] == ' ') {
+                while (j < c.length - 1 && c[j] == ' ') {
                     ++j;
                 }
                 i = j;

@@ -51,23 +51,25 @@
 // Related Topics 位运算 数组 哈希表 数学 二分查找 排序 👍 626 👎 0
 
 package leetcode.editor.cn;
+
 //Java:丢失的数字
 //Time:2022-08-01 15:06:43
-class P268_MissingNumber{
+class P268_MissingNumber {
     public static void main(String[] args) {
         Solution solution = new P268_MissingNumber().new Solution();
         System.out.println(solution.missingNumber(new int[]{3, 0, 1}));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int missingNumber(int[] nums) {
-        int t = 0;
-        for (int i = 1; i <= nums.length; i++) {
-            t = nums[i-1] ^ i ^ t;
+    class Solution {
+        public int missingNumber(int[] nums) {
+            int t = 0;
+            for (int i = 1; i <= nums.length; i++) {
+                t = nums[i - 1] ^ i ^ t;
+            }
+            return t;
         }
-        return t;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

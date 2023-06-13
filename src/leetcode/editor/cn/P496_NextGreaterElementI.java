@@ -57,7 +57,7 @@ import java.util.HashMap;
 class P496_NextGreaterElementI {
     public static void main(String[] args) {
         Solution solution = new P496_NextGreaterElementI().new Solution();
-        System.out.println(Arrays.toString(solution.nextGreaterElement(new int[]{1,3,5,2,4},new int[]{5,4,3,2,1})));
+        System.out.println(Arrays.toString(solution.nextGreaterElement(new int[]{1, 3, 5, 2, 4}, new int[]{5, 4, 3, 2, 1})));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

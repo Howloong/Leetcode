@@ -54,7 +54,7 @@ package leetcode.editor.cn;
 class P2243_CalculateDigitSumOfAString {
     public static void main(String[] args) {
         Solution solution = new P2243_CalculateDigitSumOfAString().new Solution();
-        System.out.println(solution.digitSum("00000000",3));
+        System.out.println(solution.digitSum("00000000", 3));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

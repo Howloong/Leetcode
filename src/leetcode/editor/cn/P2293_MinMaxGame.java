@@ -59,7 +59,7 @@ class P2293_MinMaxGame {
     public static void main(String[] args) {
         Solution solution = new P2293_MinMaxGame().new Solution();
 //        System.out.println(solution.minMaxGame(new int[]{1, 3, 5, 2, 4, 8, 2, 2}));
-        System.out.println(solution.minMaxGame(new int[]{1,2}));
+        System.out.println(solution.minMaxGame(new int[]{1, 2}));
 
     }
 
@@ -76,7 +76,7 @@ class P2293_MinMaxGame {
             while (n != 1) {
                 int i = 0;
                 int j = 0;
-                while (i<n){
+                while (i < n) {
                     nums[j] = Math.min(nums[i], nums[i + 1]);
                     nums[j + 1] = Math.max(nums[i + 2], nums[i + 3]);
                     i += 4;

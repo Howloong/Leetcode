@@ -52,50 +52,51 @@ import leetcode.editor.cn.DataStruct.TreeNode;
 import java.util.Arrays;
 
 //Java：最大二叉树
-class P654_MaximumBinaryTree{
+class P654_MaximumBinaryTree {
     public static void main(String[] args) {
         Solution solution = new P654_MaximumBinaryTree().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    public TreeNode constructMaximumBinaryTree(int[] nums) {
-        if (nums.length == 0) {
-            return null;
-        }
-        TreeNode node = new TreeNode();
-        if (nums.length == 1) {
-            node.val = nums[0];
+
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode() {}
+     * TreeNode(int val) { this.val = val; }
+     * TreeNode(int val, TreeNode left, TreeNode right) {
+     * this.val = val;
+     * this.left = left;
+     * this.right = right;
+     * }
+     * }
+     */
+    class Solution {
+        public TreeNode constructMaximumBinaryTree(int[] nums) {
+            if (nums.length == 0) {
+                return null;
+            }
+            TreeNode node = new TreeNode();
+            if (nums.length == 1) {
+                node.val = nums[0];
+                return node;
+            }
+            int max = Integer.MIN_VALUE;
+            int mid = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[i] > max) {
+                    max = nums[i];
+                    mid = i;
+                }
+            }
+            node.val = nums[mid];
+            node.left = constructMaximumBinaryTree(Arrays.copyOfRange(nums, 0, mid));
+            node.right = constructMaximumBinaryTree(Arrays.copyOfRange(nums, mid + 1, nums.length));
             return node;
         }
-        int max = Integer.MIN_VALUE;
-        int mid = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] > max) {
-                max = nums[i];
-                mid = i;
-            }
-        }
-        node.val = nums[mid];
-        node.left = constructMaximumBinaryTree(Arrays.copyOfRange(nums, 0, mid));
-        node.right = constructMaximumBinaryTree(Arrays.copyOfRange(nums, mid + 1, nums.length));
-        return node;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

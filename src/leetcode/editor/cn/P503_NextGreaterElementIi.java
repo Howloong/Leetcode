@@ -44,7 +44,8 @@ import java.util.Arrays;
 class P503_NextGreaterElementIi {
     public static void main(String[] args) {
 /*        Solution solution = new P503_NextGreaterElementIi().new Solution();
-        System.out.println(Arrays.toString(solution.nextGreaterElements(new int[]{1, 2, 1})))*/;
+        System.out.println(Arrays.toString(solution.nextGreaterElements(new int[]{1, 2, 1})))*/
+        ;
 //        Solution solution = new Solution();
     }
 
@@ -53,12 +54,12 @@ class P503_NextGreaterElementIi {
         public int[] nextGreaterElements(int[] nums) {
             int len = nums.length;
             int[] res = new int[len];
-            Arrays.fill(res,-1);
+            Arrays.fill(res, -1);
             ArrayDeque<Integer> arrayDeque = new ArrayDeque<>();
             arrayDeque.push(0);
             for (int i = 0; i < len * 2; i++) {
                 while (!arrayDeque.isEmpty() && nums[arrayDeque.peek()] < nums[i % len]) {
-                    res[arrayDeque.peek()] = nums[i%len];
+                    res[arrayDeque.peek()] = nums[i % len];
                     arrayDeque.pop();
                 }
                 arrayDeque.push(i % len);

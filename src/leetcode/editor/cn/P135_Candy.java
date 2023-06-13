@@ -39,35 +39,37 @@
 // Related Topics 贪心 数组 👍 921 👎 0
 
 package leetcode.editor.cn;
+
 //Java：分发糖果
-class P135_Candy{
+class P135_Candy {
     public static void main(String[] args) {
         Solution solution = new P135_Candy().new Solution();
         System.out.println(solution.candy(new int[]{1, 0, 2, 3, 4}));
-        System.out.println(solution.candy(new int[]{1,0,2}));
-        System.out.println(solution.candy(new int[]{1,2,2}));
-        System.out.println(solution.candy(new int[]{1,3,4,5,2}));
+        System.out.println(solution.candy(new int[]{1, 0, 2}));
+        System.out.println(solution.candy(new int[]{1, 2, 2}));
+        System.out.println(solution.candy(new int[]{1, 3, 4, 5, 2}));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int candy(int[] ratings) {
-        int sum = 0;
+    class Solution {
+        public int candy(int[] ratings) {
+            int sum = 0;
 //        int last = 0;
-        int[] candy = new int[ratings.length];
-        for (int i = 0; i < ratings.length - 1; i++) {
-            if (ratings[i+1] > ratings[i]) {
-                candy[i + 1] = candy[i] + 1;
+            int[] candy = new int[ratings.length];
+            for (int i = 0; i < ratings.length - 1; i++) {
+                if (ratings[i + 1] > ratings[i]) {
+                    candy[i + 1] = candy[i] + 1;
+                }
             }
-        }
-        for (int i = ratings.length - 1; i > 0; i--) {
-            if (ratings[i - 1] > ratings[i]) {
-                candy[i - 1] = Math.max(candy[i - 1], candy[i] + 1);
+            for (int i = ratings.length - 1; i > 0; i--) {
+                if (ratings[i - 1] > ratings[i]) {
+                    candy[i - 1] = Math.max(candy[i - 1], candy[i] + 1);
+                }
+                sum += candy[i];
             }
-            sum += candy[i];
+            return sum + candy[0] + ratings.length;
         }
-        return sum + candy[0] + ratings.length;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

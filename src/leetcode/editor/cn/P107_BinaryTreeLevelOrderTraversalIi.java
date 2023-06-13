@@ -35,7 +35,6 @@
 
 package leetcode.editor.cn;
 
-import com.sun.source.tree.Tree;
 import leetcode.editor.cn.DataStruct.TreeNode;
 
 import java.util.ArrayDeque;

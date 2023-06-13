@@ -54,6 +54,7 @@ class P2351_FirstLetterToAppearTwice {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         char[] c = new char[26];
+
         public char repeatedCharacter(String s) {
             for (char c1 : s.toCharArray()) {
                 c[c1 - 'a']++;

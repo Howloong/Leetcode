@@ -44,7 +44,7 @@ class P646_MaximumLengthOfPairChain {
     class Solution {
         public int findLongestChain(int[][] pairs) {
             Arrays.sort(pairs, Comparator.comparingInt(value -> value[1])
-                );
+            );
             int res = 1;
 //        int max = 1;
             int last = pairs[0][1];

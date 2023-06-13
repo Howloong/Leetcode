@@ -46,7 +46,7 @@ import java.util.Arrays;
 class P1984_MinimumDifferenceBetweenHighestAndLowestOfKScores {
     public static void main(String[] args) {
         Solution solution = new P1984_MinimumDifferenceBetweenHighestAndLowestOfKScores().new Solution();
-        System.out.println(solution.minimumDifference(new int[]{9,4,1,7},3));
+        System.out.println(solution.minimumDifference(new int[]{9, 4, 1, 7}, 3));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

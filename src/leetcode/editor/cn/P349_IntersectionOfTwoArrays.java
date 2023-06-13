@@ -29,11 +29,8 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 //Java：两个数组的交集
 class P349_IntersectionOfTwoArrays {

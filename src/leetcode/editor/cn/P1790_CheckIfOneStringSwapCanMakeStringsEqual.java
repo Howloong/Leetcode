@@ -47,7 +47,6 @@ package leetcode.editor.cn;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 
 //Java:仅执行一次字符串交换能否使两个字符串相等
 //Time:2022-10-11 10:32:40

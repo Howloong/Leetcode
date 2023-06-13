@@ -46,14 +46,14 @@ class P556_NextGreaterElementIii {
             int j = i;
             boolean flag = false;
             while (j > 0) {
-                if (s.charAt(j) <= s.charAt(j-1)) {
+                if (s.charAt(j) <= s.charAt(j - 1)) {
                     --j;
                     continue;
                 }
                 int t = j;
                 int min = Integer.MAX_VALUE;
                 while (i >= j) {
-                    if (s.charAt(j-1) < s.charAt(i)) {
+                    if (s.charAt(j - 1) < s.charAt(i)) {
                         if (s.charAt(i) < min) {
                             min = s.charAt(i);
                             t = i;

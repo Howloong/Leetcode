@@ -38,7 +38,6 @@ package leetcode.editor.cn;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 //Java：全排列
@@ -52,6 +51,7 @@ class P46_Permutations {
     class Solution {
         public List<List<Integer>> result = new ArrayList<>();
         public ArrayDeque<Integer> path = new ArrayDeque<>();
+
         public List<List<Integer>> permute(int[] nums) {
             backTracking(nums);
             return result;

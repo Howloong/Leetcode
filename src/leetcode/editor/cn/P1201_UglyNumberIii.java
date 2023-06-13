@@ -47,18 +47,20 @@
 // Related Topics 数学 二分查找 数论 👍 121 👎 0
 
 package leetcode.editor.cn;
+
 //Java:丑数 III
 //Time:2022-11-22 10:37:17
-    class P1201_UglyNumberIii{
-        public static void main(String[] args) {
-            Solution solution = new P1201_UglyNumberIii().new Solution();
-      }
-      //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int nthUglyNumber(int n, int a, int b, int c) {
-        return 1;
+class P1201_UglyNumberIii {
+    public static void main(String[] args) {
+        Solution solution = new P1201_UglyNumberIii().new Solution();
     }
-}
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int nthUglyNumber(int n, int a, int b, int c) {
+            return 1;
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

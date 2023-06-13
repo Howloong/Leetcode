@@ -108,7 +108,7 @@ class P1807_EvaluateTheBracketPairsOfAString {
                         }
                         j++;
                     }
-                    sb.append(hashMap.getOrDefault(s.substring(i+1, j ), "?"));
+                    sb.append(hashMap.getOrDefault(s.substring(i + 1, j), "?"));
                     i = j + 1;
 //                    hashMap.put(s.substring(i, j + 1), i);
                 } else {

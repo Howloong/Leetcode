@@ -53,9 +53,9 @@ class P593_ValidSquare {
             double midX = (p1[0] + p2[0] + p3[0] + p4[0]) / 4.0;
             double midY = (p1[1] + p2[1] + p3[1] + p4[1]) / 4.0;
             double d1 = distance(midX, midY, p1[0], p1[1]);
-            double d2 =  distance(midX, midY, p2[0], p2[1]);
-            double d3 =  distance(midX, midY, p3[0], p3[1]);
-            double d4 =  distance(midX, midY, p4[0], p4[1]);
+            double d2 = distance(midX, midY, p2[0], p2[1]);
+            double d3 = distance(midX, midY, p3[0], p3[1]);
+            double d4 = distance(midX, midY, p4[0], p4[1]);
             if (d1 == d2 && d1 == d3 && d1 == d4 && d1 != 0) {
                 return (midY - p1[1]) * (midY - p2[1]) + (midX - p1[0]) * (midX - p2[0]) == 0 ||
                         (midY - p1[1]) * (midY - p3[1]) + (midX - p1[0]) * (midX - p3[0]) == 0;

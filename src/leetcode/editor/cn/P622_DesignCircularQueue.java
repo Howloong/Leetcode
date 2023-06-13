@@ -60,10 +60,10 @@ class P622_DesignCircularQueue {
         public int size;
 
         public MyCircularQueue(int k) {
-            this.queue = new int[k+1];
+            this.queue = new int[k + 1];
             this.front = 0;
             this.rear = 0;
-            this.size = k+1;
+            this.size = k + 1;
         }
 
         public boolean enQueue(int value) {
@@ -89,7 +89,7 @@ class P622_DesignCircularQueue {
             if (isEmpty()) {
                 return -1;
             }
-            return queue[(front+1)%size];
+            return queue[(front + 1) % size];
         }
 
         public int Rear() {

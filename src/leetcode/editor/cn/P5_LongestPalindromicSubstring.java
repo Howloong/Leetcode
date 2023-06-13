@@ -44,10 +44,10 @@ class P5_LongestPalindromicSubstring {
         public String longestPalindrome(String s) {
             int last = 0;
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i <= s.length()-1; i++) {
+            for (int i = 0; i <= s.length() - 1; i++) {
                 String t = s.substring(0, i + 1);
                 StringBuilder substr = new StringBuilder(t);
-                if (substr.reverse().toString().equals(t) ) {
+                if (substr.reverse().toString().equals(t)) {
                     last = substr.length();
                     sb = substr;
                 }

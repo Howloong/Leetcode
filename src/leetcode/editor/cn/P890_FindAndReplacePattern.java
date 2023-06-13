@@ -29,7 +29,10 @@ package leetcode.editor.cn;//你有一个单词列表 words 和一个模式 patt
 // 
 // Related Topics 数组 哈希表 字符串 👍 180 👎 0
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 //Java：查找和替换模式
 class P890_FindAndReplacePattern {

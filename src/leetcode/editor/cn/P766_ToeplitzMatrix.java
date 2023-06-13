@@ -46,25 +46,27 @@
 // Related Topics 数组 矩阵 👍 275 👎 0
 
 package leetcode.editor.cn;
+
 //Java:托普利茨矩阵
 //Time:2022-08-31 00:52:02
-class P766_ToeplitzMatrix{
+class P766_ToeplitzMatrix {
     public static void main(String[] args) {
         Solution solution = new P766_ToeplitzMatrix().new Solution();
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public boolean isToeplitzMatrix(int[][] matrix) {
-        for (int i = 0; i < matrix.length - 1; i++) {
-            for (int j = 0; j < matrix[0].length-1; j++) {
-                if (matrix[i][j] != matrix[i+1][j + 1]) {
-                    return false;
+    class Solution {
+        public boolean isToeplitzMatrix(int[][] matrix) {
+            for (int i = 0; i < matrix.length - 1; i++) {
+                for (int j = 0; j < matrix[0].length - 1; j++) {
+                    if (matrix[i][j] != matrix[i + 1][j + 1]) {
+                        return false;
+                    }
                 }
             }
+            return true;
         }
-        return true;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

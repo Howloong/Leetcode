@@ -65,6 +65,7 @@ class QC3q1f {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Trie {
         public Node root;
+
         public Trie() {
             this.root = new Node();
         }

@@ -28,6 +28,7 @@
 // Related Topics 树 二叉搜索树 数学 动态规划 二叉树 👍 1860 👎 0
 
 package leetcode.editor.cn;
+
 //Java:不同的二叉搜索树
 //Time:2022-07-26 12:43:27
 class P96_UniqueBinarySearchTrees {
@@ -39,7 +40,7 @@ class P96_UniqueBinarySearchTrees {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int numTrees(int n) {
-            int[] dp = new int[n+1];
+            int[] dp = new int[n + 1];
             dp[0] = 1;
 //            dp[1] = 1;
 //            dp[2] = 2;

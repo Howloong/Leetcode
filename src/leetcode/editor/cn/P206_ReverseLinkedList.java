@@ -44,51 +44,50 @@ package leetcode.editor.cn;
 
 import leetcode.editor.cn.DataStruct.ListNode;
 
-import java.util.List;
-
 //Java：反转链表
-class P206_ReverseLinkedList{
+class P206_ReverseLinkedList {
     public static void main(String[] args) {
         Solution solution = new P206_ReverseLinkedList().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
-class Solution {
-    /* public ListNode reverseList(ListNode head) {
-         ListNode pre = null, temp, cur;
-         cur = head;
-         while (cur != null) {
-             temp = cur.next;
-             cur.next = pre;
-             pre = cur;
-             cur = temp;
-         }
-         return pre;
-     }*/
-    public ListNode reverseList(ListNode head) {
-        return reverse(head, null);
-    }
 
-    public ListNode reverse(ListNode cur, ListNode pre) {
-        if (cur == null) {
-            return pre;
+    /**
+     * Definition for singly-linked list.
+     * public class ListNode {
+     * int val;
+     * ListNode next;
+     * ListNode() {}
+     * ListNode(int val) { this.val = val; }
+     * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+     * }
+     */
+    class Solution {
+        /* public ListNode reverseList(ListNode head) {
+             ListNode pre = null, temp, cur;
+             cur = head;
+             while (cur != null) {
+                 temp = cur.next;
+                 cur.next = pre;
+                 pre = cur;
+                 cur = temp;
+             }
+             return pre;
+         }*/
+        public ListNode reverseList(ListNode head) {
+            return reverse(head, null);
         }
-        ListNode temp = cur.next;
-        cur.next = pre;
-        pre = cur;
-        cur = temp;
-        return reverse(cur, pre);
+
+        public ListNode reverse(ListNode cur, ListNode pre) {
+            if (cur == null) {
+                return pre;
+            }
+            ListNode temp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = temp;
+            return reverse(cur, pre);
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

@@ -32,13 +32,11 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-
 //Java：字母在字符串中的百分比
 class P2278_PercentageOfLetterInString {
     public static void main(String[] args) {
         Solution solution = new P2278_PercentageOfLetterInString().new Solution();
-        System.out.println(solution.percentageLetter("foobar",'o'));
+        System.out.println(solution.percentageLetter("foobar", 'o'));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -51,7 +49,7 @@ class P2278_PercentageOfLetterInString {
                     sum++;
                 }
             }
-            return sum*100 / s.length();
+            return sum * 100 / s.length();
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

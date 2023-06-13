@@ -77,7 +77,7 @@ class P43_MultiplyStrings {
 
         public String add(String num1, String num2) {
             if (num1.length() != num2.length()) {
-                num1 = "0".repeat(num2.length() - num1.length())+num1;
+                num1 = "0".repeat(num2.length() - num1.length()) + num1;
             }
             StringBuilder res = new StringBuilder();
             boolean carry = false;

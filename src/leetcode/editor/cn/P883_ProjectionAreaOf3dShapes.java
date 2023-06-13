@@ -59,15 +59,13 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-
 //Java：三维形体投影面积
 class P883_ProjectionAreaOf3dShapes {
     public static void main(String[] args) {
         Solution solution = new P883_ProjectionAreaOf3dShapes().new Solution();
         System.out.println(solution.projectionArea(new int[][]{{1, 2}, {3, 4}}));
         System.out.println(solution.projectionArea(new int[][]{{2}}));
-        System.out.println(solution.projectionArea(new int[][]{{1,0},{0,2}}));
+        System.out.println(solution.projectionArea(new int[][]{{1, 0}, {0, 2}}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

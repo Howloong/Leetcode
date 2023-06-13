@@ -39,33 +39,34 @@ import java.util.ArrayDeque;
 
 //Java:柱状图中最大的矩形
 //Time:2022-10-01 18:43:26
-    class P84_LargestRectangleInHistogram{
-        public static void main(String[] args) {
-            Solution solution = new P84_LargestRectangleInHistogram().new Solution();
-            System.out.println(solution.largestRectangleArea(new int[]{2,1,5,6,2,3}));
-        }
-      //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int largestRectangleArea(int[] heights) {
-        int len = heights.length;
-        int[] newHeight = new int[len + 2];
-        System.arraycopy(heights, 0, newHeight, 1, len);
-        ArrayDeque<Integer> arrayDeque = new ArrayDeque<>();
-        int max = 0;
-        arrayDeque.push(0);
-        for (int i = 1; i < newHeight.length; i++) {
-            while (!arrayDeque.isEmpty() && newHeight[i]< newHeight[arrayDeque.peek()]) {
-                int h = arrayDeque.pop();
-                int w = i-arrayDeque.peek()-1;
-                max = Math.max(max, newHeight[h] * w);
-                System.out.println(max);
-            }
-            arrayDeque.push(i);
-        }
-        return max;
-
+class P84_LargestRectangleInHistogram {
+    public static void main(String[] args) {
+        Solution solution = new P84_LargestRectangleInHistogram().new Solution();
+        System.out.println(solution.largestRectangleArea(new int[]{2, 1, 5, 6, 2, 3}));
     }
-}
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int largestRectangleArea(int[] heights) {
+            int len = heights.length;
+            int[] newHeight = new int[len + 2];
+            System.arraycopy(heights, 0, newHeight, 1, len);
+            ArrayDeque<Integer> arrayDeque = new ArrayDeque<>();
+            int max = 0;
+            arrayDeque.push(0);
+            for (int i = 1; i < newHeight.length; i++) {
+                while (!arrayDeque.isEmpty() && newHeight[i] < newHeight[arrayDeque.peek()]) {
+                    int h = arrayDeque.pop();
+                    int w = i - arrayDeque.peek() - 1;
+                    max = Math.max(max, newHeight[h] * w);
+                    System.out.println(max);
+                }
+                arrayDeque.push(i);
+            }
+            return max;
+
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

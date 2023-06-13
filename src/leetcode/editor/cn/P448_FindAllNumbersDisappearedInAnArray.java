@@ -54,7 +54,7 @@ class P448_FindAllNumbersDisappearedInAnArray {
             }
             for (int i = 0; i < n; i++) {
                 if (nums[i] > 0) {
-                    res.add(i+1);
+                    res.add(i + 1);
                 }
             }
             return res;

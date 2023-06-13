@@ -58,7 +58,7 @@ class P539_MinimumTimeDifference {
             for (int i = 0; i < res.size() - 1; i++) {
                 min = Math.min(min, res.get(i + 1) - res.get(i));
             }
-            min = Math.min(min, 1440-(res.get(res.size()-1) - res.get(0)));
+            min = Math.min(min, 1440 - (res.get(res.size() - 1) - res.get(0)));
             return min;
         }
 

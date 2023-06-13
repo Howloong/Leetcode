@@ -52,8 +52,6 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-
 //Java:三等分
 //Time:2022-10-06 13:29:55
 class P927_ThreeEqualParts {
@@ -127,7 +125,7 @@ class P927_ThreeEqualParts {
                     return new int[]{-1, -1};
 
             }
-            return new int[]{i + zeroCount, j + zeroCount+1};
+            return new int[]{i + zeroCount, j + zeroCount + 1};
         }
 
     }

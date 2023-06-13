@@ -37,7 +37,7 @@ class P1089_DuplicateZeros {
     public static void main(String[] args) {
         Solution solution = new P1089_DuplicateZeros().new Solution();
 //        solution.duplicateZeros(new int[]{1, 0, 2, 3, 0, 4, 5, 0});
-        solution.duplicateZeros(new int[]{0,1,0});
+        solution.duplicateZeros(new int[]{0, 1, 0});
     }
 
 
@@ -45,7 +45,7 @@ class P1089_DuplicateZeros {
     class Solution {
         public void duplicateZeros(int[] arr) {
             int i = 0;
-            while (i < arr.length-1) {
+            while (i < arr.length - 1) {
                 if (arr[i] == 0) {
                     if (arr.length - 1 - (i + 1) >= 0)
                         System.arraycopy(arr, i + 1, arr, i + 2, arr.length - 1 - (i + 1));

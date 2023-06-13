@@ -62,7 +62,7 @@ class P18_FourSum {
                     continue;
                 }
                 for (int j = i + 1; j < nums.length; j++) {
-                    if (j > i+1 && nums[j] == nums[j - 1]) {
+                    if (j > i + 1 && nums[j] == nums[j - 1]) {
                         continue;
                     }
                     int k = j + 1;

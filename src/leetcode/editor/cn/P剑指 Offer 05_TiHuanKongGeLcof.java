@@ -34,7 +34,7 @@ class TiHuanKongGeLcof {
                     ++len;
                 }
             }
-            char[] c = new char[s.length() + len*2];
+            char[] c = new char[s.length() + len * 2];
             int j = 0;
             for (int i = 0; i < m.length; i++) {
                 if (m[i] == ' ') {

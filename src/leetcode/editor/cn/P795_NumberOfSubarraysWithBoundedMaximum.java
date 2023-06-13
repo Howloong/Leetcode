@@ -41,7 +41,7 @@ class P795_NumberOfSubarraysWithBoundedMaximum {
         Solution solution = new P795_NumberOfSubarraysWithBoundedMaximum().new Solution();
 //        System.out.println(solution.numSubarrayBoundedMax(new int[]{2, 9, 2, 5, 6}, 2, 8));
         System.out.println(solution.numSubarrayBoundedMax(new int[]{73, 55, 36, 5, 55, 14, 9, 7, 72, 52}, 32, 69));
-        System.out.println(solution.numSubarrayBoundedMax(new int[]{2,1,4,3}, 2, 3));
+        System.out.println(solution.numSubarrayBoundedMax(new int[]{2, 1, 4, 3}, 2, 3));
 
     }
 
@@ -55,10 +55,11 @@ class P795_NumberOfSubarraysWithBoundedMaximum {
             while (i < nums.length) {
                 if (nums[i] > right) {
                     i0 = i;
-                }if (nums[i] >= left ) {
+                }
+                if (nums[i] >= left) {
                     i1 = i;
                 }
-                count += i1-i0;
+                count += i1 - i0;
                 i++;
             }
             return count;

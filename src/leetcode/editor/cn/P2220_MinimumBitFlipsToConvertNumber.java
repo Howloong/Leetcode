@@ -42,18 +42,20 @@
 // Related Topics 位运算 👍 5 👎 0
 
 package leetcode.editor.cn;
+
 //Java：转换数字的最少位翻转次数
-class P2220_MinimumBitFlipsToConvertNumber{
+class P2220_MinimumBitFlipsToConvertNumber {
     public static void main(String[] args) {
         Solution solution = new P2220_MinimumBitFlipsToConvertNumber().new Solution();
-        System.out.println(solution.minBitFlips(10,7));
+        System.out.println(solution.minBitFlips(10, 7));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int minBitFlips(int start, int goal) {
-        return Integer.bitCount((start ^ goal));
+    class Solution {
+        public int minBitFlips(int start, int goal) {
+            return Integer.bitCount((start ^ goal));
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

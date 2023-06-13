@@ -67,7 +67,7 @@ class P3_LongestSubstringWithoutRepeatingCharacters {
                     hashMap.put(d, hashMap.getOrDefault(d, 0) - 1);
                     ++start;
                 }
-                max = Math.max(max, end - start );
+                max = Math.max(max, end - start);
             }
             return max;
 

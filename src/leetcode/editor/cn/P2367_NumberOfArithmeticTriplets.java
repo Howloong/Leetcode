@@ -44,7 +44,6 @@
 
 package leetcode.editor.cn;
 
-import java.util.HashMap;
 import java.util.HashSet;
 
 //Java:算术三元组的数目

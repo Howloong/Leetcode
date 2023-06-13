@@ -58,11 +58,11 @@ import java.util.Arrays;
 class P31_NextPermutation {
     public static void main(String[] args) {
         Solution solution = new P31_NextPermutation().new Solution();
-        solution.nextPermutation(new int[]{2,6,3,5,4,1});
-        solution.nextPermutation(new int[]{1,2,3});
-        solution.nextPermutation(new int[]{3,2,1});
-        solution.nextPermutation(new int[]{1,1,5});
-        solution.nextPermutation(new int[]{3,6,8,4});
+        solution.nextPermutation(new int[]{2, 6, 3, 5, 4, 1});
+        solution.nextPermutation(new int[]{1, 2, 3});
+        solution.nextPermutation(new int[]{3, 2, 1});
+        solution.nextPermutation(new int[]{1, 1, 5});
+        solution.nextPermutation(new int[]{3, 6, 8, 4});
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -78,7 +78,7 @@ class P31_NextPermutation {
                 int t = j;
                 int min = Integer.MAX_VALUE;
                 while (i >= j) {
-                    if (nums[j-1] < nums[i]) {
+                    if (nums[j - 1] < nums[i]) {
                         if (nums[i] < min) {
                             min = nums[i];
                             t = i;
@@ -86,8 +86,8 @@ class P31_NextPermutation {
                     }
                     --i;
                 }
-                int temp = nums[j-1];
-                nums[j-1] = nums[t];
+                int temp = nums[j - 1];
+                nums[j - 1] = nums[t];
                 nums[t] = temp;
 
                 break;

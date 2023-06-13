@@ -57,7 +57,7 @@ class P777_SwapAdjacentInLrString {
                     j++;
                 }
                 if (i == len || j == len) {
-                   break;
+                    break;
                 }
                 if (startChar[i] != endChar[j]) {
                     return false;

@@ -46,7 +46,7 @@ class P343_IntegerBreak {
             dp[1] = 1;
             dp[2] = 1;
             for (int i = 3; i <= n; i++) {
-                for (int j = 1; j < i ; j++) {
+                for (int j = 1; j < i; j++) {
                     dp[i] = Math.max(dp[i], Math.max((i - j) * j, (i - j) * dp[j]));
                 }
             }

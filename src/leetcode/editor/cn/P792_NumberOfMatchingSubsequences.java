@@ -40,7 +40,6 @@
 package leetcode.editor.cn;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 
 //Java:匹配子序列的单词数
 //Time:2022-11-17 10:37:18
@@ -63,12 +62,12 @@ class P792_NumberOfMatchingSubsequences {
             }
             int count = 0;
             for (int i = 0; i < s.length(); i++) {
-                int index = s.charAt(i)-'a';
+                int index = s.charAt(i) - 'a';
                 int size = arrayLists[index].size();
                 for (int j = 0; j < size; j++) {
                     int[] t = arrayLists[index].poll();
                     int len = t[1] + 1;
-                    if (words[t[0]].length() == len ) {
+                    if (words[t[0]].length() == len) {
                         count++;
                     } else {
                         arrayLists[words[t[0]].charAt(len) - 'a'].offer(new int[]{t[0], len});

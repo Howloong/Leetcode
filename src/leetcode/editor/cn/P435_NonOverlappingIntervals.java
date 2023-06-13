@@ -41,21 +41,20 @@
 package leetcode.editor.cn;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 //Java：无重叠区间
 class P435_NonOverlappingIntervals {
     public static void main(String[] args) {
         Solution solution = new P435_NonOverlappingIntervals().new Solution();
         System.out.println(solution.eraseOverlapIntervals(new int[][]{{1, 2}, {2, 3}, {3, 4}, {1, 3}}));
-        System.out.println(solution.eraseOverlapIntervals(new int[][]{{1, 2},{1,2},{1,2}}));
-        System.out.println(solution.eraseOverlapIntervals(new int[][]{{1, 2},{3,4}}));
+        System.out.println(solution.eraseOverlapIntervals(new int[][]{{1, 2}, {1, 2}, {1, 2}}));
+        System.out.println(solution.eraseOverlapIntervals(new int[][]{{1, 2}, {3, 4}}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int eraseOverlapIntervals(int[][] intervals) {
-            Arrays.sort(intervals,(a,b)-> a[1] == b[1] ? b[0]-a[0] : a[1] - b[1]);
+            Arrays.sort(intervals, (a, b) -> a[1] == b[1] ? b[0] - a[0] : a[1] - b[1]);
 //            Arrays.sort(intervals, Comparator.comparingInt(a -> a[1]));
             int sum = 0;
             int right = intervals[0][1];

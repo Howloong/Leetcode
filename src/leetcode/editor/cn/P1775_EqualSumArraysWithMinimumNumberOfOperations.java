@@ -55,7 +55,7 @@ class P1775_EqualSumArraysWithMinimumNumberOfOperations {
         Solution solution = new P1775_EqualSumArraysWithMinimumNumberOfOperations().new Solution();
 //        System.out.println(solution.minOperations(new int[]{1, 2, 3, 4, 5, 6}, new int[]{1, 1, 2, 2, 2, 2}));
 //        System.out.println(solution.minOperations(new int[]{1,1,1,1,1,1,1}, new int[]{6}));
-        System.out.println(solution.minOperations(new int[]{6,6}, new int[]{12}));
+        System.out.println(solution.minOperations(new int[]{6, 6}, new int[]{12}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -98,13 +98,13 @@ class P1775_EqualSumArraysWithMinimumNumberOfOperations {
                 }
             }
             if (diff > 0) {
-                while (i < nums1.length&&diff>0) {
+                while (i < nums1.length && diff > 0) {
                     diff -= (6 - nums1[i]);
                     count++;
                     i++;
                 }
-                while (j>=0&&diff>0) {
-                    diff -= (nums2[j]-1);
+                while (j >= 0 && diff > 0) {
+                    diff -= (nums2[j] - 1);
                     count++;
                     j--;
                 }

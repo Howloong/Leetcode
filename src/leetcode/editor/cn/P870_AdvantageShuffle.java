@@ -42,7 +42,7 @@ import java.util.TreeSet;
 class P870_AdvantageShuffle {
     public static void main(String[] args) {
         Solution solution = new P870_AdvantageShuffle().new Solution();
-        System.out.println(Arrays.toString(solution.advantageCount(new int[]{2,0,4,1,2}, new int[]{1,3,0,0,2})));
+        System.out.println(Arrays.toString(solution.advantageCount(new int[]{2, 0, 4, 1, 2}, new int[]{1, 3, 0, 0, 2})));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

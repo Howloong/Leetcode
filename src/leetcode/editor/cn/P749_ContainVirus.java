@@ -61,17 +61,19 @@
 // Related Topics 深度优先搜索 广度优先搜索 数组 矩阵 模拟 👍 81 👎 0
 
 package leetcode.editor.cn;
+
 //Java：隔离病毒
-class P749_ContainVirus{
+class P749_ContainVirus {
     public static void main(String[] args) {
         Solution solution = new P749_ContainVirus().new Solution();
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int containVirus(int[][] isInfected) {
-        return 1;
+    class Solution {
+        public int containVirus(int[][] isInfected) {
+            return 1;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

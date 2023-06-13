@@ -47,10 +47,10 @@ class P1669_MergeInBetweenLinkedLists {
     public static void main(String[] args) {
         Solution solution = new P1669_MergeInBetweenLinkedLists().new Solution();
         ListNode p0 = new ListNode(0);
-        ListNode p1 = new ListNode(1,p0);
-        ListNode p2 = new ListNode(2,p1);
-        ListNode p3 = new ListNode(3,p2);
-        ListNode p4 = new ListNode(4,p3);
+        ListNode p1 = new ListNode(1, p0);
+        ListNode p2 = new ListNode(2, p1);
+        ListNode p3 = new ListNode(3, p2);
+        ListNode p4 = new ListNode(4, p3);
         ListNode p5 = new ListNode(5, p4);
     }
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -69,7 +69,7 @@ class P1669_MergeInBetweenLinkedLists {
         public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
             ListNode temp = list1;
             int num = 0;
-            while (num < a-1) {
+            while (num < a - 1) {
                 list1 = list1.next;
                 num++;
             }

@@ -42,7 +42,7 @@ import java.util.List;
 class P728_SelfDividingNumbers {
     public static void main(String[] args) {
         Solution solution = new P728_SelfDividingNumbers().new Solution();
-        System.out.println(solution.selfDividingNumbers(47,85));
+        System.out.println(solution.selfDividingNumbers(47, 85));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -61,7 +61,7 @@ class P728_SelfDividingNumbers {
             int temp = num;
             while (temp > 0) {
                 int i = temp % 10;
-                if (i == 0||num%i!=0) {
+                if (i == 0 || num % i != 0) {
                     return false;
                 }
                 temp = temp / 10;

@@ -32,7 +32,6 @@
 
 package leetcode.editor.cn;
 
-import com.sun.source.tree.Tree;
 import leetcode.editor.cn.DataStruct.TreeNode;
 
 //Java：对称二叉树
@@ -62,7 +61,7 @@ class P101_SymmetricTree {
             if (root == null) {
                 return false;
             }
-            return postOrder(root.left,root.right);
+            return postOrder(root.left, root.right);
         }
 
         public boolean postOrder(TreeNode left, TreeNode right) {

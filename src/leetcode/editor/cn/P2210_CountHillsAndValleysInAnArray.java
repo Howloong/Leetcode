@@ -71,7 +71,7 @@ class P2210_CountHillsAndValleysInAnArray {
                 while (j < nums.length - 1 && nums[j] == nums[i]) {
                     j++;
                 }
-                if (nums[i] > nums[i - 1] && nums[i] > nums[j]||nums[i] < nums[i - 1] && nums[i] < nums[j]) {
+                if (nums[i] > nums[i - 1] && nums[i] > nums[j] || nums[i] < nums[i - 1] && nums[i] < nums[j]) {
                     sum++;
                 }
                 i++;

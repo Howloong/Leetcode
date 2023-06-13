@@ -51,7 +51,7 @@ package leetcode.editor.cn;
 class P892_SurfaceAreaOf3dShapes {
     public static void main(String[] args) {
         Solution solution = new P892_SurfaceAreaOf3dShapes().new Solution();
-        System.out.println(solution.surfaceArea(new int[][]{{1,2},{3,4}}));
+        System.out.println(solution.surfaceArea(new int[][]{{1, 2}, {3, 4}}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -64,7 +64,7 @@ class P892_SurfaceAreaOf3dShapes {
                     if (count > 0) {
                         sum += (count << 2) + 2;
                         sum -= i > 0 ? Math.min(grid[i][j], grid[i - 1][j]) << 1 : 0;
-                        sum -= j > 0 ? Math.min(grid[i][j], grid[i ][j-1]) << 1 : 0;
+                        sum -= j > 0 ? Math.min(grid[i][j], grid[i][j - 1]) << 1 : 0;
                     }
                 }
             }

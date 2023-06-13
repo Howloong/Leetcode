@@ -80,7 +80,7 @@ class P113_PathSumIi {
             return result;
         }
 
-        public void getPath(TreeNode p,int sum, int target, List<List<Integer>> result, List<Integer> path) {
+        public void getPath(TreeNode p, int sum, int target, List<List<Integer>> result, List<Integer> path) {
             if (p.left == null && p.right == null) {
                 if (sum + p.val == target) {
                     path.add(p.val);

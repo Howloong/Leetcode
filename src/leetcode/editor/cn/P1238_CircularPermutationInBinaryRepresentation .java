@@ -36,7 +36,10 @@
 
 package leetcode.editor.cn;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 //Java:循环码排列
 //Time:2023-02-23 10:19:17

@@ -54,9 +54,9 @@ class P1752_CheckIfArrayIsSortedAndRotated {
     public static void main(String[] args) {
         Solution solution = new P1752_CheckIfArrayIsSortedAndRotated().new Solution();
         System.out.println(solution.check(new int[]{3, 4, 5, 1, 2}));
-        System.out.println(solution.check(new int[]{6,10,6}));
-        System.out.println(solution.check(new int[]{6,6,6}));
-        System.out.println(solution.check(new int[]{6,7,8}));
+        System.out.println(solution.check(new int[]{6, 10, 6}));
+        System.out.println(solution.check(new int[]{6, 6, 6}));
+        System.out.println(solution.check(new int[]{6, 7, 8}));
         System.out.println(solution.check(new int[]{2, 1, 3, 4}));
     }
 
@@ -68,7 +68,7 @@ class P1752_CheckIfArrayIsSortedAndRotated {
             System.arraycopy(nums, 0, arr, nums.length, nums.length);
             int i = 0;
             int count = 1;
-            while (i < arr.length-1) {
+            while (i < arr.length - 1) {
                 if (arr[i] > arr[i + 1]) {
                     break;
                 }
@@ -87,7 +87,7 @@ class P1752_CheckIfArrayIsSortedAndRotated {
                 }
                 i++;
             }
-            return count==nums.length;
+            return count == nums.length;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

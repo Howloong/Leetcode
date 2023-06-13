@@ -46,7 +46,7 @@ package leetcode.editor.cn;
 class P34_FindFirstAndLastPositionOfElementInSortedArray {
     public static void main(String[] args) {
         Solution solution = new P34_FindFirstAndLastPositionOfElementInSortedArray().new Solution();
-        solution.searchRange(new int[]{5,7,7,8,8,10}, 8);
+        solution.searchRange(new int[]{5, 7, 7, 8, 8, 10}, 8);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -55,7 +55,7 @@ class P34_FindFirstAndLastPositionOfElementInSortedArray {
             if (nums.length == 0) {
                 return new int[]{-1, -1};
             }
-            int i = 0, j = nums.length-1;
+            int i = 0, j = nums.length - 1;
             int mid;
             int right = -2;
             int left = -2;
@@ -69,7 +69,7 @@ class P34_FindFirstAndLastPositionOfElementInSortedArray {
                 }
             }
             i = 0;
-            j = nums.length-1;
+            j = nums.length - 1;
             while (i <= j) {
                 mid = (i + j) / 2;
                 if (nums[mid] >= target) {

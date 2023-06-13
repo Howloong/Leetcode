@@ -57,7 +57,7 @@ class P22_GenerateParentheses {
                 backTracking(left - 1, right, str + "(");
             }
             if (right > left) {
-                backTracking(left, right - 1,  str+")");
+                backTracking(left, right - 1, str + ")");
             }
         }
     }

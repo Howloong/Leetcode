@@ -36,9 +36,10 @@
 
 package leetcode.editor.cn;
 
-import com.sun.source.tree.Tree;
-
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 //Java:字符串中的第一个唯一字符
 //Time:2022-08-01 16:32:15
@@ -63,7 +64,7 @@ class P387_FirstUniqueCharacterInAString {
                     map.put(c, i);
                 }
             }
-            return map.isEmpty() ? -1: map.entrySet().iterator().next().getValue();
+            return map.isEmpty() ? -1 : map.entrySet().iterator().next().getValue();
         }
 
     }

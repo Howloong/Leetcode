@@ -58,7 +58,7 @@ class P674_LongestContinuousIncreasingSubsequence {
                 } else {
                     dp[i] = 1;
                 }
-                max = Math.max(max, dp[i ]);
+                max = Math.max(max, dp[i]);
             }
             return max;
 

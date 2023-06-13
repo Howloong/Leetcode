@@ -67,7 +67,7 @@ class P806_NumberOfLinesToWriteString {
                 }
                 sum += widths[c - 'a'];
             }
-            return new int[]{length+1, sum};
+            return new int[]{length + 1, sum};
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

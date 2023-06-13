@@ -62,7 +62,7 @@ class P1455_CheckIfAWordOccursAsAPrefixOfAnyWordInASentence {
             String[] s = sentence.split(" ");
             for (int j = 0; j < s.length; j++) {
                 if (s[j].startsWith(searchWord)) {
-                    return j+1;
+                    return j + 1;
                 }
             }
             return -1;

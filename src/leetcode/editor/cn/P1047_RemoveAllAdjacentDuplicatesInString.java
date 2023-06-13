@@ -30,34 +30,35 @@ package leetcode.editor.cn;
 import java.util.ArrayDeque;
 
 //Java：删除字符串中的所有相邻重复项
-    class P1047_RemoveAllAdjacentDuplicatesInString{
-        public static void main(String[] args) {
-            Solution solution = new P1047_RemoveAllAdjacentDuplicatesInString().new Solution();
-            System.out.println(solution.removeDuplicates("abbaca"));
-      }
-      //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public String removeDuplicates(String s) {
-        int i = 0;
-        ArrayDeque<Character> arrayDeque = new ArrayDeque<>();
-        arrayDeque.push(s.charAt(i++));
-        while (i != s.length()) {
-            char c = s.charAt(i);
-            if (arrayDeque.isEmpty() || !arrayDeque.peek().equals(c)) {
-                arrayDeque.push(c);
-            } else {
-                arrayDeque.pop();
-            }
-            ++i;
-        }
-        StringBuilder stringBuilder = new StringBuilder(arrayDeque.size());
-        while (!arrayDeque.isEmpty()) {
-            stringBuilder.append(arrayDeque.removeLast());
-        }
-        return stringBuilder.toString();
-
+class P1047_RemoveAllAdjacentDuplicatesInString {
+    public static void main(String[] args) {
+        Solution solution = new P1047_RemoveAllAdjacentDuplicatesInString().new Solution();
+        System.out.println(solution.removeDuplicates("abbaca"));
     }
-}
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public String removeDuplicates(String s) {
+            int i = 0;
+            ArrayDeque<Character> arrayDeque = new ArrayDeque<>();
+            arrayDeque.push(s.charAt(i++));
+            while (i != s.length()) {
+                char c = s.charAt(i);
+                if (arrayDeque.isEmpty() || !arrayDeque.peek().equals(c)) {
+                    arrayDeque.push(c);
+                } else {
+                    arrayDeque.pop();
+                }
+                ++i;
+            }
+            StringBuilder stringBuilder = new StringBuilder(arrayDeque.size());
+            while (!arrayDeque.isEmpty()) {
+                stringBuilder.append(arrayDeque.removeLast());
+            }
+            return stringBuilder.toString();
+
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

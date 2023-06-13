@@ -56,42 +56,41 @@ package leetcode.editor.cn;
 
 import leetcode.editor.cn.DataStruct.ListNode;
 
-import java.util.List;
-
 //Java：环形链表
-class P141_LinkedListCycle{
+class P141_LinkedListCycle {
     public static void main(String[] args) {
         Solution solution = new P141_LinkedListCycle().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for singly-linked list.
- * class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
- * }
- */
-public class Solution {
-    public boolean hasCycle(ListNode head) {
-        ListNode p = head;
-        ListNode q = head;
-        while (q != null) {
-            p = p.next;
-            if (q.next == null || q.next.next == null) {
-                return false;
+
+    /**
+     * Definition for singly-linked list.
+     * class ListNode {
+     * int val;
+     * ListNode next;
+     * ListNode(int x) {
+     * val = x;
+     * next = null;
+     * }
+     * }
+     */
+    public class Solution {
+        public boolean hasCycle(ListNode head) {
+            ListNode p = head;
+            ListNode q = head;
+            while (q != null) {
+                p = p.next;
+                if (q.next == null || q.next.next == null) {
+                    return false;
+                }
+                q = q.next.next;
+                if (q == p) {
+                    return true;
+                }
             }
-            q = q.next.next;
-            if (q == p) {
-                return true;
-            }
+            return false;
         }
-        return false;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

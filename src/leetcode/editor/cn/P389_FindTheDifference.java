@@ -35,10 +35,6 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-
 //Java:找不同
 //Time:2022-08-01 17:02:26
 class P389_FindTheDifference {

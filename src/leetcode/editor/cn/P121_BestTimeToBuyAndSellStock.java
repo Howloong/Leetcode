@@ -1,4 +1,4 @@
-  //给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
+//给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
 //
 // 你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。 
 //
@@ -35,18 +35,20 @@
 // Related Topics 数组 动态规划 👍 2468 👎 0
 
 package leetcode.editor.cn;
+
 //Java:买卖股票的最佳时机
 //Time:2022-07-31 22:57:56
-class P121_BestTimeToBuyAndSellStock{
+class P121_BestTimeToBuyAndSellStock {
     public static void main(String[] args) {
         Solution solution = new P121_BestTimeToBuyAndSellStock().new Solution();
         System.out.println(solution.maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
 //        System.out.println(solution.maxProfit(new int[]{7,6,4,3,1}));
 //        System.out.println(solution.maxProfit(new int[]{2,4,1}));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int maxProfit(int[] prices) {
+    class Solution {
+        public int maxProfit(int[] prices) {
         /*int max = 0;
         int min = prices[0];
         for (int i = 1; i < prices.length; i++) {
@@ -54,17 +56,17 @@ class Solution {
             min = Math.min(min, prices[i]);
         }
         return max;*/
-        int[] dp = new int[2];
+            int[] dp = new int[2];
 //        0为持有
 //        1为不持有
-        dp[0] = -prices[0];
-        for (int i = 1; i < prices.length; i++) {
-            dp[0] = Math.max(dp[0], -prices[i]);
-            dp[1] = Math.max(dp[1], dp[0] + prices[i]);
+            dp[0] = -prices[0];
+            for (int i = 1; i < prices.length; i++) {
+                dp[0] = Math.max(dp[0], -prices[i]);
+                dp[1] = Math.max(dp[1], dp[0] + prices[i]);
+            }
+            return Math.max(dp[0], dp[1]);
         }
-        return Math.max(dp[0], dp[1]);
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
