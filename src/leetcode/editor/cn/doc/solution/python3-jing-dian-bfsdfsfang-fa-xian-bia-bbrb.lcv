@@ -1,0 +1,56 @@
+> Problem: [1254. 统计封闭岛屿的数目](https://leetcode.cn/problems/number-of-closed-islands/description/)
+
+[TOC]
+
+# 思路
+
+1. 看见题目，类似遍历岛屿，我们可以直接用bfs或者dfs的方法，具体理解，感觉两种都可以，看大佬的解释，可能可以有适当的取舍，但区别不大。
+2. 其次由于题目要求岛屿是 **封闭的**，而边界又是会给我们带来困难（万一岛屿连接到了边界就不是封闭的了）。所以我们可以先把边界的0遍历完，并且设为1，这样就变成了最原本的找岛屿的任务。
+3. 完成2后，开始重新遍历岛屿，这里所遍历的，一定会是封闭的，不会连到边界外面去。
+
+# Code
+
+* []
+
+```Python
+
+class Solution:
+    def closedIsland(self, grid: List[List[int]]) -> int:
+        n = len(grid)
+        m = len(grid[0])
+
+        def bfs(point):
+
+            direction = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+
+            q = collections.deque()
+
+            q.append(point)
+
+            while q:
+                oldpoint = q.popleft()
+                grid[oldpoint[0]][oldpoint[1]] = 1
+                for d in direction:
+                    newx = oldpoint[0] + d[0]
+                    newy = oldpoint[1] + d[1]
+                    if 0 <= newx < n and 0 <= newy < m and grid[newx][newy] != 1:
+                        q.append([newx, newy])
+
+        for i in range(n):
+            for j in range(m):
+                if (i == 0 or j == 0 or i == n - 1 or j == m - 1) and grid[i][j] == 0:
+                    bfs([i, j])
+
+        ans = 0
+        for i in range(n):
+            for j in range(m):
+                if (i != 0 or j != 0) and grid[i][j] == 0:
+                    bfs([i, j])
+                    ans += 1
+
+        return ans
+
+```
+
+- 169
+
