@@ -54,6 +54,8 @@
 
 package leetcode.editor.cn;
 
+import java.util.ArrayDeque;
+
 //Java:黑白翻转棋
 //Time:2023-07-01 15:06:45
 class PLCP_41_FHi6rV {
