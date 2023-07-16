@@ -46,7 +46,7 @@ import java.util.List;
 class P18_FourSum {
     public static void main(String[] args) {
         Solution solution = new P18_FourSum().new Solution();
-        System.out.println(solution.fourSum(new int[]{1, 0, -1, 0, -2, 2}, 0));
+        System.out.println(solution.fourSum(new int[]{1000000000, 1000000000, 1000000000, 1000000000}, -294967296));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -68,7 +68,7 @@ class P18_FourSum {
                     int k = j + 1;
                     int l = nums.length - 1;
                     while (k < l) {
-                        int sum = nums[i] + nums[j] + nums[k] + nums[l];
+                        long sum = (long) nums[i] + (long) nums[j] + (long) nums[k] + (long) nums[l];
                         if (sum > target) {
                             --l;
                         } else if (sum < target) {
