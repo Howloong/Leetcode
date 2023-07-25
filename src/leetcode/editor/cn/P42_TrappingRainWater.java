@@ -75,16 +75,14 @@ class P42_TrappingRainWater {
         public int trap(int[] height) {
             ArrayDeque<Integer> arrayDeque = new ArrayDeque<>();
             int len = height.length;
-            int[] res = new int[len];
             int sum = 0;
             arrayDeque.push(0);
-
             for (int i = 1; i < len; i++) {
                 while (!arrayDeque.isEmpty() && height[i] > height[arrayDeque.peek()]) {
                     int mid = height[arrayDeque.pop()];
                     if (!arrayDeque.isEmpty()) {
-                        int left = arrayDeque.pop();
-                        sum += ((i - left - 1) * (Math.min(height[left], height[i]) - height[mid]));
+                        int left = arrayDeque.peek();
+                        sum += ((i - left - 1) * (Math.min(height[left], height[i]) - mid));
                     }
                 }
                 arrayDeque.push(i);
