@@ -1,0 +1,50 @@
+    class Solution {
+        public int minFallingPathSum(int[][] grid) {
+            int m = grid.length;
+            int n = grid[0].length;
+            int[] dp = new int[n];
+            int[] min = new int[4];
+            min[0] = Integer.MAX_VALUE;
+            min[1] = 0;
+            min[2] = grid[0][0];
+            min[3] = Integer.MAX_VALUE;
+            for (int i = 0; i < n; i++) {
+                dp[i] = grid[0][i];
+                getMin(dp, min, i);
+            }
+            for (int i = 1; i < m; i++) {
+                int[] temp = new int[4];
+                temp[0] = Integer.MAX_VALUE;
+                temp[1] = 0;
+                temp[2] = Integer.MAX_VALUE;
+                temp[3] = 0;
+                for (int j = 0; j < n; j++) {
+                    if (min[1] != j) {
+                        dp[j] = min[0] + grid[i][j];
+                    } else {
+                        dp[j] = min[2] + grid[i][j];
+                    }
+
+                    getMin(dp, temp, j);
+                }
+                System.arraycopy(temp, 0, min, 0, 4);
+            }
+            return min[0];
+        }
+
+        private void getMin(int[] dp, int[] temp, int j) {
+            if (dp[j] < temp[0]) {
+                temp[2] = temp[0];
+                temp[3] = temp[1];
+                temp[0] = dp[j];
+                temp[1] = j;
+            } else if (dp[j] < temp[2]) {
+                temp[2] = dp[j];
+                temp[3] = j;
+            }
+        }
+
+    }
+
+//runtime:3 ms
+//memory:48.5 MB

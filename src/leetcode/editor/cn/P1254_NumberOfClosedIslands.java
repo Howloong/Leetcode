@@ -94,7 +94,6 @@ class P1254_NumberOfClosedIslands {
     class Solution {
         int row, col;
         int[][] grid;
-
         public int closedIsland(int[][] grid) {
             row = grid.length;
             col = grid[0].length;

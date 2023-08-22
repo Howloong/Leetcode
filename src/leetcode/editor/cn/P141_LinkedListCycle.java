@@ -91,6 +91,9 @@ class P141_LinkedListCycle {
             return false;
         }
     }
+//runtime:0 ms
+//memory:42.5 MB
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

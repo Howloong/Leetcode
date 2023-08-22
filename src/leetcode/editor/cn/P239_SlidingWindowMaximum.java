@@ -43,64 +43,60 @@ package leetcode.editor.cn;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
 
 //Java：滑动窗口最大值
 class P239_SlidingWindowMaximum {
     public static void main(String[] args) {
         Solution solution = new P239_SlidingWindowMaximum().new Solution();
-//        System.out.println(Arrays.toString(solution.maxSlidingWindow(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3)));
-        System.out.println(Arrays.toString(solution.maxSlidingWindow(new int[]{1, 3, 1, 2, 0, 5}, 3)));
+        System.out.println(Arrays.toString(solution.maxSlidingWindow(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3)));
+//        System.out.println(Arrays.toString(solution.maxSlidingWindow(new int[]{1, 3, 1, 2, 0, 5}, 3)));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] maxSlidingWindow(int[] nums, int k) {
-            if (k == 1) {
-                return nums;
-            }
-            MyQueue myQueue = new MyQueue(k);
-            int[] result = new int[nums.length - k + 1];
-            int t = 0;
+            int[] res = new int[nums.length - k + 1];
+            MonotonicQueue monotonicQueue = new MonotonicQueue(k);
             for (int i = 0; i < k; i++) {
-                myQueue.offer(nums[i]);
+                monotonicQueue.offer(nums[i]);
             }
-            result[t++] = myQueue.peek();
+            res[0] = monotonicQueue.peek();
             for (int i = k; i < nums.length; i++) {
-                myQueue.offer(nums[i]);
-                myQueue.poll(nums[i - k]);
-                result[t++] = myQueue.peek();
+                monotonicQueue.poll(nums[i - k]);
+                monotonicQueue.offer(nums[i]);
+                res[i - k + 1] = monotonicQueue.peek();
             }
-            return result;
+            return res;
         }
     }
 
-    class MyQueue {
-        public ArrayDeque<Integer> arrayDeque;
+    class MonotonicQueue {
+        private Deque<Integer> deque;
 
-
-        public MyQueue(int k) {
-            arrayDeque = new ArrayDeque<>(k);
-        }
-
-        public void offer(int num) {
-            while (!arrayDeque.isEmpty() && num > arrayDeque.getLast()) {
-                arrayDeque.removeLast();
-            }
-            arrayDeque.offer(num);
-        }
-
-        public void poll(int head) {
-            if (!arrayDeque.isEmpty()) {
-                if (head == arrayDeque.peek()) {
-                    arrayDeque.poll();
-                }
-            }
+        public MonotonicQueue(int k) {
+            this.deque = new ArrayDeque<>(k);
         }
 
         public int peek() {
-            return arrayDeque.peek();
+            return deque.peek();
         }
+
+        public void offer(int num) {
+            while (!deque.isEmpty() && deque.peekLast() < num) {
+                deque.pollLast();
+            }
+            deque.offer(num);
+        }
+
+        public void poll(int num) {
+            if (deque.peek() == num) {
+                deque.poll();
+            }
+        }
+
     }
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

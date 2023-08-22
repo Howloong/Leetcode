@@ -43,7 +43,12 @@
 
 package leetcode.editor.cn;
 
+import com.sun.jdi.ObjectReference;
+
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 //Java:和至少为 K 的最短子数组
 //Time:2023-07-21 21:23:21
@@ -74,6 +79,7 @@ class P862_ShortestSubarrayWithSumAtLeastK {
             }
             return res > len ? -1 : res;
         }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
