@@ -11,20 +11,18 @@
 
 <p><strong>示例 1：</strong></p>
 
-<pre>
-<strong>输入：</strong>start = "_L__R__R_", target = "L______RR"
+<pre><strong>输入：</strong>start = "_L__R__R_", target = "L______RR"
 <strong>输出：</strong>true
 <strong>解释：</strong>可以从字符串 start 获得 target ，需要进行下面的移动：
 - 将第一个片段向左移动一步，字符串现在变为 "<strong>L</strong>___R__R_" 。
 - 将最后一个片段向右移动一步，字符串现在变为 "L___R___<strong>R</strong>" 。
-- 将第二个片段向右移动三步，字符串现在变为 "L______<strong>R</strong>R" 。
+- 将第二个片段向右移动散步，字符串现在变为 "L______<strong>R</strong>R" 。
 可以从字符串 start 得到 target ，所以返回 true 。
 </pre>
 
 <p><strong>示例 2：</strong></p>
 
-<pre>
-<strong>输入：</strong>start = "R_L_", target = "__LR"
+<pre><strong>输入：</strong>start = "R_L_", target = "__LR"
 <strong>输出：</strong>false
 <strong>解释：</strong>字符串 start 中的 'R' 片段可以向右移动一步得到 "_<strong>R</strong>L_" 。
 但是，在这一步之后，不存在可以移动的片段，所以无法从字符串 start 得到 target 。
@@ -32,8 +30,7 @@
 
 <p><strong>示例 3：</strong></p>
 
-<pre>
-<strong>输入：</strong>start = "_R", target = "R_"
+<pre><strong>输入：</strong>start = "_R", target = "R_"
 <strong>输出：</strong>false
 <strong>解释：</strong>字符串 start 中的片段只能向右移动，所以无法从字符串 start 得到 target 。</pre>
 
@@ -47,4 +44,4 @@
  <li><code>start</code> 和 <code>target</code> 由字符 <code>'L'</code>、<code>'R'</code> 和 <code>'_'</code> 组成</li> 
 </ul>
 
-<div><div>Related Topics</div><div><li>双指针</li><li>字符串</li></div></div><br><div><li>👍 132</li><li>👎 0</li></div>
+<div><div>Related Topics</div><div><li>双指针</li><li>字符串</li></div></div><br><div><li>👍 58</li><li>👎 0</li></div>
