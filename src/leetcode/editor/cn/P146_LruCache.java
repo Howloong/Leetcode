@@ -60,7 +60,9 @@
 
 package leetcode.editor.cn;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 //Java:LRU 缓存
 //Time:2023-08-22 15:21:43

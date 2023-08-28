@@ -71,23 +71,24 @@ class P143_ReorderList {
                 return;
             }
             Deque<ListNode> deque = new ArrayDeque<>();
+//            用一个栈保存Node
             while (head != null) {
                 deque.push(head);
                 head = head.next;
             }
             head = new ListNode();
-            ListNode res = head;
             while (!deque.isEmpty()) {
+//                取尾一个
                 head.next = deque.pollLast();
                 head = head.next;
                 head.next = null;
+//                取头一个
                 if (!deque.isEmpty()) {
                     head.next = deque.pollFirst();
                     head = head.next;
                     head.next = null;
                 }
             }
-            head = res.next;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

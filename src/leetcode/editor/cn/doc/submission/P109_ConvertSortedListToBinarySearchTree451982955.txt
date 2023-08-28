@@ -1,0 +1,26 @@
+    class Solution {
+        public TreeNode sortedListToBST(ListNode head) {
+            if (head == null) {
+                return null;
+            }
+            if (head.next == null) {
+                return new TreeNode(head.val);
+            }
+            ListNode i = head;
+            ListNode j = head;
+            ListNode pre = i;
+            while (j != null && j.next != null) {
+                pre = i;
+                i = i.next;
+                j = j.next.next;
+            }
+            pre.next = null;
+            TreeNode node = new TreeNode(i.val);
+            node.left = sortedListToBST(head);
+            node.right = sortedListToBST(i.next);
+            return node;
+        }
+    }
+
+//runtime:0 ms
+//memory:43.2 MB

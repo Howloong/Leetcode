@@ -34,6 +34,9 @@
 
 package leetcode.editor.cn;
 
+import leetcode.editor.cn.DataStruct.ListNode;
+import leetcode.editor.cn.DataStruct.TreeNode;
+
 //Java:有序链表转换二叉搜索树
 //Time:2023-08-22 15:18:20
 class P109_ConvertSortedListToBinarySearchTree {
@@ -68,7 +71,25 @@ class P109_ConvertSortedListToBinarySearchTree {
      */
     class Solution {
         public TreeNode sortedListToBST(ListNode head) {
-
+            if (head == null) {
+                return null;
+            }
+            if (head.next == null) {
+                return new TreeNode(head.val);
+            }
+            ListNode i = head;
+            ListNode j = head;
+            ListNode pre = i;
+            while (j != null && j.next != null) {
+                pre = i;
+                i = i.next;
+                j = j.next.next;
+            }
+            pre.next = null;
+            TreeNode node = new TreeNode(i.val);
+            node.left = sortedListToBST(head);
+            node.right = sortedListToBST(i.next);
+            return node;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
