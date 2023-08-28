@@ -60,9 +60,8 @@ class P415_AddStrings {
             }
             if (num1.length() > num2.length()) {
                 return add(num1, num2);
-            } else {
-                return add(num2, num1);
             }
+            return add(num2, num1);
         }
 
         public String add(String num1, String num2) {
