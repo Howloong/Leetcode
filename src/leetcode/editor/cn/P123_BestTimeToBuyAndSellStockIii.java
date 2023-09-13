@@ -56,7 +56,7 @@ package leetcode.editor.cn;
 class P123_BestTimeToBuyAndSellStockIii {
     public static void main(String[] args) {
         Solution solution = new P123_BestTimeToBuyAndSellStockIii().new Solution();
-        System.out.println(solution.maxProfit(new int[]{3, 3, 5, 0, 0, 3, 1, 4}));
+        System.out.println(solution.maxProfit(new int[]{8, 9, 2, 5, 4, 7, 1}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

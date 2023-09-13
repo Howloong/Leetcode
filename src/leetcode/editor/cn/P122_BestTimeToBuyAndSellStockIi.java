@@ -47,7 +47,7 @@ class P122_BestTimeToBuyAndSellStockIi {
     public static void main(String[] args) {
         Solution solution = new P122_BestTimeToBuyAndSellStockIi().new Solution();
 //        System.out.println(solution.maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
-        System.out.println(solution.maxProfit(new int[]{1, 2, 3, 4, 5}));
+        System.out.println(solution.maxProfit(new int[]{8, 9, 2, 5, 4, 7, 1}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -78,7 +78,6 @@ class P122_BestTimeToBuyAndSellStockIi {
 //            0为持有
 //            1为不持有
             dp[0] = -prices[0];
-            dp[1] = 0;
             for (int i = 1; i < prices.length; i++) {
                 dp[0] = Math.max(dp[0], dp[1] - prices[i]);
                 dp[1] = Math.max(dp[1], dp[0] + prices[i]);

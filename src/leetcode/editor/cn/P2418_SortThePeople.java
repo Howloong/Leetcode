@@ -57,6 +57,7 @@ class P2418_SortThePeople {
                 h[i][0] = heights[i];
                 h[i][1] = i;
             }
+//            Arrays.parallelSort(h, Comparator.comparingInt(a -> -a[0]));
             Arrays.sort(h, Comparator.comparingInt(a -> -a[0]));
             String[] res = new String[n];
             for (int i = 0; i < n; i++) {

@@ -41,7 +41,7 @@ package leetcode.editor.cn;
 class P121_BestTimeToBuyAndSellStock {
     public static void main(String[] args) {
         Solution solution = new P121_BestTimeToBuyAndSellStock().new Solution();
-        System.out.println(solution.maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
+        System.out.println(solution.maxProfit(new int[]{8, 9, 2, 5, 4, 7, 1}));
 //        System.out.println(solution.maxProfit(new int[]{7,6,4,3,1}));
 //        System.out.println(solution.maxProfit(new int[]{2,4,1}));
     }
