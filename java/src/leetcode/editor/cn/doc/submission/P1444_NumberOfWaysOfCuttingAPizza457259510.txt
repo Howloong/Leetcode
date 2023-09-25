@@ -1,0 +1,61 @@
+    class Solution {
+
+        public static final int MOD = (int) 1e9 + 7;
+
+        public int ways(String[] pizza, int k) {
+            MatrixSum matrixSum = new MatrixSum(pizza);
+            int m = pizza.length;
+            int n = pizza[0].length();
+            int[][][] memo = new int[k][m][n];
+            for (int i = 0; i < k; i++) {
+                for (int j = 0; j < m; j++) {
+                    Arrays.fill(memo[i][j], -1);
+                }
+            }
+            return dfs(k - 1, 0, 0, memo, matrixSum, m, n);
+        }
+
+        private int dfs(int c, int i, int j, int[][][] memo, MatrixSum matrixSum, int m, int n) {
+            if (c == 0) {
+                return matrixSum.query(i, j, m, n) > 0 ? 1 : 0;
+            }
+            if (memo[c][i][j] != -1) {
+                return memo[c][i][j];
+            }
+            int res = 0;
+            for (int j2 = j; j2 < n; j2++) {
+                if (matrixSum.query(i, j, m, j2) > 0) {
+                    res = (res + dfs(c - 1, i, j2, memo, matrixSum, m, n)) % MOD;
+                }
+            }
+            for (int i2 = i; i2 < m; i2++) {
+                if (matrixSum.query(i, j, i2, n) > 0) {
+                    res = (res + dfs(c - 1, i2, j, memo, matrixSum, m, n)) % MOD;
+                }
+            }
+            return memo[c][i][j] = res;
+        }
+    }
+
+    class MatrixSum {
+        private final int[][] sum;
+
+        public MatrixSum(String[] matrix) {
+            int m = matrix.length;
+            int n = matrix[0].length();
+            sum = new int[m + 1][n + 1];
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    sum[i + 1][j + 1] = sum[i + 1][j] + sum[i][j + 1] - sum[i][j] + (matrix[i].charAt(j) == 'A' ? 1 : 0);
+                }
+            }
+        }
+
+        public int query(int row1, int col1, int row2, int col2) {
+            return sum[row2][col2] - sum[row2][col1] - sum[row1][col2] + sum[row1][col1];
+        }
+    }
+
+
+//runtime:8 ms
+//memory:39 MB

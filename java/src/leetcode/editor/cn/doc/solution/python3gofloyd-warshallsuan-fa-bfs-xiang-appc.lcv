@@ -1,0 +1,105 @@
+> Problem: [1462. 课程表 IV](https://leetcode.cn/problems/course-schedule-iv/description/)
+
+# 思路
+
+用BFS方法来解决这个问题。可以创建一个有向图，其中节点表示路线，边表示先决条件。然后，对于每个航线，执行BFS遍历以确定可以从它到达哪些航线。在构建此可达性信息之后，可以轻松地回答查询。
+
+# 复杂度
+
+- 时间复杂度分析：
+
+构建邻接矩阵的时间复杂度为O(N^2)，其中N为课程数。
+使用Floyd-Warshall算法计算可达性的时间复杂度也为O(N^3)，因为有三重循环。
+处理查询的时间复杂度为O(Q)，其中Q是查询的数量。
+总的时间复杂度为O(N^3 + Q)，主要由Floyd-Warshall算法的计算和查询的数量决定。
+
+- 空间复杂度分析：
+
+构建邻接矩阵的空间复杂度为O(N^2)，用于存储所有的先修关系。
+使用Floyd-Warshall算法的空间复杂度为O(N^2)，用于存储中间计算结果。
+结果数组的空间复杂度为O(Q)，用于存储查询结果。
+总的空间复杂度为O(N^2 + Q)，主要由邻接矩阵和结果数组决定。
+
+需要注意的是，这个解决方案在空间复杂度上可能会有一些浪费，因为邻接矩阵会存储所有课程之间的关系，而不仅仅是查询中涉及的课程。如果内存限制较大，这个解决方案是可行的。如果内存有限，可以考虑使用其他数据结构来降低空间复杂度。
+
+# Code
+
+* []
+
+```Python
+class Solution:
+    def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
+        # 构建一个图来表示先决条件
+        graph = defaultdict(list)
+        for u, v in prerequisites:
+            graph[u].append(v)
+        
+        # 函数执行BFS并标记给定课程的可达课程
+        def bfs(course):
+            reachable = set()
+            queue = deque([course])
+            
+            while queue:
+                current_course = queue.popleft()
+                reachable.add(current_course)
+                for neighbor in graph[current_course]:
+                    if neighbor not in reachable:
+                        queue.append(neighbor)
+            
+            return reachable
+        
+        # 建立可达性矩阵
+        isReachable = [[False] * numCourses for _ in range(numCourses)]
+        for i in range(numCourses):
+            reachable = bfs(i)
+            for course in reachable:
+                isReachable[i][course] = True
+        
+        # 回答问题
+        result = []
+        for u, v in queries:
+            result.append(isReachable[u][v])
+        
+        return result
+```
+
+![image.png](https://pic.leetcode.cn/1694480308-ybDYcy-image.png)
+
+* []
+
+```go
+func checkIfPrerequisite(numCourses int, prerequisites [][]int, queries [][]int) []bool {
+    // 构建邻接矩阵来表示先修关系
+    graph := make([][]bool, numCourses)
+    for i := range graph {
+        graph[i] = make([]bool, numCourses)
+    }
+
+    // 初始化邻接矩阵
+    for _, pre := range prerequisites {
+        graph[pre[0]][pre[1]] = true
+    }
+
+    // 使用Floyd-Warshall算法计算任意两门课之间的可达性
+    for k := 0; k < numCourses; k++ {
+        for i := 0; i < numCourses; i++ {
+            for j := 0; j < numCourses; j++ {
+                if graph[i][k] && graph[k][j] {
+                    graph[i][j] = true
+                }
+            }
+        }
+    }
+
+    // 处理查询
+    results := make([]bool, len(queries))
+    for i, query := range queries {
+        u, v := query[0], query[1]
+        results[i] = graph[u][v]
+    }
+
+    return results
+}
+```
+
+![image.png](https://pic.leetcode.cn/1694480347-MpyDcx-image.png)

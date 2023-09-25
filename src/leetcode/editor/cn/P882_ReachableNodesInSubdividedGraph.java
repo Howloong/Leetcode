@@ -53,20 +53,18 @@
 // Related Topics 图 最短路 堆（优先队列） 👍 158 👎 0
 
 package leetcode.editor.cn;
-
 //Java:细分图中的可到达节点
-//Time:2023-09-12 15:49:37
-class P882_ReachableNodesInSubdividedGraph {
+//Time:2023-09-15 12:59:49
+class P882_ReachableNodesInSubdividedGraph{
     public static void main(String[] args) {
         Solution solution = new P882_ReachableNodesInSubdividedGraph().new Solution();
     }
-
     //leetcode submit region begin(Prohibit modification and deletion)
-    class Solution {
-        public int reachableNodes(int[][] edges, int maxMoves, int n) {
+class Solution {
+    public int reachableNodes(int[][] edges, int maxMoves, int n) {
 
-        }
     }
+}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

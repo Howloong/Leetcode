@@ -1,0 +1,22 @@
+    class Solution {
+        public int[] circularGameLosers(int n, int k) {
+            HashSet<Integer> hashSet = new HashSet<>();
+            for (int i = 0; i < n; i++) {
+                hashSet.add(i);
+            }
+            int index =  0;
+            int t = 1;
+            while (hashSet.contains(index)) {
+                hashSet.remove(index);
+                index += (t * k);
+                index %= n;
+                t++;
+            }
+            return hashSet.stream().mapToInt(Integer::intValue)
+                    .map(operand -> operand + 1)
+                    .sorted().toArray();
+        }
+    }
+
+//runtime:9 ms
+//memory:42.7 MB

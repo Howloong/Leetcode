@@ -1,4 +1,4 @@
-//这里有 n 门不同的在线课程，按从 1 到 n 编号。给你一个数组 courses ，其中 courses[i] = [durationi,
+//这里有 n 门不同的在线课程，按从 1 到 n 编号。给你一个数组 courses ，其中 courses[i] = [durationi, 
 //lastDayi] 表示第 i 门课将会 持续 上 durationi 天课，并且必须在不晚于 lastDayi 的时候完成。 
 //
 // 你的学期从第 1 天开始。且不能同时修读两门及两门以上的课程。 
@@ -42,42 +42,26 @@
 // 1 <= durationi, lastDayi <= 10⁴ 
 // 
 //
-// Related Topics 贪心 数组 排序 堆（优先队列） 👍 452 👎 0
+// Related Topics 贪心 数组 排序 堆（优先队列） 👍 530 👎 0
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
 //Java:课程表 III
-//Time:2023-09-11 09:49:53
+//Time:2023-09-11 20:10:01
 class P630_CourseScheduleIii {
     public static void main(String[] args) {
         Solution solution = new P630_CourseScheduleIii().new Solution();
-        System.out.println(solution.scheduleCourse(new int[][]{{100, 200}, {200, 1300}, {1000, 1250}, {2000, 3000}}));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int scheduleCourse(int[][] courses) {
-            Arrays.sort(courses, Comparator.comparingInt(o -> o[1]));
-            PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((a, b) -> b - a);
-            int day = 0;
-            for (int[] cours : courses) {
-                int duration = cours[0];
-                int lastDay = cours[1];
-                if (day + duration <= lastDay) {
-                    day += duration;
-                    priorityQueue.offer(duration);
-                } else if (!priorityQueue.isEmpty() && duration < priorityQueue.peek()) {
-                    day -= (priorityQueue.poll() - duration);
-                    priorityQueue.offer(duration);
-                }
-            }
-            return priorityQueue.size();
+            int res = 0;
+            return 1;
         }
-
     }
 //leetcode submit region end(Prohibit modification and deletion)
 

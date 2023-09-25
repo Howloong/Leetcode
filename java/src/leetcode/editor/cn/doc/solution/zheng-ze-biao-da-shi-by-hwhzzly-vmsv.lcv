@@ -1,0 +1,26 @@
+### 解题思路
+
+该题需要用到正则表示式里面调用变量，pattern的每一个字符出现一次,每个字符之间可以有任意个小写字符
+如pattern为'FB' 正则表示式：[a-z]*[F][a-z]*[B][a-z]*$
+
+### 代码
+
+* python3
+
+```python
+class Solution:
+    def camelMatch(self, queries: List[str], pattern: str) -> List[bool]:
+        res = []
+        key = '[a-z]*'
+        for pat in pattern:
+            key = key + '[' + pat + ']'
+            key = key + '[a-z]*'
+        re_camel = re.compile(r'%s$' %key)
+        for query in queries:
+            if re.match(re_camel, query):
+                res.append(True)
+            else:
+                res.append(False)
+        return res
+```
+

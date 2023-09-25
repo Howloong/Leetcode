@@ -1,0 +1,35 @@
+![image.png](https://pic.leetcode-cn.com/1618468158-vsWPhY-image.png)
+
+看了下下面的题解，除了官方题解用多个返回值只遍历了一次，其他题解大都反复计算深度，其实复杂度是O(nlogn)
+本题解进行一次遍历得到结果
+
+# 主要思想：
+
+在一次遍历深度的过程中，找到左右子树深度都为最大值的节点记录下来
+
+* 
+
+```
+class Solution {
+  private int maxDeep = Integer.MIN_VALUE;
+  private TreeNode result;
+  public TreeNode subtreeWithAllDeepest(TreeNode root) {
+    maxDeep(root, 0);
+    return result;
+  }
+  private int maxDeep(TreeNode node, int deep) {
+    if (node == null) {
+      return deep;
+    }
+    int left = maxDeep(node.left, deep+1);
+    int right = maxDeep(node.right, deep+1);
+    int currentMax = Math.max(left, right);
+    maxDeep = Math.max(maxDeep, currentMax);
+    if (left == maxDeep && right == maxDeep) {
+      result = node;
+    }
+    return currentMax;
+  }
+}
+```
+

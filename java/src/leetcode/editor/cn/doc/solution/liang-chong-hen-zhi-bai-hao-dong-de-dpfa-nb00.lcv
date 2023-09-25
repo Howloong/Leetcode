@@ -1,0 +1,106 @@
+## 理解题意
+
+简单来说，**一步操作**是使用**arr2**中的一个数替换**arr1**中的一个数。  
+很自然地，我们可以对arr1**从头到尾**进行这个过程，对每一个值进行操作（或者不操作），从而由**部分有序**构建全体有序。
+考虑进行到`arr1[i]`时，此时`0~i-1`已经有序，此时我们面临**两种选择**：
+- **不进行替换**，前提是`arr1[i]>arr1[i-1]`(注意是替换后的`arr1[i-1]`)，操作数不变。
+- **进行替换**，就要考虑用**哪个数**来替换，此时采用**贪心**的思想：首先，这个数必须比`arr1[i-1]`大以保证有序，在这个前提下，**越小越好**，这也是很显然的。所以，我们希望找到`arr2`中比`arr1[i-1]`大的最小值进行替换，使用**排序+二分查找**，操作数+1。
+
+需要指出，在已经递增的情况下，执行替换**也可能更好**，因为**可以使末位变小**。实际上，我们就是要在**最后一个数更小**和**操作数更少**之间进行取舍，也依此来定义状态。  
+有了这样的思路，可以开始设计dp了。
+
+## 第一种dp——最后一个数固定时的最小操作数
+
+根据上面的思路，定义`dp[i][j]`为：对于前`i`个数构成的递增序列，在最后一个数为`j`时的**最小操作数**。  
+状态转移方程：  
+$$
+\large
+dp[i][arr[i]]=min(dp[i-1][j]),j<arr[i]\\
+dp[i][k]=min(dp[i-1][j])+1,best\ of\ j\ is\ k
+$$
+转移方程比较丑，但是简单来说，对于每一个`dp[i-1][j]`，如果`j<arr1[i]`，则可以转移到`dp[i][arr1[i]]`并且操作数不变（不进行转化）；而对于每一个`j`，如果二分查找成功在`arr2`中找到`k`，那就可以转移到`dp[i][k]`，并且操作数+1。  
+因为状态转移**只发生在相邻两个数组之间**，可以优化掉一维，改用**两个一维数组**实现。  
+在代码实现上，由于最后一个数是**不连续的**，要用**哈希表**作为dp数组；`dp[i]`表示**当前序列**最后一个数为`i`时的最小操作数，我们从头到尾遍历`arr1`，并对上一个哈希表内的状态进行转移即可。  
+不同的值最多`m+n`个，因此这种方法的时间复杂度为`O(n*(m+n)*logm)`
+
+## 代码
+
+* cpp
+
+```cpp
+class Solution {
+public:
+    int makeArrayIncreasing(vector<int>& arr1, vector<int>& arr2) {
+        sort(arr2.begin(),arr2.end());//对arr2排序以进行二分查找
+        unordered_map<int,int> dp;//dp数组
+        dp[-1]=0;//迭代初始值
+        for(int i=0;i<arr1.size();++i)//遍历arr1中的每个值，使得0~i有序
+        {
+            unordered_map<int,int> next;//下一个dp数组
+            for(auto&p:dp)//遍历上层数组，进行状态转移
+            {
+                if(arr1[i]>p.first)//如果本来就有序了，可以不替换
+                    next[arr1[i]]=next.count(arr1[i])?min(next[arr1[i]],p.second):p.second;
+                auto iter=upper_bound(arr2.begin(),arr2.end(),p.first);//二分找到最优替换
+                if(iter==arr2.end())//没找到，跳过
+                    continue;
+                next[*iter]=next.count(*iter)?min(next[*iter],p.second+1):p.second+1;
+            }
+            swap(dp,next);//滚动
+        }
+        int ans=INT_MAX;
+        for(auto&p:dp)//遍历最后一个dp数组找到最优解
+            ans=min(ans,p.second);
+        return ans==INT_MAX?-1:ans;
+    }
+};
+```
+
+## 第二种dp——操作数固定时的最小末尾
+
+前面说过，我们面临的是**最后一个数更小**和**操作数更少**之间的取舍，第一种方法是固定最后一个数，与之对称，我们也可以固定操作数。
+直接省略外层数组，定义`dp[i]`为当前序列，在操作数为`i`时所能得到的**最后一个数的最小值**，转移方程如下：
+$$
+\large
+next[j]=min
+\begin{cases}arr1[i],dp[j]<arr1[i](不进行替换，则操作数不变，末尾变为arr[i])\\
+k,best\ of\ dp[j-1]\ is\ k(进行替换，操作数+1，末尾变成二分结果)
+\end{cases}
+$$
+代码实现上，从头到尾遍历`arr1`，对于每一个`arr1[i]`，遍历dp并进行转移，得到next。
+细节：操作数最多为`min(n,m)`，所以我们设置一个lim作为上限，同时，在遍历到`arr1[i]`时，操作数也不会超过i+1，在遍历dp时进行控制即可。
+
+## 代码
+
+* cpp
+
+```cpp
+class Solution {
+public:
+    int makeArrayIncreasing(vector<int>& arr1, vector<int>& arr2) {
+        sort(arr2.begin(),arr2.end());
+        int lim=min(arr1.size(),arr2.size());//操作数上限
+        vector<int> dp(lim+1,-1);
+        for(int i=0;i<arr1.size();++i)
+        {
+            vector<int> next(lim+1,INT_MAX);
+            for(int j=0;j<=i&&j<lim;++j)//操作数为min(i+1,n,m)
+            {
+                if(arr1[i]>dp[j])//如果本来就有序了，可以不替换
+                    next[j]=min(next[j],arr1[i]);
+                auto iter=upper_bound(arr2.begin(),arr2.end(),dp[j]);
+                if(iter==arr2.end())
+                    continue;
+                next[j+1]=min(next[j+1],*iter);
+            }
+            swap(dp,next);
+        }
+        for(int i=0;i<=lim;++i)//找到答案
+            if(dp[i]!=INT_MAX)
+                return i;
+        return -1;
+    }
+};
+```
+
+**写了好久，如果你觉得对你有帮助，求个赞谢谢喵❤️❤️❤️；如果还有疑问，欢迎在评论区交流；如果有哪里写的有问题，也请不吝赐教**

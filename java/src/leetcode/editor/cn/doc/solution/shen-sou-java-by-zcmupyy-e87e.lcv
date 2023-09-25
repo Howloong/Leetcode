@@ -1,0 +1,42 @@
+这道题好像没什么人用深搜 但是我就是比较喜欢写深搜
+但是这道题比较奇怪
+看了评论区大佬的说法是 前进的vis要记录
+但是后退的vis不需要记录
+因为这个 我wa了两发 然后改了就过了 不太明白为啥后退的vis不需要记录 有大佬可以解释一下吗
+
+* 
+
+```
+class Solution {
+    int min = Integer.MAX_VALUE;
+    boolean [] vis;
+    Set<Integer> set;
+    public int minimumJumps(int[] forbidden, int a, int b, int x) {
+        set = new HashSet<>();
+        vis = new boolean[6000+1];
+        for(int i=0;i<forbidden.length;i++){
+            set.add(forbidden[i]);
+        }
+        dfs(forbidden,a,b,x,0,0,false);
+        return min==Integer.MAX_VALUE?-1:min;
+    }
+
+    void dfs(int []forbidden,int a,int b,int x,int cur,int step,boolean flag){
+        if(cur<0||cur>6000||vis[cur]||set.contains(cur))
+            return;
+        if(cur == x){
+            min = Math.min(step,min);
+            return ;
+        }
+        if(!flag)
+        vis[cur] = true;
+        if(flag)
+            dfs(forbidden,a,b,x,cur+a,step+1,false);
+        else{
+            dfs(forbidden,a,b,x,cur+a,step+1,false);
+            dfs(forbidden,a,b,x,cur-b,step+1,true);
+        }
+    }
+}
+```
+

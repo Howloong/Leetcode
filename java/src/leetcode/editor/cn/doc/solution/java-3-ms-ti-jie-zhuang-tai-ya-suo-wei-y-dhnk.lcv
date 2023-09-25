@@ -1,0 +1,62 @@
+# 思路
+
+基础的图遍历解法这里就不说了。
+
+某花园的初始状态为可以种`4`种花，我们可以用`4`个二进制位来标识各种花是否可选。由于数组元素初始化为`0`，所以我们用`0`标识一种花可选，用`1`标识一种花不可选。`0000`表示`4`种花都可选，一个`int`可以用于存储`8`个花园的状态。
+
+按照编号从大到小遍历花园，对于每次遍历到的花园，我们选择其状态中最低位`0`代表的花进行种植，并对编号比它小的花园标记不可种植这种花。
+
+要获取一个整型`i`的最低位`0`，可以对其取反，计算最低位`1`，即`~i & -~i`。由于`-i == ~i + 1`，所以表达式可以变换为`~i & i + 1`（其实两种写法没太大差别）。
+
+# Code
+
+* Java
+
+```Java
+class Solution {
+
+    private static final int[] MAP = {0, 1, 2, 4, 3};
+    /** PATHS[i] 代表编号为 i + 2 的花园可以到达的编号更小的花园，PATHS[i][3]为有效数据量 */
+    private static final int[][] PATHS = new int[9999][4];
+
+    public int[] gardenNoAdj(int n, int[][] paths) {
+        if (paths.length == 0) {
+            int[] ans = new int[n];
+            for (int i = ans.length - 1; i >= 0; i--) {
+                ans[i] = 1;
+            }
+            return ans;
+        }
+
+        for (int[] path : paths) {
+            int a = path[0] - 1, b = path[1] - 1;
+            if (a > b) {
+                push(PATHS[a - 1], b);
+            } else {
+                push(PATHS[b - 1], a);
+            }
+        }
+        int[] marks = new int[n + 7 >>> 3];
+        int[] ans = new int[n--];
+        while (true) {
+            int mark = marks[n >>> 3] >>> ((n & 7) << 2);
+            ans[n] = MAP[(mark = ~mark & mark + 1) % 5];
+            if (n == 0) {
+                return ans;
+            }
+
+            // 标记不可种植
+            int[] path = PATHS[--n];
+            while (path[3] > 0) {
+                int v = path[--path[3]];
+                marks[v >>> 3] |= mark << ((v & 7) << 2);
+            }
+        }
+    }
+
+    private static void push(int[] path, int e) {
+        path[path[3]++] = e;
+    }
+}
+```
+
