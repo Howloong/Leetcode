@@ -6,16 +6,25 @@ using namespace std;
 class LFUCache {
 public:
     LFUCache(int capacity) {
-
+        this->capacity = capacity;
+        m = new map<int, int>(capacity);
     }
     
     int get(int key) {
+        auto count = m.count(key);
+        if (count == 0) {
+            return -1;
+        }
 
     }
     
     void put(int key, int value) {
 
     }
+
+private:
+    int capacity;
+    map<int, int> m;
 };
 
 /**
@@ -28,6 +37,6 @@ public:
 
 
 int main() {
-    Solution solution;
-    
+    LFUCache lfuCache();
+
 }
