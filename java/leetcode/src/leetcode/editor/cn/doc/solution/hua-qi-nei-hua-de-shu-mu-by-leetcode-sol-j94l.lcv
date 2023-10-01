@@ -1,0 +1,453 @@
+#### 方法一：差分数组 + 离线查询
+
+**思路与算法**
+
+本题可以转换为经典的「[差分](https://oi-wiki.org/basic/prefix-sum/)」思想，由于每朵花开的周期是固定的，第 $i$ 朵花开的周期为 $[\textit{start}_i, \textit{end}_i]$，即区间 $[\textit{start}_i, \textit{end}_i]$ 内每个时间点都有一朵花正处于开放状态，此时假设第 $j$ 个人到达的时间点为 $\textit{people}[j]$，则此时我们只需要求出 $\textit{people}[j]$ 时正处于开花状态的花朵数目即可。根据差分的性质，对差分数组求前缀和即可得到当前元素的值，此时我们只需要对区间 $[0,\textit{people}[j]]$ 之间求前缀和，即可得到时间点为 $\textit{people}[j]$ 开花的数目。
+
+具体地，由于本题中花开时间的取值范围为 $0 \le \textit{start}_i \le \textit{end}_i \leq 10^9$，这就决定了我们无法直接使用数组来计算前缀和，但可以将时间点进行离散化，利用有序集合来记录端点的变化量即可，在时间点 $\textit{start}_i$ 上开花的数量增加了 $1$，在时间点 $\textit{end}_i + 1$ 开花的数量减少了 $1$。遍历整个 $\textit{flowers}$ 数组，利用有序集合 $\textit{cnt}$ 统计每次花开放区间端点的变化量。此时根据差分的性质，只需对所有小于等于 $\textit{people}[j]$ 的端点变化量求和即可计算出 $\textit{people}[j]$ 时间点处于开花状态的花朵数目。由于 $\textit{cnt}$ 本身为有序集合，对其直接遍历即为有序，从小到大累加所有的变化量即可依次得到从早到晚开花的数目。
+为了避免每次重复计算，可将 $\textit{people}$ 从小到大排序，这样可在遍历 $\textit{people}$ 的同时遍历 $\textit{cnt}$。此时可以利用双指针，一个指向数组 $\textit{people}$，另一个指针指向有序集合 $\textit{cnt}$ 即可。
+
+**代码**
+
+* [sol1-C++]
+
+```C++
+class Solution {
+public:
+    vector<int> fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& persons) {
+        map<int, int> cnt;
+        for (auto &flower : flowers) {
+            cnt[flower[0]]++;
+            cnt[flower[1] + 1]--;
+        }
+        int m = persons.size();
+        vector<int> indices(n);
+        iota(indices.begin(), indices.end(), 0);
+        sort(indices.begin(), indices.end(), [&](int a, int b) {
+            return persons[a] < persons[b];
+        });
+
+        vector<int> ans(m);
+        int curr = 0;
+        auto it = cnt.begin();
+        for (int x : indices) {
+            while (it != cnt.end() && it->first <= persons[x]) {
+                curr += it->second;
+                it++;
+            }
+            ans[x] = curr;
+        }
+        return ans;
+    }
+};
+```
+
+* [sol1-Java]
+
+```Java
+class Solution {
+    public int[] fullBloomFlowers(int[][] flowers, int[] persons) {
+        TreeMap<Integer, Integer> cnt = new TreeMap<>();
+        for (int[] flower : flowers) {
+            cnt.put(flower[0], cnt.getOrDefault(flower[0], 0) + 1);
+            cnt.put(flower[1] + 1, cnt.getOrDefault(flower[1] + 1, 0) - 1);
+        }
+        int m = persons.length;
+        Integer[] indices = IntStream.range(0, m).boxed().toArray(Integer[]::new);
+        Arrays.sort(indices, (i, j) -> persons[i] - persons[j]);
+        int[] ans = new int[m];
+        int curr = 0;
+        for (int x : indices) {
+            while (!cnt.isEmpty() && cnt.firstKey() <= persons[x]) {
+                curr += cnt.pollFirstEntry().getValue();
+            }
+            ans[x] = curr;
+        }
+        return ans;
+    }
+}
+```
+
+* [sol1-C]
+
+```C
+typedef struct {
+    int key;
+    int val;
+    UT_hash_handle hh;
+} HashItem; 
+
+HashItem *hashFindItem(HashItem **obj, int key) {
+    HashItem *pEntry = NULL;
+    HASH_FIND_INT(*obj, &key, pEntry);
+    return pEntry;
+}
+
+bool hashAddItem(HashItem **obj, int key, int val) {
+    if (hashFindItem(obj, key)) {
+        return false;
+    }
+    HashItem *pEntry = (HashItem *)malloc(sizeof(HashItem));
+    pEntry->key = key;
+    pEntry->val = val;
+    HASH_ADD_INT(*obj, key, pEntry);
+    return true;
+}
+
+bool hashSetItem(HashItem **obj, int key, int val) {
+    HashItem *pEntry = hashFindItem(obj, key);
+    if (!pEntry) {
+        hashAddItem(obj, key, val);
+    } else {
+        pEntry->val = val;
+    }
+    return true;
+}
+
+int hashGetItem(HashItem **obj, int key, int defaultVal) {
+    HashItem *pEntry = hashFindItem(obj, key);
+    if (!pEntry) {
+        return defaultVal;
+    }
+    return pEntry->val;
+}
+
+void hashFree(HashItem **obj) {
+    HashItem *curr = NULL, *tmp = NULL;
+    HASH_ITER(hh, *obj, curr, tmp) {
+        HASH_DEL(*obj, curr);  
+        free(curr);
+    }
+}
+
+static int cmp(const void *a, const void *b) {
+    return ((int *)a)[0] - ((int *)b)[0];
+}
+
+int* fullBloomFlowers(int** flowers, int flowersSize, int* flowersColSize, int* people, int peopleSize, int* returnSize) {
+    HashItem *cnt = NULL;
+    for (int i = 0; i < flowersSize; i++) {
+        hashSetItem(&cnt, flowers[i][0], hashGetItem(&cnt, flowers[i][0], 0) + 1);
+        hashSetItem(&cnt, flowers[i][1] + 1, hashGetItem(&cnt, flowers[i][1] + 1, 0) - 1);
+    }
+    int indices[peopleSize][2];
+    int arr[flowersSize * 2][2];
+    for (int i = 0; i < peopleSize; i++) {
+        indices[i][0] = people[i];
+        indices[i][1] = i;
+    }
+    int pos = 0;
+    for (HashItem *pEntry = cnt; pEntry; pEntry = pEntry->hh.next) {
+        arr[pos][0] = pEntry->key;
+        arr[pos][1] = pEntry->val;
+        pos++;
+    }
+    int arrSize = pos;
+    qsort(indices, peopleSize, sizeof(indices[0]), cmp);
+    qsort(arr, arrSize, sizeof(arr[0]), cmp);
+
+    int curr = 0;
+    int *ans = (int *)calloc(peopleSize, sizeof(int));
+    for (int i = 0, j = 0; i < peopleSize; i++) {
+        while (j < arrSize && arr[j][0] <= indices[i][0]) {
+            curr += arr[j][1];
+            j++;
+        }
+        ans[indices[i][1]] = curr;
+    }
+    hashFree(&cnt);
+    *returnSize = peopleSize;
+    return ans;
+}
+```
+
+* [sol1-Python]
+
+```Python
+class Solution:
+    def fullBloomFlowers(self, flowers: List[List[int]], people: List[int]) -> List[int]:
+        cnt = collections.defaultdict(int)
+        for start, end in flowers:
+            cnt[start] += 1
+            cnt[end + 1] -= 1
+        arr = sorted(cnt.items())
+        m = len(people)
+        ans = [0] * m
+        j, curr = 0, 0
+        for p, i in sorted(zip(people, range(m))):
+            while j < len(arr) and arr[j][0] <= p:
+                curr += arr[j][1]
+                j += 1
+            ans[i] = curr
+        return ans
+```
+
+* [sol1-Go]
+
+```Go
+func fullBloomFlowers(flowers [][]int, people []int) []int {
+    cnt := make(map[int]int)
+    for _, flower := range flowers {
+        cnt[flower[0]] += 1
+        cnt[flower[1] + 1] -= 1
+    }
+    
+    arr := [][]int{}
+    indices := [][]int{}
+    for key, val := range cnt {
+        arr = append(arr, []int{key, val})
+    }
+    for i, p := range people {
+        indices = append(indices, []int{p, i})
+    }
+    sort.Slice(arr, func(i, j int) bool {
+        return arr[i][0] < arr[j][0]
+    })
+    sort.Slice(indices, func(i, j int) bool {
+        return indices[i][0] < indices[j][0]
+    })
+    j, curr := 0, 0
+    ans := make([]int, len(people))
+    for _, p := range indices {
+        for j < len(arr) && arr[j][0] <= p[0] {
+            curr += arr[j][1]
+            j += 1
+        }
+        ans[p[1]] = curr
+    }
+    return ans
+}
+```
+
+* [sol1-JavaScript]
+
+```JavaScript
+var fullBloomFlowers = function(flowers, people) {
+    const cnt = new Map();
+    for (const [start, end] of flowers) {
+        cnt.set(start, cnt.has(start) ? cnt.get(start) + 1 : 1);
+        cnt.set(end + 1, cnt.has(end + 1) ? cnt.get(end + 1) - 1 : -1);
+    }
+    const arr = [];
+    for (let item of cnt.entries()) {
+        arr.push([item[0], item[1]]);
+    }
+    arr.sort((a, b) => a[0] - b[0]);
+    let m = people.length; 
+    indices = Array.from(new Array(m).keys())
+    indices.sort((a, b) => people[a] - people[b]);
+    let j = 0, curr = 0;
+    let ans = new Array(m).fill(0);
+    for (const i of indices) {
+        while (j < arr.length && arr[j][0] <= people[i]) {
+            curr += arr[j][1];
+            j += 1;
+        }
+        ans[i] = curr;
+    }
+    return ans;
+};
+```
+
+**复杂度分析**
+
+- 时间复杂度： $O(n\log n + m \log m)$，其中 $n$ 表示数组 $\textit{flowers}$ 的长度，$m$ 表示数组 $\textit{people}$ 的长度。由于 $cnt$ 为有序集合，因此每次插入的时间为 $O(\log n)$，一共需要插入 $n$ 个元素，因此构建有序集合的时间为 $O(n \log n)$，$\textit{people}$ 排序花费的时间为 $O(m \log m)$，因此总的时间为 $O(n\log n + m \log m)$。
+
+- 空间复杂度： $O(n + m)$，其中 $n$ 表示数组 $\textit{flowers}$ 的长度，$m$ 表示数组 $people$ 的长度。存储 $n$ 个元素的有序集合需要使用的空间为 $O(n)$，由于本题目使用了离线查询，即需要保存 $people$ 的原始索引，使用的空间为 $O(m)$，因此总的空间为 $O(n + m)$。
+
+#### 方法二：二分查找
+
+第 $i$ 到达的时间为 $\textit{people}[i]$，假设在 $\textit{people}[i]$ 时间点之前花开的数目为 $x$，在 $\textit{people}[i]$ 时间之前花谢的数目为 $y$，则在 $\textit{people}[i]$ 时间点还处于开花状态的数目等于 $x-y$。我们只需要找到 $\textit{start} \le \textit{people}[i]$ 的花朵数目，减去 $\textit{end} < \textit{people}[i]$ 的花朵数目即为 $\textit{people}[i]$ 时间点可以看到花开的数目。
+根据以上分析，我们可以单独统计起始时间 $\textit{start}$ 与结束 $\textit{end}$，利用二分查找即可快速查找结果。
++ 首先需要将所有的起始时间 $\textit{start}$、结束时间 $\textit{end}$ 按照从早到晚进行排序；
++ 设第 $i$ 个人到达的时间 $\textit{people}[i]$，利用二分查找找到 $\textit{start}_i \le \textit{people}[i]$ 的花朵数目为 $x$，利用二分查找找到 $\textit{end}_i < \textit{people}[i]$ 的花朵数目为 $y$，则第 $i$ 个人可以看到的花朵数目为 $x -y$；
++ 依次遍历并统计每个人的查询结果即可；
+
+**思路与算法**
+
+* [sol2-C++]
+
+```C++
+class Solution {
+public:
+    vector<int> fullBloomFlowers(vector<vector<int>> &flowers, vector<int> &persons) {
+        int n = flowers.size();
+        vector<int> starts(n), ends(n);
+        for (int i = 0; i < n; ++i) {
+            starts[i] = flowers[i][0];
+            ends[i] = flowers[i][1];
+        }
+        sort(starts.begin(), starts.end());
+        sort(ends.begin(), ends.end());
+        int m = persons.size();
+        vector<int> ans(m);
+        for (int i = 0; i < m; ++i) {
+            int x = upper_bound(starts.begin(), starts.end(), persons[i]) - starts.begin();
+            int y = lower_bound(ends.begin(), ends.end(), persons[i]) - ends.begin();
+            ans[i] = x - y;
+        }
+        return ans;
+    }
+};
+```
+
+* [sol2-C]
+
+```C
+int cmp(const void *a, const void *b) {
+    return *(int *)a - *(int *)b;
+}
+
+int binarySearch(const int *arr, int left, int right, int target) {
+    int res = right + 1;
+    while (left <= right) {
+        int mid = (left + right) >> 1;
+        if (arr[mid] >= target) {
+            res = mid;
+            right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+    return res;
+}
+
+int* fullBloomFlowers(int** flowers, int flowersSize, int* flowersColSize, int* people, int peopleSize, int* returnSize) {
+    int n = flowersSize;
+    int starts[n], ends[n];
+    for (int i = 0; i < n; ++i) {
+        starts[i] = flowers[i][0];
+        ends[i] = flowers[i][1];
+    }
+    qsort(starts, n, sizeof(int), cmp);
+    qsort(ends, n, sizeof(int), cmp);
+    int m = peopleSize;
+    int *ans = (int *)malloc(sizeof(int) * m);
+    for (int i = 0; i < m; ++i) {
+        int x = binarySearch(starts, 0, n - 1, people[i] + 1);
+        int y = binarySearch(ends, 0, n - 1, people[i]);
+        ans[i] = x - y;
+    }
+    *returnSize = m;
+    return ans;
+}
+```
+
+* [sol2-Java]
+
+```Java
+class Solution {
+    public int[] fullBloomFlowers(int[][] flowers, int[] persons) {
+        int n = flowers.length;
+        int[] starts = new int[n];
+        int[] ends = new int[n];
+        for (int i = 0; i < n; i++) {
+            starts[i] = flowers[i][0];
+            ends[i] = flowers[i][1];
+        }
+        Arrays.sort(starts);
+        Arrays.sort(ends);
+
+        int m = persons.length;
+        int[] ans = new int[m];
+        for (int i = 0; i < m; i++) {
+            int x = binarySearch(starts, persons[i] + 1);
+            int y = binarySearch(ends, persons[i]);
+            ans[i] = x - y;
+        }
+        return ans;
+    }
+
+    int binarySearch(int[] arr, int target) {
+        int res = arr.length;
+        int left = 0, right = arr.length - 1;
+        while (left <= right) {
+            int mid = (left + right) >> 1;
+            if (arr[mid] >= target) {
+                res = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return res;
+    }
+}
+```
+
+* [sol2-Python3]
+
+```Python
+class Solution:
+    def fullBloomFlowers(self, flowers: List[List[int]], people: List[int]) -> List[int]:
+        starts = sorted([start for start, _ in flowers])
+        ends = sorted([end for _, end in flowers])
+        return [bisect_right(starts, p) - bisect_left(ends, p) for p in people]
+
+```
+
+* [sol2-Go]
+
+```Go
+func fullBloomFlowers(flowers [][]int, people []int) []int {
+    n := len(flowers)
+    starts := make([]int, n)
+    ends := make([]int, n)
+    for i, flower := range flowers {
+        starts[i] = flower[0]
+        ends[i] = flower[1]
+    }
+    sort.Ints(starts)
+    sort.Ints(ends)
+    m := len(people)
+    ans := make([]int, m)
+    for i, p := range people {
+        x := sort.SearchInts(starts, p + 1)
+        y := sort.SearchInts(ends, p)
+        ans[i] = x - y
+    }
+    return  ans
+}
+```
+
+* [sol2-JavaScript]
+
+```JavaScript
+var fullBloomFlowers = function(flowers, people) {
+    const starts = flowers.map((item) => item[0]);
+    const ends = flowers.map((item) => item[1]);
+    starts.sort((a, b) => a - b);
+    ends.sort((a, b) => a - b);
+
+    var binarySearch = function(arr, target) {
+        let res = arr.length;
+        let left = 0, right = arr.length - 1;
+        while (left <= right) {
+            let mid = (left + right) >> 1;
+            if (arr[mid] >= target) {
+                res = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return res;
+    }
+    const m = people.length; 
+    const ans = new Array(m).fill(0);
+    for (let i = 0; i < m; i++) {
+        const p = people[i];
+        ans[i] = binarySearch(starts, p + 1) - binarySearch(ends, p);
+    }
+    return ans;
+};
+```
+
+**代码**
+
+**复杂度分析**
+
+- 时间复杂度： $O((n + m) \times \log n)$，其中 $n$ 表示数组 $\textit{flowers}$ 的长度，$m$ 表示数组 $\textit{people}$ 的长度。对 $\textit{start, end}$ 进行排序需要的时间为 $O(n \log n)$，对每个到达的人进行二分查找时需要的时间为 $O(\log n)$，一共需要查询 $m$ 次，查询时花费时间为 $m \log n$，总的时间复杂度为 $(n + m) \times \log n$。
+
+- 空间复杂度： $O(n)$，其中 $n$ 表示数组 $\textit{flowers}$ 的长度。需要单独保存每朵花开的时间点 $\textit{start}$ 与结束的时间点 $\textit{end}$，需要的空间为 $O(n)$，排序需要的空间为 $O(\log n)$，总的空间复杂度为 $O(n + \log n) = O(n)$。
+
