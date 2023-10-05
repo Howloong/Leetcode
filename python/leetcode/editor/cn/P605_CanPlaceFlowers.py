@@ -70,9 +70,3 @@ class Solution(object):
 
 
 # leetcode submit region end(Prohibit modification and deletion)
-s = Solution()
-s2 = Solution
-print(s2.canPlaceFlowers())
-# print(s.canPlaceFlowers(s, [1, 0, 0, 0, 1], 1))
-# print(s.canPlaceFlowers(s, [1, 0, 0, 0, 1], 1))
-print(s.canPlaceFlowers([1], 0))

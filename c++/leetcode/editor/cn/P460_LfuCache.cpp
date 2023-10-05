@@ -9,7 +9,7 @@ public:
         this->capacity = capacity;
         m = new map<int, int>(capacity);
     }
-    
+
     int get(int key) {
         auto count = m.count(key);
         if (count == 0) {
@@ -17,7 +17,7 @@ public:
         }
 
     }
-    
+
     void put(int key, int value) {
 
     }

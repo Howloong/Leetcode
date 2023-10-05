@@ -9,7 +9,7 @@ public:
     LockingTree(vector<int> &parent) {
         int n = parent.size();
         this->parent = parent;
-        this->children = vector<vector<int>>(n);
+        this->children = vector<vector<int> >(n);
         this->lockedNode = vector<int>(n, -1);
         for (int i = 0; i < n; ++i) {
             int p = parent[i];
@@ -36,9 +36,9 @@ public:
     }
 
     bool upgrade(int num, int user) {
-        auto b= lockedNode[num] == -1
-               && checkParent(num)
-               && checkChildren(num);
+        auto b = lockedNode[num] == -1
+                 && checkParent(num)
+                 && checkChildren(num);
         if (b) {
             lockedNode[num] = user;
         }
@@ -67,7 +67,7 @@ public:
 
 private:
     vector<int> parent;
-    vector<vector<int>> children;
+    vector<vector<int> > children;
     vector<int> lockedNode;
 };
 

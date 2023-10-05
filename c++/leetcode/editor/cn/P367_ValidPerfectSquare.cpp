@@ -14,7 +14,7 @@ public:
         while (left <= right) {
             int mid = left + (right - left) / 2;
             int t = num / mid;
-            if (mid <t) {
+            if (mid < t) {
                 left = mid + 1;
             } else if (mid > t) {
                 right = mid - 1;

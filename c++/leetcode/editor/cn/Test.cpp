@@ -17,7 +17,7 @@ int main() {
             b = a % K;
             a = a / K;
         }
-        cout << res+a << endl;
+        cout << res + a << endl;
     }
 }
 

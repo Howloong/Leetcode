@@ -43,8 +43,6 @@ public:
 
 
 int main() {
-    Solution solution;
-    vector v{5, 7, 7, 8, 8, 10};
-//    vector v{1};
-    solution.searchRange(v, 8);
+    vector<int> v = {123};
+    cout << v[0];
 }

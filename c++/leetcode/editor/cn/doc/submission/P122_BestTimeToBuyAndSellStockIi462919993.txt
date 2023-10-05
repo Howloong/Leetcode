@@ -1,0 +1,38 @@
+    class Solution {
+        public int maxProfit(int[] prices) {
+            int i = 0;
+            int sum = 0;
+            while (i < prices.length-1) {
+                int j = i + 1;
+                if (prices[j] == prices[i]) {
+                    i++;
+                    continue;
+                }
+                if (prices[j] < prices[i]) {
+                    while (j < prices.length - 1 && prices[j] >= prices[j + 1]) {
+                        j++;
+                    }
+                } else {
+                    while (j < prices.length - 1 && prices[j] <= prices[j + 1]) {
+                        j++;
+                    }
+                    sum += prices[j] - prices[i];
+                }
+                i = j;
+            }
+            return sum;
+/*            int[] dp = new int[2];
+//            0为持有
+//            1为不持有
+            dp[0] = -prices[0];
+            dp[1] = 0;
+            for (int i = 1; i < prices.length; i++) {
+                dp[0] = Math.max(dp[0], dp[1] - prices[i]);
+                dp[1] = Math.max(dp[1], dp[0] + prices[i]);
+            }
+            return Math.max(dp[0], dp[1]);*/
+        }
+    }
+
+//runtime:0 ms
+//memory:43.2 MB

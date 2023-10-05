@@ -21,5 +21,4 @@ public:
 
 int main() {
     Solution solution;
-    cout << solution.removeElement(*new vector{0,1,2,2,3,0,4,2}, 2);
 }
