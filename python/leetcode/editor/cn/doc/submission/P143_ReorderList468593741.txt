@@ -1,0 +1,40 @@
+
+    /**
+     * Definition for singly-linked list.
+     * public class ListNode {
+     * int val;
+     * ListNode next;
+     * ListNode() {}
+     * ListNode(int val) { this.val = val; }
+     * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+     * }
+     */
+    class Solution {
+        public void reorderList(ListNode head) {
+            if (head == null) {
+                return;
+            }
+            Deque<ListNode> deque = new ArrayDeque<>();
+//            用一个栈保存Node
+            while (head != null) {
+                deque.push(head);
+                head = head.next;
+            }
+            head = new ListNode();
+            while (!deque.isEmpty()) {
+//                取尾一个
+                head.next = deque.pollLast();
+                head = head.next;
+                head.next = null;
+//                取头一个
+                if (!deque.isEmpty()) {
+                    head.next = deque.pollFirst();
+                    head = head.next;
+                    head.next = null;
+                }
+            }
+        }
+    }
+
+//runtime:4 ms
+//memory:44.5 MB
