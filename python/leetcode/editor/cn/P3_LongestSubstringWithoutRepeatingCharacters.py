@@ -17,5 +17,4 @@ class Solution:
 
 
 # leetcode submit region end(Prohibit modification and deletion)
-s = Solution
-print(s.lengthOfLongestSubstring(s, "abcabcbb"))
+print(Solution().lengthOfLongestSubstring("abcabcbb"))

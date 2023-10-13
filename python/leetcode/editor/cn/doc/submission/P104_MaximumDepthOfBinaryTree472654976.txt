@@ -1,0 +1,21 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    depth = 0
+
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        def func(node, d):
+            if node is None:
+                self.depth = max(self.depth, d)
+                return
+            func(node.left, d + 1)
+            func(node.right, d + 1)
+        func(root,0)
+        return self.depth
+
+# runtime:56 ms
+# memory:18.6 MB

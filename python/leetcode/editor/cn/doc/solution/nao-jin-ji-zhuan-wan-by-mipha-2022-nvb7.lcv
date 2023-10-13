@@ -1,0 +1,74 @@
+# 思路
+
+如果没做过 [1503. 所有蚂蚁掉下来前的最后一刻](https://leetcode.cn/problems/last-moment-before-all-ants-fall-out-of-a-plank/) 这题，我周赛时肯定做不出来，最烦脑筋急转弯，人老了转不过来。
+
+根据`1503`题，机器人其实是不会相互碰撞的，一直移动就是了
+
+* 
+
+```
+for i,num in enumerate(nums):
+    if s[i] == 'L':
+        nums[i] -= d
+    else:
+        nums[i] += d
+```
+
+然后得到最终位置后，排序，再计算任意两数距离的总和，我记得是有公式的，但我忘了，直接枚举左边界，左边界慢慢右移，计算总和。
+
+* 
+
+```
+nums.sort()
+MAX_NUM = int(1e9+7)
+n = len(nums)
+t = 0
+for i in range(1,n):
+    t += nums[i] - nums[0]
+    t %= MAX_NUM
+res = t
+for i in range(1,n):
+    t -= (nums[i] - nums[i-1])*(n-i)
+    t = (t+MAX_NUM) % MAX_NUM
+        res += t
+    res %= MAX_NUM
+```
+
+**PS**: 一生之敌 $10^9+7$，又wa了一次，我佛了
+
+---
+
+# Python3 代码
+
+* 
+
+```
+class Solution:
+    def sumDistance(self, nums: List[int], s: str, d: int) -> int:
+        for i,num in enumerate(nums):
+            if s[i] == 'L':
+                nums[i] -= d
+            else:
+                nums[i] += d
+        
+        nums.sort()
+        
+        MAX_NUM = int(1e9+7)
+        
+        n = len(nums)
+        t = 0
+        for i in range(1,n):
+            t += nums[i] - nums[0]
+            t %= MAX_NUM
+        
+        res = t
+        for i in range(1,n):
+            t -= (nums[i] - nums[i-1])*(n-i)
+            t = (t+MAX_NUM) % MAX_NUM
+            
+            res += t
+            res %= MAX_NUM
+        
+        return res
+```
+

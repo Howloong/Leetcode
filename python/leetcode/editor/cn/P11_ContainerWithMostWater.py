@@ -8,7 +8,7 @@ class Solution(object):
         :rtype: int
         """
         left = 0
-        right = len(height)-1
+        right = len(height) - 1
         ans = 0
         while left < right:
             l = height[left]
@@ -22,5 +22,4 @@ class Solution(object):
 
 
 # leetcode submit region end(Prohibit modification and deletion)
-s=Solution
-print(s.maxArea(s,[1,8,6,2,5,4,8,3,7]))
+print(Solution().maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]))

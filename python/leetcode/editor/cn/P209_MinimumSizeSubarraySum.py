@@ -9,14 +9,14 @@ class Solution:
         ans = math.inf
         s = 0
         left = 0
-        for right, x in enumerate(nums):
+        right = 0
+        for x in nums:
             s += x
-            while s - nums[left] >= target:
+            while s >= target:
                 s -= nums[left]
-                left += 1
-            if s >= target:
                 ans = min(ans, right - left + 1)
+                left += 1
+            right += 1
         return ans if ans <= n else 0
-
 
 # leetcode submit region end(Prohibit modification and deletion)

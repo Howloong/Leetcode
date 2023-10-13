@@ -1,0 +1,129 @@
+# 题目
+
+## 2731. 移动机器人
+
+有一些机器人分布在一条无限长的数轴上，他们初始坐标用一个下标从 **0** 开始的整数数组 `nums` 表示。当你给机器人下达命令时，它们以每秒钟一单位的速度开始移动。
+
+给你一个字符串 `s` ，每个字符按顺序分别表示每个机器人移动的方向。`'L'` 表示机器人往左或者数轴的负方向移动，`'R'` 表示机器人往右或者数轴的正方向移动。
+
+当两个机器人相撞时，它们开始沿着原本相反的方向移动。
+
+请你返回指令重复执行 `d` 秒后，所有机器人之间两两距离之和。由于答案可能很大，请你将答案对 `10^9 + 7` 取余后返回。
+
+**注意：**
+
+- 对于坐标在 `i` 和 `j` 的两个机器人，`(i,j)` 和 `(j,i)` 视为相同的坐标对。也就是说，机器人视为无差别的。
+- 当机器人相撞时，它们 **立即改变** 它们的前进方向，这个过程不消耗任何时间。
+- 当两个机器人在同一时刻占据相同的位置时，就会相撞。
+  - 例如，如果一个机器人位于位置 0 并往右移动，另一个机器人位于位置 2 并往左移动，下一秒，它们都将占据位置 1，并改变方向。再下一秒钟后，第一个机器人位于位置 0 并往左移动，而另一个机器人位于位置 2 并往右移动。
+
+  - 例如，如果一个机器人位于位置 0 并往右移动，另一个机器人位于位置 1 并往左移动，下一秒，第一个机器人位于位置 0 并往左行驶，而另一个机器人位于位置 1 并往右移动。
+
+# 题目分析
+
+这道题实际上是在求 `n` 个点两两之间的距离的和。
+题目绕了一个弯，说编号为 `i` 的机器人，出发点为 `nums[i]`，沿着 `s[i]` 方向前进，发生碰撞了就会反向。求 `d` 秒后各个机器人之间的距离之和。
+
+由于我们是求的距离，因为我们并不关心每个机器人在哪个位置，我们只需要**知道 `d` 秒后哪些个点有机器人** 即可【只与每个点的机器人是哪个不重要】
+
+两个机器人发生碰撞，必然是两个机器人相向而行，即位置靠左的机器人朝右走，位置靠右的机器人朝左走。发生碰撞后两个机器人反向，但是仍然是一个机器人在朝右走，一个机器人在朝左走。
+
+![image.png](https://pic.leetcode.cn/1696945775-fVTmKt-image.png)
+
+由上图可知，发生碰撞后其实是机器人2代替机器人1向右走，机器人1代替机器人2向左走，但是机器人2到的终点始终是机器人1继续走会到的终点，机器人1到的终点同样是机器人2继续走会到的终点。**对于终点来说，终究会有机器人到的**。
+
+因此我们可以认为发生碰撞后，**机器人都沿着各自的方向继续前进**，那么所有机器人 `d` 秒后的位置，就是其起点加上或减去 `d`。【向右为加，向左为减】
+
+然后我们来看如何求这 `n` 个点的距离和。
+我们假设第 `k` 个点的坐标是 `pos[k]`，其与其之前的所有点的坐标的距离和为 `preDistSum[k]`, 那么距离和可以表示为：
+
+* 
+
+```
+preDistSum[k] = (pos[k] - pos[k-1]) + (pos[k] - pos[k-2]) + ... + 
+                (pos[k] - pos[0])
+              = (pos[k] - pos[k-1]) + (pos[k] - pos[k-1] + pos[k-1] - pos[k-2])
+                +...+ (pos[k] - pos[k-1] + pos[k-1] - pos[0])
+              = k * (pos[k] - pos[k-1]) + (pos[k-1] - pos[k-2]) +...+
+                (pos[k-1] - pos[0])
+              = k * (pos[k] - pos[k-1]) + preDistSum[k-1]
+```
+
+![image.png](https://pic.leetcode.cn/1696946438-OulTBt-image.png)
+
+因此我们得到了第 `k` 个点与之前坐标的距离和的状态转移公式：`preDistSum[k] = preDistSum[k - 1] + (pos[k] - pos[k-1]) * k`，很明显当 `k = 0`时，只有一个点，距离和 `preDistSum[0] = 0` 。
+
+因此，我们需要先对机器人的终点坐标进行 **排序**，然后 **累加** 所有点的 `preDistSum`，就可以得到所有点的距离和。
+
+# 代码
+
+* []
+
+```Java
+class Solution {
+    final int MOD = 1000000007;
+
+    public int sumDistance(int[] nums, String s, int d) {
+        int n = nums.length;
+        long[] pos = new long[n];   // 存储每个机器人的终点坐标；结果可能越界因此用long存储
+        for(int i = 0; i < n; i++){
+            pos[i] = (long)nums[i] + (s.charAt(i) == 'R' ? d : -d); // 每个机器人的终点其实就是沿着给定方向前进d个单位
+        }
+        Arrays.sort(pos);   // 对每个机器人的终点坐标排序
+        long sum = 0;   // 结果
+        long preDistSum = 0;    // 每个机器人与在它之前的机器人的距离之和
+        for(int i = 1; i < n; i++){
+            preDistSum += 1L * (pos[i] - pos[i - 1]) * i % MOD; // 前缀距离和计算    
+            sum += preDistSum;  // 累计距离之和
+            sum %= MOD;
+        }
+        return (int)sum;
+    }
+}
+```
+
+* []
+
+```Python
+class Solution:
+    def sumDistance(self, nums: List[int], s: str, d: int) -> int:
+        MOD = 1000000007
+        # 生成每个机器人的终点坐标并排序
+        # 每个机器人的终点其实就是沿着给定方向前进d个单位
+        pos = sorted([num + (2 * (char == 'R') - 1) * d for num, char in zip(nums, s)])
+        res = 0             # 结果
+        pre_dist_sum = 0    # 每个机器人与在它之前的机器人的距离之和
+        for i in range(1, len(pos)):
+            pre_dist_sum += (pos[i] - pos[i-1]) * i % MOD   # 前缀距离和计算
+            res += pre_dist_sum     # 累计距离之和
+            res %= MOD
+        return res
+```
+
+* []
+
+```C++
+class Solution {
+private:
+    int MOD = 1000000007;
+
+public:
+    int sumDistance(vector<int>& nums, string s, int d) {
+        int n = nums.size();
+        vector<long long> pos(n);   // 存储每个机器人的终点坐标；结果可能越界因此用long存储
+        for(int i = 0; i < n; i++){
+            pos[i] = (long long)nums[i] + (2 * (s[i] == 'R') - 1) * d; // 每个机器人的终点其实就是沿着给定方向前进d个单位
+        }
+        sort(pos.begin(), pos.end());   // 对每个机器人的终点坐标排序
+        long long sum = 0;   // 结果
+        long long preDistSum = 0;    // 每个机器人与在它之前的机器人的距离之和
+        for(int i = 1; i < n; i++){
+            preDistSum += 1L * (pos[i] - pos[i - 1]) * i % MOD; // 前缀距离和计算    
+            sum += preDistSum;  // 累计距离之和
+            sum %= MOD;
+        }
+        return (int)sum;
+    }
+};
+```
+

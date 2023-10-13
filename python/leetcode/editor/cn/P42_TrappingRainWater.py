@@ -1,10 +1,6 @@
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution(object):
     def trap(self, height):
-        """
-        :type height: List[int]
-        :rtype: int
-        """
         n = len(height)
         ans = 0
         left = 0
@@ -24,5 +20,5 @@ class Solution(object):
 
 
 # leetcode submit region end(Prohibit modification and deletion)
-s=Solution
-print(s.trap(s,[0,1,0,2,1,0,1,3,2,1,2,1]))
+s = Solution()
+print(s.trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))

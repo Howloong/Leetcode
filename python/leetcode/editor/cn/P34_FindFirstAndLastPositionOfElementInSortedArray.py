@@ -32,8 +32,8 @@ class Solution:
 
 
 # leetcode submit region end(Prohibit modification and deletion)
-s = Solution
+s = Solution()
 # print(s.searchRange(s, [5, 7, 7, 8, 8, 10], 8))
-print(s.searchRange(s, [5, 7, 7, 8, 8, 10], 6))
+print(s.searchRange([5, 7, 7, 8, 8, 10], 6))
 # print(s.searchRange(s, [], 6))
 # print(s.searchRange(s, [2, 2], 3))

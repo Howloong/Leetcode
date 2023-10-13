@@ -1,0 +1,27 @@
+    class Solution {
+        public List<List<Integer>> result = new ArrayList<>();
+        public ArrayDeque<Integer> path = new ArrayDeque<>();
+        public List<List<Integer>> permute(int[] nums) {
+            backTracking(nums);
+            return result;
+        }
+
+        public void backTracking(int[] nums) {
+            if (path.size() == nums.length) {
+                result.add(new ArrayList<>(path));
+                return;
+            }
+            for (int i = 0; i < nums.length; i++) {
+                if (path.contains(nums[i])) {
+                    continue;
+                }
+                path.addLast(nums[i]);
+                backTracking(nums);
+                path.removeLast();
+
+            }
+        }
+    }
+
+//runtime:1 ms
+//memory:41.5 MB

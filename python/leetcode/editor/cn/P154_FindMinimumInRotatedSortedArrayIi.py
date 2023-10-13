@@ -8,13 +8,16 @@ class Solution:
         right = len(nums) - 2
         while left <= right:
             mid = left + (right - left) // 2
-            if nums[mid] > nums[right+1]:
+            if nums[mid] < nums[right]:
+                right = mid - 1
+            elif nums[mid] > nums[right]:
                 left = mid + 1
             else:
-                right = mid - 1
+                right -= 1
         return nums[left]
 
 
 # leetcode submit region end(Prohibit modification and deletion)
-s = Solution()
-print(s.findMin([5, 1, 2, 3, 4]))
+print(Solution().findMin([3, 1]) == 1)
+print(Solution().findMin([1, 3, 5]) == 1)
+print(Solution().findMin([2, 2, 2, 0, 1]) == 0)

@@ -1,0 +1,38 @@
+    class Solution {
+        private List<List<Integer>> list = new ArrayList<>();
+        private LinkedList<Integer> path = new LinkedList<>();
+        private boolean[] used;
+
+        public List<List<Integer>> permute(int[] nums) {
+            if (nums.length == 1) {
+                path.add(nums[0]);
+                list.add(path);
+            } else {
+                used = new boolean[nums.length];
+                backtracking(nums);
+            }
+            return list;
+        }
+
+        public void backtracking(int[] nums) {
+            if (path.size() == nums.length) {
+                list.add(new LinkedList<>(path));
+                return;
+            }
+            for (int i = 0; i < nums.length; i++) {
+                if (used[i]) {
+                    continue;
+                }
+                used[i] = true;
+                path.add(nums[i]);
+                backtracking(nums);
+                path.removeLast();
+                used[i] = false;
+            }
+        }
+
+
+    }
+
+//runtime:1 ms
+//memory:41.3 MB
