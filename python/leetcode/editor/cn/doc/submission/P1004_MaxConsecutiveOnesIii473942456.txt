@@ -1,0 +1,22 @@
+class Solution:
+    def longestOnes(self, nums: List[int], k: int) -> int:
+        left = 0
+        right =0
+        n = len(nums)
+        zero = 0
+        res = 0
+        while right < n:
+            while right < n:
+                zero += not nums[right]
+                if zero > k:
+                    break
+                right += 1
+            res = max(res, right - left)
+            while left <= right and zero > k:
+                zero -= not nums[left]
+                left += 1
+            right += 1
+        return res
+
+# runtime:120 ms
+# memory:16.7 MB

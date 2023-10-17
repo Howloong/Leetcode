@@ -1,0 +1,42 @@
+### 思路
+
+对比普通的二分无非就多了一个额外操作：每次开辟一个包含 $mid$ 和前面的楼的 **高度差** 数组，利用这个数组排序后可以在每次 $check$ 中先枚举最高的高度进行优先选择，其次搭砖，从而查看当前 $mid$ 位置是否合理
+
+### 代码
+
+* []
+
+```Java
+
+class Solution {
+    public int furthestBuilding(int[] heights, int bricks, int ladders) {
+        int len = heights.length;
+        if(ladders >= len - 1) return len - 1;
+        // 对走到最远的下标进行二分
+        int l = ladders, r = len - 1;
+        while(l < r) {
+            int mid = l + r + 1 >> 1;
+            if(check(heights, bricks, ladders, mid)) l = mid;
+            else r = mid - 1;
+        }
+        return l;
+    }
+    public boolean check(int[] heights, int bricks, int ladders, int mid) {
+        // 建立 mid 之前的高度差数组，方便最优化搭砖
+        int[] dist = new int[mid];
+        for(int i = 0; i < mid; i++) dist[i] = heights[i + 1] - heights[i];
+        Arrays.sort(dist);
+
+        // 从最高的高度差进行枚举
+        for(int i = mid - 1; i >= 0; i--) {
+            // 提前可以剪波枝
+            if(dist[i] < 0) break;
+            if(ladders > 0) ladders--;
+            else if(bricks >= dist[i]) bricks -= dist[i];
+            else return false;
+        }
+        return true;
+    }
+}
+```
+

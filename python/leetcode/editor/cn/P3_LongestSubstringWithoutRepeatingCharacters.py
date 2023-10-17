@@ -1,5 +1,4 @@
 # leetcode submit region begin(Prohibit modification and deletion)
-from collections import Counter
 
 
 class Solution:

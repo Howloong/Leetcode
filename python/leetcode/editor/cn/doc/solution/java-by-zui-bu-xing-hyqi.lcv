@@ -1,0 +1,57 @@
+# 思路与算法
+
+- 我们维护一个窗口，窗口内是多余的字符，要做的就是寻求这个窗口的大小
+- 字符的总长度为N,每个字符的数应为 each，从反向的角度来看，就是要窗口外4个字符的数量都不超过each，否则窗口进行滑动
+- 一开始，我们把窗口外字符数量统计为全量；当窗口R指针右滑的时候，窗口外s[R]字符的数量减少1;当L指针右滑的时候，s[L]字符的数量增加1；如果窗口外的4个字符数量都没有超过 each，该窗口是一个可以考虑的替换可能性
+
+### 以样例 QQQW来说
+
+- 字符长度为4,每个字符应该为 each = 1
+
+1. 一开始 L在0，R 在0 ，窗口外字符的数量为
+   Q = 3 ，W = 1 ，E = 0 ，R = 0； Q超量，W正好，E、R 不足
+   当R 滑到下标2的时候， Q = 0 ，W = 1 ，E = 0 ，R = 0；这才满足 4个字符都不超过1，此时的窗口大小
+   [0-2] 是一个可替换的区间
+
+![image.png](https://pic.leetcode.cn/1669541910-YoOASg-image.png)
+
+- L指针右移，此时s[0]位置的Q 要被窗口外的计数加上
+
+2. L来到1的时候，R继续判断，而正好这个时候窗口外的字符数量 Q = 1 ，W = 1 ，E = 0 ，R = 0；是满足条件的，此时[1-2]是一个可替换的区间，更新最小值
+   ![image.png](https://pic.leetcode.cn/1669542393-wjrzVY-image.png)
+
+# 代码
+
+* []
+
+```java
+public int balancedString(String s) {
+
+        char[] cs = s.toCharArray();
+        int N = cs.length;
+        int each = N / 4;
+        // 初始化为N ，全部替换是一种方案
+        int ans = N;
+        int[] count = new int[128];
+        for (char c : cs) {
+            count[c]++;
+        }
+        int R = 0;
+        int L = 0;
+        while (L < N) {
+            // 窗口外的数量不合法，R指针就一直往右滑
+            while (R < N && (count['Q'] > each || count['W'] > each || count['E'] > each || count['R'] > each)) {
+                count[cs[R++]]--;
+            }
+
+            // 这个时候要判断一下，因为有可能R出界了窗口也是不合法的
+            if (!(count['Q'] > each || count['W'] > each || count['E'] > each || count['R'] > each)) {
+                // 注意，这个时候的R 是来到了实际窗口的下一个位置，所以是 R-L
+                ans = Math.min(ans, R - L);
+            }
+            count[cs[L++]]++;
+        }
+        return ans;
+    }
+```
+

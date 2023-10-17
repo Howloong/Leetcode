@@ -1,0 +1,32 @@
+* 
+
+```
+class Solution {
+public:
+    vector<int> singleNumber(vector<int>& nums) {
+        //先将所有的数字都异或一遍，必然会出现一个带0和1的结果，其中的1必然是结果的两个数字不同的地方
+        //然后任找一个为1的地方，我们再次遍历数字，这次用两个基数ab去遍历，如果该位上为1就与a异或，为0就与b异或
+        int tmp = 0;
+        for(auto num : nums){
+            tmp ^= num;
+        }
+        //寻找1
+        int i = 0;
+        while(i < 32){
+            if(tmp>>i & 1) break;
+            i++;
+        }
+        //再次遍历
+        int a = 0, b = 0;
+        for(auto num : nums){
+            if(num & 1<<i){
+                a ^= num;
+            }else{
+                b ^= num;
+            }
+        }
+        return {a, b};
+    }
+};
+```
+

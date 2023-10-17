@@ -10,7 +10,7 @@ class Solution:
             temp2 = dp[2]
             dp[0] = max(dp[0], max(dp[1], dp[3]) - prices[i])
             dp[1] = max(dp[1], dp[3])
-            dp[2] = temp1 +prices[i]
+            dp[2] = temp1 + prices[i]
             dp[3] = temp2
         return max(dp[1], dp[2], dp[3])
 

@@ -1,4 +1,6 @@
-from typing import List
+from typing import List, Optional
+
+from leetcode.editor.cn.dataStruct.ListNode import ListNode
 
 
 # leetcode submit region begin(Prohibit modification and deletion)

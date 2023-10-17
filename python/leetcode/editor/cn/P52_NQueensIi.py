@@ -21,10 +21,13 @@ class Solution:
                 s1.remove(t1)
                 s2.remove(t2)
             return count
+
         s1 = set()
         s2 = set()
         c = set()
         return backTracking(0)
+
+
 # leetcode submit region end(Prohibit modification and deletion)
 s = Solution()
 print(s.totalNQueens(1))
