@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 
 from leetcode.editor.cn.dataStruct.ListNode import ListNode
 
@@ -10,8 +10,8 @@ from leetcode.editor.cn.dataStruct.ListNode import ListNode
 #         self.val = val
 #         self.next = next
 class Solution:
-    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        pre = None
+    def trainningPlan(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        pre = None1
         cur = head
         while cur:
             nxt = cur.next
@@ -19,5 +19,4 @@ class Solution:
             pre = cur
             cur = nxt
         return pre
-
-    # leetcode submit region end(Prohibit modification and deletion)
+# leetcode submit region end(Prohibit modification and deletion)

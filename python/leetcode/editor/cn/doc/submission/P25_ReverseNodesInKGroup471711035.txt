@@ -1,9 +1,3 @@
-from typing import Optional
-
-from leetcode.editor.cn.dataStruct.ListNode import ListNode
-
-
-# leetcode submit region begin(Prohibit modification and deletion)
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
@@ -27,10 +21,11 @@ class Solution:
                 cur.next = pre
                 pre = cur
                 cur = nxt
-            temp = p0.next
+            nxt = p0.next
             p0.next.next = cur
             p0.next = pre
-            p0 = temp
+            p0 = nxt
         return dummy.next
 
-# leetcode submit region end(Prohibit modification and deletion)
+# runtime:56 ms
+# memory:17.1 MB

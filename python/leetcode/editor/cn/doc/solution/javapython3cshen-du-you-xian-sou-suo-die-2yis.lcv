@@ -1,0 +1,166 @@
+# 题目
+
+## 173. 二叉搜索树迭代器
+
+实现一个二叉搜索树迭代器类`BSTIterator` ，表示一个按中序遍历二叉搜索树（BST）的迭代器：
+- `BSTIterator(TreeNode root)` 初始化 `BSTIterator` 类的一个对象。`BST` 的根节点 `root` 会作为构造函数的一部分给出。指针应初始化为一个不存在于 `BST` 中的数字，且该数字小于 `BST` 中的任何元素。
+- `boolean hasNext()` 如果向指针右侧遍历存在数字，则返回 `true` ；否则返回 `false` 。
+- `int next()`将指针向右移动，然后返回指针处的数字。
+
+注意，指针初始化为一个不存在于 `BST` 中的数字，所以对 `next()` 的首次调用将返回 `BST` 中的最小元素。
+
+你可以假设 `next()` 调用总是有效的，也就是说，当调用 `next()` 时，`BST` 的中序遍历中至少存在一个下一个数字。
+
+# 题目分析
+
+这道题是实现一个中序遍历二叉树的迭代器。
+二叉树的中序遍历有两种方式【见 [94. 二叉树的中序遍历](https://leetcode.cn/problems/binary-tree-inorder-traversal/)】：递归法和迭代法。
+而我们要实现中序遍历二叉树的迭代器，就可以按这两种方式去思考。
+
+如果使用递归法，由于是利用函数递归的方式去找到每一个节点，是不能中断的。而迭代器是在调用的时候才能去返回对应的节点。因此递归法不适用。
+
+从名字也可以看出来，迭代法适用于迭代器的实现。迭代器的原理是利用栈结构对节点进行缓存。因此我们可以将迭代过程中的中间状态进行中断。
+
+中序遍历迭代法的代码（以 `Java` 为例）
+
+* java
+
+```java
+List<Integer> res = new ArrayList<>();
+TreeNode node = root;
+Stack<TreeNode> st = new Stack<>();
+while(!st.isEmpty() || node != null){
+    while(node != null){
+        st.push(node);
+        node = node.left;
+    }
+    node = st.pop();
+    res.add(node.val);
+    node = node.right;
+}
+return res;
+```
+
+我们其实整个代码就是一个迭代器：
+- 循环之前的定义 **相当于** 整个迭代器的初始化，初始化当前节点 `node` 和 栈 `st` 。
+
+  * 
+
+  ```
+  TreeNode node = root;
+  Stack<TreeNode> st = new Stack<>();
+  ```
+- 大循环的判断 **相当于** 判断迭代器是否存在下一个元素 `hasNext()`。
+
+  * 
+
+  ```
+  while(!st.isEmpty() || node != null){
+  }
+  ```
+- 而循环中的内容 **相当于** 获取当前节点的值 `next()`。
+
+  * 
+
+  ```
+  while(node != null){
+      st.push(node);
+      node = node.left;
+  }
+  node = st.pop();
+  res.add(node.val);
+  node = node.right;
+  ```
+
+【为不影响阅读，将示例图解放在代码之后】
+
+# 代码
+
+* []
+
+```Java
+class BSTIterator {
+    TreeNode node;  // 当前节点
+    Stack<TreeNode> st; // 缓存遍历的节点的栈
+
+    public BSTIterator(TreeNode root) {
+        this.node = root;   // 初始当前节点为根节点
+        this.st = new Stack();
+    }
+    
+    public int next() {
+        while(node != null){
+            st.push(node);
+            node = node.left;
+        }   // 中序遍历，因此需要把当前子树的最左侧节点依次入栈
+        node = st.pop();    // 栈顶节点为当前要处理节点
+        int val = node.val; // 缓存节点值
+        node = node.right;  // 左中右，当前节点处理完后该处理其右子树的节点了
+        return val;
+    }
+    
+    public boolean hasNext() {
+        return node != null || !st.isEmpty();   // 只有当节点和栈同时为空，整个树遍历结束
+    }
+}
+```
+
+* []
+
+```Python
+class BSTIterator:
+
+    def __init__(self, root: Optional[TreeNode]):
+        self.node = root   # 初始当前节点为根节点
+        self.st = []    # 缓存遍历的节点的栈
+
+    def next(self) -> int:
+        while self.node:
+            # 中序遍历，因此需要把当前子树的最左侧节点依次入栈
+            self.st.append(self.node)
+            self.node = self.node.left
+        self.node = self.st.pop()    # 栈顶节点为当前要处理节点
+        val = self.node.val # 缓存节点值
+        self.node = self.node.right  # 左中右，当前节点处理完后该处理其右子树的节点了
+        return val
+
+
+    def hasNext(self) -> bool:
+        return self.node is not None or len(self.st) > 0   # 只有当节点和栈同时为空，整个树遍历结束
+```
+
+* []
+
+```C++
+lass BSTIterator {
+private:
+    TreeNode* node;  // 当前节点
+    stack<TreeNode*> st; // 缓存遍历的节点的栈
+
+public:
+    BSTIterator(TreeNode* root) {
+        this->node = root;   // 初始当前节点为根节点
+    }
+    
+    int next() {
+        while(this->node){
+            st.push(this->node);
+            this->node = this->node->left;
+        }   // 中序遍历，因此需要把当前子树的最左侧节点依次入栈
+        this->node = st.top();    // 栈顶节点为当前要处理节点
+        st.pop();
+        int val = this->node->val; // 缓存节点值
+        this->node = node->right;  // 左中右，当前节点处理完后该处理其右子树的节点了
+        return val;
+    }
+    
+    bool hasNext() {
+        return this->node || !st.empty();   // 只有当节点和栈同时为空，整个树遍历结束
+    }
+};
+```
+
+# 附图
+
+![image.png](https://pic.leetcode.cn/1695466281-oKMmqm-image.png)
+

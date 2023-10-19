@@ -10,27 +10,25 @@ from leetcode.editor.cn.dataStruct.ListNode import ListNode
 #         self.val = val
 #         self.next = next
 class Solution:
-    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
-        p0 = head
-        n = 0
-        while p0:
-            n += 1
-            p0 = p0.next
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
         dummy = ListNode(next=head)
         p0 = dummy
-        while n >= k:
-            n -= k
+        cur = p0.next
+        while cur and cur.next:
             pre = None
             cur = p0.next
-            for _ in range(k):
+            for _ in (1, 2):
                 nxt = cur.next
                 cur.next = pre
                 pre = cur
                 cur = nxt
-            temp = p0.next
+            tmp = p0.next
             p0.next.next = cur
             p0.next = pre
-            p0 = temp
+            p0 = tmp
         return dummy.next
 
+
 # leetcode submit region end(Prohibit modification and deletion)
+print(Solution().swapPairs(ListNode(1)))
+# print(Solution().swapPairs(None))

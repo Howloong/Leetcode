@@ -1,0 +1,37 @@
+`inorder()`作为中序遍历函数，使用yield关键字让它成为生成器函数，每次`next()`或者`hasNext()`会调用它，返回下一个数。如果是`hasNext()`调用，则把这个值缓存起来。
+
+* []
+
+```python
+class BSTIterator:
+    def __init__(self, root: Optional[TreeNode]):
+        self.root = root
+        self.inorder = self.inorder()#生成器
+        self.now = None
+
+    def next(self) -> int:
+        if self.now is None:
+            return next(self.inorder, None).val
+        else:
+            n = self.now
+            self.now = None#清除缓存
+            return n.val
+
+    def hasNext(self) -> bool:
+        if self.now is None:
+            self.now = next(self.inorder, None)
+        return True if self.now else False
+
+    def inorder(self):
+        node = self.root
+        stack = []
+        while node or len(stack) > 0:
+            while node:
+                stack.append(node)
+                node = node.left
+            node = stack.pop()
+            yield node
+            node = node.right
+
+```
+
