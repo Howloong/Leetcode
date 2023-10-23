@@ -14,14 +14,14 @@ class Solution:
         if head is None:
             return None
         dummy = ListNode(next=head)
-        cur=dummy
+        cur = dummy
         while cur.next and cur.next.next:
-            val=cur.next.val
+            val = cur.next.val
             if cur.next.next.val == val:
-                while cur.next and cur.next.val==val:
-                    cur.next=cur.next.next
+                while cur.next and cur.next.val == val:
+                    cur.next = cur.next.next
             else:
-                cur=cur.next
+                cur = cur.next
         return dummy.next
 
 # leetcode submit region end(Prohibit modification and deletion)

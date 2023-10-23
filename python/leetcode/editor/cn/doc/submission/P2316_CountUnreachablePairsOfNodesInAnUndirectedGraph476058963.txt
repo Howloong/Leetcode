@@ -1,0 +1,48 @@
+class UnionFind:
+    def __init__(self, n: int):
+        self.nodes = [0] * n
+        self.rank = [0] * n
+        for i in range(n):
+            self.nodes[i] = i
+            self.rank[i] = 0
+
+    def find(self, x: int):
+        if x == self.nodes[x]:
+            return x
+        self.nodes[x] = self.find(self.nodes[x])
+        return self.nodes[x]
+
+    def unite(self, x: int, y: int):
+        x = self.find(x)
+        y = self.find(y)
+        if x == y:
+            return
+        if self.rank[x] < self.rank[y]:
+            self.nodes[x] = self.nodes[y]
+        else:
+            self.nodes[y] = self.nodes[x]
+        if self.rank[x] == self.rank[y]:
+            self.rank[x] += 1
+
+
+class Solution:
+    def countPairs(self, n: int, edges: List[List[int]]) -> int:
+        u = UnionFind(n)
+        for edge in edges:
+            u.unite(edge[0], edge[1])
+        cnt = Counter(u.nodes)
+        res = 0
+        for _, c in cnt.items():
+            res += (c * (c - 1) >> 1)
+        return ((n * (n - 1)) >> 1) - res
+
+
+
+# total_testcases:66
+# total_correct:50
+# input_formatted:11
+[[5,0],[1,0],[10,7],[9,8],[7,2],[1,3],[0,2],[8,5],[4,6],[4,2]]
+# expected_output:0
+# code_output:27
+# last_testcase:11
+[[5,0],[1,0],[10,7],[9,8],[7,2],[1,3],[0,2],[8,5],[4,6],[4,2]]

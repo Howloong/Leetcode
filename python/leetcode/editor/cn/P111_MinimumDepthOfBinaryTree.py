@@ -11,8 +11,11 @@ from leetcode.editor.cn.dataStruct.TreeNode import TreeNode
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        if not p or not q:
-            return p is q
-        return p.val == q.val and self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        left = self.minDepth(root.left)
+        right = self.minDepth(root.right)
+        return min(left, right) + 1 if left and right else left + right + 1
+
 # leetcode submit region end(Prohibit modification and deletion)

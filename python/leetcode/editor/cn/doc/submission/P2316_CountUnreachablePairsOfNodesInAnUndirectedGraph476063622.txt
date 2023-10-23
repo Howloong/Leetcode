@@ -1,0 +1,45 @@
+class UnionFind:
+    def __init__(self, n: int):
+        self.nodes = [0] * n
+        self.rank = [0] * n
+        for i in range(n):
+            self.nodes[i] = i
+            self.rank[i] = 0
+
+    def find(self, x: int):
+        if x == self.nodes[x]:
+            return x
+        self.nodes[x] = self.find(self.nodes[x])
+        return self.nodes[x]
+
+    def unite(self, x: int, y: int):
+        x = self.find(x)
+        y = self.find(y)
+        if x == y:
+            return
+        if self.rank[x] < self.rank[y]:
+            self.nodes[x] = self.nodes[y]
+        else:
+            self.nodes[y] = self.nodes[x]
+        if self.rank[x] == self.rank[y]:
+            self.rank[x] += 1
+
+
+class Solution:
+    def countPairs(self, n: int, edges: List[List[int]]) -> int:
+        u = UnionFind(n)
+        for edge in edges:
+            u.unite(edge[0], edge[1])
+        cnt = {}
+        for i in range(n):
+            t = u.find(i)
+            cnt[t] = cnt.get(t, 0) + 1
+        res = 0
+        for _, c in cnt.items():
+            res += (c * (c - 1) >> 1)
+        return ((n * (n - 1)) >> 1) - res
+
+
+
+# runtime:476 ms
+# memory:60.6 MB
