@@ -1,0 +1,42 @@
+
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode() {}
+     * TreeNode(int val) { this.val = val; }
+     * TreeNode(int val, TreeNode left, TreeNode right) {
+     * this.val = val;
+     * this.left = left;
+     * this.right = right;
+     * }
+     * }
+     */
+    class Solution {
+        public int res;
+        public int maxSumBST(TreeNode root) {
+            dfs(root);
+            return res;
+        }
+
+        public int[] dfs(TreeNode node) {
+            if (node == null) {
+                return new int[]{Integer.MAX_VALUE, Integer.MIN_VALUE, 0};
+                //0为最小值，1为最大值，2为和
+            }
+            int[] left = dfs(node.left);
+            int[] right = dfs(node.right);
+            int val = node.val;
+            if (left[1] >= val || right[0] <= val) {
+                return new int[]{Integer.MIN_VALUE, Integer.MAX_VALUE, 0};
+            }
+            int s = left[2] + right[2] + val;
+            res = Math.max(res, s);
+            return new int[]{Math.min(left[0], val), Math.max(right[1], val), s};
+        }
+    }
+
+//runtime:6 ms
+//memory:57.6 MB
