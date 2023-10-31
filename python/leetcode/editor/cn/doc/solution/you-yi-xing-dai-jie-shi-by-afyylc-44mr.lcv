@@ -1,0 +1,25 @@
+### 解题思路
+
+使用datetime函数，datetime.datetime.strptime('20220103', "%Y%m%d")可以返回周几(从0开始)
+
+### 代码
+
+* python3
+
+```python
+
+
+import datetime
+class Solution:
+    def dayOfTheWeek(self, day: int, month: int, year: int) -> str:
+        w_list = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]  # 星期列表
+        d = str(year) + str("{:0>2d}".format(month)) + str("{:0>2d}".format(day))  # 格式化日期，月和日必须是两位的
+        return w_list[datetime.datetime.strptime(d, "%Y%m%d").weekday()]
+
+# 一行：
+import datetime
+class Solution:
+    def dayOfTheWeek(self, day: int, month: int, year: int) -> str:
+        return ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][datetime.datetime.strptime(str(year)+str("{:0>2d}".format(month))+str("{:0>2d}".format(day)), "%Y%m%d").weekday()]
+```
+

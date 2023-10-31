@@ -1,7 +1,7 @@
 from collections import deque
 from typing import List, Optional
 
-from leetcode.editor.cn.dataStruct.TreeNode import TreeNode, createTree
+from leetcode.editor.cn.dataStruct.TreeNode import TreeNode, printTree, createTree
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
@@ -12,37 +12,27 @@ from leetcode.editor.cn.dataStruct.TreeNode import TreeNode, createTree
 #         self.left = left
 #         self.right = right
 class Solution:
-    def rightSideView1(self, root: Optional[TreeNode]) -> List[int]:
-        res = []
-
-        def func(node: TreeNode, depth: int) -> None:
-            if node is None:
-                return
-            nonlocal res
-            if len(res) == depth:
-                res.append(node.val)
-            func(node.right, depth + 1)
-            func(node.left, depth + 1)
-
-        func(root, 0)
-        return res
-
-    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root:
             return []
         res = []
         cur = deque([root])
+        depth = 0
         while cur:
-            res.append(cur[0].val)
+            val = []
+            depth += 1
             for _ in range(len(cur)):
                 node = cur.pop()
+                val.append(node.val)
                 if node.left:
                     cur.appendleft(node.left)
                 if node.right:
                     cur.appendleft(node.right)
+            res.append(val if depth % 2 != 0 else val[::-1])
         return res
 
 
 # leetcode submit region end(Prohibit modification and deletion)
-t = createTree([1, 2, 3, None, 5, None, 4])
-print(Solution().rightSideView(t))
+print(Solution().zigzagLevelOrder(createTree([3, 9, 20, None, None, 15, 7])))
+print(Solution().zigzagLevelOrder(createTree([1])))
+print(Solution().zigzagLevelOrder(createTree([])))

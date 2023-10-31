@@ -1,0 +1,19 @@
+# 大家不要学我，这样这样写程序会被骂的
+
+**datetime.datetime(year,month,day)**
+创建一个datetime类（python自带的库，感兴趣的朋友可以了解一下）
+
+**datetime.datetime(year,month,day).weekday()**
+返回该datetime类型变量的周数（0~6，是星期一到星期日。）
+
+**["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"][datetime.datetime(year,month,day).weekday()]**
+返回数组指定索引的字符串
+
+* 
+
+```
+class Solution:
+    def dayOfTheWeek(self, day: int, month: int, year: int) -> str:
+        return ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"][datetime.datetime(year,month,day).weekday()]
+```
+

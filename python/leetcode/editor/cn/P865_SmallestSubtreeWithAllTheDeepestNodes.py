@@ -1,5 +1,3 @@
-from typing import Optional
-
 from leetcode.editor.cn.dataStruct.TreeNode import TreeNode
 
 
@@ -11,7 +9,7 @@ from leetcode.editor.cn.dataStruct.TreeNode import TreeNode
 #         self.left = left
 #         self.right = right
 class Solution:
-    def lcaDeepestLeaves1(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+    def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
         res = None
         _max = 0
 
@@ -30,17 +28,4 @@ class Solution:
         recursion(root, 0)
         return res
 
-    def lcaDeepestLeaves(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        def recursion(node: TreeNode) -> (int, TreeNode):
-            if not node:
-                return 0, None
-            left_height, left_ancestor = recursion(node.left)
-            right_height, right_ancestor = recursion(node.right)
-            if left_height > right_height:
-                return left_height + 1, left_ancestor
-            if left_height < right_height:
-                return right_height + 1, right_ancestor
-            return left_height + 1, node
-
-        return recursion(root)[1]
         # leetcode submit region end(Prohibit modification and deletion)
