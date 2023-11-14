@@ -1,0 +1,58 @@
+### 解题思路
+
+此处撰写解题思路
+
+### 代码
+
+* typescript
+
+```typescript
+function findTheCity(
+    n: number,
+    edges: number[][],
+    distanceThreshold: number
+): number {
+    // floyd算法：动态规划计算多源最短路径
+    //dp[k][i][j]代表可以通过前k个顶点到达ij的最短距离
+    // 可以经过k节点dp[k-1][i][k]+dp[k-1][k][j]，
+    // 可以没经过k节点dp[k-1][i][j]
+    // ==> dp[k][i][j] = Math.min(dp[k-1][i][j],dp[k-1][i][k]+dp[k-1][k][j])
+
+    //由于上面的dp[k]只由dp[k-1]推出，则我们压缩成二维数组
+
+    // 简化版
+    // dp[i][j]代表i到j的最短路径   dp[i][j] = Math.min(dp[i][j],dp[i][k]+dp[k][j])
+    let dp: number[][] = new Array(n)
+        .fill(0)
+        .map((val) => new Array(n).fill(Infinity));
+    for (let i = 0; i < n; i++) dp[i][i] = 0;
+    for (let i = 0; i < edges.length; i++) {
+        dp[edges[i][0]][edges[i][1]] = edges[i][2];
+        dp[edges[i][1]][edges[i][0]] = edges[i][2];
+    }
+    // 更新dp数组
+    for (let k = 0; k < n; k++) {
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < n; j++) {
+                dp[i][j] = Math.min(dp[i][j], dp[i][k] + dp[k][j]);
+            }
+        }
+    }
+    let result = 0;
+    let min = Infinity;
+    for (let i = 0; i < n; i++) {
+        let count = 0;
+        for (let j = 0; j < n; j++) {
+            if (dp[i][j] <= distanceThreshold) {
+                count++;
+            }
+        }
+        if (count <= min) {
+            result = i;
+            min = count;
+        }
+    }
+    return result;
+}
+```
+

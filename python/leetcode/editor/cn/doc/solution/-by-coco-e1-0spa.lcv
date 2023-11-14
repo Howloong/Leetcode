@@ -1,0 +1,114 @@
+## 方法一：并查集
+
+首先，我们把坐在错误位置上的情侣连接成一个环（一对情侣看成环的一个顶点，该顶点有出边和入边），那么对每一个错误连接的环 ，如果环的顶点数为 **a** ，显然**我们需要调整的次数为 a - 1次**，因而我们可以将正确连接的情侣也考虑进来，看成一个顶点数为 1 的自环，则调整次数为 1- 1 = 0；借鉴一下官方的图可以更好理解：
+
+1. 顶点数为 1 的自环，需要调整的次数为 1 - 1 = 0
+   ![长度1的自环](https://pic.leetcode-cn.com/1664677490-YrJgbm-image.png)
+
+2. 顶点数为 3 的环，需要调整的次数为 3 - 2 = 1
+   ![image.png](https://pic.leetcode-cn.com/1664677195-kKhTGi-image.png)
+
+因此，假设存在 n 个错误连接的环
+$$
+(a_{1}, a_{2}, a_{3} ... a_{n})
+$$
+则我们需要调整的次数 total 为 :
+$$
+total = \sum_{i = 1}^{n}(a_{i}-1)
+$$
+若 n 个环的总顶点数为 N，则有
+$$
+\sum_{i = 1}^{n}a_{i} = N
+$$
+联立上面两个式子，可得
+$$
+total= N - n
+$$
+因此我们可以使用并查集统计给定的 N 对情侣能够形成多少个环 n，具体做法为：连接 row[i] / 2 和 row[i + 1] / 2 ，如果 row[i] / 2 和 row[i + 1] / 2 为正确连接，比如 0 和 1、2 和 3，那么经过向下取整后 row[i] / 2 和 row[i + 1] / 2 的值相同，就会形成顶点数为 1 的自环，基于我们上述的表述可以知道，这种自环需要调整的次数为 1 - 1= 0 次。
+
+下面就是编码时间啦（并查集的写法不唯一，功能一致就行）：
+
+* java
+
+```java
+class Solution {
+    public int minSwapsCouples(int[] row) {
+        int m = row.length;
+        int N = m / 2;
+        UnionFind unionFind = new UnionFind(N);
+        for (int i = 0; i < m; i += 2) {
+            unionFind.union(row[i] / 2, row[i + 1] / 2);
+        }
+        return N - unionFind.getCount(); // 这里的 unionFind.getCount() 统计的是环的数量 n 
+    }
+
+    // 并查集模板
+    private class UnionFind {
+
+        private int[] parent;
+
+        private int count;
+
+        public int getCount() {
+            return count;
+        }
+
+        public UnionFind(int n) {
+            this.count = n;
+            this.parent = new int[n];
+            for (int i = 0; i < n; i++) {
+                parent[i] = i;
+            }
+        }
+
+        public int find(int x) {
+            if(parent[x] != x) parent[x] = find(parent[x]);
+            return parent[x]; 
+        }
+
+        public void union(int x, int y) {
+            int rootX = find(x);
+            int rootY = find(y);
+            if (rootX == rootY) {
+                return;
+            }
+
+            parent[rootX] = rootY;
+            count--;
+        }
+    }
+}
+```
+
+## 方法二：贪心
+
+贪心的做法就比较简单，从前往后遍历 row 数组，如果 i < row.length - 1 && row[i] 和 row[i + 1] 能够成功牵手，那么我们跳过这对情侣，执行 i += 2；否则我们就从 i + 1 出发，遍历 row 数组，寻找能与 row[i] 牵手的 row[j] ，交换 row[i + 1] 和 row[j] 并更新交换次数 ans，再 i += 2， 重复上述过程直至完成遍历。
+
+* java
+
+```java
+class Solution {
+    // 贪心解法
+    public int minSwapsCouples(int[] row) {
+        int ans = 0, n = row.length;
+        for (int i = 0; i < n; i++) {
+            if (i < n - 1 && (row[i] ^ row[i + 1]) == 1) {
+                i++;
+                continue;
+            }
+            for (int j = i + 1; j < n; j++) {
+                if ((row[j] ^ row[i]) == 1) {
+                    int t = row[i + 1];
+                    row[++i] = row[j];
+                    row[j] = t;
+                    ans++;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+}
+```
+
+写在末尾：努力刷 hard 中，看到有意思的题目会分享一下自己的想法，如果你有不一样的想法，也欢迎分享给我呀！😃🥳

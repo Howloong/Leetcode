@@ -1,0 +1,104 @@
+> Problem: [1131. 绝对值表达式的最大值](https://leetcode.cn/problems/maximum-of-absolute-value-expression/description/)
+
+[TOC]
+
+# 思路
+
+> 不能使用暴力破解，复杂度过高
+
+# 解题方法
+
+这个算式`|arr1[i] - arr1[j]| + |arr2[i] - arr2[j]| + |i - j|`一共有3个绝对值，就是会有2<sup>3</sup>共8中可能，如果把1标识为对值表达式中前面的数大，0标识为绝对值表达式中后面的值大，那么有8种可能如下
+
+* 
+
+```
+111	arr1[i] - arr1[j] + arr2[i] - arr2[j] + i - j 
+110	arr1[i] - arr1[j] + arr2[i] - arr2[j] + j - i 
+101	arr1[i] - arr1[j] + arr2[j] - arr2[i] + i - j
+100 arr1[i] - arr1[j] + arr2[j] - arr2[i] + j - i
+
+
+011 arr1[j] - arr1[i] + arr2[i] - arr2[j] + i - j 
+010 arr1[j] - arr1[i] + arr2[i] - arr2[j] + j - i
+001 arr1[j] - arr1[i] + arr2[j] - arr2[i] + i - j 
+000 arr1[j] - arr1[i] + arr2[j] - arr2[i] + j - i
+```
+
+通过观察后得知，上下两个互补的（即对应1的换成0，如101，010）只要把j和i对调，等式也是一样的。
+
+* 
+
+```
+111	arr1[i] - arr1[j] + arr2[i] - arr2[j] + i - j 
+110	arr1[i] - arr1[j] + arr2[i] - arr2[j] + j - i 
+101	arr1[i] - arr1[j] + arr2[j] - arr2[i] + i - j
+100 arr1[i] - arr1[j] + arr2[j] - arr2[i] + j - i
+```
+
+拿出前面的4个等式（由于后面是互补，忽略），把i和j分别拿到前面和后面，就会得到下面的等式，惊人的发现前面的和后面的符号顺序都是一样的。
+
+* 
+
+```
+111	arr1[i] + arr2[i] + i - （arr1[j] + arr2[j] + j ）
+110	arr1[i] + arr2[i] - i - （arr1[j] + arr2[j] - j ）
+101	arr1[i] - arr2[i] + i - （arr1[j] - arr2[j] + j）
+100 arr1[i] - arr2[i] - i - （arr1[j] - arr2[j] - j）
+```
+
+所以顺利的把j和i等同起来，就是两个指针的移动了。由于java中使用集合是很影响效率，所以全使用数组实现。实际使用可以把下表定义为常量增进理解。
+
+# Code
+
+* []
+
+```Java
+
+class Solution {
+    public int maxAbsValExpr(int[] arr1, int[] arr2) {
+        int len = arr1.length;
+        //calM[0]存储最小值，calM[1]存储最大值
+        //calM[][0] arr1[i] + arr2[i] + i
+        //calM[][1] arr1[i] + arr2[i] - i
+        //calM[][2] arr1[i] - arr2[i] + i
+        //calM[][3] arr1[i] - arr2[i] - i
+        int[][] calM = new int[2][4];
+        for (int i = 0; i < 4; i++) {
+            calM[0][i] = Integer.MAX_VALUE;
+        }
+        for (int i = 0; i < 4; i++) {
+            calM[1][i] = Integer.MIN_VALUE;
+        }
+        for (int i = 0; i < len; i++) {
+            int[] modes = new int[]{
+                    arr1[i] + arr2[i] + i,
+                    arr1[i] + arr2[i] - i,
+                    arr1[i] - arr2[i] + i,
+                    arr1[i] - arr2[i] - i
+            };
+            for (int j = 0; j < 4; j++) {
+                int modeMin = calM[0][j];
+                if (modes[j] < modeMin) {
+                    calM[0][j] = modes[j];
+                }
+                int modeMax = calM[1][j];
+                if (modes[j] > modeMax) {
+                    calM[1][j] = modes[j];
+                }
+            }
+        }
+
+        //算出最小值和最大值后，分别计算
+        int max = calM[1][0] - calM[0][0];
+        for (int i = 1; i < 4; i++) {
+            int cur = calM[1][i] - calM[0][i];
+            if (cur > max) {
+                max = cur;
+            }
+        }
+        return max;
+    }
+}
+```
+

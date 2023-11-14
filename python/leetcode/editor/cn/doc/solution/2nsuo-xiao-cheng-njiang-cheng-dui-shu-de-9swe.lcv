@@ -1,0 +1,80 @@
+> Problem: [765. 情侣牵手](https://leetcode.cn/problems/couples-holding-hands/description/)
+
+[TOC]
+
+# 思路
+
+> 对于一对情侣来说，如果他们当前不能牵手，无论他们当前在什么位置，总是能通过一次交换就能达到牵手的目标
+
+# 解题方法
+
+> 直接套并查集模板即可
+
+# Code
+
+* []
+
+```Python
+
+# 思路：        # 对于一对情侣来说，如果他们当前不能牵手，无论他们当前在什么位置，总是能通过一次交换就能达到牵手的目标
+
+# 更优化的模板：将每个树都压缩到一个根节点上面
+class UF:
+    # 初始化
+    def __init__(self, n):
+        self.parent = [i for i in range(n)]  # 记录每个节点的父亲节点（初始化为只有一个节点，那么其父亲节点就是本身）
+        self.count = n  # 记录初始化的连通个数（最开始每一个节点都算一个连通量）
+
+    # 寻找父亲节点
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])  # 状态压缩（路径压缩），找到最头上的根节点，进行连接
+        return self.parent[x]
+
+    # 合并两个节点
+    def union(self, x, y):
+        rootP = self.find(x)  # 寻找x的父亲节点
+        rootQ = self.find(y)  # 寻找y的父亲节点
+        if rootP == rootQ:  # 根节点一样的就直接返回即可
+            return
+        self.parent[rootP] = rootQ  # 拼接在一起
+        self.count -= 1  # 连通个数减一
+
+    # 判断两个节点是否连接
+    def IsConnection(self, x, y):
+        return self.find(x) == self.find(y)  # 只需要判断其父亲节点是否一致即可
+
+    # 返回具体的连通分量的个数
+    def TotalCount(self):
+        return self.count
+
+# 上面为并查集的模板
+
+class Solution(object):
+    def minSwapsCouples(self, row):
+        """
+        :type row: List[int]
+        :rtype: int
+        """
+        # 对于一对情侣来说，如果他们当前不能牵手，无论他们当前在什么位置，总是能通过一次交换就能达到牵手的目标
+        n = len(row) // 2
+        uf = UF(n)
+        for i in range(len(row)):
+            row[i] //= 2
+
+        for i in range(n):
+            le = i * 2
+            for j in range(i + 1, n):
+                ri = j * 2
+                if row[le] == row[ri] or row[le] == row[ri + 1]:
+                    uf.union(i, j)
+                if row[le + 1] == row[ri] or row[le + 1] == row[ri + 1]:
+                    uf.union(i, j)
+
+        set_ = set()
+        for i in range(n):
+            set_.add(uf.find(i))
+        return n - len(set_)
+
+```
+

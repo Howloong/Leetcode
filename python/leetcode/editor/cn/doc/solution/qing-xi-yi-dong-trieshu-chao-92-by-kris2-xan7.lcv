@@ -1,0 +1,75 @@
+> Problem: [421. 数组中两个数的最大异或值](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array/description/)
+
+[TOC]
+
+# 思路
+
+如果对基础trie树结构不清晰的可以参考经典题:[208. 实现 Trie (前缀树)](https://leetcode.cn/problems/implement-trie-prefix-tree/solutions/2510542/gai-xie-trieshu-yzong-by-kris20030907-4kt8/)
+
+1. **暴力 wa一发 38/45**
+2. **同样是trie树,这里可以通过对每个数字按照位运算结果最大值为目的，而通过异或运算的特性，只要两个数字之间走的trie树路线不同（比如0b1101 找 ob0010异或结果是1111），就能找到最大的值.而且找的是整个数组中某对数字,所以可以通过trie树将每个数按照 "31"位拆分,每个节点可以有31个分叉,最后求max**
+
+   2.1 **为什么要拆分成 31位,因为 int的范围 2^31 - 1.**
+
+   2.2 **这里有个顺序问题,应该从前往后还是从后往前遍历每一位?**
+   **这其实和你的计算顺序有关,如果查询的时候你想计算最大值,肯定是每一位都要判断是走 0 呢还是走 1 ,计算两个数的最大异或和(假设trie中就俩数),应该从后往前遍历,更方便计算一个二进制数的10进制数,如` 1101 -> 1 * 2^0 + 0 * 2^1 + 1 * 2^2 `依次类推,每次只要上一个值`res * 2`加上当前数位就可以得到当前数的10进制数**
+
+附上运行结果截图:
+![image.png](https://pic.leetcode.cn/1699064237-sXPUGA-image.png)
+
+# Code
+
+* []
+
+```C++
+
+class Solution {
+public:
+//1.初始化数组和指针
+    static const int N = 200010, M = N * 31;   //注意数据范围,最多可能有N*31个节点
+    int son[M][2];
+    int idx = 0;
+
+    //2. 插入
+    void insert(int x){
+        int p = 0;
+        //取出每一位作为节点
+        for(int i = 30; i >= 0; i--){
+            int u = x >> i & 1; //取出第i位数位
+            if(!son[p][u]) son[p][u] = ++idx;
+            p = son[p][u];
+        }
+    }
+    //3. 查询  这里需要选择和当前数"尽量相反的数位求和"
+    int query(int x){
+        int p = 0; 
+        int res = 0;   //每个数的最后一位对应的初始2的次数为 0
+
+        for(int i = 30; i >= 0; i--){
+            int u = x >> i & 1;
+
+            if(son[p][!u]) {
+                res = res * 2 + !u;  //有相反数位直接求和
+                p = son[p][!u];  //那你就要从这边下去找下一位数(第一遍没注意)
+            }
+            else {
+                res = res * 2 + u; //没有相反的数位就直接求当前数位呗,但是不能省略
+                p = son[p][u];
+            }
+        }
+        return res;
+    }
+
+    int findMaximumXOR(vector<int>& nums) {
+        int ans = 0;
+        //最后就是把每个数插入trie树然后查询哪个数和当前数异或值最大喽,可以同时查询
+        for(int num : nums){
+            insert(num);
+            int t = query(num);
+            ans = max(ans, t ^ num);
+        }
+        return ans;
+    }
+};
+```
+

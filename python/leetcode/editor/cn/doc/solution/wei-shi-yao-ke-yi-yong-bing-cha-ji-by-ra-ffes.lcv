@@ -1,0 +1,97 @@
+菜鸡瞎写的，这里只会提供一种直观上的理解。具体的严格证明还要看三叶小姐☘️写的的证明(在下面链接)。
+
+# 参考资料
+
+- [【宫水三叶☘️の相信科学系列】为什么交换任意一个都是对的？两种 100% 的解法：并查集 & 贪心 - 情侣牵手](https://leetcode-cn.com/problems/couples-holding-hands/solution/liang-chong-100-de-jie-fa-bing-cha-ji-ta-26a6/)
+- [【力扣官方】🎦 情侣牵手 - 情侣牵手](https://leetcode-cn.com/problems/couples-holding-hands/solution/qing-lu-qian-shou-by-leetcode-gl1c/)
+
+# "情侣组" 与 "连通分量"
+
+实际上，**情侣对可以被抽象为一个节点**。
+
+![image-00030909111426251.png](https://pic.leetcode-cn.com/1631151949-YAWEwQ-image-00030909111426251.png)
+
+可以发现，**对于那些交错的情侣对来说**，**交换次数**即**连通分量大小减一**。
+
+因此我们需要求出**图中连通分量的数目**， 这就可以用 **"并查集"**。
+
+# 并查集
+
+**根据座位**，将相关情侣对连接在一起。
+
+![image-00030909112354269.png](https://pic.leetcode-cn.com/1631151998-jbOWAg-image-00030909112354269.png)
+
+可以得到并操作，把交错的情侣对并在一起。
+
+首先，我们总是**以「情侣对」为单位进行设想**。
+
+- 对于 情侣对 $(0, 1)$ 而言，其「情侣对」编号为 $0$ 。
+- 同理，情侣对 $(i, i+1)$ 而言，其「情侣对」编号 $i / 2$ 。
+  - 可以理解为 $i$ 的 parent 就是 $i / 2$ ， 而 $i+1$ 的 parent 也是 $i / 2$ 。
+
+* cpp
+
+```cpp
+for (int i = 0; i < row; i += 2){
+  uf.Union(row[i] / 2, row[i+1] / 2); 
+}
+```
+
+### "并查集" 与 "连通分量"
+
+观察可以发现，只有 $parent[i] = i$ 才能被算作一个**连通分量**。也就是图中有3个连通分量。
+![image-00030909113114589.png](https://pic.leetcode-cn.com/1631152047-CLYqmT-image-00030909113114589.png)
+
+假设**一共有 $k$ 个连通分量**, 可以发现我们需要的交换次数为
+$$
+(S_1 - 1) + (S_2 - 1) + ... + (S_k - 1) = M - k
+$$
+其中 $S_k$ 为连通分量的大小， $M$ 为节点数 (即情侣对数, 我们把情侣对抽象成节点了) ，$k$ 为连通分量的数目。
+
+故「至少交换的次数 = **所有情侣的对数 - 并查集里连通分量的个数**」。
+
+* cpp
+
+```cpp
+
+
+class Solution {
+private:
+    const static int MAX_SIZE = 70; 
+    class UnionFind{
+    public:
+        vector<int> parent; 
+        UnionFind() : parent(MAX_SIZE) { }
+        void initialize(int n){
+            for (int i = 0; i < n; i++){ parent[i] = i; }
+        }
+        int Find(int x){
+            // Base Case: 集合只有一个节点(root)
+            if (parent[x] == x) return x;
+            return parent[x] = Find(parent[x]); 
+        }
+        void Union(int a, int b){ // a 接到 b 上
+            parent[Find(a)] = parent[Find(b)]; 
+        }
+    }; 
+
+public:
+    int minSwapsCouples(vector<int>& row) {
+        int n = row.size(); 
+        int m = n / 2; 
+        static UnionFind st; 
+        st.initialize(m); 
+        for (int i = 0; i < n; i += 2){
+            st.Union(row[i] / 2, row[i+1] / 2); 
+        }
+        int cnt = 0; 
+        for (int i = 0; i < m; i++){
+            if (i == st.Find(i))    cnt++; 
+        }
+        return m - cnt; 
+    }
+};
+
+
+```
+

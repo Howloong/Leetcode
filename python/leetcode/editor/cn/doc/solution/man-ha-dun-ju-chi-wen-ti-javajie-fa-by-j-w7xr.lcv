@@ -1,0 +1,41 @@
+### 解题思路
+
+曼哈顿距离：两点南北方向距离加上东西方向距离，也叫出租车距离，是为了简化欧式距离计算而提出的。这道题是一个三位曼哈顿距离的题。
+打开绝对值号其实分解开就四种情况，要找的是每种情况的【最大值与最小值的差】的最大值
+A=arr1[i]+arr2[i]+i
+
+B=arr1[i]+arr2[i]-i
+
+C=arr1[i]-arr2[i]+i
+
+D=arr1[i]-arr2[i]-i
+
+### 代码
+
+* java
+
+```java
+class Solution {
+    public int maxAbsValExpr(int[] arr1, int[] arr2) {
+        int len = arr1.length;
+        int a_max=Integer.MIN_VALUE,a_min=Integer.MAX_VALUE;
+        int b_max=Integer.MIN_VALUE,b_min=Integer.MAX_VALUE;
+        int c_max=Integer.MIN_VALUE,c_min=Integer.MAX_VALUE;
+        int d_max=Integer.MIN_VALUE,d_min=Integer.MAX_VALUE;
+        for(int i=0;i<len;i++){
+            a_max=Math.max(a_max,arr1[i]+arr2[i]+i);
+            a_min=Math.min(a_min,arr1[i]+arr2[i]+i);
+            b_max=Math.max(b_max,arr1[i]+arr2[i]-i);
+            b_min=Math.min(b_min,arr1[i]+arr2[i]-i);
+            c_max=Math.max(c_max,arr1[i]-arr2[i]-i);
+            c_min=Math.min(c_min,arr1[i]-arr2[i]-i);
+            d_max=Math.max(d_max,arr1[i]-arr2[i]+i);
+            d_min=Math.min(d_min,arr1[i]-arr2[i]+i);
+        }
+        int a =Math.max(a_max-a_min,b_max-b_min);
+        int b =Math.max(c_max-c_min,d_max-d_min);
+        return Math.max(a,b);
+    }
+}
+```
+

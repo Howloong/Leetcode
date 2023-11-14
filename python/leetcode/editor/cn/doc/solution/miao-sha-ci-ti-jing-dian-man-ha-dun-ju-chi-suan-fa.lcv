@@ -1,0 +1,42 @@
+**题解 时间复杂度O(n)**
+
+看一眼时间复杂度，用暴力肯定超时，仔细想想可以把这个题抽象为求三维曼哈顿距离的最大值
+
+$dist = |x_i - x_j| + |y_i - y_j| + |z_i - z_j|$
+分析：
+- dist这个表达式去绝对值后，$x_i，y_i，z_i$只可能有八种情况
+  $1：x_i + y_i + z_i，2：x_i + y_i - z_i, ...，8：-x_i - y_i - z_i$
+- 可以发现每一种情况对应的$x_j, y_j, z_j$, 一定也能被确定下来（对应符号相反），比如：$x_i + y_i - z_i$这种情况，一定是$dist = (x_i + y_i - z_i)+(-x_j - y_j + z_j)$
+- 所以我们只需要先用$O(n)$的复杂度求出点$i$的八种情况分别对应的最大值$maxv[k], k=0,..8$，然后再用$O(n)$的复杂度枚举每一种去绝对值的组合，取八种组合中的最大值即为最终结果
+- 进一步可以求d维的曼哈顿距离，情况有$2^d$种，时间复杂度为$O(2^d n)$
+
+**C++代码：**
+
+* cpp
+
+```cpp
+class Solution {
+public:
+    // 八种情况，用1表示正号，-1表示负号
+    int d[8][3] = {{1, 1, 1}, {1, 1, -1}, {1, -1, 1}, {-1, 1, 1}, {1, -1, -1}, {-1, -1, 1}, {-1, 1, -1}, {-1, -1, -1}};
+    int maxv[8];
+
+    int maxAbsValExpr(vector<int> &arr1, vector<int> &arr2) {
+        int n = arr1.size();
+        memset(maxv, 0x80, sizeof maxv);
+
+        // 求出点i的8种组合的最大值
+        for (int k = 0; k < 8; k ++)
+            for (int i = 0; i < n; i ++)
+                maxv[k] = max(maxv[k], i * d[k][0] + arr1[i] * d[k][1] + arr2[i] * d[k][2]);
+
+        int res = 0;
+        for (int k = 0; k < 8; k ++)
+            for (int j = 0; j < n; j ++)
+                res = max(res, maxv[k] - j * d[k][0] - arr1[j] * d[k][1] - arr2[j] * d[k][2]);
+
+        return res;
+    }
+};
+```
+

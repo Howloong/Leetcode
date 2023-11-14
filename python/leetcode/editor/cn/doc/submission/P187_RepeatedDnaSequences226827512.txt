@@ -1,0 +1,17 @@
+    class Solution {
+        public List<String> findRepeatedDnaSequences(String s) {
+            Map<String, Integer> map = new HashMap();
+            Set<String> set = new HashSet<>();
+            for (int i = 0; i <= s.length() - 10; i++) {
+                String subStr = s.substring(i, i + 10);
+                map.put(subStr, map.getOrDefault(subStr, 0) + 1);
+                if (map.get(subStr) >= 2) {
+                    set.add(subStr);
+                }
+            }
+            return new ArrayList<>(set);
+        }
+    }
+
+//runtime:24 ms
+//memory:46.8 MB
