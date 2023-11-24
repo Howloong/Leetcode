@@ -1,37 +1,41 @@
-def strStr(self, haystack: str, needle: str) -> int:
-    if not needle:
-        return 0
+n = 4
+m = 5
+# 存储了某个节点所对应的边的集合（链表）的头结点
+head = [-1] * n
+# 存储访问的某一条边所指向的节点
+edges = [0] * m
+# 由于是使用的链表存储的边，该数组存储的是下一条边
+next = [0] * m
+# 存储某条边权重是多少
+weights = [0] * m
+index = 0
 
-    n = len(haystack)
-    m = len(needle)
-    # 添加哨兵，下标均从1开始
-    haystack = " " + haystack
-    needle = " " + needle
-    # 构建next数组
-    next = [0] * (m + 1)
-    # i从2开始，j从0开始，这样就需要比较j+1和i的值，同时j=next[j]
-    # 或者j从1开始，需要比较i和j的值，j=next[j-1]
-    i, j = 2, 0
-    while i <= m:
-        # 匹配不成功，j=next[j]
-        while j > 0 and needle[i] != needle[j + 1]:
-            j = next[j]
-        # 匹配成功，j先加1
-        if needle[i] == needle[j + 1]:
-            j += 1
-        next[i] = j
-        i += 1
-    # 匹配
-    i, j = 1, 0
-    while i <= n:
-        # 如果匹配不成功，则j=next[j]，找到最长的前后缀
-        while j > 0 and haystack[i] != haystack[j + 1]:
-            j = next[j]
-        # 匹配成功，则先让j++
-        if haystack[i] == needle[j + 1]:
-            j += 1
-        # 匹配成功，返回下标
-        if j == m:
-            return i - m
-        i += 1
-    return -1
+
+def add(_from: int, _to: int, weight: int) -> None:
+    global index
+    # 第index条边指向了_to
+    edges[index] = _to
+    # 头插法，第index个边的下一个边指向head所指向的节点
+    next[index] = head[_from]
+    # 第index个边的权重
+    weights[index] = weight
+    # 将新插入的边接在head的下一个
+    head[_from] = index
+    index += 1
+
+
+def traverse(_from: int):
+    # 从_from点开始，e为_from点的第一条边
+    e = head[_from]
+    while e != -1:
+        # 表示存在一条从_from到_to的边
+        _to = edges[e]
+        weight = weights[e]
+        # 找到下一条边的编号
+        e = next[e]
+
+
+add(0, 1, 1)
+add(0, 2, 2)
+add(1, 2, 3)
+pass

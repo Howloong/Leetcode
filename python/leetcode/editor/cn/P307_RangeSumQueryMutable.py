@@ -1,71 +1,37 @@
-from typing import List, Optional
+from typing import List
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
-class Node:
-    def __init__(self):
-        self.left: Optional["Node"] = None
-        self.right: Optional["Node"] = None
-        self.val: int = 0
-        self.mark: int = 0
-
-    def pushUp(self, node: "Node") -> None:
-        node.val = node.left.val + node.right.val
-
-    def pushDown(self, node: "Node", left_num: int, right_num: int) -> None:
-        if not node.left:
-            node.left = Node()
-        if not node.right:
-            node.right = Node()
-        if not node.mark:
-            return
-        # 题目中是将一个区间的数替换为另一个区间的数，所以覆盖
-        node.left.val = node.mark * left_num
-        node.right.val = node.mark * right_num
-
-        node.left.mark = node.mark
-        node.right.mark = node.mark
-        node.mark = 0
-
-    def update(self, node: "Node", start: int, end: int, l: int, r: int, val: int) -> None:
-        if l <= start and end <= r:
-            node.val = (end - start + 1) * val
-            node.mark = val
-            return
-        mid = (start + end) >> 1
-        self.pushDown(node, mid - start + 1, end - mid)
-        if l <= mid:
-            self.update(node.left, start, mid, l, r, val)
-        if r > mid:
-            self.update(node.right, mid + 1, end, l, r, val)
-        self.pushUp(node)
-
-    def query(self, node: "Node", start: int, end: int, l: int, r: int) -> int:
-        if l <= start and end <= r:
-            return node.val
-        mid = (start + end) // 2
-        ans = 0
-        self.pushDown(node, mid - start + 1, end - mid)
-        if l <= mid:
-            ans += self.query(node.left, start, mid, l, r)
-        if r > mid:
-            ans += self.query(node.right, mid + 1, end, l, r)
-        return ans
-
-
 class NumArray:
 
     def __init__(self, nums: List[int]):
-        self.tree_node = Node()
-        self.n = len(nums)
-        for i in range(self.n):
-            self.tree_node.update(self.tree_node, 0, self.n - 1, i, i, nums[i])
+        n = len(nums)
+        tree = [0] * (n + 1)
+        for i, x in enumerate(nums, 1):
+            tree[i] += x
+            nxt = i + (i & -i)
+            if nxt <= n:
+                tree[nxt] += tree[i]
+        self.tree = tree
+        self.nums = nums
 
     def update(self, index: int, val: int) -> None:
-        self.tree_node.update(self.tree_node, 0, self.n - 1, index, index, val)
+        delta = val - self.nums[index]
+        self.nums[index] = val
+        i = index + 1
+        while i < len(self.tree):
+            self.tree[i] += delta
+            i += i & -i
+
+    def prefixSum(self, i: int) -> int:
+        s = 0
+        while i:
+            s += self.tree[i]
+            i &= i - 1
+        return s
 
     def sumRange(self, left: int, right: int) -> int:
-        return self.tree_node.query(self.tree_node, 0, self.n - 1, left, right)
+        return self.prefixSum(right + 1) - self.prefixSum(left)
 
 
 # Your NumArray object will be instantiated and called as such:

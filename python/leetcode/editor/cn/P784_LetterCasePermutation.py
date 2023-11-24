@@ -29,6 +29,6 @@ class Solution:
 
 
 # leetcode submit region end(Prohibit modification and deletion)
-# print(Solution().letterCasePermutation("a1b2"))
+print(Solution().letterCasePermutation("a1b2"))
 # print(Solution().letterCasePermutation("3z4"))
 print(Solution().letterCasePermutation("C"))

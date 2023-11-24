@@ -22,7 +22,23 @@ class Solution:
 
         dfs(0, 0)
         return ans
-
+        # ans = []
+        # path = []
+        # n = len(s)
+        #
+        # def dfs(i: int):
+        #     if i == n:
+        #         ans.append(path.copy())
+        #         return
+        #     for j in range(i, n):
+        #         t = s[i: j + 1]
+        #         if t == t[::-1]:
+        #             path.append(t)
+        #             dfs(j + 1)
+        #             path.pop()
+        #
+        # dfs(0)
+        # return ans
 
 # leetcode submit region end(Prohibit modification and deletion)
 print(Solution().partition("aab"))

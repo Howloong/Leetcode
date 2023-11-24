@@ -1,0 +1,57 @@
+**关键思路图解**
+1. 由于回文字符串两侧是对称的，所以以中心点两边对称位置为中心产生的回文长度是相等的。
+   ![1.png](https://pic.leetcode-cn.com/bba4fe97c275550592ce80a37cc5a44d6795ca7484ef1c60dd972e3a3156a17a-1.png)
+
+图中输入字符串为XABAXABAX，下方的len表示以该字符为中心的回文串半径长（不包括中心点）。以第二个B为中心的回文半径长和第一个B相等，也是2。
+
+2. 新的回文结构半径会被局限在覆盖该中心点的最右侧回文字符串内，遇到这种情况需要用中心扩展法，尝试扩展新的回文结构。
+   ![2.png](https://pic.leetcode-cn.com/2bfa860e37f3cfd242764304d4b2c6d79f5e95fc94d68272d65fd9b171b56d35-2.png)
+
+图中第二个B为中心的回文结构半径初始值为1，因为之前最右边的回文长度只覆盖到A，这个时候需要在初始值1的基础上往外扩展。如果扩展成功，则把最右边回文结构向右移动，争取覆盖更多没有计算的部分。
+
+![3.png](https://pic.leetcode-cn.com/1337c66e4057c90339a4a06031f737d957336b6f3809d937810057bad8990449-3.png)
+
+3. 由于新的回文结构半径会被局限在覆盖该中心点的最右侧回文字符串内，所以也会出现新的回文半径小于其对称点的情况。所以新的半径应该取中心点到回文最右侧和对称点回文半径中的最小值。
+   ![4.png](https://pic.leetcode-cn.com/db2fd9ad3201366ceb06a985145caaf31b8b1a024ad180a653443faf17503ece-4.png)
+
+**参考官方代码并添加注释**
+
+* 
+
+```
+class Solution {
+    public int countSubstrings(String s) {
+        int n = s.length();
+        StringBuffer t = new StringBuffer("$#");
+        // 添加间隔的#字符，是的所有的回文都是奇数长度的，这样不会改变结果
+        for (int i = 0; i < n; ++i) {
+            t.append(s.charAt(i));
+            t.append('#');
+        }
+        n = t.length();
+        t.append('!');
+
+        int[] f = new int[n];
+        // iMax为最右侧回文的中心点， rMax为最右侧回文的最有点
+        int iMax = 0, rMax = 0, ans = 0;
+        for (int i = 1; i < n; ++i) {
+            // 第i个元素的初始值取i到最右回文边界 和 i的对称点的长度的小值
+            f[i] = i <= rMax ? Math.min(rMax - i + 1, f[2 * iMax - i]) : 1;
+            // 中心拓展
+            while (t.charAt(i + f[i]) == t.charAt(i - f[i])) {
+                ++f[i];
+            }
+            // 动态维护 iMax 和 rMax
+            if (i + f[i] - 1 > rMax) {
+                iMax = i;
+                rMax = i + f[i] - 1;
+            }
+            // 统计答案, 当前贡献为 (f[i] - 1) / 2 上取整
+            ans += f[i] / 2;
+        }
+
+        return ans;
+    }
+}
+```
+

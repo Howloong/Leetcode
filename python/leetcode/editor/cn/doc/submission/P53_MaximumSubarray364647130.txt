@@ -1,0 +1,27 @@
+    class Solution {
+        public int maxSubArray(int[] nums) {
+          /*  int res = nums[0];
+            int sum = 0;
+            for (int i : nums
+            ) {
+                if (sum > 0) {
+                    sum += i;
+                } else {
+                    sum = i;
+                }
+                res = Math.max(res, sum);
+            }
+            return res;*/
+            int n = nums.length;
+            int dp = Math.max(nums[0], 0);
+            int max = nums[0];
+            for (int i = 1; i < n; i++) {
+                dp = Math.max(dp+ nums[i], nums[i]);
+                max = Math.max(max, dp);
+            }
+            return max;
+        }
+    }
+
+//runtime:1 ms
+//memory:50.7 MB
