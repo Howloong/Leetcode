@@ -1,0 +1,104 @@
+> Problem: [907. 子数组的最小值之和](https://leetcode.cn/problems/sum-of-subarray-minimums/description/)
+
+[TOC]
+
+# 思路
+
+根据出现的频率可以发现：
+- 3出现了1次，1出现了6次，2出现了2次，4出现了1次，
+- 再联想到其下标的位置，
+- 考虑左边第一个小于这个数的位置，left
+- 右边第一个小于这个数的位置,right
+- 可以发现，当前数出现的次数，跟上面的左右两个下标有关：
+
+- 比如： （需要在数组的两端加上一个0，表示最小的情况）
+
+- 3： 当前3的下标为1，其左边小于3的小标为0，其右边小于3的小标为：2
+- 出现的次数为：（i-left）*(right-i)=（1-0）*（2-1）=1 次
+
+- 在比如1：（2-0）*（5-2）=6 次
+- 所以考虑使用单调栈（单调递增栈，栈尾 小，栈顶 大）
+
+# Code
+
+* []
+
+```Python
+class Solution(object):
+    def sumSubarrayMins(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: int
+        """
+        # 根据出现的频率可以发现：
+        # 3出现了1次，1出现了6次，2出现了2次，4出现了1次，
+        # 再联想到其下标的位置，
+        # 考虑左边第一个小于这个数的位置，left
+        # 右边第一个小于这个数的位置,right
+        # 可以发现，当前数出现的次数，跟上面的左右两个下标有关：
+        # 比如： （需要在数组的两端加上一个0，表示最小的情况）
+        # 3： 当前3的下标为1，其左边小于3的小标为0，其右边小于3的小标为：2
+        # 出现的次数为：（i-left）*(right-i)=（1-0）*（2-1）=1 次
+        # 在比如1：（2-0）*（5-2）=6 次
+        # 所以考虑使用单调栈（单调递增栈，栈尾 小，栈顶 大）
+        
+        # 使用两个单调栈，最后对left和right进行一次遍历即可
+        n = len(arr)
+        left = [0]*n
+        right = [0]*n
+        res = 0
+        stack = []
+
+        for i,x in enumerate(arr):  # 左边的left
+            while stack and x < arr[stack[-1]]:
+                stack.pop()
+            if stack:
+                left[i] = stack[-1]
+            else:
+                left[i] = -1
+            stack.append(i)
+
+        stack = []
+        # 右边的right，使用倒序
+        for j in range(n-1,-1,-1):
+            while stack and arr[j] <= arr[stack[-1]]:  #因为是倒序，想要找到第一个小于这个数的小标，就得取等于
+                stack.pop()
+            if stack:
+                right[j] = stack[-1]
+            else:
+                right[j] = n
+            stack.append(j)
+
+        
+        for i,x in enumerate(arr):
+            res = (res+(x*(i-left[i])*(right[i]-i))) % (10**9+7)  # ！！！ 注意这个地方取余的问题
+
+        return res
+
+
+# 其他的写法
+# from collections import deque
+
+# class Solution(object):
+#     MOD = 1000000007
+
+#     def getElement(self, arr, n, i):
+#         if i == -1 or i == n:
+#             return float('-inf')
+#         return arr[i]
+
+#     def sumSubarrayMins(self, arr):
+#         if arr is None or len(arr) == 0:
+#             return 0
+#         n = len(arr)
+#         ans = 0
+#         stack = deque()
+#         for i in range(-1, n + 1):
+#             while stack and self.getElement(arr, n, stack[-1]) > self.getElement(arr, n, i):
+#                 cur = stack.pop()
+#                 ans = (ans + (cur - stack[-1]) * (i - cur) * arr[cur]) % self.MOD
+#             stack.append(i)
+
+#         return ans
+```
+

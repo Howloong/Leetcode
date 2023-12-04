@@ -1,0 +1,105 @@
+> Problem: [828. 统计子串中的唯一字符](https://leetcode.cn/problems/count-unique-characters-of-all-substrings-of-a-given-string/description/)
+
+# 思路
+
+让我们思考一下如何让角色成为一个独特的角色。
+
+考虑字符串"xaxaxaxaxax"，并专注于使第二个"A"成为唯一字符。
+我们可以取"XA(XAXX)AX"，其中"()"是我们的子字符串。
+
+我们可以在这里看到，要使第二个"A"算作唯一字符，我们需要:
+1. 在第一个和第二个A之间插入"("
+2. 在第二个和第三个A之间插入")"
+
+对于第一步，我们有A(XA)和AX(A)两种可能性。
+对于第二步，我们有"A)XXA"，"AX)XA"和"AXX)A"，三种可能。
+
+所以总共有2 * 3 = 6种方法使第二个A成为子字符串中的唯一字符。
+换句话说，只有6个子字符串，其中这个A贡献了1个点作为唯一字符串。
+
+而不是计算所有唯一字符并努力处理所有可能的子字符串，
+我们可以计算S中的每个字符，有多少种方法可以找到一个唯一的字符。
+我们数然后和一下，就会得到答案。
+
+# 解释
+
+1. index[26][2]记录每个大写字符的最后两个出现索引。
+
+2. 将index中的所有值初始化为-1。
+
+3. 在字符串S上循环，对于每个字符c，将其最后两次出现的索引更新为index[c]。
+
+4. 循环时计数。例如，如果"A"分别在索引3、6、9处出现两次，我们需要计数:
+
+第一个"A": (6-3)* (3-(-1))
+第二个"A": (9-6)* (6-3)
+第三个"A": (N-9) * (9-6)
+
+# 时空复杂度分析:
+
+- 时间复杂度：O(N)，其中N是字符串s的长度。遍历一次字符串，并在常量时间内执行每个字符的操作。
+
+空间复杂度：O(1)。尽管有一个固定大小的哈希表（index），但它的大小是常数级的（26个字母），与输入字符串的长度无关，因此可以视为空间复杂度为O(1)。
+
+- 算法说明：
+
+index 是一个字典，用于记录每个大写字母最近两次出现的位置。初始时，所有字母的位置都设置为[-1, -1]。
+
+在遍历字符串 s 的过程中，对于每个字符 c，计算以 c 结尾的独特字母子串的数量。具体计算方式是将当前位置 i 减去前一次出现位置 j，再减去再前一次出现位置 k，然后将结果累加到 res 中。
+
+最后，遍历所有字母，处理它们在字符串末尾的情况，将剩余的独特字母子串数量累加到 res 中。
+
+最终结果取模以满足题目要求。
+
+这个算法的关键点在于维护每个字母最近两次出现的位置，以及在遍历过程中的累加计算。通过一次遍历，可以高效地计算出结果。
+
+# Code
+
+* []
+
+```Python
+class Solution:
+    def uniqueLetterString(self, S):
+        index = {c: [-1, -1] for c in ascii_uppercase}
+        res = 0
+        for i, c in enumerate(S):
+            k, j = index[c]
+            res += (i - j) * (j - k)
+            index[c] = [j, i]
+        for c in index:
+            k, j = index[c]
+            res += (len(S) - j) * (j - k)
+        return res % (10**9 + 7)
+```
+
+![image.png](https://pic.leetcode.cn/1700971945-cyuIkf-image.png)
+
+* []
+
+```golang
+func uniqueLetterString(s string) int {
+    const mod = 1e9 + 7
+    index := make(map[byte][2]int)
+    res := 0
+
+    for i := 0; i < 26; i++ {
+        index[byte('A'+i)] = [2]int{-1, -1}
+    }
+
+    for i, c := range s {
+        ch := byte(c)
+        k, j := index[ch][0], index[ch][1]
+        res = (res + (i-j)*(j-k)) % mod
+        index[ch] = [2]int{j, i}
+    }
+
+    for _, v := range index {
+        k, j := v[0], v[1]
+        res = (res + (len(s)-j)*(j-k)) % mod
+    }
+
+    return res
+}
+```
+
+![image.png](https://pic.leetcode.cn/1700971975-QaOzUy-image.png)

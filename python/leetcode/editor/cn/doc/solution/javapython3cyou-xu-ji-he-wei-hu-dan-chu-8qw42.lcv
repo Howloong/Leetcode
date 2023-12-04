@@ -1,0 +1,121 @@
+# 题目
+
+## 2336. 无限集中的最小数字
+
+现有一个包含所有正整数的集合 `[1, 2, 3, 4, 5, ...]` 。
+
+实现 `SmallestInfiniteSet` 类：
+- `SmallestInfiniteSet()` 初始化 `SmallestInfiniteSet` 对象以包含 **所有** 正整数。
+- `int popSmallest()` **移除** 并返回该无限集中的最小整数。
+- `void addBack(int num)` 如果正整数 `num` **不** 存在于无限集中，则将一个 `num` **添加** 到该无限集中。
+
+# 题目分析
+
+这道题是模拟一个所有正整数集合的元素入集与出集。
+
+如果不考虑有元素入集，只考虑出集的操作。由于每次出集都是返回集合中的最小元素，那么使用一个指针 `point` 从 `1` 开始，每次弹出就递增一次。即 `point` 指向当前要弹出的最小值。
+
+![image.png](https://pic.leetcode.cn/1701190328-QCmiDT-image.png)
+
+但是现在有元素入集的操作，会有什么影响呢？
+- 如果加入的元素 `num` 大于等于 `point`，说明加入的元素在要弹出的元素之后，并不影响弹出；
+- 如果加入的元素 `num` 小于 `point`，说明之前弹出的较小值又加入了。这就会影响弹出的操作。
+  - 因为 `[0, point)` 范围有元素了，有比 `point` 更小的值了，我么需要去范围 `[0, point)` 中的最小值；
+  - 因此我们需要一个能够 **排序且元素不重复的数据结构** 来存储这些再次加入的较小值，即使用 **有序集合**
+  - 如果有序集合不为空，说明有比 `point` 更小的元素，从集合中弹出，否则 `point` 指向的就是最小元素；
+  - 而在加入元素时，元素值小于 `point` 的就加入有序集合。
+
+    ![image.png](https://pic.leetcode.cn/1701190685-YGjQUc-image.png)
+
+> 参考
+> 《[无限集中的最小数字](https://leetcode.cn/problems/smallest-number-in-infinite-set/solutions/2542156/wu-xian-ji-zhong-de-zui-xiao-shu-zi-by-l-5mfr/?envType=daily-question&envId=2023-11-29)》—— 力扣官方官解
+
+# 代码
+
+* []
+
+```Java
+class SmallestInfiniteSet {
+    private TreeSet<Integer> lessPoint;     //存储[0, point)重新加入集合的值
+    private int point;      // 有序弹出的值
+
+    public SmallestInfiniteSet() {
+        lessPoint = new TreeSet<>();
+        point = 1;
+    }
+    
+    public int popSmallest() {
+        if(!lessPoint.isEmpty()){
+            // [1, point)存在元素，弹出有序集合首个元素即为最小值
+            return lessPoint.pollFirst();
+        }
+        return point++;     // 否则point指向的就是最小值
+    }
+    
+    public void addBack(int num) {
+        // 加入的元素小于point，加入有序集合；即之前弹出的较小值又加入回来
+        if(num < point){
+            lessPoint.add(num);
+        }
+    }
+}
+```
+
+* []
+
+```Python
+from sortedcontainers import SortedSet
+
+class SmallestInfiniteSet:
+
+    def __init__(self):
+        self.less_point = SortedSet()   #存储[0, point)重新加入集合的值
+        self.point = 1                  # 有序弹出的值
+
+    def popSmallest(self) -> int:
+        if self.less_point:
+            # [1, point)存在元素，弹出有序集合首个元素即为最小值
+            return self.less_point.pop(0)
+
+        # 否则point指向的就是最小值
+        ans = self.point    # 暂存最小值
+        self.point += 1     # 后移一位
+        return ans     
+
+    def addBack(self, num: int) -> None:
+        # 加入的元素小于point，加入有序集合；即之前弹出的较小值又加入回来
+        if num < self.point:
+            self.less_point.add(num)
+```
+
+* []
+
+```C++
+class SmallestInfiniteSet {
+private:
+    set<int> lessPoint;
+    int point = 1;
+
+public:
+    SmallestInfiniteSet() {
+    }
+    
+    int popSmallest() {
+        if(!lessPoint.empty()){
+            // [1, point)存在元素，弹出有序集合首个元素即为最小值
+            int val = *lessPoint.begin();
+            lessPoint.erase(val);
+            return val;
+        }
+        return point++;     // 否则point指向的就是最小值
+    }
+    
+    void addBack(int num) {
+        // 加入的元素小于point，加入有序集合；即之前弹出的较小值又加入回来
+        if(num < point){
+            lessPoint.emplace(num);
+        }
+    }
+};
+```
+

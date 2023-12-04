@@ -1,0 +1,103 @@
+## 哈希表
+
+利用 `mat` 的数值各不相同，先使用「哈希表」对 `mat` 进行转存，以 $mat[i][j]$ 为键，$(i, j)$ 为值，方便后续快速查询某个值所在位置。
+
+创建数组 `c1` 和 `c2`，分别记录某行某列有多少单元格被涂色，如 `c1[x] = a` 代表第 $x$ 行被涂色单元格数量为 $a$ 个，`c2[y] = b` 代表第 $y$ 列被涂色单元格数量为 $b$ 个。
+
+遍历所有的 $arr[i]$，查询到 $arr[i]$ 的所在位置 $(x, y)$ 后，更新 `c1` 和 `c2`，若某行或某列被完全涂色，返回当前下标。
+
+代码：
+
+* []
+
+```Java
+class Solution {
+    public int firstCompleteIndex(int[] arr, int[][] mat) {
+        int n = mat.length, m = mat[0].length;
+        Map<Integer, int[]> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                map.put(mat[i][j], new int[]{i, j});
+            }
+        }
+        int[] c1 = new int[n], c2 = new int[m];
+        for (int i = 0; i < n * m; i++) {
+            int[] info = map.get(arr[i]);
+            int x = info[0], y = info[1];
+            if (++c1[x] == m || ++c2[y] == n) return i;
+        }
+        return -1; // never
+    }
+}
+```
+
+* []
+
+```C++
+class Solution {
+public:
+    int firstCompleteIndex(vector<int>& arr, vector<vector<int>>& mat) {
+        int n = mat.size(), m = mat[0].size();
+        unordered_map<int, pair<int, int>> map;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                map[mat[i][j]] = make_pair(i, j);
+            }
+        }
+        vector<int> c1(n), c2(m);
+        for (int i = 0; i < n * m; i++) {
+            pair<int, int> info = map[arr[i]];
+            int x = info.first, y = info.second;
+            if (++c1[x] == m || ++c2[y] == n) return i;
+        }
+        return -1; // never
+    }
+};
+```
+
+* []
+
+```Python
+class Solution:
+    def firstCompleteIndex(self, arr: List[int], mat: List[List[int]]) -> int:
+        n, m = len(mat), len(mat[0])
+        mapping = {mat[i][j]: (i, j) for i in range(n) for j in range(m)}
+        c1, c2 = [0] * n, [0] * m
+        for i in range(n * m):
+            x, y = mapping[arr[i]]
+            c1[x], c2[y] = c1[x] + 1, c2[y] + 1
+            if c1[x] == m or c2[y] == n: return i
+        return -1  # never
+```
+
+* []
+
+```TypeScript
+function firstCompleteIndex(arr: number[], mat: number[][]): number {
+    const n = mat.length, m = mat[0].length;
+    const map: { [key: number]: [number, number] } = {};
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < m; j++) {
+            map[mat[i][j]] = [i, j];
+        }
+    }
+    const c1 = new Array(n).fill(0), c2 = new Array(m).fill(0);
+    for (let i = 0; i < n * m; i++) {
+        const [x, y] = map[arr[i]];
+        if (++c1[x] == m || ++c2[y] === n) return i;
+    }
+    return -1; // never
+};
+```
+
+* 时间复杂度：$O(n \times m)$
+* 空间复杂度：$O(n \times m)$
+
+---
+
+## 最后
+
+**如果有帮助到你，请给题解点个赞和收藏，让更多的人看到 ~ ("▔□▔)/**
+
+所有题解已经加入 [刷题指南](https://github.com/SharingSource/LogicStack-LeetCode/wiki)，欢迎 star 哦 ~
+

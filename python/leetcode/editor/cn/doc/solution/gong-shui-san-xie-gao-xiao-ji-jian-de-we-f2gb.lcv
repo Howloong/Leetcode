@@ -1,0 +1,116 @@
+## DFS + 位运算
+
+“伪回文”是指能够通过重新排列变成“真回文”，真正的回文串只有两种情况：
+
+* 长度为偶数，即出现次数为奇数的字符个数为 $0$ 个
+* 长度为奇数，即出现次数为奇数的字符个数为 $1$ 个（位于中间）
+
+因此，**我们只关心路径中各个字符（数字 `0-9`）出现次数的奇偶性，若路径中所有字符出现次数均为偶数，或仅有一个字符出现次数为奇数，那么该路径满足要求**。
+
+节点值范围为 $[1, 9]$，除了使用固定大小的数组进行词频统计以外，还可以使用一个 `int` 类型的变量 `cnt` 来统计各数值的出现次数奇偶性：若 $cnt$ 的第 $k$ 位为 $1$，说明数值 $k$ 的出现次数为奇数，否则说明数值 $k$ 出现次数为偶数或没出现过，两者是等价的。
+
+例如 $cnt = (0001010)_2$ 代表数值 $1$ 和数值 $3$ 出现次数为奇数次，其余数值没出现过或出现次数为偶数次。
+
+翻转一个二进制数字中的某一位可使用「异或」操作，具体操作位 `cnt ^= 1 << k`。
+
+判断是否最多只有一个字符出现奇数次的操作，也就是判断一个二进制数字是为全为 $0$ 或仅有一位 $1$，可配合 `lowbit` 来做，若 `cnt` 与 `lowbit(cnt) = cnt & -cnt` 相等，说明满足要求。
+
+考虑到对 `lowbit(x) = x & -x` 不熟悉的同学，这里再做简单介绍：*`lowbit(x)` 表示 `x` 的二进制表示中最低位的 $1$ 所在的位置对应的值*，即仅保留从最低位起的第一个 $1$，其余位均以 $0$ 填充：
+* `x = 6`，其二进制表示为 $(110)_2$，那么 $lowbit(6) = (010)_2 = 2$
+* `x = 12`，其二进制表示为 $(1100)_2$，那么 $lowbit(12) = (100)_2 = 4$
+
+代码：
+
+* []
+
+```Java
+class Solution {
+    int ans = 0;
+    public int pseudoPalindromicPaths (TreeNode root) {
+        dfs(root, 0);
+        return ans;
+    }
+    void dfs(TreeNode root, int cnt) {
+        if (root.left == null && root.right == null) {
+            cnt ^= 1 << root.val;
+            if (cnt == (cnt & -cnt)) ans++;
+            return ;
+        }
+        if (root.left != null) dfs(root.left, cnt ^ (1 << root.val));
+        if (root.right != null) dfs(root.right, cnt ^ (1 << root.val));
+    }
+}
+```
+
+* []
+
+```C++
+class Solution {
+public:
+    int ans;
+    int pseudoPalindromicPaths(TreeNode* root) {
+        dfs(root, 0);
+        return ans;
+    }
+    void dfs(TreeNode* root, int cnt) {
+        if (!root->left && !root->right) {
+            cnt ^= 1 << root->val;
+            if (cnt == (cnt & -cnt)) ans++;
+            return;
+        }
+        if (root->left) dfs(root->left, cnt ^ (1 << root->val));
+        if (root->right) dfs(root->right, cnt ^ (1 << root->val));
+    }
+};
+```
+
+* []
+
+```Python
+class Solution:
+    def pseudoPalindromicPaths (self, root: Optional[TreeNode]) -> int:
+        ans = 0
+        def dfs(root, cnt):
+            nonlocal ans
+            if not root.left and not root.right:
+                cnt ^= 1 << root.val
+                ans += 1 if cnt == (cnt & -cnt) else 0
+                return 
+            if root.left:
+                dfs(root.left, cnt ^ (1 << root.val))
+            if root.right:
+                dfs(root.right, cnt ^ (1 << root.val))
+        dfs(root, 0)
+        return ans
+```
+
+* []
+
+```TypeScript
+function pseudoPalindromicPaths (root: TreeNode | null): number {
+    let ans = 0;
+    const dfs = function (root: TreeNode, cnt: number): void {
+        if (root.left == null && root.right == null) {
+            cnt ^= 1 << root.val;
+            if (cnt == (cnt & -cnt)) ans++;
+            return ;
+        }
+        if (root.left) dfs(root.left, cnt ^ (1 << root.val));
+        if (root.right) dfs(root.right, cnt ^ (1 << root.val));
+    }
+    dfs(root, 0);
+    return ans;
+};
+```
+
+* 时间复杂度：$O(n)$
+* 空间复杂度：$O(\log{n})$
+
+---
+
+## 最后
+
+**如果有帮助到你，请给题解点个赞和收藏，让更多的人看到 ~ ("▔□▔)/**
+
+所有题解已经加入 [刷题指南](https://github.com/SharingSource/LogicStack-LeetCode/wiki)，欢迎 star 哦 ~
+
