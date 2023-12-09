@@ -1,0 +1,84 @@
+> [1466. 重新规划路线](https://leetcode.cn/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/)
+
+[TOC]
+
+# 剥洋葱说明书
+
+这个东西没有找到具体名称，有知道的朋友回复一下，是一种 “入度统计” 与 “拓扑排序” 的混合体。更直接的理解就是把 “无向图” 变成 “单向根树” 的算法；
+
+首先 “剥洋葱” 算法适用于 “无向图” 类题目，并且题目流程是 “外” 节点单向往 “内” 节点的情况下使用，其优点是，不需要一般算法的 “建图” 环节，也就是不需要完整知道一个节点可以通往那些子节点，每个节点只有一个移动方向。最终把 “无向图” 变成一个只通往根节点的树；
+
+> 具体原理上是先根据 “边” 数列统计每个点的入度，那么 “入度为1” 的节点就是 “最外层节点” 然后我们可以用各种算法把节点间累加或异或成一个数值，这时候由于 “入度为1” 也就等于只有一个值存在在当前节点，这个值就是下一个节点，故形成了单向移动，整个枚举顺序可以用一个队列存放，只需要把当前节点编号从下个节点混合值中删除即可；
+
+这个方法有一种变体，因为 “内节点” 实际并不是一个固定的节点，是几何形态上的最里面一个节点，类似本题，如果我们 0节点 并不是内核，或者更极端， 0 本身就是一个 “最外层” 的节点，那如何操作呢？其实很简单，就把对应需要变成根节点的节点入度额外 +1 即可；
+
+# 解题方法
+
+用 “剥洋葱算法” 把图变成一个单向的树结构，根是 0 ，那么再统计一次 connections ，因为已经知道任意节点下一个跳转正确值，故如果 $next[connections[i][0]] != connections[i][1]$ 答案 +1 即可；
+
+* []
+
+```Java
+class Solution {
+    public int minReorder(int n, int[][] connections) {
+        // 统计入度与混合值
+        int[] indeg = new int[n];
+        int[] mixs = new int[n];
+        indeg[0] = 1;
+        for (int[] con : connections) {
+            indeg[con[0]]++;
+            indeg[con[1]]++;
+            mixs[con[0]] ^= con[1];
+            mixs[con[1]] ^= con[0];
+        }
+        
+        // 把图压成单向根树
+        int[] next = new int[n];
+        int[] queue = new int[n];
+        int tail = 0;
+        for (int i = 0; i < n; i++) {
+            if (indeg[i] == 1) queue[tail++] = i;
+        }
+        for (int i = 0; i < n - 1; i++) {
+            int cur = queue[i];
+            int nex = mixs[cur];
+            indeg[nex]--;
+            mixs[nex] ^= cur;
+            if (indeg[nex] == 1) queue[tail++] = nex;
+            next[cur] = nex;
+        }
+        
+        // 再次统计边组，方向不一致的找出来即可
+        int ans = 0;
+        for (int[] con : connections) {
+            if (next[con[0]] != con[1]) ans++;
+        }
+        return ans;
+    }
+}
+```
+
+![image.png](https://pic.leetcode.cn/1701921421-qDDhHg-image.png)
+
+# 类似方法的题目
+
+> 本题 [题解](https://leetcode.cn/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/solutions/2557450/xiang-jie-ru-he-jian-dan-kuai-jie-100-bo-5v89/) - [1466. 重新规划路线](https://leetcode.cn/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/)
+
+剥洋葱：[题解](https://leetcode.cn/problems/minimum-fuel-cost-to-report-to-the-capital/solutions/2554785/bo-yang-cong-ji-nian-yi-xia-360duo-tian-lw59o/) - [2477. 到达首都的最少油耗](https://leetcode.cn/problems/minimum-fuel-cost-to-report-to-the-capital/description/)
+
+剥洋葱：[题解](https://leetcode.cn/problems/minimize-the-total-price-of-the-trips/solutions/2245791/mu-qian-de-kuai-su-fang-fa-da-ju-hui-by-vv6ux/) - [2646. 最小化旅行的价格总和](https://leetcode.cn/problems/minimize-the-total-price-of-the-trips/) - [第 341 场周赛](https://leetcode.cn/contest/weekly-contest-341/)
+
+剥洋葱：[题解](https://leetcode.cn/problems/collect-coins-in-a-tree/solutions/2452812/bo-yang-cong-nei-kai-hua-gen-gen-hua-yan-vyru/) - [2603. 收集树中金币](https://leetcode.cn/problems/collect-coins-in-a-tree/description/) - [第 338 场周赛](https://leetcode.cn/contest/weekly-contest-338/)
+
+剥洋葱：[题解](https://leetcode.cn/problems/maximum-employees-to-be-invited-to-a-meeting/solutions/2507911/shu-huan-you-shuang-ruo-zhuo-bo-yang-con-x62k/) - [2127. 参加会议的最多员工数](https://leetcode.cn/problems/maximum-employees-to-be-invited-to-a-meeting/description/)
+
+剥洋葱：[题解](https://leetcode.cn/problems/smallest-missing-genetic-value-in-each-subtree/solutions/2506636/tu-wen-xiang-jie-shu-pou-bing-cha-ji-jav-cnb3/) - [2003. 每棵子树内缺失的最小基因值](https://leetcode.cn/problems/smallest-missing-genetic-value-in-each-subtree/description/)
+
+进阶题目：
+
+树环：[题解](https://leetcode.cn/problems/maximize-value-of-function-in-a-ball-passing-game/solutions/2416702/10ms-shu-shang-bei-zeng-yu-di-yu-shu-hua-vl9b/) - [2836. 在传球游戏中最大化函数值](https://leetcode.cn/problems/maximize-value-of-function-in-a-ball-passing-game/description/)
+
+树环：[题解](https://leetcode.cn/problems/count-visited-nodes-in-a-directed-graph/solutions/2465975/shen-sou-pan-duan-huan-yu-lian-by-l00-1up5/) - [2876. 有向图访问计数](https://leetcode.cn/problems/count-visited-nodes-in-a-directed-graph/description/) - [第 365 场周赛](https://leetcode.cn/contest/weekly-contest-365)
+
+树环：[题解](https://leetcode.cn/problems/maximize-value-of-function-in-a-ball-passing-game/solutions/2416702/10ms-shu-shang-bei-zeng-yu-di-yu-shu-hua-vl9b/) - [2836. 在传球游戏中最大化函数值](https://leetcode.cn/problems/maximize-value-of-function-in-a-ball-passing-game/description/) - [第 360 场周赛](https://leetcode.cn/contest/weekly-contest-360/)
+

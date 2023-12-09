@@ -1,0 +1,34 @@
+> Problem: [1466. 重新规划路线](https://leetcode.cn/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/)
+
+# 复杂度
+
+时间复杂度:
+
+> 添加时间复杂度, 示例： $O(n)$
+
+空间复杂度:
+
+> 添加空间复杂度, 示例： $O(n)$
+
+# Code
+
+* []
+
+```Python
+class Solution:
+    def minReorder(self, n: int, connections: List[List[int]]) -> int:
+        g = [[] for _ in range(n)]
+        for a, b in connections:
+            g[a].append([b, 1])
+            g[b].append([a, 0])
+        ans = 0
+        def dfs(x: int, fa: int):
+            nonlocal ans
+            for nex, cost in g[x]:
+                if nex != fa:
+                    ans += cost
+                    dfs(nex, x)
+        dfs(0, -1)
+        return ans
+```
+

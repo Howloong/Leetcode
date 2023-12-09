@@ -1,0 +1,161 @@
+题目说：
+城市里的代表可以选择乘坐所在城市的车，或者乘坐其他城市的车。相邻城市之间一辆车的油耗是一升汽油。
+
+对于用例[[0,1],[0,2],[1,3],[1,4]]，5个座位的车。第一想到的是：
+
+* 
+
+```
+3--1
+4--1
+1--0
+1--0
+2--0
+```
+
+一共代价为5.其中两次出现1--0是因为从3出发的车和从4出发的车走1-0这条边的代价。
+
+对应代码为先构建树，然后DFS：
+* 如果剩余车位还有，那当前节点搭顺风车，如果没有，则自己新开一辆车。
+* 当前子树到当前节点的总代价是 所有子节点的子树代价+ 子节点开过来的车总数。
+
+* 
+
+```
+class Solution {
+    class TreeNode{
+        int val;
+        List<TreeNode> childs=new ArrayList<>();
+        TreeNode parent;
+    }
+    public long minimumFuelCost(int[][] roads, int seats) {
+        TreeNode root=buildTree(roads);
+        
+        long[] res= getRes(root,seats);
+        return res[2]-res[0];
+    }
+    
+    
+    //// current carcount, avaseat, dist
+    private long[] getRes(TreeNode root,int maxSeats){
+        long carCount=0;
+        long avaSeat=0;
+        long dist=0;
+        for(TreeNode c: root.childs){
+            long[] tmp=getRes(c,maxSeats);
+            carCount+=tmp[0];
+            avaSeat+=tmp[1];
+            dist+=tmp[2];
+        }
+        if(avaSeat==0){
+            avaSeat=maxSeats-1;
+            carCount++;
+            dist+=carCount;
+        }else{
+            avaSeat--;
+            dist+=carCount;
+        }
+        long[] res=new long[]{carCount,avaSeat,dist};
+        //System.out.println("cur "+root.val+": "+Arrays.toString(res));
+        return res;
+    }
+    
+    private TreeNode buildTree(int[][] rs){
+        int n=rs.length+1;
+        HashMap<Integer,HashSet<Integer>> edges=new HashMap<>(rs.length*2);
+        for(int[] r:rs){
+            putEdge(r[0],r[1],edges);
+            putEdge(r[1],r[0],edges);
+        }
+        //System.out.println("Edges: "+edges);
+        
+        HashMap<Integer,TreeNode> nodes=new HashMap<>(n);
+        for(int i=0;i<n;i++){
+            
+            TreeNode r=new TreeNode();
+            r.val=i;
+            nodes.put(i,r);
+        }
+        
+        //// start from 0
+        LinkedList<TreeNode> guding=new LinkedList<TreeNode>();
+        guding.add(nodes.get(0));
+        
+        while(!guding.isEmpty()){
+            //// every guding's neibor
+            LinkedList<TreeNode> newGuding=new LinkedList<>();
+            while(!guding.isEmpty()){
+                TreeNode r=guding.remove();
+                if(!edges.containsKey(r.val)){
+                    continue;
+                }
+                for(int neib:edges.get(r.val)){
+                    TreeNode neibNode=nodes.get(neib);
+                    r.childs.add(neibNode);
+                    neibNode.parent=r;
+                    
+                    edges.get(neib).remove(r.val);
+                    
+                    newGuding.add(neibNode);
+                }
+            }
+            
+            guding=newGuding;
+        }
+        
+        return nodes.get(0);
+    }
+    
+    private void putEdge(int a,int b,HashMap<Integer,HashSet<Integer>> edges){
+        if(edges.containsKey(a)){
+                edges.get(a).add(b);
+        }else{
+            HashSet<Integer> set=new HashSet<>();
+            set.add(b);
+            edges.put(a,set);
+        }
+    }
+}
+```
+
+如果题目明显指明可以换车，在3和4代表达到点1时候，**4号代表坐到3号代表的车上去。**，才能得到代价为4的结果。
+**但是按常理，代表开会路上还要换车多次，确实有点难想象**。
+
+代码为先构建树，
+* 到当前节点的代价是所有子节点的代价+ 当前节点到子节点的边上的流量（即子节点向上返回的车位数）。
+* 当前节点向上返回的车数量是根据当前子树的大小计算的。
+
+* 
+
+```
+class Solution {
+ 
+    public long minimumFuelCost(int[][] roads, int seats) {
+        TreeNode root=buildTree(roads);
+        
+        long[] res=getRes(root,seats);
+        
+        return res[1];
+    }
+    
+    
+    //// size in root tree, cost to root
+    private long[] getRes(TreeNode root,int maxSeats){
+       long size=1;
+        long res=0;
+        for(TreeNode c: root.childs){
+            long[] t=getRes(c,maxSeats);       
+            long carCount=(t[0]+maxSeats-1)/maxSeats;
+
+            size+=t[0];
+            res+=carCount+t[1];
+        }
+       
+        //// to parent car count: 
+        long[] ret= new long[]{size,res};
+        //System.out.println(root.val+":"+Arrays.toString(ret));
+        return ret;
+    }
+    
+```
+

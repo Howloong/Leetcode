@@ -1,0 +1,102 @@
+> Problem: [1466. 重新规划路线](https://leetcode.cn/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/)
+
+[TOC]
+
+# 思路
+
+> 根据题意我们需要遍历图,然后统计每个端点的出度或者入度即可.
+
+# 解题方法
+
+> 遍历图可以dfs或者bfs,bfs代码逻辑更清晰,这里采用bfs和链队实现.注意在bfs同时我们可以释放边表.
+
+# 复杂度
+
+时间复杂度:$O(n)$
+
+空间复杂度:$O(n)$
+
+# Code
+
+* []
+
+```C
+typedef struct _edgelist {
+	int ver;
+	bool flag;//true代表出,false代表入
+	struct _edgelist* next;
+}_edgelist;
+
+int minReorder(int n, int** connections, int connectionsSize, int* connectionsColSize) 
+{
+	_edgelist** E = (_edgelist**)calloc(n, sizeof(_edgelist*));
+
+	for (int i = 0; i < connectionsSize; i++)
+	{
+		int ver1 = connections[i][0]/*弧尾*/, ver2 = connections[i][1]/*弧头*/;
+
+		_edgelist* p = NULL;
+
+		p = E[ver1];
+		E[ver1] = (_edgelist*)malloc(sizeof(_edgelist));
+		*(E[ver1]) = (_edgelist){ ver2,true,p };//ver1到ver2一条弧
+
+		p = E[ver2];
+		E[ver2] = (_edgelist*)malloc(sizeof(_edgelist));
+		*(E[ver2]) = (_edgelist){ ver1,false,p };
+	}
+	int ans = 0;
+
+	bool* visitMark = (bool*)calloc(n, sizeof(bool));
+
+	typedef struct list {
+		int vertex;
+		struct list* next;
+	}list;
+
+	list* head = NULL, * tail = NULL;
+	tail = head = (list*)calloc(1, sizeof(list));
+	head->vertex = 0;
+	visitMark[0] = true;
+
+	while (tail)
+	{
+		list* p = tail;
+		head = tail = NULL;
+		while (p)
+		{
+			_edgelist* e = E[p->vertex];
+			while (e)
+			{
+				if (!visitMark[e->ver])
+				{
+					visitMark[e->ver] = true;
+					if (head == NULL)
+					{
+						tail = head = (list*)calloc(1, sizeof(list));
+						head->vertex = e->ver;
+					}
+					else
+					{
+						head = head->next = (list*)calloc(1, sizeof(list));
+						head->vertex = e->ver;
+					}
+					if (e->flag)
+						ans++;
+				}
+				list* f = e;
+				e = e->next;
+				free(f);//释放边表
+			}
+			list* iv = p;
+			p = p->next;
+			free(iv);
+		}
+	}
+
+	free(visitMark);
+	free(E);
+	return ans;
+}
+```
+

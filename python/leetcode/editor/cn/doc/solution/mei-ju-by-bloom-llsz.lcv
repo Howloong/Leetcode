@@ -1,0 +1,73 @@
+> Problem: [2048. 下一个更大的数值平衡数](https://leetcode.cn/problems/next-greater-numerically-balanced-number/description/)
+
+### 方法一：枚举
+
+### Code
+
+* []
+
+```Rust
+impl Solution {
+    pub fn next_beautiful_number(n: i32) -> i32 {
+        (1 + n..)
+            .find(|&x| {
+                let mut x = x;
+                let mut cnt = vec![0; 10];
+                while x > 0 {
+                    cnt[(x % 10) as usize] += 1;
+                    x /= 10;
+                }           
+                cnt.into_iter()
+                    .enumerate()
+                    .filter(|&(_, c)| c != 0)
+                    .all(|(i, c)| i == c)
+            })
+            .unwrap()
+    }
+}
+```
+
+### 方法二：预处理 + 二分查找
+
+### Code
+
+* []
+
+```Rust
+static mut inited: bool = false;
+static mut F: Vec<i32> = vec![];
+impl Solution {
+    
+    pub fn next_beautiful_number(n: i32) -> i32 {
+        unsafe {
+            if !inited  {
+                F = Self::init(); 
+                inited = true;
+            }
+            let i = match F.binary_search(&(n + 1)) {
+                Ok(i) | Err(i) => i
+            };
+            F[i]
+        }
+    }
+
+    fn init() -> Vec<i32>{
+        (1..=1224444)
+            .filter(|&x| {
+                let mut x = x;
+                let mut cnt = vec![0; 10];
+                while x > 0 {
+                    cnt[(x % 10) as usize] += 1;
+                    x /= 10;
+                }           
+                cnt.into_iter()
+                    .enumerate()
+                    .filter(|&(_, c)| c != 0)
+                    .all(|(i, c)| i == c)
+            })
+            .collect::<Vec<i32>>()
+    }
+    
+}
+```
+

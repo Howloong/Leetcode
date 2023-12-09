@@ -1,0 +1,101 @@
+# 题目
+
+## 2048. 下一个更大的数值平衡数
+
+如果整数  `x` 满足：对于每个数位 `d` ，这个数位 **恰好** 在 `x` 中出现 `d` 次。那么整数 `x` 就是一个 **数值平衡数** 。
+
+给你一个整数 `n` ，请你返回 **严格大于** `n` 的 **最小数值平衡数** 。
+
+# 题目分析
+
+## 枚举
+
+根据输入 `n` 的取值范围，最大 `n` 为 `1000000` 七位数，那么比它大的最小数值平衡数就为 `1224444`。因此我们可以枚举 `[n + 1, 1224444]` 的数，依次判断当前数是否为一个数值平衡数，如果是立即返回。
+
+![image.png](https://pic.leetcode.cn/1702053701-MdJuvI-image.png)
+
+## 模拟
+
+模拟这部分主要是模拟数值平衡数的判断，我们可以通过循环除 `10` 和 模`10` 的方式获取数字的每一位，并且使用一个长度为 `10` 的数组统计数字 `0-9` 的出现频数。
+然后再遍历一次频数数组，校验出现过的每个数字（频数不为 `0` ）的频数是否为等于数字本身。
+
+![image.png](https://pic.leetcode.cn/1702053855-mKMqTh-image.png)
+
+# 代码
+
+* []
+
+```Java
+class Solution {
+    public int nextBeautifulNumber(int n) {
+        for(int i = n + 1; i <= 1224444; i++){
+            if(check(i))return i;
+        }
+        return -1;
+    }
+
+    private boolean check(int num){
+        int[] cnts = new int[10];
+        // 统计num中每个数字出现的频数
+        while(num > 0){
+            cnts[num % 10]++;
+            num /= 10;
+        }
+        // 校验数字出现的频数是否等于数字本身
+        for(int i = 0; i < 10; i++){
+            if(cnts[i] > 0 && cnts[i] != i)return false;    // 数字出现了（频数不为0）且频数不等于本身，返回false
+        }
+        return true;
+    }
+}
+
+```
+
+* []
+
+```Python
+class Solution:
+    def nextBeautifulNumber(self, n: int) -> int:
+        def check(num: int) -> bool:
+            # 统计num中每个数字出现的频数
+            cnts = Counter(str(num))
+            # 校验数字出现的频数是否等于数字本身
+            for i in range(10):
+                ch = str(i)
+                if ch in cnts and cnts[ch] != i: return False  # 数字出现了（频数不为0）且频数不等于本身，返回false
+            return True
+
+        for i in range(n + 1, 1224445):
+            # 从n+1开始枚举
+            if check(i): return i
+        return -1
+```
+
+* []
+
+```C++
+class Solution {
+private:
+    bool check(int num){
+        vector<int> cnts(10);
+        // 统计num中每个数字出现的频数
+        while(num > 0){
+            cnts[num % 10]++;
+            num /= 10;
+        }
+        // 校验数字出现的频数是否等于数字本身
+        for(int i = 0; i < 10; i++){
+            if(cnts[i] > 0 && cnts[i] != i)return false;    // 数字出现了（频数不为0）且频数不等于本身，返回false
+        }
+        return true;
+    }
+public:
+    int nextBeautifulNumber(int n) {
+        for(int i = n + 1; i <= 1224444; i++){
+            if(check(i))return i;
+        }
+        return -1;
+    }
+};
+```
+

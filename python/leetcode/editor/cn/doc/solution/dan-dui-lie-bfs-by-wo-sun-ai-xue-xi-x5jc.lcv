@@ -1,0 +1,64 @@
+> Problem: [1466. 重新规划路线](https://leetcode.cn/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/)
+
+[TOC]
+
+# 思路
+
+> bfs
+
+# 解题方法
+
+> 从0开始广度优先遍历，凡是遇到倒转的道路则res++
+
+# 复杂度
+
+时间复杂度:
+
+> $O(n)$
+
+空间复杂度:
+
+> $O(n)$
+
+# Code
+
+* []
+
+```C++
+class Solution {
+public:
+    int minReorder(int n, vector<vector<int>>& connections) {
+        //建树
+        vector<vector<int>> Ato(n);
+        vector<vector<int>> toA(n);
+        for(auto &con : connections){
+          Ato[con[0]].push_back(con[1]);
+          toA[con[1]].push_back(con[0]);
+        }
+
+        //广度优先遍历
+        int res = 0;
+        vector<int> visited(n, 0);  //记录已访问的节点
+        queue<int> q;   //借助队列完成bfs
+        q.push(0);
+        while(!q.empty()){
+          int x = q.front();
+          q.pop();
+          visited[x] = 1;
+          //将toA的节点直接放入下一轮遍历
+          for(auto y : toA[x]){
+            q.push(y);
+          }
+          //将Ato中未访问的节点全部改变方向并放入Ato
+          for(auto y : Ato[x]){
+            if(!visited[y]){
+              q.push(y);
+              res++;
+            }
+          }  
+        }
+        return res;
+    }
+};
+```
+
