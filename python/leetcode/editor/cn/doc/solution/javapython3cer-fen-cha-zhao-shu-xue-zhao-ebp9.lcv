@@ -1,0 +1,136 @@
+> 对官解 —— 《[寻找峰值II](https://leetcode.cn/problems/find-a-peak-element-ii/solutions/2566062/xun-zhao-feng-zhi-ii-by-leetcode-solutio-y57g/?envType=daily-question&envId=2023-12-19)》 的理解与补充
+
+# 题目
+
+## 1901.寻找峰值II
+
+一个 2D 网格中的 **峰值** 是指那些 **严格大于** 其相邻格子(上、下、左、右)的元素。
+
+给你一个 **从 0 开始编号** 的 `m x n` 矩阵 `mat` ，其中任意两个相邻格子的值都 **不相同** 。找出 **任意一个** 峰值 `mat[i][j]` 并 **返回其位置** `[i,j]` 。
+
+你可以假设整个矩阵周边环绕着一圈值为 `-1` 的格子。
+
+要求必须写出时间复杂度为 `O(m log(n))` 或 `O(n log(m))` 的算法
+
+# 题目分析
+
+这道题和昨天的 [162.寻找峰值](https://leetcode.cn/problems/find-peak-element/solutions/2570305/javapython3cer-fen-cha-zhao-bu-man-zu-fe-93il/) 的思路是类似，但是多加了一个维度。
+
+## 思路分析
+
+我们希望将未知的二维问题转换为已知的一维问题，然后我们就可以用 `162.寻找峰值` 的策略去做了。
+
+如何将二维问题转为一维问题呢？我们可以看下题目的提示，要求时间复杂度是 `O(m log(n))` 或 `O(n log(m))`。 说明我们在一个维度是逐个元素遍历的，在另一个维度是二分的。
+
+假设我们对每一行的元素 `mat[i]` 是逐个元素遍历，那么我们希望找到什么元素呢？
+注意题目假设矩阵周围绕了一圈 `-1` 的格子且矩阵内的元素为正数，因此每个元素都可能是峰值，而**其中一行的最大值一定是峰值**。
+
+如果我们找到了一行的最大值 `mat[i][j]`，其已经满足了两个相邻格子严格小于它，接下来就看上下两个格子是否也严格小于它？
+
+到这里我们好像将二维转为一维了：
+- 如果上下两个格子也都小于它，那么这个位置一定是峰值；
+- 如果有一侧不满足条件，不满足的那一侧一定存在峰值；【这就和一维数组的思路是一样的】
+
+![image.png](https://pic.leetcode.cn/1702919344-pPdgld-image.png)
+【下方格子不满足条件的情况同理】
+
+因此，我们每次对行的搜索范围为 `[left, right)`:
+- 如果 `mat[i][j] < mat[i-1[j]`，峰值一定在其上半部分`[left, i)`;
+- 如果 `mat[i][j] < mat[i+1[j]`，峰值一定在其下半部分`[i+1, right)`;
+
+同时都取当前搜索行的最大值，因为最大值一定满足有两个位置严格小于它。
+
+# 代码
+
+* []
+
+```Java
+class Solution {
+    public int[] findPeakGrid(int[][] mat) {
+        int m = mat.length;
+        int n = mat[0].length;
+        int left = 0, right = m;    // 二分查找[left, right)，left初始取到首行0，right初始取到最后一行的下一行n
+        int mid;
+        while(left < right){
+            mid = left + ((right - left) >> 1);
+            // 找到当前行最大值的索引
+            int maxVal = mat[mid][0], j = 0;
+            for(int idx = 0; idx < n; idx++){
+                if(mat[mid][idx] > maxVal){
+                    maxVal = mat[mid][idx];
+                    j = idx;
+                }
+            }
+            // 如果mid是一个峰值，直接返回坐标
+            // 同时对mid=0和mid=n-1进行处理
+            if(mat[mid][j] > (mid == 0 ? -1 : mat[mid - 1][j]) && mat[mid][j] > (mid == m - 1 ? -1 : mat[mid + 1][j])){
+                return new int[]{mid, j};
+            }
+            // 如果mid的元素小于其上一个元素，那么在[left, mid)肯定会存在一个峰值
+            // 否则mid的元素小于其下一个元素，那么在[mid+1, right)会存在一个峰值
+            if(mid > 0 && mat[mid][j] < mat[mid - 1][j]){
+                right = mid;
+            }else{
+                left = mid + 1;
+            }
+        }
+        return new int[]{-1, -1};     // 矩阵中一定存在峰值，不会走到这里
+    }
+}
+```
+
+* []
+
+```Python
+class Solution:
+    def findPeakGrid(self, mat: List[List[int]]) -> List[int]:
+        m = len(mat)
+        left, right = 0, m    # 二分查找[left, right)，left初始取到首行0，right初始取到最后一行的下一行n
+        while left < right:
+            mid = left + ((right - left) >> 1)
+            row = mat[mid]
+            j = row.index(max(row))   # 找到当前行最大值的索引
+            # 如果mid是一个峰值，直接返回坐标
+            # 同时对mid=0和mid=n-1进行处理
+            if row[j] > (-1 if mid == 0 else mat[mid-1][j]) and row[j] > (-1 if mid == m - 1 else mat[mid+1][j]): 
+                return [mid, j]
+            # 如果mid的元素小于其上一个元素，那么在[left, mid)肯定会存在一个峰值
+            # 否则mid的元素小于其下一个元素，那么在[mid+1, right)会存在一个峰值
+            if mid > 0 and row[j] < mat[mid - 1][j]:
+                right = mid
+            else:
+                left = mid + 1
+            
+        return [-1, -1]     # 矩阵中一定存在峰值，不会走到这里
+```
+
+* []
+
+```C++
+class Solution {
+public:
+    vector<int> findPeakGrid(vector<vector<int>>& mat) {
+        int m = mat.size();
+        int left = 0, right = m;    // 二分查找[left, right)，left初始取到首行0，right初始取到最后一行的下一行n
+        int mid;
+        while(left < right){
+            mid = left + ((right - left) >> 1);
+            int j = max_element(mat[mid].begin(), mat[mid].end()) - mat[mid].begin();   // 找到当前行最大值的索引
+            // 如果mid是一个峰值，直接返回坐标
+            // 同时对mid=0和mid=n-1进行处理
+            if(mat[mid][j] > (mid == 0 ? -1 : mat[mid - 1][j]) && mat[mid][j] > (mid == m - 1 ? -1 : mat[mid + 1][j])){
+                return {mid, j};
+            }
+            // 如果mid的元素小于其上一个元素，那么在[left, mid)肯定会存在一个峰值
+            // 否则mid的元素小于其下一个元素，那么在[mid+1, right)会存在一个峰值
+            if(mid > 0 && mat[mid][j] < mat[mid - 1][j]){
+                right = mid;
+            }else{
+                left = mid + 1;
+            }
+        }
+        return {-1, -1};     // 矩阵中一定存在峰值，不会走到这里
+    }
+};
+```
+

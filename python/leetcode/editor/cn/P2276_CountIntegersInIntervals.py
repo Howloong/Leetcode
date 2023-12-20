@@ -1,0 +1,30 @@
+# leetcode submit region begin(Prohibit modification and deletion)
+from typing import Optional
+
+class CountIntervals:
+    __slots__ = 'left', 'right', 'l', 'r', 'cnt'
+
+    def __init__(self, l=1, r=10 ** 9):
+        self.left = self.right = None
+        self.l, self.r, self.cnt = l, r, 0
+
+    def add(self, l: int, r: int) -> None:
+        if self.cnt == self.r - self.l + 1:
+            return
+        if l <= self.l and self.r <= r:
+            self.cnt = self.r - self.l + 1
+            return
+        mid = (self.l + self.r) // 2
+        if self.left is None:
+            self.left = CountIntervals(self.l, mid)
+        if self.right is None:
+            self.right = CountIntervals(mid + 1, self.r)
+        if l <= mid:
+            self.left.add(l, r)
+        if mid < r:
+            self.right.add(l, r)
+        self.cnt = self.left.cnt + self.right.cnt
+
+    def count(self) -> int:
+        return self.cnt
+# leetcode submit region end(Prohibit modification and deletion)

@@ -1,0 +1,68 @@
+> Problem: [https://leetcode.cn/problems/stamping-the-grid/description/](https://leetcode.cn/problems/stamping-the-grid/description/ "https://leetcode.cn/problems/stamping-the-grid/description/")
+
+\[TOC]
+
+# 思路
+
+> 该问题可以简化等效于下面三个判断：
+
+1. 每行出现的连0个数必须大于width，
+
+2. 每列出现连0的个数必须大于hight
+
+3. 特殊情况，角部的 0 ， 即0的上左，上右，下左，下右 为1的四种情况，需要检验以该 0 为角的 width \* hight 的矩形内部全为0（实现上直接对该区域求sum为0），
+
+# 解题方法
+
+> 检验上面三种情况，如违反则返回false
+
+# 复杂度
+
+时间复杂度:
+
+> $O(n)$： 行遍历一次，列编列一次， 前两个检验通过的情况下，角0的情况数量较少，基本可以忽略
+
+空间复杂度:
+
+> 只需要用于行列循环的行列变量和几个用于统计的变量。
+>
+> ![null](https://pic.leetcode.cn/1702525990-NPEYrY-1702525985053660.jpeg)
+
+# Code
+
+* Python3
+
+```Python
+class Solution:
+    def possibleToStamp(self, grid: List[List[int]], stampHeight: int, stampWidth: int) -> bool:
+        for i,row in enumerate(grid):
+            cnt = 0
+            for j,g in enumerate(row):
+                if g:
+                    if 0 < cnt  < stampWidth:
+                        return(False)
+                    cnt = 0
+                else:
+                    cnt += 1    
+            if 0 < cnt  < stampWidth:
+                return(False)        
+        for j in range(len(grid[0])):
+            cnt = 0
+            for i in range(len(grid)):
+                if grid[i][j]:
+                    if 0 < cnt  < stampHeight:
+                        return(False)
+                    if cnt and 0<j<len(grid[0])-1:
+                        if (grid[i-1][j-1]) and sum(sum(grid[k][j:j+stampWidth])     for k in range(i-stampHeight,i)): return(False)
+                        if (grid[i-1][j+1]) and sum(sum(grid[k][j-stampWidth+1:j+1]) for k in range(i-stampHeight,i)): return(False)    
+                    cnt = 0
+                else:
+                    cnt += 1     
+                    if cnt==stampHeight and 0<j<len(grid[0])-1:
+                        if (grid[i-stampHeight+1][j-1]) and sum(sum(grid[k][j:j+stampWidth])     for k in range(i-stampHeight+1,i+1)): return(False)
+                        if (grid[i-stampHeight+1][j+1]) and sum(sum(grid[k][j-stampWidth+1:j+1]) for k in range(i-stampHeight+1,i+1)): return(False)                     
+            if 0 < cnt  < stampHeight:
+                return(False)          
+        return(True)
+```
+

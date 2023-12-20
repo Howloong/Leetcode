@@ -1,0 +1,94 @@
+> Problem: [1631. 最小体力消耗路径](https://leetcode.cn/problems/path-with-minimum-effort/description/)
+
+# 思路
+
+可以通过使用二分查找来解决。具体来说，你可以在可能的最小和最大高度差之间进行二分查找，然后检查是否存在一条路径使得体力消耗不超过当前的中间值。
+
+这个实现中使用了深度优先搜索（DFS）来检查是否存在一条路径，同时使用二分查找在可能的最小和最大高度差之间寻找最小的体力消耗值。
+
+# 复杂度
+
+- 时间复杂度：
+
+深度优先搜索 (DFS):
+
+在最坏情况下，DFS可能需要遍历整个图。
+对于每一次DFS调用，最差情况下需要遍历所有的相邻节点。
+因此，DFS的时间复杂度为O(V + E)，其中V是节点数，E是边数。
+在这个问题中，V为rows * columns，E为2 * V（因为每个节点有上下左右四个相邻节点）。
+所以，总的时间复杂度为O(rows * columns)。
+二分查找:
+
+二分查找的时间复杂度为O(log(max_height))，其中max_height是高度的最大值（在这个问题中为10^6）。
+总体时间复杂度:
+
+由于这两部分是嵌套的，所以总体时间复杂度为O(rows * columns * log(10^6))，但由于log(10^6)是一个常数因子，因此可以简化为O(rows * columns)。
+
+- 空间复杂度：
+
+递归调用栈:
+
+在DFS中，递归调用会使用栈空间，最大深度不会超过rows * columns。
+因此，递归调用栈的空间复杂度为O(rows * columns)。
+visited数组:
+
+使用了一个visited数组来标记访问过的节点，其大小为rows * columns。
+因此，visited数组的空间复杂度为O(rows * columns)。
+其他常量空间:
+
+除了上述两部分，算法使用了一些常量空间（如directions数组等）。
+这些常量空间的复杂度可以视为常数。
+总体空间复杂度:
+
+总体空间复杂度为O(rows * columns)，其中常数项被忽略。
+综上所述，该算法的总体时间复杂度为O(rows * columns)，总体空间复杂度为O(rows * columns)。
+
+# Code
+
+* []
+
+```Python
+class Solution:
+    def minimumEffortPath(self, heights: List[List[int]]) -> int:
+        def dfs(x, y, visited, threshold):
+            if x < 0 or x >= rows or y < 0 or y >= columns or visited[x][y]:
+                return False
+            
+            visited[x][y] = True
+            
+            # 检查当前位置是否满足阈值条件
+            if x == rows - 1 and y == columns - 1:
+                return True
+            
+            for dx, dy in directions:
+                new_x, new_y = x + dx, y + dy
+                
+                if 0 <= new_x < rows and 0 <= new_y < columns and not visited[new_x][new_y]:
+                    diff = abs(heights[x][y] - heights[new_x][new_y])
+                    if diff <= threshold:
+                        if dfs(new_x, new_y, visited, threshold):
+                            return True
+            
+            return False
+        
+        rows, columns = len(heights), len(heights[0])
+        left, right = 0, 10**6
+        
+        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+        
+        while left < right:
+            mid = left + (right - left) // 2
+            visited = [[False] * columns for _ in range(rows)]
+            
+            if dfs(0, 0, visited, mid):
+                # 如果存在阈值为threshold <= mid的路径，则尝试寻找更小的阈值
+                right = mid
+            else:
+                # 如果不存在阈值为threshold <= mid的路径，请尝试设置更大的阈值
+                left = mid + 1
+        
+        return left
+```
+
+![image.png](https://pic.leetcode.cn/1702256345-QVmKLD-image.png)
+

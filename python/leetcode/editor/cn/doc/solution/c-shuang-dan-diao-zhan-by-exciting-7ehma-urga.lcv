@@ -1,0 +1,57 @@
+> Problem: [2454. 下一个更大元素 IV](https://leetcode.cn/problems/next-greater-element-iv/description/)
+
+[TOC]
+
+# 思路
+
+> 讲述看到这一题的思路
+
+# 解题方法
+
+> 描述你的解题方法
+
+# 复杂度
+
+时间复杂度:
+
+> 添加时间复杂度, 示例： $O(n)$
+
+空间复杂度:
+
+> 添加空间复杂度, 示例： $O(n)$
+
+# Code
+
+* []
+
+```C++
+class Solution {
+public:
+    vector<int> secondGreaterElement(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> res(n,-1);
+        stack<int> s1,s2;
+        for(int i=0;i<n;i++){
+            int x=nums[i];
+            while(!s2.empty()&&nums[s2.top()]<x){
+                res[s2.top()]=x;
+                s2.pop();
+            }
+            vector<int> temp;
+            while(!s1.empty()&&nums[s1.top()]<x){
+                temp.push_back(s1.top());
+                s1.pop();
+            }
+            int j=temp.size();
+            while(j){
+                s2.push(temp[j-1]);
+                j--;
+            }
+            temp.clear();
+            s1.push(i);
+        }
+        return res;
+    }
+};
+```
+
