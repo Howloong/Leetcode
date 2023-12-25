@@ -1,0 +1,110 @@
+> Problem: [1671. 得到山形数组的最少删除次数](https://leetcode.cn/problems/minimum-number-of-removals-to-make-mountain-array/description/)
+
+[TOC]
+
+# 思路
+
+正反求一次最长递增子序列即可，不过要多保存一次枚举到各个数时的长度
+
+# 解题方法
+
+- 正反找一次最长递增子序列，合并起来找到最长山形数组长度
+  - 那问题在于怎么找到最长递增子序列
+  - 我们遍历数组，将值存在一个数组`qwq`中
+  - 如果`qwq`中没有元素或者末元素小于新值`x`
+    - 那么直接将`x`加入`qwq`
+  - 否则找到`x`在`qwq`中的位置，并插入
+    - 我们理解下为什么这样是对的：
+      - 如果是`1 6 3 5`，那么我们遍历完`1 6`得到`qwq`为`1 6`
+      - 当遇到`3`时，`3`小于`6`，那么找到`3`的位置是1，替换`6`
+      - 当遇到`5`时，我们发现`5`>`3`，所以直接加入`qwq`
+      - 如果我们之前保留`6`，那这个`5`没法进来
+    - 还可以写得更详细些，但是我感觉差不多了，剩下的部分靠悟好了XD
+- 找到了最长的山形数组长度，那就意味着找到了最少的删除次数:
+  - $总长度-（正反长度和-1）$
+
+# 复杂度
+
+时间复杂度:$O(n)$
+![图片.png](https://pic.leetcode.cn/1703237869-Exotyf-%E5%9B%BE%E7%89%87.png)
+空间复杂度:$O(n)$->最坏大概4n左右
+
+# Talk is cheap, here's the code
+
+* []
+
+```Rust
+impl Solution {
+    pub fn minimum_mountain_removals(nums: Vec<i32>) -> i32 {
+        let l = Self::lis(&nums);
+        let r = Self::lis(&nums.iter().rev().map(|x| *x).collect::<Vec<i32>>());
+        nums.len() as i32 + 1 - l.iter().zip(r.iter().rev()) //将l和r拉合
+                .filter(|(&p, &q)| p > 1 && q > 1) //长度必须至少为2因为两点才能确定单调性
+                .fold(0, |x, (y, z)| x.max((y + z) as i32)) //求和
+    }
+    fn lis<T:Ord+Copy>(nums: &Vec<T>) -> Vec<usize> {
+        nums.iter()
+            .fold((vec![], vec![]), |mut x, &y| {
+                if x.0.is_empty() || x.0[x.0.len() - 1] < y {
+                    x.0.push(y)
+                } else {
+                    let i = x.0.partition_point(|&v| v < y) as usize;
+                    x.0[i] = y //二分找到y的位置
+                }
+                x.1.push(x.0.len());
+                x
+            }) //.0代表最长递增子序列长什么样
+            .1 //到每个点能构成多长的最长递增子序列
+    }
+}
+```
+
+* []
+
+```C++
+class Solution {
+public:
+    int minimumMountainRemovals(vector<int> &nums) {
+        int n = nums.size();
+        vector<int> qwq, qaq(n);
+        for(int i = 0;i < n;++i) {
+            int x = nums[i];
+            if(qwq.size() == 0 || qwq[qwq.size() - 1] < x)qwq.push_back(x); //二分找到x应该在的位置
+            else *lower_bound(qwq.begin(), qwq.end(), x) = x;
+            qaq[i] = qwq.size(); //记录长度
+        }
+        qwq.clear();
+        int ans = 0;
+        for(int i = n - 1;i >= 0;--i) { //反方向再来一遍
+            int x = nums[i];
+            if(qwq.size() == 0 || qwq[qwq.size() - 1] < x)qwq.push_back(x); //二分找到应该在的位置
+            else *lower_bound(qwq.begin(), qwq.end(), x) = x;
+            int c = qwq.size(); //记录长度
+            if(c > 1 && qaq[i] > 1)ans = max(ans, c + qaq[i] - 1); //如果长度大于1了就开始计算答案（能找到的最长的山形数组）
+        }
+        return n - ans;
+    }
+};
+```
+
+* []
+
+```Python
+class Solution:
+    def minimumMountainRemovals(self, nums: List[int]) -> int:
+        n=len(nums)
+        def lis(nums:List[int])->List[int]:
+            qaq=[0]*n
+            qwq=[]
+            for i,x in enumerate(nums):
+                if len(qwq)==0 or qwq[-1]<x:qwq.append(x)
+                else:
+                    j=bisect_left(qwq,x)
+                    qwq[j]=x
+                qaq[i]=len(qwq)
+            return qaq
+        l=lis(nums)
+        r=lis(nums[::-1])[::-1]
+        return n-max(a+b for a,b in zip(l,r)if a>1 and b>1)+1
+```
+

@@ -1,0 +1,199 @@
+**方法一：动态规划**
+
+本题可以转化为求最长上升子序列和最长下降子序列。
+
+我们定义 $left[i]$ 表示以 $nums[i]$ 结尾的最长上升子序列的长度，定义 $right[i]$ 表示以 $nums[i]$ 开头的最长下降子序列的长度。
+
+那么最终答案就是 $n - \max(left[i] + right[i] - 1)$，其中 $0 \leq i \lt n$，并且 $left[i] \gt 1$ 且 $right[i] \gt 1$。
+
+* [sol1-Python3]
+
+```python
+class Solution:
+    def minimumMountainRemovals(self, nums: List[int]) -> int:
+        n = len(nums)
+        left = [1] * n
+        right = [1] * n
+        for i in range(1, n):
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    left[i] = max(left[i], left[j] + 1)
+        for i in range(n - 2, -1, -1):
+            for j in range(i + 1, n):
+                if nums[i] > nums[j]:
+                    right[i] = max(right[i], right[j] + 1)
+        return n - max(a + b - 1 for a, b in zip(left, right) if a > 1 and b > 1)
+```
+
+* [sol1-Java]
+
+```java
+class Solution {
+    public int minimumMountainRemovals(int[] nums) {
+        int n = nums.length;
+        int[] left = new int[n];
+        int[] right = new int[n];
+        Arrays.fill(left, 1);
+        Arrays.fill(right, 1);
+        for (int i = 1; i < n; ++i) {
+            for (int j = 0; j < i; ++j) {
+                if (nums[i] > nums[j]) {
+                    left[i] = Math.max(left[i], left[j] + 1);
+                }
+            }
+        }
+        for (int i = n - 2; i >= 0; --i) {
+            for (int j = i + 1; j < n; ++j) {
+                if (nums[i] > nums[j]) {
+                    right[i] = Math.max(right[i], right[j] + 1);
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < n; ++i) {
+            if (left[i] > 1 && right[i] > 1) {
+                ans = Math.max(ans, left[i] + right[i] - 1);
+            }
+        }
+        return n - ans;
+    }
+}
+```
+
+* [sol1-C++]
+
+```cpp
+class Solution {
+public:
+    int minimumMountainRemovals(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> left(n, 1), right(n, 1);
+        for (int i = 1; i < n; ++i) {
+            for (int j = 0; j < i; ++j) {
+                if (nums[i] > nums[j]) {
+                    left[i] = max(left[i], left[j] + 1);
+                }
+            }
+        }
+        for (int i = n - 2; i >= 0; --i) {
+            for (int j = i + 1; j < n; ++j) {
+                if (nums[i] > nums[j]) {
+                    right[i] = max(right[i], right[j] + 1);
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < n; ++i) {
+            if (left[i] > 1 && right[i] > 1) {
+                ans = max(ans, left[i] + right[i] - 1);
+            }
+        }
+        return n - ans;
+    }
+};
+```
+
+* [sol1-Go]
+
+```go
+func minimumMountainRemovals(nums []int) int {
+	n := len(nums)
+	left, right := make([]int, n), make([]int, n)
+	for i := range left {
+		left[i], right[i] = 1, 1
+	}
+	for i := 1; i < n; i++ {
+		for j := 0; j < i; j++ {
+			if nums[i] > nums[j] {
+				left[i] = max(left[i], left[j]+1)
+			}
+		}
+	}
+	for i := n - 2; i >= 0; i-- {
+		for j := i + 1; j < n; j++ {
+			if nums[i] > nums[j] {
+				right[i] = max(right[i], right[j]+1)
+			}
+		}
+	}
+	ans := 0
+	for i := range left {
+		if left[i] > 1 && right[i] > 1 {
+			ans = max(ans, left[i]+right[i]-1)
+		}
+	}
+	return n - ans
+}
+```
+
+* [sol1-TypeScript]
+
+```ts
+function minimumMountainRemovals(nums: number[]): number {
+    const n = nums.length;
+    const left = Array(n).fill(1);
+    const right = Array(n).fill(1);
+    for (let i = 1; i < n; ++i) {
+        for (let j = 0; j < i; ++j) {
+            if (nums[i] > nums[j]) {
+                left[i] = Math.max(left[i], left[j] + 1);
+            }
+        }
+    }
+    for (let i = n - 2; i >= 0; --i) {
+        for (let j = i + 1; j < n; ++j) {
+            if (nums[i] > nums[j]) {
+                right[i] = Math.max(right[i], right[j] + 1);
+            }
+        }
+    }
+    let ans = 0;
+    for (let i = 0; i < n; ++i) {
+        if (left[i] > 1 && right[i] > 1) {
+            ans = Math.max(ans, left[i] + right[i] - 1);
+        }
+    }
+    return n - ans;
+}
+```
+
+* [sol1-Rust]
+
+```rust
+impl Solution {
+    pub fn minimum_mountain_removals(nums: Vec<i32>) -> i32 {
+        let n = nums.len();
+        let mut left = vec![1; n];
+        let mut right = vec![1; n];
+        for i in 1..n {
+            for j in 0..i {
+                if nums[i] > nums[j] {
+                    left[i] = left[i].max(left[j] + 1);
+                }
+            }
+        }
+        for i in (0..n - 1).rev() {
+            for j in i + 1..n {
+                if nums[i] > nums[j] {
+                    right[i] = right[i].max(right[j] + 1);
+                }
+            }
+        }
+
+        let mut ans = 0;
+        for i in 0..n {
+            if left[i] > 1 && right[i] > 1 {
+                ans = ans.max(left[i] + right[i] - 1);
+            }
+        }
+
+        (n as i32) - ans
+    }
+}
+```
+
+时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $nums$ 的长度。
+
+---
+
+有任何问题，欢迎评论区交流，欢迎评论区提供其它解题思路（代码），也可以点个赞支持一下作者哈😄~
