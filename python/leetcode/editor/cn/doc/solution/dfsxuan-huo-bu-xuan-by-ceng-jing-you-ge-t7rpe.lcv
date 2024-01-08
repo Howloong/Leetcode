@@ -1,0 +1,57 @@
+> Problem: [2397. 被列覆盖的最多行数](https://leetcode.cn/problems/maximum-rows-covered-by-columns/description/)
+> 每日一copy，请各位大佬多多指教，欢迎讨论区交流。
+
+[TOC]
+
+# 思路
+
+> 很经典的选或不选问题，通过回溯方法找到所有结果得出最大结果。
+
+# 解题方法
+
+> 每一列都有选或者不选两种情况，用used数组记录选择的情况。
+> 完成选择以后记录覆盖的行数，如果m[i][j]为1但是j列没有被选择，
+> 则该行未被覆盖，最后返回最大的行覆盖数。
+
+# Code
+
+* []
+
+```C++
+class Solution {
+public:
+int res=0,cnt=0;
+void dfs(vector<vector<int>>& matrix, int numSelect,int lie,vector<int>&used){
+    if(cnt>numSelect)return;//cnt表示选择的数目，数目超出限制直接返回
+    if(lie>=matrix[0].size()){//列数选择完毕开始计算总行数
+        if(cnt==numSelect){
+            int count=0;
+            for(int i=0;i<matrix.size();i++){
+                bool flag=true;
+                for(int j=0;j<matrix[0].size();j++){
+                    if(matrix[i][j]&&!used[j]){//如果m[i][j]是1但是j列没有选择
+                        flag=false;            //该行未被覆盖
+                        break;
+                    }
+                }
+                if(flag)count++;
+            }
+            res=max(res,count);
+        }
+        return;
+    }
+    used[lie]=1;                    //选择该列进入下一递归
+    cnt++;
+    dfs(matrix,numSelect,lie+1,used);
+    cnt--;
+    used[lie]=0;
+    dfs(matrix,numSelect,lie+1,used);//不选择该列进行下一递归
+}
+    int maximumRows(vector<vector<int>>& matrix, int numSelect) {
+        vector<int>used(12,0);
+        dfs(matrix,numSelect,0,used);
+        return res;
+    }
+};
+```
+

@@ -1,0 +1,87 @@
+> Problem: [2397. 被列覆盖的最多行数](https://leetcode.cn/problems/maximum-rows-covered-by-columns/description/)
+
+# 位运算
+
+## 实现1：二进制枚举集合+子集判断
+
+- 题目可以等价枚举所有数,这些数保证二进制形式是满足刚好等于numsSelect个二进制1的。然后确定一个数。
+- 然后根据当前选择的数，依次跟每行构成的二进制数判断，判断是否满足该行二进制数是否满足是当前枚举元素的子集。
+  - 判断子集方法（a 是 b的子集）
+    - a & b == a
+    - a | b == b
+- 判断完之后，就进行统计满足要求的行数。
+- 更新最大答案值，然后接着枚举下一个数，重复上述操作
+
+* []
+
+```C++
+class Solution {
+public:
+    int maximumRows(vector<vector<int>>& matrix, int numSelect) {
+        int m = matrix.size(), n = matrix[0].size();
+        vector<int> mask(m);//存储m行对应的二进制表示
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                mask[i] |= matrix[i][j] << j;
+            }
+        }
+        int ans = 0;
+        for (int subset = 0; subset < (1 << n); subset++) {
+            //判断枚举的二进制集合subset是否是有numSelect个1
+            if (__builtin_popcount(subset) == numSelect) {
+                int covered_row = 0;
+                for (int& row : mask) {
+                    // if ((row & subset) == row) {//这里必须加括号，因为优先级==符号高于&符号
+                    //     covered_row++;
+                    // }
+                    if ((row | subset) == subset) {//这里必须加括号，因为优先级==符号高于|符号
+                        covered_row++;
+                    }
+                }
+                ans = max(ans, covered_row);
+            }
+        }
+        return ans;
+    }
+};
+```
+
+## 优化：Gosper‘s Hack
+
+确定枚举的集合中的1的个数，如何从小到大不重不漏的枚举完所有满足条件的集合。
+规律：
+- 已经上一个集合为subset, 则下一个集合:
+  $((subset ^ (subset + (subset & -subset))) / (subset & -subset) >> 2) | (subset + (subset & -subset))$
+
+* []
+
+```C++
+class Solution {
+public:
+    int maximumRows(vector<vector<int>>& matrix, int numSelect) {
+        int m = matrix.size(), n = matrix[0].size();
+        vector<int> mask(m);//存储m行对应的二进制表示
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                mask[i] |= matrix[i][j] << j;
+            }
+        }
+        int ans = 0, subset = (1 << numSelect) - 1;
+        while (subset < (1 << n)) {
+            int covered_rows = 0;
+            for (int& row : mask) {
+                if ((row & subset) == row) {
+                    covered_rows++;
+                }
+            }
+            ans = max(ans, covered_rows);
+            int lowbit = subset & -subset;
+            int x = subset + lowbit;
+            int y = (subset ^ x) / lowbit >> 2;
+            subset = x | y;
+        }
+        return ans;
+    }
+};
+```
+
