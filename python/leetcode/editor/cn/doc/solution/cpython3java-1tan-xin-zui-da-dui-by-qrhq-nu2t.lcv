@@ -1,0 +1,207 @@
+思路和心得：
+
+# （一）贪心+最大堆
+
+* []
+
+```python
+class Solution:
+    def repeatLimitedString(self, s: str, repeatLimit: int) -> str:
+        xf = defaultdict(int)
+        for c in s:
+            ID = ord(c) - ord('a')
+            xf[ID] += 1
+        
+        maxHeap = []
+        for x, f in xf.items():
+            heapq.heappush(maxHeap, (-x, f))
+        
+        res = []
+        while maxHeap:
+            x, f = heapq.heappop(maxHeap)
+            x *= -1
+            c = chr(ord('a') + x)
+            
+            #------ 全放进res
+            if f <= repeatLimit:
+                for _ in range(f):
+                    res.append(c)
+                
+            #--------- 只能一次放repeatLimit个
+            else:
+                for _ in range(repeatLimit):
+                    res.append(c)
+                f -= repeatLimit
+                
+                #-------放一个次小的字母，隔断一下
+                if maxHeap:
+                    y, f2 = heapq.heappop(maxHeap)
+                    y *= (-1)
+                    c2 = chr(ord('a') + y)
+                    res.append(c2)
+                    f2 -= 1
+                    if f2 > 0:
+                        heapq.heappush(maxHeap, (-y, f2))
+
+                    if f > 0:
+                        heapq.heappush(maxHeap, (-x, f))
+                else:
+                    break
+        
+        return ''.join(res)
+```
+
+* []
+
+```c++
+class Solution 
+{
+public:
+    string repeatLimitedString(string s, int repeatLimit) 
+    {
+        int xf[26];
+        memset(xf, 0, sizeof(xf));
+        for (char & c : s)
+        {
+            xf[c - 'a'] ++;
+        }
+
+        priority_queue<pair<int, int>, vector<pair<int, int>>, less<pair<int, int>>> maxHeap;
+        for (int x = 0; x < 26; x ++)
+        {
+            if (xf[x] > 0)
+            {
+                maxHeap.push(pair<int, int>{x, xf[x]});
+            }
+        }
+
+        string res = "";
+        while (!maxHeap.empty())
+        {
+            auto [x, f] = maxHeap.top();    maxHeap.pop();
+            char c = 'a' + x;
+            
+            //-------- 全放进去
+            if (f <= repeatLimit)
+            {
+                for (int _ = 0; _ < f; _ ++)
+                {
+                    res.push_back(c);
+                }
+            }
+            //-------- 只能一次repeatLimint个
+            else
+            {
+                for (int _ = 0; _ < repeatLimit; _ ++)
+                {
+                    res.push_back(c);
+                }
+                f -= repeatLimit;
+
+                //-------放一个次小的字母，隔断一下
+                if (!maxHeap.empty())
+                {
+                    auto [y, f2] = maxHeap.top();    maxHeap.pop();
+                    char c2 = 'a' + y;
+                    res.push_back(c2);
+                    f2 --;
+                    if (f2 > 0)
+                    {
+                        maxHeap.push(pair<int, int>{y, f2});
+                    }
+                    if (f > 0)
+                    {
+                        maxHeap.push(pair<int, int>{x, f});
+                    }
+                }
+            }
+        }
+        
+        return res;
+    }
+};
+```
+
+* []
+
+```java
+class Node
+{
+    int x;
+    int f;
+
+    Node() {}
+    Node(int x_, int f_)
+    {
+        x = x_;
+        f = f_;
+    }
+}
+
+class Solution 
+{
+    public String repeatLimitedString(String s, int repeatLimit) 
+    {
+        int [] xf = new int[26];
+        for (int i = 0; i < s.length(); i ++)
+        {
+            char c = s.charAt(i);
+            xf[c - 'a'] ++;
+        }
+
+        PriorityQueue<Node> maxHeap = new PriorityQueue<>((o1, o2) -> o2.x - o1.x);
+        for (int x = 0; x < 26; x ++)
+        {
+            if (xf[x] > 0)
+            {
+                maxHeap.offer(new Node(x, xf[x]));
+            }
+        }
+
+        StringBuilder SB = new StringBuilder();
+        while (!maxHeap.isEmpty())
+        {
+            Node tmp = maxHeap.poll();
+            int x = tmp.x,    f = tmp.f;
+            char c = (char)('a' + x);
+
+            if (f <= repeatLimit)
+            {
+                for (int ee = 0; ee < f; ee ++)
+                {
+                    SB.append(c);
+                }
+            }
+            else
+            {
+                for (int ee = 0; ee < repeatLimit; ee ++)
+                {
+                    SB.append(c);
+                }
+                f -= repeatLimit;
+
+                if (!maxHeap.isEmpty())
+                {
+                    Node tmp2 = maxHeap.poll();
+                    int y = tmp2.x,    f2 = tmp2.f;
+                    char c2 = (char)('a' + y);
+                    SB.append(c2);
+                    f2 --;
+
+                    if (f2 > 0)
+                    {
+                        maxHeap.offer(new Node(y, f2));
+                    }
+                    if (f > 0)
+                    {
+                        maxHeap.offer(new Node(x, f));
+                    }
+                }
+            }
+        }
+        
+        return SB.toString();
+    }
+}
+```
+

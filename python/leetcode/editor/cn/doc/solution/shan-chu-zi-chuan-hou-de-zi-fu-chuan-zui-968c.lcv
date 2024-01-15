@@ -1,0 +1,148 @@
+#### 方法一：栈
+
+**思路**
+
+因为题目要求需要删除重新拼接的字符串产生的 $\text{``AB"}$ 和 $\text{``CD"}$，因此我们可以使用栈。当栈顶两个元素分别为 $\text{``AB"}$ 或 $\text{``CD"}$ 时，我们通过将它们弹出栈来模拟删除的过程。这样以来，后续的判断过程就是建立在已经删除元素的栈之上了。遍历完之后，返回栈的长度。
+
+**代码**
+
+* [sol1-C++]
+
+```C++
+class Solution {
+public:
+    int minLength(string s) {
+        vector<int> st;
+        for (char c : s) {
+            st.push_back(c);
+            int m = st.size();
+            if (m >= 2 &&
+                (st[m - 2] == 'A' && st[m - 1] == 'B' ||
+                st[m - 2] == 'C' && st[m - 1] == 'D')) {
+                st.pop_back();
+                st.pop_back();
+            }
+        }
+        return st.size();
+    }
+};
+```
+
+* [sol1-Java]
+
+```Java
+class Solution {
+    public int minLength(String s) {
+        List<Character> stack = new ArrayList<Character>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            stack.add(c);
+            int m = stack.size();
+            if (m >= 2 &&
+                (stack.get(m - 2) == 'A' && stack.get(m - 1) == 'B' ||
+                stack.get(m - 2) == 'C' && stack.get(m - 1) == 'D')) {
+                stack.remove(m - 1);
+                stack.remove(m - 2);
+            }
+        }
+        return stack.size();
+    }
+}
+```
+
+* [sol1-C#]
+
+```C#
+public class Solution {
+    public int MinLength(string s) {
+        IList<char> stack = new List<char>();
+        foreach (char c in s) {
+            stack.Add(c);
+            int m = stack.Count;
+            if (m >= 2 &&
+                (stack[m - 2] == 'A' && stack[m - 1] == 'B' ||
+                stack[m - 2] == 'C' && stack[m - 1] == 'D')) {
+                stack.RemoveAt(m - 1);
+                stack.RemoveAt(m - 2);
+            }
+        }
+        return stack.Count;
+    }
+}
+```
+
+* [sol1-Python3]
+
+```Python
+class Solution:
+    def minLength(self, s: str) -> int:
+        stack = []
+        for c in s:
+            stack.append(c)
+            if len(stack) >= 2 and ((stack[-2] == 'A' and stack[-1] == 'B') or (stack[-2] == 'C' and stack[-1] == 'D')):
+                stack.pop()
+                stack.pop()
+        return len(stack)
+```
+
+* [sol1-Go]
+
+```Go
+func minLength(s string) int {
+    var stack []byte
+    for i := range s {
+        stack = append(stack, s[i])
+        m := len(stack)
+        if m >= 2 && (string(stack[m-2:]) == "AB" || string(stack[m - 2:]) == "CD") {
+            stack = stack[:m-2]
+        }
+    }
+    return len(stack)
+}
+```
+
+* [sol1-C]
+
+```C
+int minLength(char *s){
+    int n = strlen(s), m = 0;
+    char *stack = (char *)malloc(sizeof(char) * n);
+    for (int i = 0; i < n; i++) {
+        stack[m++] = s[i];
+        if (m >= 2 && (
+            stack[m - 2] == 'A' && stack[m - 1] == 'B' ||
+            stack[m - 2] == 'C' && stack[m - 1] == 'D'
+        )) {
+            m -= 2;
+        }
+    }
+    free(stack);
+    return m;
+}
+```
+
+* [sol1-JavaScript]
+
+```JavaScript
+var minLength = function(s) {
+    const st = new Array();
+    for (const c of s) {
+        st.push(c);
+        let m = st.length;
+        if (m >= 2 &&
+            (st[m - 2] == 'A' && st[m - 1] == 'B' ||
+            st[m - 2] == 'C' && st[m - 1] == 'D')) {
+            st.pop();
+            st.pop();
+        }
+    }
+    return st.length;
+};
+```
+
+**复杂度分析**
+
+- 时间复杂度：$O(n)$，其中 $n$ 是字符串 $s$ 的长度。只会遍历 $s$ 一次。
+
+- 空间复杂度：$O(n)$。是栈的空间复杂度。
+

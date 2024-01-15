@@ -1,0 +1,55 @@
+> Problem: [2182. 构造限制重复的字符串](https://leetcode.cn/problems/construct-string-with-repeat-limit/description/)
+
+[TOC]
+
+# 思路
+
+> 由题意可知，我们需要不断拿当前剩下字母中最大的追加到答案串中，直到这个字母连续出现次数达到repeatLimit（如果这个字母本来就不够repeatLimit个，那就直接考虑第二大的字母），此时拿一个第二大的字母插入.
+
+# 解题方法
+
+> 贪心+模拟
+
+# Code
+
+* []
+
+```C++
+class Solution {
+public:
+    string repeatLimitedString(string s, int repeatLimit) {
+        vector<int> cnt(26);
+        for(char ch:s){
+            cnt[ch-'a']++;
+        }
+        auto find_next=[&](vector<int>& cnt,int start){
+            for(int i=start;i>=0;i--){
+                if(cnt[i]!=0){
+                    return i;
+                }
+            }
+            return -1;
+        };
+        string ans="";
+        for(int i=25;i>=0;i--){
+            while(cnt[i]>repeatLimit){
+                ans+=string(repeatLimit,i+'a');
+                int nxt=find_next(cnt,i-1);
+                if(nxt!=-1){
+                    ans+=string(1,'a'+nxt);
+                    cnt[nxt]-=1;
+                } else {
+                    return ans;
+                }
+                cnt[i]-=repeatLimit;
+            }
+            if(cnt[i]>0&&cnt[i]<=repeatLimit){
+                ans+=string(cnt[i],i+'a');
+                cnt[i]=0;
+            }
+        }
+        return ans;
+    }
+};
+```
+

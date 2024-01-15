@@ -1,0 +1,95 @@
+> Problem: [2182. 构造限制重复的字符串](https://leetcode.cn/problems/construct-string-with-repeat-limit/description/)
+
+[TOC]
+
+# 思路
+
+> 大顶堆 + 贪心构造，记录最大连续出现的字符个数，如果大于了limit，则需要弹出下一个大的元素构造。
+
+# 解题方法
+
+> 推荐两道类似题目
+
+- [1054.距离相等的条形码](https://leetcode.cn/problems/distant-barcodes/description/)
+- [1405.最长快乐字符串](https://leetcode.cn/problems/longest-happy-string/description/)
+
+# 复杂度
+
+时间复杂度:
+
+> 添加时间复杂度, 示例： $O(n)$
+
+空间复杂度:
+
+> 添加空间复杂度, 示例： $O(n)$
+
+# Code
+
+* []
+
+```Java
+class Solution {
+    public String repeatLimitedString(String ss, int limit) {
+        char[] s = ss.toCharArray();
+        Arrays.sort(s);
+        int cnt = 1;
+        var pq = new PriorityQueue<Node>((a, b) -> b.ch - a.ch);
+        for (int i = 1; i < s.length; i++) {
+            if (s[i] != s[i-1]) {
+                pq.offer(new Node(s[i-1], cnt));
+                cnt = 1;
+            } else {
+                cnt++;
+            }
+        }
+        if (cnt > 0) {
+            pq.offer(new Node(s[s.length-1], cnt));
+        }
+        // 贪心构造，记录字符当前连续的次数，如果大于了limit，则需选择下一个大的字符。
+        cnt = 0;
+        char pre = ' ';
+        var sb = new StringBuilder();
+        while (!pq.isEmpty()) {
+            var p1 = pq.poll();
+            if (p1.ch == pre) {
+                if (++cnt > limit) {
+                    if (pq.isEmpty()) break;
+                    var p2 = pq.poll();
+                    sb.append(p2.ch);
+                    pre = p2.ch;
+                    p2.cnt -= 1;
+                    if (p2.cnt > 0) {
+                        pq.offer(p2);
+                    }
+                    cnt = 1;
+                } else {
+                    sb.append(p1.ch);
+                    pre = p1.ch;
+                    p1.cnt -= 1;
+                }
+            } else {
+                cnt = 1;
+                sb.append(p1.ch);
+                pre = p1.ch;
+                p1.cnt -= 1;
+            }
+            if (p1.cnt > 0) {
+                pq.offer(p1);
+            }
+        }
+        return sb.toString();
+    }
+
+
+    class Node {
+        char ch;
+        int cnt;
+
+        public Node(char ch, int cnt) {
+            this.ch = ch;
+            this.cnt = cnt;
+        }
+    }
+}
+```
+

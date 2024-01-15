@@ -1,0 +1,33 @@
+> Problem: [2182. 构造限制重复的字符串](https://leetcode.cn/problems/construct-string-with-repeat-limit/description/)
+
+[TOC]
+
+# Code
+
+* []
+
+```Python
+class Solution:
+    def repeatLimitedString(self, s: str, repeatLimit: int) -> str:
+        q = []
+        cnt = Counter(s)
+        for k, v in cnt.items():
+            heapq.heappush(q, (-1 * (ord(k) - ord('a')), k, v)) # -25, z, 2
+
+        ans = ""
+        while q:
+            pr, c, cnt = heapq.heappop(q)
+            if cnt <= repeatLimit:
+                ans += c * cnt
+            else:
+                ans += c * repeatLimit
+                if q:
+                    pr2, c2, cnt2 = heapq.heappop(q)
+                    ans += c2
+                    cnt2 -= 1
+                    if cnt2 > 0:
+                        heapq.heappush(q, (pr2, c2, cnt2))
+                    heapq.heappush(q, (pr, c, cnt - repeatLimit))
+        return ans
+```
+
